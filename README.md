@@ -124,6 +124,24 @@ code-length map keeps 92% of the exact cell's information in 64 regions (3.47
 against 3.15 bits per byte, with 5.06 for no context), yet adds nothing in v8:
 the exact cell is already a context there, so the map is redundant.
 
+### Grafted into lpaq1, a mature compressor (`lpaq1g/`)
+
+lpaq1 is Matt Mahoney's "lite paq" (GPL). With the graft switched off, it
+reproduces lpaq1 byte for byte. Sizes include the map (4,319 B, plus 640 B for
+topics). Every full-size run was decoded and compared with the original.
+
+| lpaq1 -9 plus | 1 MB | 10 MB | enwik8 (100 MB) |
+|---|---|---|---|
+| nothing (original) | 226,908 | 2,122,364 | 19,755,948 |
+| grid location | 229,718 | 2,112,803 | 19,620,916 |
+| + spatial map | 227,981 | 2,097,388 | 19,509,152 |
+| + symmetry | 227,021 | 2,087,990 | **19,456,911 (−1.5%)** |
+| + topic specialists (16) | not run | **2,083,294** | running |
+
+At 1 MB the map costs more than it saves; from 10 MB on it pays for itself.
+Context on the enwik8 ladder (Mahoney's benchmark): drt|lpaq9m 17,964,751;
+paq8hp12 16,230,028; paq8px 15,849,084; cmix 14,623,723.
+
 ### Can position alone hold data? (`src/positional.py`)
 
 89,619 bytes of random data were hidden purely in the **order** of 109,056
