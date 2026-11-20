@@ -1,0 +1,87 @@
+--- a/src/context-manager.cpp	2026-11-20 19:22:20.643224249 +0000
++++ b/src/context-manager.cpp	2026-11-20 21:35:27.568271144 +0000
+@@ -1,4 +1,5 @@
+ #include "context-manager.h"
++#include "contexts/gridzip.h"
+ 
+ ContextManager::ContextManager() : history_(100000000, 0),
+     shared_map_(256*8000000, 0), words_(8, 0), recent_bytes_(8, 0) {}
+@@ -84,6 +85,7 @@
+     UpdateWords();
+     UpdateRecentBytes();
+     UpdateWRTContext();
++    GridState::Get().Update(bit_context_);
+     for (const auto& context : contexts_) {
+       context->Update();
+     }
+--- a/src/predictor.cpp	2026-11-20 19:22:20.649599876 +0000
++++ b/src/predictor.cpp	2026-11-20 21:35:27.568418038 +0000
+@@ -8,6 +8,8 @@
+ #include "models/paq8.h"
+ #include "models/fxcmv1.h"
+ #include "mixer/lstm.h"
++#include "contexts/gridzip.h"
++#include <cstdlib>
+ #include "contexts/context-hash.h"
+ #include "contexts/bracket-context.h"
+ #include "contexts/sparse.h"
+@@ -33,6 +35,7 @@
+   AddDirect();
+   AddMatch();
+   AddDoubleIndirect();
++  AddGridZip();
+   AddMixers();
+ }
+ 
+@@ -82,7 +85,7 @@
+ }
+ 
+ void Predictor::AddPAQ8() {
+-  PAQ8* paq = new PAQ8(11);
++  PAQ8* paq = new PAQ8(getenv("CMIX_PAQ") ? atoi(getenv("CMIX_PAQ")) : 11);
+   AddModel(paq);
+   AddAuxiliary();
+ }
+@@ -98,7 +101,7 @@
+ }
+ 
+ void Predictor::AddPPMD() {
+-  AddByteModel(new PPMD::PPMD(25, 14000, manager_.bit_context_, vocab_));
++  AddByteModel(new PPMD::PPMD(25, getenv("CMIX_PPMD_MB") ? atoi(getenv("CMIX_PPMD_MB")) : 14000, manager_.bit_context_, vocab_));
+ }
+ 
+ void Predictor::AddWord() {
+@@ -181,6 +184,15 @@
+   return 1 + 4094 * p;
+ }
+ 
++void Predictor::AddGridZip() {
++  if (!GridState::Get().Load()) return;
++  float delta = 400;
++  for (int i = 0; i < GridState::NCTX; ++i) {
++    const Context& context = manager_.AddContext(std::unique_ptr<Context>(new GridZipContext(i)));
++    AddModel(new Indirect(manager_.nonstationary_, context.GetContext(), manager_.bit_context_, delta, manager_.shared_map_));
++  }
++}
++
+ void Predictor::AddMixers() {
+   unsigned int vocab_size = 0;
+   for (unsigned int i = 0; i < vocab_.size(); ++i) {
+@@ -238,6 +250,7 @@
+   const Context& interval2 = manager_.AddContext(std::unique_ptr<Context>(
+       new Interval(manager_.bit_context_, map, 8)));
+   AddMixer(0, interval2.GetContext(), 0.001);
++  if (GridState::Get().enabled) AddMixer(0, GridState::Get().mix_ctx, 0.001);
+ 
+   for (int i = 0; i < 256; ++i) map[i] = 0;
+   for (int i = 'a'; i <= 'z'; ++i) map[i] = 1;
+--- a/src/predictor.h	2026-11-20 19:22:20.649599876 +0000
++++ b/src/predictor.h	2026-11-20 21:35:27.568488286 +0000
+@@ -38,6 +38,7 @@
+   void AddMatch();
+   void AddDoubleIndirect();
+   void AddMixers();
++  void AddGridZip();
+ 
+   std::vector<std::unique_ptr<Model>> models_;
+   std::vector<std::unique_ptr<ByteModel>> byte_models_;

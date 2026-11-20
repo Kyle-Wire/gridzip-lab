@@ -866,6 +866,7 @@ void Predictor::update(int y) {
     if (NGENE) {
       if ((byte|32)>=97 && (byte|32)<=122) W_cur=h[5]; else if (W_cur) { W_prev=W_cur; W_cur=0; }
       if (!(GF&16)) struct_update(byte);
+      if (!(GF&64)) { U32 wd=0; if ((byte|32)>=97 && (byte|32)<=122) msw_cur=h[5]; else if (msw_cur) { wd=msw_cur; msw_cur=0; } multiscale_update(byte, wd); }
       int g1=G_hist[G_pos&65535]; long j2=G_pos-G_len[g1]; int g2= j2>=0? G_hist[j2&65535]:0;
       long j3=j2-G_len[g2]; int g3= j3>=0? G_hist[j3&65535]:0;
       for (int q=0;q<NGENE;++q) {
@@ -877,6 +878,7 @@ void Predictor::update(int y) {
         if (f&128) hh=hmix(hh, W_cur); if (f&256) hh=hmix(hh, W_prev^0x55555555u);
         if (f&512) hh=hmix(hh, 50000+S_state); if (f&1024) hh=hmix(hh, 51000+G_topic);
         if (f&4096) hh=hmix(hh, 52000+S_link*4+(S_tmpl>3?3:S_tmpl));
+        if (f&8192) hh=hmix(hh, MS_sentw ^ 0x3C6EF372u); if (f&16384) hh=hmix(hh, MS_sec ^ 0xA54FF53Au);
         h[1+q]=hh;
       }
     }
