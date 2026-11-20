@@ -1,0 +1,5 @@
+{"n": 10000000, "cells": 1024, "space": "none", "size": 2320451.25}
+{"n": 10000000, "cells": 1024, "space": "learned", "regions": 16, "size": 2307970.25, "secs": 77}
+{"n": 10000000, "cells": 1024, "space": "random", "regions": 16, "size": 2320100.25, "secs": 82}
+{"n": 10000000, "cells": 1024, "space": "learned", "regions": 32, "size": 2308201.25, "secs": 80}
+{"n": 10000000, "cells": 1024, "space": "random", "regions": 32, "size": 2319040.25, "secs": 85}
