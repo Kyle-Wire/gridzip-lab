@@ -136,7 +136,7 @@ topics). Every full-size run was decoded and compared with the original.
 | grid location | 229,718 | 2,112,803 | 19,620,916 |
 | + spatial map | 227,981 | 2,097,388 | 19,509,152 |
 | + symmetry | 227,021 | 2,087,990 | **19,456,911 (−1.5%)** |
-| + topic specialists (16) | not run | **2,083,294** | running |
+| + topic specialists (16) | not run | **2,083,294** | **19,395,627 (−1.8%)** |
 
 At 1 MB the map costs more than it saves; from 10 MB on it pays for itself.
 Context on the enwik8 ladder (Mahoney's benchmark): drt|lpaq9m 17,964,751;
@@ -156,10 +156,12 @@ counted below.
 | sorted by topic (64 clusters) | 19,543,338 | −1.0% |
 | nearest-neighbour chain | 19,513,523 | **−1.1%** |
 | random (control) | 19,957,970 | +1.0% |
-| chain + lpaq1g (grid, map, symmetry) | 19,212,282 | **−2.6%** (19,235,351 with map and permutation) |
+| chain + lpaq1g (grid, map, symmetry) | 19,212,282 | −2.6% (19,235,351 with map and permutation) |
+| chain + lpaq1g + topic specialists | 19,170,935 | **−2.8%** (**19,194,644** with map, topics and permutation) |
 
 The two gains stack almost exactly: 1.5% from the contexts and 1.1% from
-ordering. The random control shows the original order already holds useful
+ordering. The best row was decoded and the article order inverted, and the
+result is byte-identical to enwik8. The random control shows the original order already holds useful
 locality, and placing related articles side by side adds another 1%. This is
 experiment 3's lesson in a compressor: what an online learner sees next to
 what changes how well it specialises.
