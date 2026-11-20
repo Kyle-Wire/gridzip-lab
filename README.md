@@ -227,7 +227,43 @@ bytes to read, plus any of the grid cell, map regions, word, previous word,
 page structure, topic, folded bytes or link depth. Fitness is the compressed
 size of 2 MB. Each generation keeps the elite and breeds the rest by
 tournament, crossover and mutation. Every generation's best is checked on a
-held-out 2 MB slice. Log: `results/evolve.json`. Running.
+held-out 2 MB slice. Log: `results/evolve.json`.
+
+| 2 MB slices, `MIX2=1 MIXSEL=1` | Training | Held out |
+|---|---|---|
+| lpaq1-like genome | 441,981 | 453,057 |
+| hand-designed genome (our contexts) | 428,701 | 438,440 |
+| evolved, 20 generations × 24 | 426,843 (−0.43%) | 436,566 (−0.43%) |
+
+The gain on held-out data equals the gain on training data, so evolution
+learned general rules rather than its slice. Every feature family we designed
+survived selection: grid cell, map regions, folding, topic, structure and link
+depth. Evolution also found contexts we had not tried: a skip context over
+bytes 1, 2, 3 and 6; folding over a gappy six-byte window; the grid cell with
+the previous cell and the previous word; and the word with link and template
+depth.
+
+### Speciation: an island model (`src/speciation.py`)
+
+Three populations of 12 evolved in their own 1 MB habitats (prose-heavy,
+markup-heavy, table-heavy), with the best organism migrating around the ring
+every 3 generations. The multi-scale features were available as genes.
+
+| Champion of → scored in | prose | markup | table | held-out 2 MB |
+|---|---|---|---|---|
+| prose island | 228,591 | 190,433 | 231,312 | **434,064 (−1.0% vs hand)** |
+| markup island | 228,591 | 190,433 | 231,312 | 434,064 |
+| table island | 229,222 | 190,504 | 231,461 | 434,595 |
+| hand-designed | 229,907 | 191,620 | 232,994 | 438,440 |
+| hybrid (genes merged greedily) | not scored | not scored | not scored | 434,330 (−0.9%) |
+
+**No niche specialists emerged.** Migration carried one genome to both the
+prose and markup islands, and the table island's own species is no better in
+its home habitat. One generalist outcompeted everywhere: the text kinds share
+more structure than they differ. Still, the island model found a better
+genome than the single population (−1.0% against −0.43% held out). It used the
+new multi-scale genes: section heading with fine-map regions, and sentence
+start with topic and word.
 
 ### Batch compression: chunks, then compress again
 
