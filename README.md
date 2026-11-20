@@ -106,8 +106,23 @@ being clustered are.
 Contexts are computed on each byte's orbit under a symmetry group: letter case
 is swapped, and the ten digits are permuted. At 10 MB on top of v6: case only
 gives 2,301,768 B (−0.06%), and case plus digits gives **2,296,319 B (−0.30%)**,
-the best 10 MB result. At 1 MB, case alone hurts (+0.2%). The full enwik8 run
-is in progress.
+the best 10 MB result for that engine. At 1 MB, case alone hurts (+0.2%).
+On all of enwik8, v7 gives **22,048,955 B**.
+
+### Engine upgrades: v8, v9, v10
+
+| Engine | What changed | 1 MB | 10 MB |
+|---|---|---|---|
+| v7 | grid + two-zoom map + symmetry | 244,058 | 2,296,319 |
+| v8 | 16M-slot tables, more byte contexts (order 5 and 8, sparse, markup), 3 mixers plus a final mixer, 2 SSE stages | 237,689 | 2,201,795 |
+| v8 + code-length map | cells clustered by what byte follows, minimising cross-entropy | 238,524 | 2,202,564 |
+| v9 | fast and slow estimates per context; decaying mixer learning rate | 226,338 | **2,108,842** |
+| v10 | v9 + topic specialists: cells clustered by which passages they co-occur in; a running vote picks the topic, which selects a 4th mixer | 225,763 | running |
+
+The v9 and v10 1 MB figures exclude the map cost (about 4.3 KB). The
+code-length map keeps 92% of the exact cell's information in 64 regions (3.47
+against 3.15 bits per byte, with 5.06 for no context), yet adds nothing in v8:
+the exact cell is already a context there, so the map is redundant.
 
 ### Can position alone hold data? (`src/positional.py`)
 

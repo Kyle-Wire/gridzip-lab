@@ -1,0 +1,2 @@
+code-length map: {'R': 64, 'iters': 10, 'bits_per_byte_region': 3.5156490975825956, 'bits_per_byte_exact_cell': 3.154960721703271, 'bits_per_byte_random': 4.40813718748083, 'bits_per_byte_no_context': 5.081165875804683}
+{"n": 10000000, "variant": "full", "TB": 24, "size": 2108842.25, "secs": 345}

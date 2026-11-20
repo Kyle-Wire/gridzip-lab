@@ -3,7 +3,7 @@ import json, math, os, sys, time
 import numpy as np
 from gridzip import learn_grid, map_bytes
 from geometry import features, pca_coords, kmeans
-import v8, v9
+import v8, v9, v10
 
 path, n, out = sys.argv[1], int(sys.argv[2]), sys.argv[3]
 variants = sys.argv[4].split(",")
@@ -27,6 +27,11 @@ for v in variants:
     if "C" in v: kw["regC"] = regC
     cost = base_cost + (m * math.log2(int(os.environ.get("RC", 64))) / 8 if "C" in v else 0)
     t = time.time()
-    nb = (v9 if os.environ.get("ENGINE") == "v9" else v8).compress(data, table, ra, rb, **kw)
+    eng = {"v8": v8, "v9": v9, "v10": v10}[os.environ.get("ENGINE", "v8")]
+    if eng is v10 and int(os.environ.get("NT", 1)) > 1:
+        kw["tlab"] = v10.topic_map(toks, m, int(os.environ["NT"]))
+        kw["decay"] = float(os.environ.get("DECAY", 0.95))
+        cost += m * math.log2(int(os.environ["NT"])) / 8
+    nb = eng.compress(data, table, ra, rb, **kw)
     res.append(dict(n=n, variant=v, TB=kw["TB"], size=nb + cost, secs=round(time.time() - t)))
     print(json.dumps(res[-1]), flush=True); json.dump(res, open(out, "w"), indent=1)
