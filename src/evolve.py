@@ -14,11 +14,11 @@ import json, os, random, subprocess, sys, tempfile
 from concurrent.futures import ThreadPoolExecutor
 
 LP = os.environ["LPAQ_DIR"]
-EXE = f"{LP}/lpaq1gx"
+EXE = os.environ.get("EXE", f"{LP}/lpaq1gx")
 TRAIN, HOLD = f"{LP}/e2", f"{LP}/h2"
 MAP = f"{LP}/map10t16.bin"
 POP, GENS, ELITE, MAXG, WORKERS = 24, int(os.environ.get("GENS", 20)), 4, 17, 2
-FEATS = 13
+FEATS = int(os.environ.get("FEATS", 13))
 rng = random.Random(int(os.environ.get("SEED", 0)))
 
 LPAQ = [(0, 0x3), (0, 0x7), (0, 0xF), (0, 0x3F), (0x80, 0)]
