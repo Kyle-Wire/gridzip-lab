@@ -633,6 +633,62 @@ public:
   }
 };
 
+
+// ---- Immune memory: after a SURPRISE (the actual byte was poorly predicted),
+// store "this context -> that byte" with a strength. When the context recurs,
+// predict it strongly; correct predictions reinforce, wrong ones decay.
+class ImmuneModel {
+  enum {HB=22}; std::vector<U8> mb, ms; std::vector<U32> mk;
+  U32 c4, key; int c0, bcount, hit, exp_byte, strength; double cost; StateMap sm;
+public:
+  ImmuneModel(): mb(1<<HB), ms(1<<HB), mk(1<<HB), c4(0), key(0), c0(1), bcount(0), hit(0), exp_byte(0), strength(0), cost(0), sm(64*2*256) {}
+  void bitcost(int y, int pr) { int p = y ? pr : 4096-pr; if (p<1) p=1; cost += -log2(p/4096.0); }
+  int p(int y, Mixer& m, int pr_last) {
+    bitcost(y, pr_last);
+    c0+=c0+y; ++bcount;
+    if (bcount==8) {
+      int c=c0&255; bcount=0; c0=1;
+      U32 idx=key>>(32-HB);
+      if (hit) { if (exp_byte==c) { if (ms[idx]<15) ms[idx]++; } else { if (ms[idx]>0) ms[idx]--; if (ms[idx]==0) mb[idx]=c; } }
+      if (cost > 6.0 && !(hit && exp_byte==c)) { mk[idx]=key; mb[idx]=c; ms[idx]=1; }   // surprise: remember
+      cost=0;
+      c4=c4<<8|c; key=(c4&0xffffff)*2654435761u ^ 0x5bd1e995u;
+      U32 j=key>>(32-HB); hit = mk[j]==key && ms[j]>0; exp_byte=mb[j]; strength=ms[j];
+    }
+    int cxt=0;
+    if (hit && ((exp_byte+256)>>(8-bcount))==c0) { int b=exp_byte>>(7-bcount)&1; cxt=(strength*2+b)*256+(c4&255)+1; }
+    m.add(stretch(sm.p(y, cxt)));
+    return hit;
+  }
+};
+
+// ---- Learned regimes (finance-style regime switching): no hand-written rules.
+// Recent text is summarised as a 8-dim profile of byte classes (decaying);
+// an online k-means assigns it to one of K learned regimes, which then selects
+// the mixer weights in place of the hand-written page-structure tracker.
+static int REG_K=0, REG_cur=0; static double REG_prof[8], REG_cent[16][8]; static int REG_n[16];
+static inline int bclass(int c){ if(c>=97&&c<=122) return 0; if(c>=65&&c<=90) return 1; if(c>=48&&c<=57) return 2; if(c==32) return 3;
+  if(c==10) return 4; if(c=='['||c==']'||c=='{'||c=='}'||c=='|') return 5; if(c=='<'||c=='>'||c=='&'||c==';'||c=='='||c=='/') return 6; return 7; }
+static void regime_update(int c) {
+  if (!REG_K) return;
+  for (int i=0;i<8;++i) REG_prof[i]*=0.9; REG_prof[bclass(c)]+=0.1;
+  int best=0; double bd=1e9;
+  for (int k=0;k<REG_K;++k){ double d=0; for(int i=0;i<8;++i){double e=REG_prof[i]-REG_cent[k][i]; d+=e*e;} if(d<bd){bd=d;best=k;} }
+  REG_n[best]++; double lr = REG_n[best]<1000 ? 1.0/REG_n[best] : 0.001;
+  for (int i=0;i<8;++i) REG_cent[best][i]+= lr*(REG_prof[i]-REG_cent[best][i]);
+  REG_cur=best;
+}
+
+// ---- Multi-scale (renormalisation) state: sentence and section level.
+static U32 MS_sent=0, MS_sentw=0, MS_sec=0, MS_head=0; static int MS_inhead=0, MS_wc=0, MS_bol=1;
+static void multiscale_update(int c, U32 word_done) {
+  if (word_done) { if (MS_wc==0) MS_sentw=word_done; MS_wc++; }
+  if (c=='.' || c=='!' || c=='?' || c==10) { MS_sent=0; MS_wc=0; MS_sentw=0; }
+  if (MS_bol && c=='=') { MS_inhead=1; MS_head=0; }
+  if (MS_inhead && c!='=') MS_head=MS_head*31+c;
+  if (c==10) { if (MS_inhead) { MS_sec=MS_head; MS_inhead=0; } MS_bol=1; } else MS_bol=0;
+}
+
 //////////////////////////// Predictor /////////////////////////
 
 // A Predictor estimates the probability that the next bit of
@@ -707,6 +763,7 @@ static void load_grid() {
   if (GF&4) NCX+=2;
   if (GF&8) NCX+=2;
   if (GF&16) NCX+=2;
+  if (GF&64) NCX+=3;
   load_genome(); if (NGENE) NCX=1+NGENE;
 }
 static inline U32 hmix(U32 a, U32 b) {
@@ -753,9 +810,12 @@ void Predictor::update(int y) {
   static Mixer* mp=0;
   static MatchModel mm(MEM);  // predicts next bit by matching context
   static RefModel* rm = getenv("REFMODEL") ? new RefModel() : 0;
+  static ImmuneModel* im = getenv("IMMUNE") ? new ImmuneModel() : 0;
+  static int regk = getenv("REGIME") ? atoi(getenv("REGIME")) : 0;
+  static U32 msw_cur=0;
   if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
-      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0), sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
-      else mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0), s0); } init=1; }
+      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0), sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
+      else mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0), s0); } init=1; }
   Mixer& m=*mp;
   const int N=NCX;
 
@@ -779,6 +839,7 @@ void Predictor::update(int y) {
     else h[5]=0;
     int k=6;
     if (GF) {
+      if (regk) { if (!REG_K) { REG_K=regk; for(int a=0;a<regk;++a) for(int b=0;b<8;++b) REG_cent[a][b]=(a*7+b*3)%11/11.0; } regime_update(byte); }
       G_state=G_go[G_state*256+byte]; ++G_pos; G_hist[G_pos&65535]=G_out[G_state];
       int g1=G_hist[G_pos&65535]; long j2=G_pos-G_len[g1]; int g2= j2>=0? G_hist[j2&65535]:0;
       long j3=j2-G_len[g2]; int g3= j3>=0? G_hist[j3&65535]:0;
@@ -794,6 +855,11 @@ void Predictor::update(int y) {
           for (int t=0;t<G_NT;++t) G_tv[t]*=G_decay;
           G_tv[G_tlab[gn]]+=1.0; int b=0; for (int t=1;t<G_NT;++t) if (G_tv[t]>G_tv[b]) b=t; G_topic=b; }
         h[k++]=hmix(109,G_topic*65536+(c4&0xffff)); h[k++]=hmix(110,hmix(G_topic,h[5])); }
+      if (GF&64) { U32 wd=0; if ((byte|32)>=97 && (byte|32)<=122) msw_cur=h[5]; else if (msw_cur) { wd=msw_cur; msw_cur=0; }
+        multiscale_update(byte, wd);
+        h[k++]=hmix(113,hmix(MS_sentw, MS_wc>7?7:MS_wc)*0x10000+(c4&0xffff));
+        h[k++]=hmix(114,hmix(MS_sec, h[5]));
+        h[k++]=hmix(115,hmix(MS_sentw, h[5])); }
       if (GF&16) { struct_update(byte);
         h[k++]=hmix(111,S_state*65536+(c4&0xffff)); h[k++]=hmix(112,hmix(S_state*7+S_link*3+(S_tmpl>0),h[5])); }
     }
@@ -830,6 +896,7 @@ void Predictor::update(int y) {
   // predict
   int len=mm.p(y, m);
   if (rm) rm->p(y, m);
+  if (im) im->p(y, m, pr);
   int order=0;
   if (len==0) {
     if (*cp[4]) ++order;
@@ -840,7 +907,7 @@ void Predictor::update(int y) {
   else order=5+(len>=8)+(len>=12)+(len>=16)+(len>=32);
   for (int i=0;i<N;++i) m.add(stretch(sm[i].p(y, *cp[i])));
   { static int msel = getenv("MIXSEL") ? atoi(getenv("MIXSEL")) : 0;   // 0 topic x struct, 1 struct only, 2 topic only
-    int tp = (GF&8) && msel!=1 ? G_topic : 0, sp = (GF&16) && msel!=2 ? S_state : 0;
+    int tp = (GF&8) && msel!=1 ? G_topic : 0, sp = (GF&16) && msel!=2 ? (regk ? REG_cur%10 : S_state) : 0;
     m.set(order+10*(h[0]>>13) + 80*(tp + ((GF&8) ? 64 : 1)*sp));
     static int mix2 = getenv("MIX2") ? 1 : 0;
     if (mix2) { m.setk(1, c0); m.setk(2, (c4&255)*8 + bcount); m.setk(3, ((len>15?15:len)*2 + (order>0))*10 + ((GF&16) ? S_state : 0));

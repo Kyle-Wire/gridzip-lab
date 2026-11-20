@@ -52,10 +52,15 @@ def article_vectors(pages, merges, m, dims=32):
     starts = np.cumsum([0] + [len(p) for p in pages[:-1]]).astype(np.int64)
     V = _page_cell_counts(buf, starts, G, out, m)
     df = (V > 0).sum(0) + 1
-    V = np.log1p(V) * np.log(len(pages) / df)[None]
+    np.log1p(V, out=V); V *= np.log(len(pages) / df).astype(np.float32)[None]
     V /= np.linalg.norm(V, axis=1, keepdims=True) + 1e-9
-    U, S, _ = np.linalg.svd(V - V.mean(0), full_matrices=False)
-    X = U[:, :dims] * S[:dims]
+    mu = V.mean(0)
+    # top principal axes from the small m x m covariance (same subspace as an SVD, far less memory)
+    Cv = (V.T @ V).astype(np.float64) / len(V) - np.outer(mu, mu)
+    w, E = np.linalg.eigh(Cv)
+    E = E[:, ::-1][:, :dims].astype(np.float32)
+    X = V @ E - (mu @ E)[None]
+    del V
     return X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-9)
 
 
@@ -89,9 +94,10 @@ if __name__ == "__main__":
     os.makedirs(outdir, exist_ok=True)
     for name, order in orders.items():
         if name not in want: continue
-        body = b"".join(pages[i] for i in order)
-        out = prefix + body + tail
-        assert len(out) == len(data)
-        open(f"{outdir}/enwik8.{name}", "wb").write(out)
+        with open(f"{outdir}/enwik8.{name}", "wb") as f:   # stream, no full copy in memory
+            f.write(prefix)
+            for i in order: f.write(pages[i])
+            f.write(tail)
+        assert os.path.getsize(f"{outdir}/enwik8.{name}") == len(data)
         np.save(f"{outdir}/order.{name}.npy", np.array(order))
     print("written", list(orders), flush=True)

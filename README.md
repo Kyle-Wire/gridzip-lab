@@ -184,6 +184,25 @@ identical to before.
 | single mixer | 2,059,112 |
 | two-layer mixer | **2,034,518 (−1.2%)**, round trip verified |
 
+### Ideas from nature (lpaq1g): immune memory, multi-scale, learned regimes
+
+All rows on 10 MB of enwik8 with the best settings (`MIX2=1 MIXSEL=1`).
+
+| Variant | Size | Change |
+|---|---|---|
+| baseline (`GFLAGS=31`) | 2,034,518 | baseline |
+| + immune memory (`IMMUNE=1`): after a surprise, remember "context → byte"; hits reinforce it, misses decay it | 2,032,630 | −0.09% |
+| + multi-scale (`GFLAGS` bit 64): sentence-level (first word, word count) and section-level (last heading) contexts | **2,017,466** | **−0.84%** |
+| learned regimes (`REGIME=10`): online k-means over a decaying profile of byte classes, used in place of the hand-written structure tracker | 2,036,292 | +0.09% |
+
+The learned regimes lose to the hand-written tracker, so the hand-written
+rules carry knowledge the byte-class profile does not.
+
+**Champion, enwik8:** chain order + `GFLAGS=95 MIX2=1 MIXSEL=1 IMMUNE=1` gives
+18,584,807 B, plus the map (4,959 B) and the permutation (18,750 B):
+**18,608,516 B, −5.8% against lpaq1.** The archive was decoded and compared
+with the input.
+
 ### Reference-based coding (lpaq1g, `REFMODEL=1`)
 
 This borrows from genomics: align each article to a relative and code only
