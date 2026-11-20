@@ -34,5 +34,11 @@
   "map": "laplacian grid 4 axes x 2",
   "regions": 16,
   "size": 2315245.25
+ },
+ {
+  "n": 10000000,
+  "map": "random16",
+  "regions": 16,
+  "size": 2320100.25
  }
 ]

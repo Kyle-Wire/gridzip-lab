@@ -78,7 +78,36 @@ The inverse transform is verified at every grid size.
 
 At 1 MB it is slightly worse than v5: 244,232 B (16 coarse / 128 fine regions)
 against 243,270 B, because the larger map costs more and the mixer has more to
-learn. The 10 MB test is running.
+learn. At 10 MB it helps: 2,303,247 B against v5's 2,307,970 B (−0.2%).
+
+### Which geometry of the grid? (`src/geometry.py`, `src/em_map.py`, `src/emeans_map.py`)
+
+All rows at 10 MB, 1,024 cells, 16 regions, map cost included.
+
+| Map | Size |
+|---|---|
+| k-means on PCA coordinates (v5) | **2,307,927** |
+| literal coordinate grid in PCA space (3 axes × 3 bins) | 2,312,498 |
+| coordinate grid, 2 axes × 4 bins | 2,314,169 |
+| coordinate grid, 4 axes × 2 bins | 2,314,813 |
+| Laplacian eigenmaps (manifold learning), then k-means | 2,313,945 |
+| Laplacian coordinate grid, 4 axes × 2 bins | 2,315,245 |
+| random regions (control) | 2,320,100 |
+
+Clusters that follow the data's own shape beat an axis-aligned coordinate grid
+and the manifold embedding. At 1 MB, EM (Gaussian mixtures, soft membership)
+and e-means (arXiv 2611.09501) match k-means to within 0.02%, even though
+e-means reaches 3% lower clustering error. Only 68 of 1,280 cells have a real
+second region. The clustering algorithm is not the bottleneck; the features
+being clustered are.
+
+### v7: symmetry (quotient) contexts (`src/v7.py`)
+
+Contexts are computed on each byte's orbit under a symmetry group: letter case
+is swapped, and the ten digits are permuted. At 10 MB on top of v6: case only
+gives 2,301,768 B (−0.06%), and case plus digits gives **2,296,319 B (−0.30%)**,
+the best 10 MB result. At 1 MB, case alone hurts (+0.2%). The full enwik8 run
+is in progress.
 
 ### Can position alone hold data? (`src/positional.py`)
 
@@ -114,7 +143,9 @@ produce. Three seeds per condition. Results are in
 
 The same small transformer reads either raw bytes or grid coordinates, with
 the same steps, batch and context length in tokens. Both are scored on a
-held-out 500 KB slice of enwik8, in bits per test byte. Running.
+held-out 500 KB slice of enwik8, in bits per test byte. Seed 0: bytes
+**2.289**, grid (1,024 cells) **2.108**, so the grid model is 7.9% better at
+equal compute. More seeds are pending.
 
 ## Run it
 

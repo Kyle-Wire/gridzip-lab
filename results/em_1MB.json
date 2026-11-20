@@ -1,0 +1,27 @@
+[
+ {
+  "n": 1000000,
+  "map": "kmeans16 + kmeans128 (v6)",
+  "size": 244232.25
+ },
+ {
+  "n": 1000000,
+  "map": "em_hard16 + kmeans128",
+  "size": 244244.25
+ },
+ {
+  "n": 1000000,
+  "map": "em_soft: best16 + (best,second) pair",
+  "size": 244276.25
+ },
+ {
+  "n": 1000000,
+  "map": "kmeans16 only",
+  "size": 243828.25
+ },
+ {
+  "n": 1000000,
+  "map": "em_hard16 only",
+  "size": 243849.25
+ }
+]
