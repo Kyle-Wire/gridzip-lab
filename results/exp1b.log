@@ -1,0 +1,15 @@
+english (Wikipedia)      cells=    0 context-coded total=   210436
+english (Wikipedia)      cells=  256 context-coded total=   156605
+english (Wikipedia)      cells= 1024 context-coded total=   141189
+english (Wikipedia)      cells= 2048 context-coded total=   138160
+english (Wikipedia)      cells= 4096 context-coded total=   140453
+flood/heat docs          cells=    0 context-coded total=    45803
+flood/heat docs          cells=  256 context-coded total=    36139
+flood/heat docs          cells= 1024 context-coded total=    35086
+flood/heat docs          cells= 2048 context-coded total=    36575
+flood/heat docs          cells= 4096 context-coded total=    40903
+sparse bits (1% ones)    cells=    0 context-coded total=    40448
+sparse bits (1% ones)    cells=  256 context-coded total=    43981
+sparse bits (1% ones)    cells= 1024 context-coded total=    46560
+sparse bits (1% ones)    cells= 2048 context-coded total=    49548
+sparse bits (1% ones)    cells= 4096 context-coded total=    55348

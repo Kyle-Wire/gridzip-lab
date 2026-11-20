@@ -1,0 +1,3 @@
+learned 2048 cells on 5,000,000 B in 82s
+applied: 100,000,000 B -> 34,392,896 coordinates in 810s
+RESULT file=100,000,000 cells=2048 map=5,439 stream=29,633,257 total=29,638,696 ratio=0.2964 time=835s

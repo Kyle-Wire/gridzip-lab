@@ -1,0 +1,21 @@
+shared grid (4096 cells) learned on 2 MB of other Wikipedia text in 47s
+  english (Wikipedia)      cells=    0 map=        0 fixed=   500000 coded=   287813
+  english (Wikipedia)      cells=  256 map=      576 fixed=   252618 coded=   218584
+  english (Wikipedia)      cells= 1024 map=     2559 fixed=   220340 coded=   187417
+  english (Wikipedia)      cells= 4096 map=    11647 fixed=   182613 coded=   159816
+{"dataset": "english (Wikipedia)", "original": 500000, "gzip": 160807, "bz2": 126146, "xz": 137800, "order0_entropy": 287694, "source_entropy": null, "grid0_fixed": 500000, "grid0_coded": 287813, "grid0_map": 0, "grid0_cells": 0, "grid256_fixed": 252618, "grid256_coded": 218584, "grid256_map": 576, "grid256_cells": 256, "grid1024_fixed": 220340, "grid1024_coded": 187417, "grid1024_map": 2559, "grid1024_cells": 1024, "grid4096_fixed": 182613, "grid4096_coded": 159816, "grid4096_map": 11647, "grid4096_cells": 4096, "shared256_coded": 216171, "shared1024_coded": 189740, "shared4096_coded": 161559}
+  flood/heat docs          cells=    0 map=        0 fixed=    97566 coded=    59664
+  flood/heat docs          cells=  256 map=      576 fixed=    55196 coded=    48262
+  flood/heat docs          cells= 1024 map=     2559 fixed=    47541 coded=    41292
+  flood/heat docs          cells= 4096 map=    11647 fixed=    44296 coded=    41998
+{"dataset": "flood/heat docs", "original": 97566, "gzip": 37360, "bz2": 31629, "xz": 34120, "order0_entropy": 59557, "source_entropy": null, "grid0_fixed": 97566, "grid0_coded": 59664, "grid0_map": 0, "grid0_cells": 0, "grid256_fixed": 55196, "grid256_coded": 48262, "grid256_map": 576, "grid256_cells": 256, "grid1024_fixed": 47541, "grid1024_coded": 41292, "grid1024_map": 2559, "grid1024_cells": 1024, "grid4096_fixed": 44296, "grid4096_coded": 41998, "grid4096_map": 11647, "grid4096_cells": 4096, "shared256_coded": 52353, "shared1024_coded": 48782, "shared4096_coded": 44754}
+  random bytes             cells=    0 map=        0 fixed=   500000 coded=   500275
+  random bytes             cells=  256 map=      576 fixed=   558201 coded=   501191
+  random bytes             cells= 1024 map=     2559 fixed=   668769 coded=   504333
+  random bytes             cells= 4096 map=    11647 fixed=   740168 coded=   517822
+{"dataset": "random bytes", "original": 500000, "gzip": 500173, "bz2": 502801, "xz": 500084, "order0_entropy": 499978, "source_entropy": 500000, "grid0_fixed": 500000, "grid0_coded": 500275, "grid0_map": 0, "grid0_cells": 0, "grid256_fixed": 558201, "grid256_coded": 501191, "grid256_map": 576, "grid256_cells": 256, "grid1024_fixed": 668769, "grid1024_coded": 504333, "grid1024_map": 2559, "grid1024_cells": 1024, "grid4096_fixed": 740168, "grid4096_coded": 517822, "grid4096_map": 11647, "grid4096_cells": 4096, "shared256_coded": 500513, "shared1024_coded": 500738, "shared4096_coded": 501154}
+  sparse bits (1% ones)    cells=    0 map=        0 fixed=   500000 coded=    40290
+  sparse bits (1% ones)    cells=  256 map=      576 fixed=    49125 coded=    42553
+  sparse bits (1% ones)    cells= 1024 map=     2559 fixed=    54170 coded=    44189
+  sparse bits (1% ones)    cells= 4096 map=    11647 fixed=    60978 coded=    53700
+{"dataset": "sparse bits (1% ones)", "original": 500000, "gzip": 55367, "bz2": 47774, "xz": 48648, "order0_entropy": 40229, "source_entropy": 40397, "grid0_fixed": 500000, "grid0_coded": 40290, "grid0_map": 0, "grid0_cells": 0, "grid256_fixed": 49125, "grid256_coded": 42553, "grid256_map": 576, "grid256_cells": 256, "grid1024_fixed": 54170, "grid1024_coded": 44189, "grid1024_map": 2559, "grid1024_cells": 1024, "grid4096_fixed": 60978, "grid4096_coded": 53700, "grid4096_map": 11647, "grid4096_cells": 4096, "shared256_coded": 40322, "shared1024_coded": 40365, "shared4096_coded": 40516}
