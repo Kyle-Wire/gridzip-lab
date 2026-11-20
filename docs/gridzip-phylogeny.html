@@ -1,0 +1,207 @@
+<title>GridZip Phylogeny</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab-notebook cladogram. Lineages read left to right as indentation; each specimen card states idea, measured result, and fate. */
+:root {
+  --paper: #f3f5f2;
+  --card: #ffffff;
+  --ink: #18242b;
+  --muted: #5b6a70;
+  --line: #b9c5c2;
+  --moss: #2f6b4f;      /* survived */
+  --gold: #a5761c;      /* champion */
+  --slate: #8a9497;     /* extinct */
+  --sky: #2a6a8f;       /* growing / running */
+  --display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #111a1e; --card: #18242a; --ink: #e3ebe8; --muted: #9aaaae; --line: #35474c;
+  --moss: #6fbf93; --gold: #e0b45a; --slate: #6f7c80; --sky: #6fb3dc; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #111a1e; --card: #18242a; --ink: #e3ebe8; --muted: #9aaaae; --line: #35474c;
+  --moss: #6fbf93; --gold: #e0b45a; --slate: #6f7c80; --sky: #6fb3dc; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px }
+.wrap { max-width: 1060px; margin: 0 auto; display: grid; gap: 28px }
+header { display: grid; gap: 10px }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted) }
+h1 { font: 700 clamp(30px, 5vw, 46px)/1.05 var(--display); margin: 0; text-wrap: balance }
+.lede { max-width: 66ch; margin: 0; color: var(--muted) }
+.champ { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: baseline; padding: 14px 18px; border: 1px solid var(--gold); border-radius: 10px; background: var(--card) }
+.champ b { font: 600 26px/1 var(--display); font-variant-numeric: tabular-nums }
+.champ span { color: var(--muted); font-size: 13px }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; color: var(--muted) }
+.chip { display: inline-flex; align-items: center; gap: 6px; font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 4px 7px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap }
+.chip.living { color: var(--gold) } .chip.survived { color: var(--moss) } .chip.extinct { color: var(--slate) } .chip.growing { color: var(--sky) }
+section { display: grid; gap: 10px }
+h2 { font: 600 20px/1.2 var(--display); margin: 0 }
+h2 small { font: 400 13px var(--body); color: var(--muted); margin-left: 8px }
+.scroll { overflow-x: auto; padding-bottom: 4px }
+
+/* tree */
+.tree, .tree ul { list-style: none; margin: 0; padding: 0 }
+.tree ul { margin-left: 22px; padding-left: 18px; border-left: 1.5px solid var(--line) }
+.tree li { position: relative; padding: 6px 0 }
+.tree ul > li::before { content: ""; position: absolute; left: -18px; top: 26px; width: 16px; border-top: 1.5px solid var(--line) }
+.node { display: grid; gap: 4px; max-width: 640px; min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px }
+.node .top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center }
+.node h3 { font: 600 15px/1.25 var(--display); margin: 0 }
+.node p { margin: 0; font-size: 13.5px; color: var(--muted) }
+.node .res { font: 400 12.5px/1.4 var(--mono); color: var(--ink); font-variant-numeric: tabular-nums }
+.node .from { font: 400 11.5px var(--mono); color: var(--muted) }
+.node.extinct { opacity: .72; border-style: dashed }
+.node.extinct h3 { text-decoration: line-through; text-decoration-color: var(--slate) }
+.node.living { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset }
+.node.growing { border-color: var(--sky) }
+.root .node { border-width: 1.5px }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch }
+@media (max-width: 520px) { .tree ul { margin-left: 8px; padding-left: 12px } .tree ul > li::before { left: -12px; width: 10px } }
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">gridzip-lab · experiment lineage · 20 Nov 2026</div>
+  <h1>GridZip Phylogeny</h1>
+  <p class="lede">Every experiment from one late-night question: can the location of bits carry information? Each card is a specimen. Its parent is the idea it grew from, and its fate is what the measurement decided. Sizes are bytes on enwik8 (100 MB of Wikipedia, the Hutter Prize test data) unless a card says otherwise. Every map, permutation and primer is counted in the size.</p>
+  <div class="champ">
+    <div><div class="eyebrow">current champion · enwik8</div><b>18,991,601 B</b></div>
+    <span>lpaq1 host + grid, spatial map, symmetry, topic and structure specialists + reordered articles · 3.9% under lpaq1 · decode verified</span>
+  </div>
+  <div class="legend">
+    <span class="chip living">● living champion</span><span class="chip survived">● survived</span>
+    <span class="chip extinct">● extinct</span><span class="chip growing">● growing (running)</span>
+  </div>
+</header>
+
+<section>
+  <h2>Lineage A · our own engine<small>from a codebook to a context-mixing compressor</small></h2>
+  <div class="scroll">
+  <ul class="tree root"><li>
+    <div class="node survived"><div class="top"><h3>The question: location carries data</h3><span class="chip survived">origin</span></div>
+      <p>Kyle's idea: a coordinate grid where locations hold functions, so position stores information beside the bits.</p></div>
+    <ul><li>
+      <div class="node survived"><div class="top"><h3>v1 · grid of functions</h3><span class="chip survived">survived</span></div>
+        <p>Each cell = two earlier cells joined (byte-pair encoding). Files become coordinates.</p>
+        <div class="res">500 KB English: 160 KB · gzip 161 · bzip2 126</div>
+        <div class="from">from: information theory (codebooks)</div></div>
+      <ul><li>
+        <div class="node survived"><div class="top"><h3>v2 · where you just were</h3><span class="chip survived">survived</span></div>
+          <p>Code each coordinate given the previous cell.</p>
+          <div class="res">English 138 KB (−14%) · enwik8 29.6 MB</div></div>
+        <ul>
+          <li><div class="node survived"><div class="top"><h3>v3 · longer memory</h3><span class="chip survived">survived</span></div>
+            <p>Last 4 cells as context, blended long to short (PPM).</p>
+            <div class="res">10 MB: 2,420,606 · beats xz by 11%</div></div>
+            <ul>
+              <li><div class="node extinct"><div class="top"><h3>v3.1 · learned blending</h3><span class="chip extinct">absorbed</span></div>
+                <p>Online mixer over context lengths. Small gain, folded into v4.</p></div></li>
+              <li><div class="node extinct"><div class="top"><h3>BWT on grid coordinates</h3><span class="chip extinct">extinct</span></div>
+                <p>Reorganize then compress. Grid and BWT exploit the same structure.</p>
+                <div class="res">1 MB: bytes 287 KB · grid 291–313 KB</div></div></li>
+            </ul></li>
+          <li><div class="node survived"><div class="top"><h3>v4 · bitwise context mixing + grid location</h3><span class="chip survived">survived</span></div>
+            <p>Strong byte model, then add "which grid cell am I in" as context.</p>
+            <div class="res">22,548,741 → 22,284,286 (−1.2%) · gain grows with data</div></div>
+            <ul><li>
+              <div class="node survived"><div class="top"><h3>v5 · spatial map</h3><span class="chip survived">survived</span></div>
+                <p>Cells placed on a map by how they are used. Random-map control gains nothing.</p>
+                <div class="res">22,175,978 (−0.5% more)</div>
+                <div class="from">from: geometry (PCA + clustering)</div></div>
+              <ul>
+                <li><div class="node extinct"><div class="top"><h3>Other geometries</h3><span class="chip extinct">extinct</span></div>
+                  <p>Coordinate grid in PCA space, Laplacian eigenmaps (manifolds), EM soft maps, e-means (arXiv 2611.09501). None beat k-means; the features matter, not the clusterer.</p>
+                  <div class="from">from: manifold learning, mixture models</div></div></li>
+                <li><div class="node extinct"><div class="top"><h3>Code-length map</h3><span class="chip extinct">extinct</span></div>
+                  <p>Clusters chosen to minimize bits (KL divergence). Keeps 92% of the information, but the exact cell is already a context.</p></div></li>
+                <li><div class="node survived"><div class="top"><h3>v6 · two zoom levels</h3><span class="chip survived">survived</span></div>
+                  <p>Coarse and fine map regions together.</p><div class="res">10 MB: −0.2%</div></div>
+                  <ul><li>
+                    <div class="node survived"><div class="top"><h3>v7 · symmetry</h3><span class="chip survived">survived</span></div>
+                      <p>Contexts on equivalence classes: case folded, digits merged.</p>
+                      <div class="res">22,048,955</div><div class="from">from: representation theory (quotients)</div></div>
+                    <ul><li>
+                      <div class="node survived"><div class="top"><h3>v8 → v9 · stronger engine</h3><span class="chip survived">survived</span></div>
+                        <p>Bigger tables, more contexts, 3 mixers, fast and slow estimates per context.</p>
+                        <div class="res">10 MB: 2,108,842 · enwik8 19,829,261</div></div>
+                      <ul><li>
+                        <div class="node survived"><div class="top"><h3>v10 · topic specialists</h3><span class="chip survived">survived</span></div>
+                          <p>A running topic vote picks a specialist mixer.</p>
+                          <div class="res">10 MB: 2,102,865 (−0.3%)</div><div class="from">from: experiment 3 (mixed specialists win)</div></div>
+                      </li></ul>
+                    </li></ul>
+                  </li></ul></li>
+              </ul>
+            </li></ul></li>
+        </ul>
+      </li></ul>
+    </li></ul>
+  </li></ul>
+  </div>
+</section>
+
+<section>
+  <h2>Lineage B · grafted onto lpaq1<small>a mature host compressor (Mahoney, 2007, GPL)</small></h2>
+  <div class="scroll">
+  <ul class="tree root"><li>
+    <div class="node survived"><div class="top"><h3>Host: lpaq1</h3><span class="chip survived">host</span></div>
+      <p>Graft switched off reproduces lpaq1 byte for byte.</p>
+      <div class="res">enwik8 19,755,948 · enwik9 164,508,919</div></div>
+    <ul><li>
+      <div class="node survived"><div class="top"><h3>+ grid, spatial map, symmetry</h3><span class="chip survived">survived</span></div>
+        <div class="res">19,456,911 (−1.5%)</div><div class="from">from: lineage A, v4–v7</div></div>
+      <ul><li>
+        <div class="node survived"><div class="top"><h3>+ topic specialists</h3><span class="chip survived">survived</span></div>
+          <div class="res">19,395,627 (−1.8%) · enwik9 161,433,444 (−1.9%, decode verified)</div></div>
+        <ul><li>
+          <div class="node survived"><div class="top"><h3>+ structure specialists</h3><span class="chip survived">survived</span></div>
+            <p>Tracks prose, tag, link, template, table, heading, list, entity, URL. Structure picks the mixer; topics stay as contexts.</p>
+            <div class="res">19,200,043 (−2.8%)</div><div class="from">from: cmix's bracket model</div></div>
+          <ul>
+            <li><div class="node extinct"><div class="top"><h3>+ pretraining</h3><span class="chip extinct">extinct</span></div>
+              <p>Prime on cmix's word list first. Saves 37 KB, costs 122 KB to ship.</p><div class="from">from: kid → PhD</div></div></li>
+            <li><div class="node survived"><div class="top"><h3>+ two-layer mixer</h3><span class="chip survived">survived</span></div>
+              <p>Four selected networks, then a final network.</p><div class="res">10 MB: −1.2%</div><div class="from">from: paq8 / neural nets</div></div></li>
+            <li><div class="node living"><div class="top"><h3>+ curriculum reorder</h3><span class="chip living">champion</span></div>
+              <p>Articles arranged so neighbours are similar; the permutation (18,750 B) is counted.</p>
+              <div class="res">18,991,601 (−3.9%) · restores byte-identical</div><div class="from">from: experiment 3 + cmix article order</div></div>
+              <ul><li><div class="node growing"><div class="top"><h3>enwik9, full stack</h3><span class="chip growing">running</span></div>
+                <p>Reorder 243,425 articles (permutation ≤ 500,557 B, counted), compress with everything, verify.</p></div></li></ul></li>
+            <li><div class="node growing"><div class="top"><h3>Evolution of contexts</h3><span class="chip growing">running</span></div>
+              <p>Genomes of contexts; fitness = compressed size; mutation, crossover, selection; checked on held-out data.</p>
+              <div class="from">from: biology (natural selection)</div></div></li>
+            <li><div class="node extinct"><div class="top"><h3>Reference-based coding</h3><span class="chip extinct">extinct</span></div>
+              <p>A second match model aligned only to the previous article (the closest relative in chain order). The existing match model already finds those repeats.</p><div class="res">10 MB: −0.02% to −0.03%</div><div class="from">from: genomics</div></div></li>
+          </ul></li>
+        </ul></li>
+      </ul></li>
+    </ul>
+  </li></ul>
+  </div>
+</section>
+
+<section>
+  <h2>Probes · testing the theory itself</h2>
+  <div class="scroll">
+  <ul class="tree root">
+    <li><div class="node survived"><div class="top"><h3>Position as storage</h3><span class="chip survived">survived</span></div>
+      <p>89.6 KB hidden in word order alone and recovered exactly. Costs the same information as plain bytes; sorting reclaims order that doesn't matter.</p></div></li>
+    <li><div class="node survived"><div class="top"><h3>Experiment 3 · kid → PhD</h3><span class="chip survived">survived</span></div>
+      <p>Specialist from day one wins its field; mixed training is the best all-rounder; specializing late forgets.</p><div class="from">fed: topic specialists, curriculum reorder, pretraining</div></div></li>
+    <li><div class="node survived"><div class="top"><h3>Experiment 4 · transformer on grid tokens</h3><span class="chip survived">survived</span></div>
+      <p>Same model, same compute: 2.11 bits/byte on grid tokens vs 2.29 on bytes (−7.9%).</p></div></li>
+    <li><div class="node extinct"><div class="top"><h3>Batch: compress chunks, recompress</h3><span class="chip extinct">extinct</span></div>
+      <p>Chunks alone +12%; compressed output doesn't shrink again.</p></div></li>
+    <li><div class="node extinct"><div class="top"><h3>The screenshot · two-part code</h3><span class="chip extinct">extinct for text</span></div>
+      <p>Lowercase layer plus case bits seen with the future. Future context cuts case bits 42%, but the one-pass model already pays less. Suited to images and rasters.</p></div></li>
+  </ul>
+  </div>
+</section>
+
+<footer>Source, logs and every number: github.com/Kyle-Wire/gridzip-lab. "Extinct" means the measurement didn't justify keeping it, not that the idea taught nothing.</footer>
+</div>

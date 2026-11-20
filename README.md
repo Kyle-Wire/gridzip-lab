@@ -184,6 +184,32 @@ identical to before.
 | single mixer | 2,059,112 |
 | two-layer mixer | **2,034,518 (−1.2%)**, round trip verified |
 
+### Reference-based coding (lpaq1g, `REFMODEL=1`)
+
+This borrows from genomics: align each article to a relative and code only
+what differs. A second match model looks only inside the previous article,
+which in chain order is the closest relative, so no reference index is
+stored.
+
+| 10 MB, best settings | without | with reference model |
+|---|---|---|
+| original order | 2,034,518 | 2,033,894 (−0.03%) |
+| chain order | 2,078,584 | 2,078,108 (−0.02%) |
+
+Close to a null result. lpaq1's match model already jumps to the most recent
+repeat, and after reordering that is usually in the neighbouring article.
+(The chain-order slice is a different set of articles, so its absolute size
+is not comparable with the original-order slice.)
+
+### Evolution of contexts (`src/evolve.py`, `GENOME`)
+
+A genome is a list of genes, and each gene is one context: which of the last 8
+bytes to read, plus any of the grid cell, map regions, word, previous word,
+page structure, topic, folded bytes or link depth. Fitness is the compressed
+size of 2 MB. Each generation keeps the elite and breeds the rest by
+tournament, crossover and mutation. Every generation's best is checked on a
+held-out 2 MB slice. Log: `results/evolve.json`. Running.
+
 ### Batch compression: chunks, then compress again
 
 | 10 MB of enwik8, lpaq1 | Size |
@@ -223,7 +249,7 @@ images (coarse then fine) better than text.
 | | enwik9 |
 |---|---|
 | lpaq1 -9 | 164,508,919 |
-| lpaq1g, grid + map + symmetry + topics (`GFLAGS=15`) | **161,433,444** (−1.9%, map included) |
+| lpaq1g, grid + map + symmetry + topics (`GFLAGS=15`) | **161,433,444** (−1.9%, map included; decode verified) |
 
 ### Curriculum: reorder the articles (`src/reorder.py`)
 

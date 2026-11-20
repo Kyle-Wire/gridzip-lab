@@ -170,6 +170,9 @@ To compile (g++ 3.4.5, upx 3.00w):
 #include <ctype.h>
 #define NDEBUG  // remove for debugging
 #include <assert.h>
+#include <vector>
+#include <deque>
+#include <algorithm>
 
 // 8, 16, 32 bit unsigned types (adjust as appropriate)
 typedef unsigned char  U8;
@@ -592,6 +595,44 @@ int MatchModel::p(int y, Mixer& m) {
   return len;
 }
 
+
+// ---- Reference model (genomics-style): match only inside the PREVIOUS article,
+// which in chain order is the closest relative. No reference index is stored.
+class RefModel {
+  std::vector<U8> cur, ref; std::vector<int> ht4, ht8;
+  int match, len, c0, bcount; U32 c4, c8; StateMap sm;
+  enum {HB=20, MAXLEN=60};
+public:
+  RefModel(): match(-1), len(0), c0(1), bcount(0), c4(0), c8(0), sm(64<<8) { ht4.assign(1<<HB,-1); ht8.assign(1<<HB,-1); }
+  int p(int y, Mixer& m) {
+    c0+=c0+y; ++bcount;
+    if (bcount==8) {
+      int c=c0&255; bcount=0; c0=1;
+      c8=c8<<8|c4>>24; c4=c4<<8|c;
+      cur.push_back(c);
+      if (c4==0x6167653Eu && c8==0x20203C70u) {   // "  <page>": new article begins
+        ref.swap(cur); cur.clear(); std::fill(ht4.begin(),ht4.end(),-1); std::fill(ht8.begin(),ht8.end(),-1);
+        U32 a=0,b=0; for (int i=0;i<(int)ref.size();++i){ b=b<<8|a>>24; a=a<<8|ref[i];
+          if (i>=3) ht4[(a*2654435761u)>>(32-HB)]=i+1; if (i>=7) ht8[((a*2654435761u)^(b*0x85EBCA77u))>>(32-HB)]=i+1; }
+        match=-1; len=0;
+      } else if (!ref.empty()) {
+        if (len>0 && match<(int)ref.size() && ref[match]==c) { ++match; if (len<MAXLEN) ++len; }
+        else { len=0; match=-1; }
+        if (len==0 && cur.size()>=8) { int q=ht8[((c4*2654435761u)^(c8*0x85EBCA77u))>>(32-HB)]; if (q>=0) { match=q; len=8; } }
+        if (len==0 && cur.size()>=4) { int q=ht4[(c4*2654435761u)>>(32-HB)]; if (q>=0) { match=q; len=1; } }
+        if (match>=(int)ref.size()) { len=0; match=-1; }
+      }
+    }
+    int cxt=0;
+    if (len>0 && match>=0 && match<(int)ref.size() && ((ref[match]+256)>>(8-bcount))==c0) {
+      int b=ref[match]>>(7-bcount)&1;
+      cxt=((len<16?len:15+len/16)*2+b)*256 + (c4&255) + 1;
+    } else if (len>0 && bcount>0) len=0;
+    m.add(stretch(sm.p(y, cxt)));
+    return len;
+  }
+};
+
 //////////////////////////// Predictor /////////////////////////
 
 // A Predictor estimates the probability that the next bit of
@@ -623,6 +664,17 @@ static int G_NT=1, G_topic=0; static double G_tv[64]; static double G_decay=0.95
 static std::vector<int> G_hist;     // longest cell ending at each position
 static int G_state=0;
 static long G_pos=0;
+// ---- evolvable contexts: GENOME="fmask:bmask,..." (hex). Each gene is one context:
+// bmask bit i = include byte c(i+1) (i=0..7); fmask bits: 0 g1, 1 g2, 2 r1, 3 r2, 4 r3,
+// 5 f1, 6 f2, 7 word, 8 previous word, 9 page structure, 10 topic, 11 fold bytes (symmetry), 12 link/template depth
+static int NGENE=0; static int GENE_F[24], GENE_B[24];
+static U32 W_cur=0, W_prev=0;
+static void load_genome() {
+  const char* g=getenv("GENOME"); if (!g) return;
+  const char* p=g;
+  while (*p && NGENE<17) { unsigned f=0,b=0; if (sscanf(p,"%x:%x",&f,&b)!=2) break; GENE_F[NGENE]=f; GENE_B[NGENE]=b; ++NGENE;
+    const char* c=strchr(p,','); if (!c) break; p=c+1; }
+}
 static void load_grid() {
   const char* f=getenv("GRIDMAP"); const char* fl=getenv("GFLAGS");
   if (!f || !fl) return;
@@ -655,6 +707,7 @@ static void load_grid() {
   if (GF&4) NCX+=2;
   if (GF&8) NCX+=2;
   if (GF&16) NCX+=2;
+  load_genome(); if (NGENE) NCX=1+NGENE;
 }
 static inline U32 hmix(U32 a, U32 b) {
   U32 h=a*0x9E3779B1u ^ (b+0x7F4A7C15u)*0x85EBCA77u; h^=h>>15; h*=0xC2B2AE3Du; return h^(h>>13);
@@ -699,9 +752,10 @@ void Predictor::update(int y) {
   static U32 h[NMAX];
   static Mixer* mp=0;
   static MatchModel mm(MEM);  // predicts next bit by matching context
+  static RefModel* rm = getenv("REFMODEL") ? new RefModel() : 0;
   if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
-      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1, sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
-      else mp=new Mixer(NCX+1, s0); } init=1; }
+      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0), sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
+      else mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0), s0); } init=1; }
   Mixer& m=*mp;
   const int N=NCX;
 
@@ -743,6 +797,23 @@ void Predictor::update(int y) {
       if (GF&16) { struct_update(byte);
         h[k++]=hmix(111,S_state*65536+(c4&0xffff)); h[k++]=hmix(112,hmix(S_state*7+S_link*3+(S_tmpl>0),h[5])); }
     }
+    if (NGENE) {
+      if ((byte|32)>=97 && (byte|32)<=122) W_cur=h[5]; else if (W_cur) { W_prev=W_cur; W_cur=0; }
+      if (!(GF&16)) struct_update(byte);
+      int g1=G_hist[G_pos&65535]; long j2=G_pos-G_len[g1]; int g2= j2>=0? G_hist[j2&65535]:0;
+      long j3=j2-G_len[g2]; int g3= j3>=0? G_hist[j3&65535]:0;
+      for (int q=0;q<NGENE;++q) {
+        int f=GENE_F[q], bm=GENE_B[q]; U32 hh=0x9E3779B1u*(q+1);
+        for (int bi=0;bi<8;++bi) if (bm>>bi&1) { int cb = bi<4 ? (c4>>(8*bi))&255 : (c8>>(8*(bi-4)))&255; if (f&2048) cb=orb(cb); hh=hmix(hh, cb+256*bi); }
+        if (f&1) hh=hmix(hh, 1000+g1); if (f&2) hh=hmix(hh, 20000+g2);
+        if (f&4) hh=hmix(hh, 40000+G_reg[g1]); if (f&8) hh=hmix(hh, 41000+G_reg[g2]); if (f&16) hh=hmix(hh, 42000+G_reg[g3]);
+        if (f&32) hh=hmix(hh, 43000+G_regB[g1]); if (f&64) hh=hmix(hh, 45000+G_regB[g2]);
+        if (f&128) hh=hmix(hh, W_cur); if (f&256) hh=hmix(hh, W_prev^0x55555555u);
+        if (f&512) hh=hmix(hh, 50000+S_state); if (f&1024) hh=hmix(hh, 51000+G_topic);
+        if (f&4096) hh=hmix(hh, 52000+S_link*4+(S_tmpl>3?3:S_tmpl));
+        h[1+q]=hh;
+      }
+    }
     for (int i=1;i<N;++i) cp[i]=t[h[i]]+1;
     c0=1;
     bcount=0;
@@ -758,6 +829,7 @@ void Predictor::update(int y) {
 
   // predict
   int len=mm.p(y, m);
+  if (rm) rm->p(y, m);
   int order=0;
   if (len==0) {
     if (*cp[4]) ++order;
