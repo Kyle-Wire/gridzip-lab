@@ -1,0 +1,75 @@
+"""Curriculum for a compressor: reorder enwik8's articles so related ones sit
+together, then compress. (cmix ships an article order for enwik9; this tests
+the idea with our own topic geometry.)
+
+Cost of the reordering = the permutation, which the decoder needs:
+log2(N!) bits for N articles (an upper bound: any ordering coded as a Lehmer
+code). Prefix (before the first <page>) and suffix stay in place.
+
+Orders tried:
+  original   : as in the file
+  topic      : articles sorted by their dominant topic, then by 2nd PCA axis
+  chain      : greedy nearest-neighbour chain through article vectors
+  random     : control
+Article vector = histogram of grid cells in the article -> log/TF-IDF -> SVD.
+"""
+import math, os, re, sys
+import numpy as np
+from gridzip import learn_grid, apply_grid
+
+
+def split_pages(data):
+    starts = [m.start() for m in re.finditer(rb"  <page>", data)]
+    prefix = data[: starts[0]]
+    pages = [data[s:e] for s, e in zip(starts, starts[1:] + [len(data)])]
+    # the last "page" may be cut by the 100 MB boundary: keep it last, unmoved
+    return prefix, pages[:-1], pages[-1]
+
+
+def article_vectors(pages, merges, m, dims=32):
+    V = np.zeros((len(pages), m), dtype=np.float32)
+    for i, p in enumerate(pages):
+        t = apply_grid(p, merges)
+        np.add.at(V[i], t, 1.0)
+    df = (V > 0).sum(0) + 1
+    V = np.log1p(V) * np.log(len(pages) / df)[None]
+    V /= np.linalg.norm(V, axis=1, keepdims=True) + 1e-9
+    U, S, _ = np.linalg.svd(V - V.mean(0), full_matrices=False)
+    X = U[:, :dims] * S[:dims]
+    return X / (np.linalg.norm(X, axis=1, keepdims=True) + 1e-9)
+
+
+def chain_order(X, start=0):
+    n = len(X); left = np.ones(n, dtype=bool); order = [start]; left[start] = False
+    cur = start
+    for _ in range(n - 1):
+        sims = X @ X[cur]; sims[~left] = -9
+        cur = int(sims.argmax()); order.append(cur); left[cur] = False
+    return order
+
+
+if __name__ == "__main__":
+    src, outdir = sys.argv[1], sys.argv[2]
+    data = open(src, "rb").read()
+    prefix, pages, tail = split_pages(data)
+    n = len(pages)
+    perm_bytes = math.lgamma(n + 1) / math.log(2) / 8
+    print(f"articles={n:,}  permutation cost <= {perm_bytes:,.0f} B", flush=True)
+    merges, _ = learn_grid(data[:2_000_000], 1024)
+    X = article_vectors(pages, merges, 256 + len(merges))
+    from geometry import kmeans
+    topic = kmeans(X, 64)
+    orders = {
+        "original": list(range(n)),
+        "topic": sorted(range(n), key=lambda i: (topic[i], X[i, 1])),
+        "chain": chain_order(X),
+        "random": list(np.random.default_rng(0).permutation(n)),
+    }
+    os.makedirs(outdir, exist_ok=True)
+    for name, order in orders.items():
+        body = b"".join(pages[i] for i in order)
+        out = prefix + body + tail
+        assert len(out) == len(data)
+        open(f"{outdir}/enwik8.{name}", "wb").write(out)
+        np.save(f"{outdir}/order.{name}.npy", np.array(order))
+    print("written", list(orders), flush=True)

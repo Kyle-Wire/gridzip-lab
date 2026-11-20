@@ -142,6 +142,28 @@ At 1 MB the map costs more than it saves; from 10 MB on it pays for itself.
 Context on the enwik8 ladder (Mahoney's benchmark): drt|lpaq9m 17,964,751;
 paq8hp12 16,230,028; paq8px 15,849,084; cmix 14,623,723.
 
+### Curriculum: reorder the articles (`src/reorder.py`)
+
+cmix ships an article order for enwik9. Here our own geometry picks the
+order: each of enwik8's 12,346 articles becomes a TF-IDF vector over grid
+cells, reduced with SVD, and articles are arranged so neighbours are similar.
+The decoder needs only the permutation, at most log2(N!) bits = 18,750 B,
+counted below.
+
+| Order | lpaq1 | Net change |
+|---|---|---|
+| original | 19,755,948 | baseline |
+| sorted by topic (64 clusters) | 19,543,338 | −1.0% |
+| nearest-neighbour chain | 19,513,523 | **−1.1%** |
+| random (control) | 19,957,970 | +1.0% |
+| chain + lpaq1g (grid, map, symmetry) | 19,212,282 | **−2.6%** (19,235,351 with map and permutation) |
+
+The two gains stack almost exactly: 1.5% from the contexts and 1.1% from
+ordering. The random control shows the original order already holds useful
+locality, and placing related articles side by side adds another 1%. This is
+experiment 3's lesson in a compressor: what an online learner sees next to
+what changes how well it specialises.
+
 ### Can position alone hold data? (`src/positional.py`)
 
 89,619 bytes of random data were hidden purely in the **order** of 109,056
