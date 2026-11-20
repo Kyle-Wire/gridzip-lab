@@ -1,0 +1,4 @@
+{"n": 10000000, "cells": 0, "grid": false, "size": 2339828, "secs": 54}
+{"n": 10000000, "cells": 256, "grid": true, "size": 2327050.75, "map": 575.75, "secs": 68}
+{"n": 10000000, "cells": 1024, "grid": true, "size": 2320451.25, "map": 2559.25, "secs": 68}
+{"n": 10000000, "cells": 4096, "grid": true, "size": 2325564.75, "map": 11646.75, "secs": 70}

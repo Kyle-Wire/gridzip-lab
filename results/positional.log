@@ -1,0 +1,10 @@
+words=109,056 blocks=426 of 256, raw list=964,270 B
+order can hold: 89,619 B in blocks (whole-list maximum log2(N!)/8 = 208,462 B)
+payload recovered exactly from word ORDER alone: True
+xz size, sorted (order holds nothing)   : 277,908 B
+xz size, ordered to carry the payload   : 346,608 B  (+68,700)
+xz size, randomly shuffled              : 438,008 B  (+160,100)
+payload size                            : 89,619 B
+set-aware coding of the sorted set      : 225,432 B
+  -> best way to store set + payload    : 315,051 B (payload kept as plain bytes)
+  -> set + payload hidden in the order  : 346,608 B

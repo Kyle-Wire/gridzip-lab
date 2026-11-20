@@ -1,0 +1,56 @@
+[
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "none",
+  "size": 243774.25
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "learned",
+  "regions": 16,
+  "size": 243270.25,
+  "secs": 8
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "random",
+  "regions": 16,
+  "size": 244868.25,
+  "secs": 9
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "learned",
+  "regions": 64,
+  "size": 243431.25,
+  "secs": 8
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "random",
+  "regions": 64,
+  "size": 244718.25,
+  "secs": 8
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "learned",
+  "regions": 256,
+  "size": 243883.25,
+  "secs": 9
+ },
+ {
+  "n": 1000000,
+  "cells": 1024,
+  "space": "random",
+  "regions": 256,
+  "size": 244674.25,
+  "secs": 9
+ }
+]

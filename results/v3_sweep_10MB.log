@@ -1,1 +1,17 @@
 {'bytes': 10000000, 'gzip': 3688458, 'bz2': 2916026, 'xz': 2720256}
+learned 4096 cells in 344s
+cells=    0 order=2 total=   3,882,491  (1.331 x bzip2)
+cells=    0 order=3 total=   3,161,528  (1.084 x bzip2)
+cells=    0 order=4 total=   2,719,806  (0.933 x bzip2)
+cells=  512 order=2 total=   2,684,942  (0.921 x bzip2)
+cells=  512 order=3 total=   2,463,066  (0.845 x bzip2)
+cells=  512 order=4 total=   2,420,606  (0.830 x bzip2)
+cells= 1024 order=2 total=   2,610,947  (0.895 x bzip2)
+cells= 1024 order=3 total=   2,464,721  (0.845 x bzip2)
+cells= 1024 order=4 total=   2,440,687  (0.837 x bzip2)
+cells= 2048 order=2 total=   2,572,320  (0.882 x bzip2)
+cells= 2048 order=3 total=   2,487,889  (0.853 x bzip2)
+cells= 2048 order=4 total=   2,475,874  (0.849 x bzip2)
+cells= 4096 order=2 total=   2,572,858  (0.882 x bzip2)
+cells= 4096 order=3 total=   2,528,455  (0.867 x bzip2)
+cells= 4096 order=4 total=   2,521,987  (0.865 x bzip2)
