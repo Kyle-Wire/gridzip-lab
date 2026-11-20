@@ -48,7 +48,7 @@ Mahoney's Large Text Compression Benchmark (mattmahoney.net/dc/text.html).
 | Grid v3 (512 cells, 4 cells of context) | 266,346 | 2,420,606 | not run |
 | v4, bytes only | 243,008 | 2,339,828 | 22,548,741 |
 | v4 + grid (1,024 cells) | 241,215 | 2,320,451 | **22,284,286** |
-| v5 + learned spatial map (16 regions) | 243,270 | **2,307,970** | running |
+| v5 + learned spatial map (16 regions) | 243,270 | **2,307,970** | **22,175,978** |
 | v5 + random map (control) | 244,868 | 2,320,100 | not run |
 
 The 1 MB column for v4 and v5 differs slightly: the v5 rows add the grid's map
@@ -60,10 +60,25 @@ cost (about 2.6 KB) and use an untuned mixer.
 |---|---|---|---|
 | 1 MB | 0.6% | 0.2% | +0.4% (worse) |
 | 10 MB | 0.8% | 0.5% | 0.0% |
-| 100 MB | 1.2% | running | not run |
+| 100 MB | 1.2% | 0.5% | not run |
 
 Both signals grow with data. The random-map control shows the gain comes from
 the **arrangement** of the grid, not from simply having more contexts.
+
+### Reorganise, then compress: BWT on grid coordinates (`src/bwt.py`)
+
+A negative result. On 1 MB of enwik8, the Burrows-Wheeler transform followed
+by move-to-front and context coding gives 287,415 B on bytes. On grid
+coordinates it gives 291,201 B (256 cells), 298,442 B (1,024) and 312,596 B
+(4,096). The BWT and the grid exploit the same structure, so stacking them adds
+nothing, and the larger alphabet makes the reordered output harder to code.
+The inverse transform is verified at every grid size.
+
+### v6: the map at two zoom levels (`src/v6.py`)
+
+At 1 MB it is slightly worse than v5: 244,232 B (16 coarse / 128 fine regions)
+against 243,270 B, because the larger map costs more and the mixer has more to
+learn. The 10 MB test is running.
 
 ### Can position alone hold data? (`src/positional.py`)
 
