@@ -111,6 +111,29 @@ Add the map's cost (4,959 B at 1,024 cells and 16 topics) before comparing.
 If the graft wins by 1% or more on 10 MB and on full enwik8, a prize attempt
 is worth planning: fx2-cmix is the strongest open base under the 10 GB limit.
 
+## 4b. Put the evolved genome in the champion (quick win)
+
+Speciation's winner beat the hand-designed contexts by 1.0% on held-out 2 MB.
+It has not been run at full scale. `GENOME` replaces the flag-based contexts;
+keep `GFLAGS=95` so the grid, map, topic, structure and multi-scale state is
+still tracked.
+
+```bash
+G=0:3,0:7,0:f,0:3f,80:0,1:0,103:0,1c:4,19:0,70:1,840:7,800:3f,24a0:3,580:0,200:3,1290:0,4060:1
+```
+
+```bash
+GENOME=$G IMMUNE=1 MIX2=1 MIXSEL=1 GRIDMAP=work/map.bin GFLAGS=95 lpaq1g/lpaq1g 9 work/enwik8.chain work/champ8g
+```
+
+```bash
+GENOME=$G IMMUNE=1 MIX2=1 MIXSEL=1 GRIDMAP=work/map.bin GFLAGS=95 lpaq1g/lpaq1g d work/champ8g work/check && cmp work/check work/enwik8.chain
+```
+
+Compare with step 3's size, then add the map and the permutation. The other
+champions are in `results/speciation.json`, and the single-population winner
+is in `results/evolve.json`.
+
 ## 5. Other open threads
 
 - **Evolution:** `src/evolve.py` and `src/speciation.py` need `LPAQ_DIR`
