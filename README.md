@@ -358,8 +358,30 @@ A small byte-level transformer (0.9 M parameters, 4,000 steps) is trained five
 ways on the same budget: broad only, narrow only, broad then narrow, mixed, and
 narrow then broad. Each is scored by bits per byte on held-out flood/heat docs
 and on held-out Wikipedia, which is the size a model-driven compressor would
-produce. Three seeds per condition. Results are in
-`results/exp3_results.jsonl` once the runs finish.
+produce. Three seeds per condition (`results/exp3_results.jsonl`).
+
+| Training order | Flood/heat docs | Wikipedia |
+|---|---|---|
+| broad only | 4.308 ± 0.011 | 1.950 ± 0.006 |
+| narrow only | **1.945 ± 0.007** | 4.014 ± 0.038 |
+| broad then narrow ("kid → PhD") | 2.442 ± 0.017 | 2.487 ± 0.014 |
+| mixed throughout | 2.279 ± 0.004 | 1.999 ± 0.005 |
+| narrow then broad | 3.734 ± 0.050 (best mid-run 2.530) | **1.936 ± 0.015** |
+
+Bits per byte, mean ± standard deviation over 3 seeds; lower is better.
+
+- For one field, the pure specialist wins, by a wide margin and on every
+  seed.
+- "Kid → PhD" forgets: its Wikipedia score drops from 1.95 to 2.49, and it
+  still trails the specialist on the field.
+- Mixed throughout is the best all-rounder, close to the best on both.
+- Narrow then broad edges broad-only on Wikipedia (1.936 vs 1.950), but the
+  gap is about one standard deviation with 3 seeds. Not established.
+
+The setting is small: a 0.9 M-parameter model with plenty of field text for
+its size. These lessons carried into the compressor: mixed specialists
+(topic and structure specialists), order matters (curriculum reordering),
+and a broad head start fades (pretraining did not pay).
 
 ## Experiment 4: transformer on grid tokens (`src/exp4.py`)
 
