@@ -1,0 +1,38 @@
+[
+ {
+  "n": 10000000,
+  "map": "kmeans16 (v5)",
+  "regions": 16,
+  "size": 2307927.25
+ },
+ {
+  "n": 10000000,
+  "map": "pca_grid 2 axes x 4 bins",
+  "regions": 16,
+  "size": 2314169.25
+ },
+ {
+  "n": 10000000,
+  "map": "pca_grid 4 axes x 2 bins",
+  "regions": 16,
+  "size": 2314813.25
+ },
+ {
+  "n": 10000000,
+  "map": "pca_grid 3 axes x 3 bins (27)",
+  "regions": 27,
+  "size": 2312498.032000346
+ },
+ {
+  "n": 10000000,
+  "map": "laplacian kmeans16",
+  "regions": 16,
+  "size": 2313945.25
+ },
+ {
+  "n": 10000000,
+  "map": "laplacian grid 4 axes x 2",
+  "regions": 16,
+  "size": 2315245.25
+ }
+]
