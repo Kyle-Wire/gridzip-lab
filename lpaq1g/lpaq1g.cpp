@@ -646,14 +646,38 @@ static void load_grid() {
   if (GF&2) NCX+=3;
   if (GF&4) NCX+=2;
   if (GF&8) NCX+=2;
+  if (GF&16) NCX+=2;
 }
 static inline U32 hmix(U32 a, U32 b) {
   U32 h=a*0x9E3779B1u ^ (b+0x7F4A7C15u)*0x85EBCA77u; h^=h>>15; h*=0xC2B2AE3Du; return h^(h>>13);
 }
+// wiki-page structure: 0 prose, 1 xml tag, 2 [[link]], 3 {{template}}, 4 table line,
+// 5 heading line, 6 list line, 7 &entity;, 8 url, 9 xml/text header lines
+static int S_state=0, S_tag=0, S_link=0, S_tmpl=0, S_ent=0, S_url=0, S_line=0, S_prev=0, S_bol=1;
+static int S_urlk=0;
+static void struct_update(int c) {
+  if (S_bol) { S_line = c; S_bol = 0; }
+  if (c=='\n') { S_bol=1; S_line=0; }
+  if (c=='<') S_tag=1; else if (c=='>') S_tag=0;
+  if (c=='&') S_ent=1; else if (c==';' || c==' ') S_ent=0;
+  if (c=='[' && S_prev=='[') S_link++; else if (c==']' && S_prev==']' && S_link>0) S_link--;
+  if (c=='{' && S_prev=='{') S_tmpl++; else if (c=='}' && S_prev=='}' && S_tmpl>0) S_tmpl--;
+  // url: "http" then until space or ] or |
+  if (c=='h') S_urlk=1; else if (S_urlk==1 && c=='t') S_urlk=2; else if (S_urlk==2 && c=='t') S_urlk=3;
+  else if (S_urlk==3 && c=='p') { S_url=1; S_urlk=0; } else S_urlk=0;
+  if (c==' ' || c==']' || c=='|' || c=='\n') S_url=0;
+  S_prev=c;
+  int st=0;
+  if (S_tag) st=1; else if (S_ent) st=7; else if (S_url) st=8; else if (S_tmpl) st=3; else if (S_link) st=2;
+  else if (S_line=='|' || S_line=='!' || S_line=='{') st=4; else if (S_line=='=') st=5;
+  else if (S_line=='*' || S_line=='#' || S_line==':' || S_line==';') st=6;
+  else if (S_line==' ' ) st=9;
+  S_state=st;
+}
 static inline int orb(int c){ if(c>=65&&c<=90) return c+32; if(c>=48&&c<=57) return 48; return c; }
 
 void Predictor::update(int y) {
-  enum {NMAX=16};
+  enum {NMAX=24};
   static U8 t0[0x10000];  // order 1 cxt -> state
   static HashTable<16> t(MEM*2);  // cxt -> state
   static int c0=1;  // last 0-7 bits with leading 1
@@ -667,7 +691,7 @@ void Predictor::update(int y) {
   static U32 h[NMAX];
   static Mixer* mp=0;
   static MatchModel mm(MEM);  // predicts next bit by matching context
-  if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; mp=new Mixer(NCX+1, 80*(GF&8 ? 64 : 1)); init=1; }
+  if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; mp=new Mixer(NCX+1, 80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1)); init=1; }
   Mixer& m=*mp;
   const int N=NCX;
 
@@ -706,6 +730,8 @@ void Predictor::update(int y) {
           for (int t=0;t<G_NT;++t) G_tv[t]*=G_decay;
           G_tv[G_tlab[gn]]+=1.0; int b=0; for (int t=1;t<G_NT;++t) if (G_tv[t]>G_tv[b]) b=t; G_topic=b; }
         h[k++]=hmix(109,G_topic*65536+(c4&0xffff)); h[k++]=hmix(110,hmix(G_topic,h[5])); }
+      if (GF&16) { struct_update(byte);
+        h[k++]=hmix(111,S_state*65536+(c4&0xffff)); h[k++]=hmix(112,hmix(S_state*7+S_link*3+(S_tmpl>0),h[5])); }
     }
     for (int i=1;i<N;++i) cp[i]=t[h[i]]+1;
     c0=1;
@@ -731,7 +757,9 @@ void Predictor::update(int y) {
   }
   else order=5+(len>=8)+(len>=12)+(len>=16)+(len>=32);
   for (int i=0;i<N;++i) m.add(stretch(sm[i].p(y, *cp[i])));
-  m.set(order+10*(h[0]>>13) + ((GF&8) ? 80*G_topic : 0));
+  { static int msel = getenv("MIXSEL") ? atoi(getenv("MIXSEL")) : 0;   // 0 topic x struct, 1 struct only, 2 topic only
+    int tp = (GF&8) && msel!=1 ? G_topic : 0, sp = (GF&16) && msel!=2 ? S_state : 0;
+    m.set(order+10*(h[0]>>13) + 80*(tp + ((GF&8) ? 64 : 1)*sp)); }
   pr=m.p();
   pr=pr+3*a1.pp(y, pr, c0)>>2;
   pr=pr+3*a2.pp(y, pr, c0^h[0]>>2)>>2;
@@ -782,6 +810,9 @@ private:
 public:
   Encoder(Mode m, FILE* f);
   void flush();  // call this when compression is finished
+
+  // Pretraining: run bits through the model only (no coding); same on both sides
+  void prime(int c) { for (int i=7; i>=0; --i) predictor.update((c>>i)&1); }
 
   // Compress one byte
   void compress(int c) {
@@ -854,6 +885,7 @@ int main(int argc, char **argv) {
     // Compress
     Encoder e(COMPRESS, out);
     int c;
+    if (getenv("PRIMER")) { FILE* pf=fopen(getenv("PRIMER"),"rb"); if (!pf) quit("no primer"); while ((c=getc(pf))!=EOF) e.prime(c); fclose(pf); }
     while ((c=getc(in))!=EOF)
       e.compress(c);
     e.flush();
@@ -878,6 +910,7 @@ int main(int argc, char **argv) {
     out=fopen(argv[3], "wb");
     if (!out) perror(argv[3]), exit(1);
     Encoder e(DECOMPRESS, in);
+    if (getenv("PRIMER")) { FILE* pf=fopen(getenv("PRIMER"),"rb"); if (!pf) quit("no primer"); int c; while ((c=getc(pf))!=EOF) e.prime(c); fclose(pf); }
     while (size-->0)
       putc(e.decompress(), out);
   }

@@ -142,6 +142,42 @@ At 1 MB the map costs more than it saves; from 10 MB on it pays for itself.
 Context on the enwik8 ladder (Mahoney's benchmark): drt|lpaq9m 17,964,751;
 paq8hp12 16,230,028; paq8px 15,849,084; cmix 14,623,723.
 
+### Structure specialists and pretraining (lpaq1g, `GFLAGS` bit 16, `PRIMER`)
+
+**Structure specialists:** a small tracker of where we are on a wiki page:
+prose, XML tag, `[[link]]`, `{{template}}`, table line, heading, list,
+`&entity;`, URL, or header line. It joins two contexts and selects the mixer's
+weights. Giving each topic × structure pair its own weights spreads training
+too thin, so with `MIXSEL=1` structure picks the mixer and topics stay as
+contexts.
+
+| lpaq1g on | flags 15 | + structure (`MIXSEL=1`) |
+|---|---|---|
+| 10 MB | 2,078,335 | 2,059,112 (−0.9%) |
+| enwik8 | 19,390,668 | **19,195,084 (−1.0%)** |
+
+**Pretraining:** before coding, a primer is run through the model on both
+sides. It must ship with the decompressor, so its cost is its compressed size.
+
+| Primer (cost) | 1 MB | 10 MB | enwik8 |
+|---|---|---|---|
+| none | 221,490 | 2,059,112 | 19,195,084 |
+| cmix `english.dic` (122,140 B) | 213,095 | 2,033,523 | 19,157,849 |
+| WikiText-2 valid (233,546 B) | 212,213 | 2,043,533 | not run |
+
+Pretraining helps, by 8 to 37 KB, and the in-domain word list beats general
+English once there is enough data. It never repays its own cost. It pays only
+when the primer is already shipped for another reason, as in cmix, where the
+dictionary also drives word replacement. That matches experiment 3: a broad
+head start fades as the model learns the real data.
+
+### enwik9 (1 GB, the Hutter Prize file)
+
+| | enwik9 |
+|---|---|
+| lpaq1 -9 | 164,508,919 |
+| lpaq1g, grid + map + symmetry + topics (`GFLAGS=15`) | **161,433,444** (−1.9%, map included) |
+
 ### Curriculum: reorder the articles (`src/reorder.py`)
 
 cmix ships an article order for enwik9. Here our own geometry picks the
@@ -157,7 +193,8 @@ counted below.
 | nearest-neighbour chain | 19,513,523 | **−1.1%** |
 | random (control) | 19,957,970 | +1.0% |
 | chain + lpaq1g (grid, map, symmetry) | 19,212,282 | −2.6% (19,235,351 with map and permutation) |
-| chain + lpaq1g + topic specialists | 19,170,935 | **−2.8%** (**19,194,644** with map, topics and permutation) |
+| chain + lpaq1g + topic specialists | 19,170,935 | −2.8% (19,194,644 with map, topics and permutation) |
+| chain + lpaq1g + structure specialists (`GFLAGS=31`, `MIXSEL=1`) | 18,967,892 | **−3.9%** (**18,991,601** with map, topics and permutation; decode verified) |
 
 The two gains stack almost exactly: 1.5% from the contexts and 1.1% from
 ordering. The best row was decoded and the article order inverted, and the
