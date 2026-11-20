@@ -171,6 +171,53 @@ when the primer is already shipped for another reason, as in cmix, where the
 dictionary also drives word replacement. That matches experiment 3: a broad
 head start fades as the model learns the real data.
 
+### Two-layer ("neural") mixer (lpaq1g, `MIX2=1`)
+
+Four first-layer weight sets, each selected by its own context: lpaq1's
+order and match context (times structure); the partial byte; the last byte ×
+bit position; and match length × structure. A final mixer, selected by the
+partial byte × structure, combines them. With `MIX2` unset, the output is
+identical to before.
+
+| 10 MB, `GFLAGS=31 MIXSEL=1` | Size |
+|---|---|
+| single mixer | 2,059,112 |
+| two-layer mixer | **2,034,518 (−1.2%)**, round trip verified |
+
+### Batch compression: chunks, then compress again
+
+| 10 MB of enwik8, lpaq1 | Size |
+|---|---|
+| whole file at once | 2,122,364 |
+| ten 1 MB chunks, each compressed alone | 2,379,861 (+12%) |
+| those compressed chunks, compressed again by lpaq1 | 2,382,888 (bigger) |
+| …or by xz | 2,380,044 (bigger) |
+
+Compressed output looks like noise, so a second pass cannot shrink it, and
+splitting costs each chunk the context of the others. The version that works
+keeps raw chunks and **reorders** them (see Curriculum below), then
+compresses once.
+
+### The "screenshot" as a two-part code (`src/twolayer.py`)
+
+Layer A is the text lowercased (lossy on its own). Layer B is one case bit per
+letter, coded afterwards with A fully known, including the future.
+
+| 10 MB | Size |
+|---|---|
+| layer B, past-only context | 86,129 |
+| layer B, **with future context** | 49,650 (−42%) |
+| layer A with the best engine | 2,011,726 |
+| **A + B** | 2,061,376 |
+| one pass on the original, best engine | **2,034,518** |
+
+A negative result. Seeing the future makes the case bits 42% cheaper, but the
+one-pass model already pays only 22,792 B for case (2,034,518 − 2,011,726):
+about 0.48 bits per capital letter, against 1.05 for the two-part code. Case
+and letters help predict each other, and splitting them loses that. A two-part
+code wins only when its layers are close to independent, which is why it suits
+images (coarse then fine) better than text.
+
 ### enwik9 (1 GB, the Hutter Prize file)
 
 | | enwik9 |

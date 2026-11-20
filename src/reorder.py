@@ -26,11 +26,31 @@ def split_pages(data):
     return prefix, pages[:-1], pages[-1]
 
 
+from numba import njit
+
+
+@njit(cache=True)
+def _page_cell_counts(buf, starts, G, out, m):
+    V = np.zeros((len(starts), m), dtype=np.float32)
+    st = 0; pg = -1
+    for i in range(len(buf)):
+        while pg + 1 < len(starts) and i >= starts[pg + 1]:
+            pg += 1
+        st = G[st, buf[i]]
+        if pg >= 0:
+            V[pg, out[st]] += 1.0
+    return V
+
+
 def article_vectors(pages, merges, m, dims=32):
-    V = np.zeros((len(pages), m), dtype=np.float32)
-    for i, p in enumerate(pages):
-        t = apply_grid(p, merges)
-        np.add.at(V[i], t, 1.0)
+    """bag of grid cells per article (longest cell ending at each byte)"""
+    from v4 import build_automaton
+    table = [bytes([i]) for i in range(256)]
+    for a, b in merges: table.append(table[a] + table[b])
+    G, out, _ = build_automaton(table)
+    buf = np.frombuffer(b"".join(pages), dtype=np.uint8)
+    starts = np.cumsum([0] + [len(p) for p in pages[:-1]]).astype(np.int64)
+    V = _page_cell_counts(buf, starts, G, out, m)
     df = (V > 0).sum(0) + 1
     V = np.log1p(V) * np.log(len(pages) / df)[None]
     V /= np.linalg.norm(V, axis=1, keepdims=True) + 1e-9
@@ -59,14 +79,16 @@ if __name__ == "__main__":
     X = article_vectors(pages, merges, 256 + len(merges))
     from geometry import kmeans
     topic = kmeans(X, 64)
+    want = sys.argv[3].split(",") if len(sys.argv) > 3 else ["original", "topic", "chain", "random"]
     orders = {
         "original": list(range(n)),
         "topic": sorted(range(n), key=lambda i: (topic[i], X[i, 1])),
-        "chain": chain_order(X),
+        "chain": chain_order(X) if "chain" in want else None,
         "random": list(np.random.default_rng(0).permutation(n)),
     }
     os.makedirs(outdir, exist_ok=True)
     for name, order in orders.items():
+        if name not in want: continue
         body = b"".join(pages[i] for i in order)
         out = prefix + body + tail
         assert len(out) == len(data)

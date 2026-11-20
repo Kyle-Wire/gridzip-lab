@@ -402,43 +402,51 @@ inline int dot_product(int *t, int *w, int n) {
 }
 
 class Mixer {
-  const int N, M;  // max inputs, max contexts
+  // Layer 1: K weight sets over the same N inputs, each selected by its own
+  // context (set k -> offset base[k]). Layer 2 (only when K>1): a small mixer
+  // over the K layer-1 outputs, selected by its own context.
+  // With K==1 this is exactly lpaq1's mixer.
+  const int N, M;  // max inputs, total layer-1 weight sets
   int* tx;         // N inputs
   int* wx;         // N*M weights
-  int cxt;         // context
+  int cxt;         // context of set 0 (lpaq API)
   int nx;          // Number of inputs in tx, 0 to N
-  int pr;          // last result (scaled 12 bits)
+  int pr;          // final result (scaled 12 bits)
+  enum {KMAX=8};
+  int K, base[KMAX], cx[KMAX], prk[KMAX];
+  int* fw; int fx[KMAX+1]; int fcx, FM;
 public:
   Mixer(int n, int m);
-
-  // Adjust weights to minimize coding cost of last prediction
+  void layers(int k, const int* sizes, int final_sets) {  // call once, before use
+    K=k; int off=0; for (int i=0;i<k;++i){base[i]=off; off+=sizes[i]; cx[i]=0;}
+    if (off>M) quit("mixer sets");
+    FM=final_sets; alloc(fw, (K+1)*FM);
+    for (int i=0;i<FM;++i) for (int j=0;j<K;++j) fw[i*(K+1)+j]=65536/K;
+  }
   void update(int y) {
-    int err=((y<<12)-pr)*7;
-    assert(err>=-32768 && err<32768);
-    train(&tx[0], &wx[cxt*N], N, err);
+    if (K<=1) {
+      int err=((y<<12)-pr)*7;
+      train(&tx[0], &wx[cxt*N], N, err);
+    } else {
+      for (int k=0;k<K;++k) { int err=((y<<12)-prk[k])*7; train(&tx[0], &wx[(base[k]+cx[k])*N], N, err); }
+      int err=((y<<12)-pr)*2; train(fx, &fw[fcx*(K+1)], K+1, err);
+    }
     nx=0;
   }
-
-  // Input x (call up to N times)
-  void add(int x) {
-    assert(nx<N);
-    tx[nx++]=x;
-  }
-
-  // Set a context
-  void set(int cx) {
-    assert(cx>=0 && cx<M);
-    cxt=cx;
-  }
-
-  // predict next bit
+  void add(int x) { assert(nx<N); tx[nx++]=x; }
+  void set(int c) { assert(c>=0 && c<M); cxt=c; cx[0]=c; }
+  void setk(int k, int c) { cx[k]=c; }
+  void setfinal(int c) { fcx=c; }
   int p() {
-    return pr=squash(dot_product(&tx[0], &wx[cxt*N], N)>>8);
+    if (K<=1) return pr=squash(dot_product(&tx[0], &wx[cxt*N], N)>>8);
+    for (int k=0;k<K;++k) { prk[k]=squash(dot_product(&tx[0], &wx[(base[k]+cx[k])*N], N)>>8); fx[k]=stretch(prk[k]); }
+    fx[K]=256;
+    return pr=squash(dot_product(fx, &fw[fcx*(K+1)], K+1)>>8);
   }
 };
 
 Mixer::Mixer(int n, int m):
-    N(n), M(m), tx(0), wx(0), cxt(0), nx(0), pr(2048) {
+    N(n), M(m), tx(0), wx(0), cxt(0), nx(0), pr(2048), K(1), fw(0), fcx(0), FM(0) {
   assert(n>0 && N>0 && M>0);
   alloc(tx, N);
   alloc(wx, N*M);
@@ -691,7 +699,9 @@ void Predictor::update(int y) {
   static U32 h[NMAX];
   static Mixer* mp=0;
   static MatchModel mm(MEM);  // predicts next bit by matching context
-  if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; mp=new Mixer(NCX+1, 80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1)); init=1; }
+  if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
+      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1, sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
+      else mp=new Mixer(NCX+1, s0); } init=1; }
   Mixer& m=*mp;
   const int N=NCX;
 
@@ -759,7 +769,10 @@ void Predictor::update(int y) {
   for (int i=0;i<N;++i) m.add(stretch(sm[i].p(y, *cp[i])));
   { static int msel = getenv("MIXSEL") ? atoi(getenv("MIXSEL")) : 0;   // 0 topic x struct, 1 struct only, 2 topic only
     int tp = (GF&8) && msel!=1 ? G_topic : 0, sp = (GF&16) && msel!=2 ? S_state : 0;
-    m.set(order+10*(h[0]>>13) + 80*(tp + ((GF&8) ? 64 : 1)*sp)); }
+    m.set(order+10*(h[0]>>13) + 80*(tp + ((GF&8) ? 64 : 1)*sp));
+    static int mix2 = getenv("MIX2") ? 1 : 0;
+    if (mix2) { m.setk(1, c0); m.setk(2, (c4&255)*8 + bcount); m.setk(3, ((len>15?15:len)*2 + (order>0))*10 + ((GF&16) ? S_state : 0));
+      m.setfinal(c0 + 256*((GF&16) ? S_state : 0)); } }
   pr=m.p();
   pr=pr+3*a1.pp(y, pr, c0)>>2;
   pr=pr+3*a2.pp(y, pr, c0^h[0]>>2)>>2;
