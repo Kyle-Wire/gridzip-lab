@@ -178,7 +178,7 @@ side stream, every archive decoded and compared. Quick-experiment harnesses are
 `work/exp/run_round*.py` (results in `round*.jsonl`, logs `round*.log`);
 `work/exp/run_full8.py` runs full enwik8.
 
-- **Champion, 17,683,150 B (2026-11-21):** `work/exp/build_wordchain.py` (12 s: word-vector greedy chain, writes
+- **Champion, 17,683,150 B (2026-11-21):** reproducible from the tracked `champion/` folder (README there). Originally `work/exp/build_wordchain.py` (12 s: word-vector greedy chain, writes
   work/enwik8.wordchain and work/order.wordchain.npy, header transform with rebuild check), then
   `CONFIG=full5 CHAIN=word TRANSFORM=hdr run_full8.py`: 17,641,170 B archive + map and tree 6,494 + permutation
   18,750 + side stream 16,736. Encode 536 s, decode 478 s, peak 1.46 GB; enwik8 rebuilt byte for byte. On 10 MB
