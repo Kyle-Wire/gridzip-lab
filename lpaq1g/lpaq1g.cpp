@@ -404,6 +404,26 @@ inline int dot_product(int *t, int *w, int n) {
   return sum>>8;
 }
 
+// ---- mixer knobs (round 2 experiments). Every default reproduces the champion exactly.
+// MXLR1/MXLR2: layer-1/layer-2 learning rates (7, 2). MXBOOST/MXHALF: layer-1 rate starts at
+// MXLR1+MXBOOST and falls back toward MXLR1 with a half-life of MXHALF KB. MXSETS: extra layer-1
+// weight sets (bit 1 region x structure, 2 fine region, 4 topic, 8 sentence word count x structure,
+// 16 byte two back x bit position). MXFINAL: final-layer selector (0 c0 x structure, 1 c0, 2 c0 x region).
+// MXBIAS=1: a constant input. MXAPM: extra final APM (1 by structure, 2 by region), averaged in.
+// Round 6 A: difficulty = moving average of the coding cost of the last few bytes, in half-bit steps (0..15).
+// MXSETS bit 32 picks a weight set by it (with page structure); MXAPM=3 adds an APM on it.
+static int D_LT[4096], D_cost=0, D_ema=0, D_q=0, D_on=-1;
+static int MX_LR1=7, MX_LR2=2, MX_BOOST=0, MX_HALF=256, MX_SETS=0, MX_FINAL=0, MX_BIAS=0, MX_APM=0, MX_lr=7;
+static long MX_nbytes=0;
+static void load_mx() {
+  const char* v;
+  if ((v=getenv("MXLR1"))) MX_LR1=atoi(v); if ((v=getenv("MXLR2"))) MX_LR2=atoi(v);
+  if ((v=getenv("MXBOOST"))) MX_BOOST=atoi(v); if ((v=getenv("MXHALF"))) MX_HALF=atoi(v);
+  if ((v=getenv("MXSETS"))) MX_SETS=atoi(v); if ((v=getenv("MXFINAL"))) MX_FINAL=atoi(v);
+  if ((v=getenv("MXBIAS"))) MX_BIAS=atoi(v); if ((v=getenv("MXAPM"))) MX_APM=atoi(v);
+  MX_lr=MX_LR1+MX_BOOST;
+}
+
 class Mixer {
   // Layer 1: K weight sets over the same N inputs, each selected by its own
   // context (set k -> offset base[k]). Layer 2 (only when K>1): a small mixer
@@ -418,6 +438,7 @@ class Mixer {
   enum {KMAX=8};
   int K, base[KMAX], cx[KMAX], prk[KMAX];
   int* fw; int fx[KMAX+1]; int fcx, FM;
+  int bk, bcx2, bw;  // blended set (MXSETS 512): set bk mixes weights cx[bk] and bcx2, bw/16 and (16-bw)/16
 public:
   Mixer(int n, int m);
   void layers(int k, const int* sizes, int final_sets) {  // call once, before use
@@ -428,11 +449,13 @@ public:
   }
   void update(int y) {
     if (K<=1) {
-      int err=((y<<12)-pr)*7;
+      int err=((y<<12)-pr)*MX_lr;
       train(&tx[0], &wx[cxt*N], N, err);
     } else {
-      for (int k=0;k<K;++k) { int err=((y<<12)-prk[k])*7; train(&tx[0], &wx[(base[k]+cx[k])*N], N, err); }
-      int err=((y<<12)-pr)*2; train(fx, &fw[fcx*(K+1)], K+1, err);
+      for (int k=0;k<K;++k) { int err=((y<<12)-prk[k])*MX_lr;
+        if (k==bk) { train(&tx[0], &wx[(base[k]+cx[k])*N], N, err*bw>>4); train(&tx[0], &wx[(base[k]+bcx2)*N], N, err*(16-bw)>>4); }
+        else train(&tx[0], &wx[(base[k]+cx[k])*N], N, err); }
+      int err=((y<<12)-pr)*MX_LR2; train(fx, &fw[fcx*(K+1)], K+1, err);
     }
     nx=0;
   }
@@ -440,16 +463,19 @@ public:
   void set(int c) { assert(c>=0 && c<M); cxt=c; cx[0]=c; }
   void setk(int k, int c) { cx[k]=c; }
   void setfinal(int c) { fcx=c; }
+  void setblend(int k, int c1, int c2, int w) { bk=k; cx[k]=c1; bcx2=c2; bw=w; }
   int p() {
     if (K<=1) return pr=squash(dot_product(&tx[0], &wx[cxt*N], N)>>8);
-    for (int k=0;k<K;++k) { prk[k]=squash(dot_product(&tx[0], &wx[(base[k]+cx[k])*N], N)>>8); fx[k]=stretch(prk[k]); }
+    for (int k=0;k<K;++k) { int d=dot_product(&tx[0], &wx[(base[k]+cx[k])*N], N);
+      if (k==bk) d=(int)(((long long)d*bw + (long long)dot_product(&tx[0], &wx[(base[k]+bcx2)*N], N)*(16-bw))>>4);
+      prk[k]=squash(d>>8); fx[k]=stretch(prk[k]); }
     fx[K]=256;
     return pr=squash(dot_product(fx, &fw[fcx*(K+1)], K+1)>>8);
   }
 };
 
 Mixer::Mixer(int n, int m):
-    N(n), M(m), tx(0), wx(0), cxt(0), nx(0), pr(2048), K(1), fw(0), fcx(0), FM(0) {
+    N(n), M(m), tx(0), wx(0), cxt(0), nx(0), pr(2048), K(1), fw(0), fcx(0), FM(0), bk(-1), bcx2(0), bw(16) {
   assert(n>0 && N>0 && M>0);
   alloc(tx, N);
   alloc(wx, N*M);
@@ -523,13 +549,14 @@ class MatchModel {
   int c0;     // last 0-7 bits of y
   int bcount; // number of bits in c0 (0..7)
   StateMap sm;  // len, bit, last byte -> prediction
+  const U32 M1, M2;  // hash multipliers: each byte shifts the hash by log2 of their power of two, so smaller = longer context
 public:
-  MatchModel(int n);  // n must be a power of 2 at least 8.
+  MatchModel(int n, U32 m1=3<<3, U32 m2=5<<5);  // n must be a power of 2 at least 8.
   int p(int y, Mixer& m);  // update bit y (0..1), predict next bit to m
 };
 
-MatchModel::MatchModel(int n): N(n/2-1), HN(n/8-1), buf(0), ht(0), pos(0), 
-    match(0), len(0), h1(0), h2(0), c0(1), bcount(0), sm(56<<8) {
+MatchModel::MatchModel(int n, U32 m1, U32 m2): N(n/2-1), HN(n/8-1), buf(0), ht(0), pos(0), 
+    match(0), len(0), h1(0), h2(0), c0(1), bcount(0), sm(56<<8), M1(m1), M2(m2) {
   assert(n>=8 && (n&n-1)==0);
   alloc(buf, N+1);
   alloc(ht, HN+1);
@@ -542,8 +569,8 @@ int MatchModel::p(int y, Mixer& m) {
   ++bcount;
   if (bcount==8) {
     bcount=0;
-    h1=h1*(3<<3)+c0&HN;
-    h2=h2*(5<<5)+c0&HN;
+    h1=h1*M1+c0&HN;
+    h2=h2*M2+c0&HN;
     buf[pos++]=c0;
     c0=1;
     pos&=N;
@@ -637,11 +664,19 @@ public:
 // ---- Immune memory: after a SURPRISE (the actual byte was poorly predicted),
 // store "this context -> that byte" with a strength. When the context recurs,
 // predict it strongly; correct predictions reinforce, wrong ones decay.
+// Round 10 variants (env): IMMCAP strength cap (default 15, up to 63: clonal expansion), IMMTHR surprise threshold in
+// bits (default 6). A second memory (IMMUNE2=mode) keys on the map instead of bytes: 1 = the last two cells
+// (recognises a token pattern), 2 = the last three cells, 3 = the fine regions of the last three cells + last byte
+// (fuzzy recognition: near-variants trigger the same memory).
+// Modes 4/6/7/8: the last 4/5/6/7 cells.
+static U32 imm_mapkey(int mode);
 class ImmuneModel {
   enum {HB=22}; std::vector<U8> mb, ms; std::vector<U32> mk;
-  U32 c4, key; int c0, bcount, hit, exp_byte, strength; double cost; StateMap sm;
+  U32 c4, key; int c0, bcount, hit, exp_byte, strength; double cost; StateMap sm; int mode, cap; double thr;
 public:
-  ImmuneModel(): mb(1<<HB), ms(1<<HB), mk(1<<HB), c4(0), key(0), c0(1), bcount(0), hit(0), exp_byte(0), strength(0), cost(0), sm(64*2*256) {}
+  int pb=-1, ps=0;   // this bit's vote (-1 none, else the bit it predicts) and its strength, for co-stimulation
+  ImmuneModel(int md=0): mb(1<<HB), ms(1<<HB), mk(1<<HB), c4(0), key(0), c0(1), bcount(0), hit(0), exp_byte(0), strength(0), cost(0), sm(64*2*256), mode(md),
+    cap(getenv("IMMCAP") ? atoi(getenv("IMMCAP")) : 15), thr(getenv("IMMTHR") ? atof(getenv("IMMTHR")) : 6.0) { if (cap>63) cap=63; }
   void bitcost(int y, int pr) { int p = y ? pr : 4096-pr; if (p<1) p=1; cost += -log2(p/4096.0); }
   int p(int y, Mixer& m, int pr_last) {
     bitcost(y, pr_last);
@@ -649,14 +684,14 @@ public:
     if (bcount==8) {
       int c=c0&255; bcount=0; c0=1;
       U32 idx=key>>(32-HB);
-      if (hit) { if (exp_byte==c) { if (ms[idx]<15) ms[idx]++; } else { if (ms[idx]>0) ms[idx]--; if (ms[idx]==0) mb[idx]=c; } }
-      if (cost > 6.0 && !(hit && exp_byte==c)) { mk[idx]=key; mb[idx]=c; ms[idx]=1; }   // surprise: remember
+      if (hit) { if (exp_byte==c) { if (ms[idx]<cap) ms[idx]++; } else { if (ms[idx]>0) ms[idx]--; if (ms[idx]==0) mb[idx]=c; } }
+      if (cost > thr && !(hit && exp_byte==c)) { mk[idx]=key; mb[idx]=c; ms[idx]=1; }   // surprise: remember
       cost=0;
-      c4=c4<<8|c; key=(c4&0xffffff)*2654435761u ^ 0x5bd1e995u;
+      c4=c4<<8|c; key = mode ? imm_mapkey(mode)*2654435761u ^ (c4&255)*0x9E3779B1u ^ 0x5bd1e995u : (c4&0xffffff)*2654435761u ^ 0x5bd1e995u;
       U32 j=key>>(32-HB); hit = mk[j]==key && ms[j]>0; exp_byte=mb[j]; strength=ms[j];
     }
-    int cxt=0;
-    if (hit && ((exp_byte+256)>>(8-bcount))==c0) { int b=exp_byte>>(7-bcount)&1; cxt=(strength*2+b)*256+(c4&255)+1; }
+    int cxt=0; pb=-1; ps=strength;
+    if (hit && ((exp_byte+256)>>(8-bcount))==c0) { int b=exp_byte>>(7-bcount)&1; pb=b; cxt=(strength*2+b)*256+(c4&255)+1; }
     m.add(stretch(sm.p(y, cxt)));
     return hit;
   }
@@ -716,10 +751,65 @@ Predictor::Predictor(): pr(2048) {}
 #include <deque>
 static int GF=0, NCX=6;
 static std::vector<int> G_go, G_out, G_len, G_reg, G_regB, G_tlab;
+// Round 6 B (GFLAGS 262144): a nested region tree from the map file (after the topics): each cell's node when the
+// tree had 16, 64 and 256 leaves. The tree splits the heaviest, most spread leaf first (adaptive refinement).
+static std::vector<int> G_t16, G_t64, G_t256;
+// Round 7 (GFLAGS 524288): the grid automaton's state (the longest suffix of the text that begins some cell: a
+// variable-length context cut at the map's own vocabulary), alone and with the cell before the current one.
+// GFLAGS 1048576: next-cell indirect: the cell that followed the current cell the last time, with the automaton state.
+static std::vector<int> G_next;
+static int G_p2=0, G_p3=0;
+static std::vector<int> G_lastb;   // round 36: each cell's last byte (-1 for an empty cell)   // round 32: the cell trigram's guess (GFLAGS 67108864), read by MXSETS 131072
+// Round 7b (GFLAGS 2097152; MXSETS 256): the correlogram's two signals. Each cell's position in the map plane
+// (two 4-bit coordinates, an 'XY' section after the topics); the direction of the last step between cells,
+// and the recent place: an exponential average of positions (~50 bytes) on an 8 x 8 grid.
+// MXSETS 512 (the user's geographically weighted mixing): a weight set blended between the cell's nearest and
+// second-nearest fine-region centroids, by inverse squared distance (G_w2 = weight of the nearest, in 16ths).
+static std::vector<int> G_x, G_y, G_rb2, G_w2; static int XY_px=0, XY_py=0, XY_dir=8, XY_place=0;
+// Fluid map (round 9, GFLAGS 4194304 contexts, MXSETS 1024 weight set): every cell is a particle on a 2-D torus
+// (16-bit coordinates). Mass = how often the cell has ended a byte. Each byte, the cell that just ended (b) and the
+// cell before it (a) pull toward each other, each moving in proportion to the other's mass, so heavy cells barely move
+// (inertia); b is then pushed down the gradient of a 32x32 grid of particle counts (pressure, so the fluid doesn't
+// collapse). Start: hashed positions (FLINIT=0, a "big bang", nothing sent) or the map plane (FLINIT=1, XY section).
+// FLKA attraction (/256 of the gap, default 4), FLKP pressure step per count of difference (default 16, of 65536),
+// FLQ place grid bits per axis (default 4: 256 places). Encoder and decoder run the same integer physics.
+static std::vector<unsigned short> FL_x, FL_y; static std::vector<int> FL_m, FL_d;
+static int FL_on=0, FL_ka=4, FL_kp=16, FL_init=0, FL_q=4, FL_p1=0, FL_p2=0;
+static inline int fl_sq(int c) { return (FL_x[c]>>11)*32 + (FL_y[c]>>11); }
+static inline int fl_place(int c) { return ((FL_x[c]>>(16-FL_q)) << FL_q) + (FL_y[c]>>(16-FL_q)); }
+static void fl_step(int a, int b) {
+  if (FL_m[b] < (1<<30)) ++FL_m[b];
+  int s0 = fl_sq(b);
+  if (a != b && FL_ka) {
+    int dx = (short)(FL_x[a]-FL_x[b]), dy = (short)(FL_y[a]-FL_y[b]);      // the short way round the torus
+    long long ma = FL_m[a], mb = FL_m[b], t = (ma+mb) << 8;
+    int sa = fl_sq(a);
+    FL_x[b] += (int)(dx*FL_ka*ma/t); FL_y[b] += (int)(dy*FL_ka*ma/t);
+    FL_x[a] -= (int)(dx*FL_ka*mb/t); FL_y[a] -= (int)(dy*FL_ka*mb/t);
+    int sa2 = fl_sq(a); if (sa2 != sa) { --FL_d[sa]; ++FL_d[sa2]; } }
+  if (FL_kp) { int s = fl_sq(b), x = s>>5, y = s&31;
+    int gx = FL_d[((x+31)&31)*32+y] - FL_d[((x+1)&31)*32+y], gy = FL_d[x*32+((y+31)&31)] - FL_d[x*32+((y+1)&31)];
+    FL_x[b] += gx*FL_kp; FL_y[b] += gy*FL_kp; }
+  int s1 = fl_sq(b); if (s1 != s0) { --FL_d[s0]; ++FL_d[s1]; }
+}
 static int G_NT=1, G_topic=0; static double G_tv[64]; static double G_decay=0.95;
 static std::vector<int> G_hist;     // longest cell ending at each position
 static int G_state=0;
 static long G_pos=0;
+static U32 imm_mapkey(int mode) {
+  if (G_len.empty()) return 0;
+  int g1=G_hist[G_pos&65535]; long j2=G_pos-G_len[g1]; int g2= j2>=0? G_hist[j2&65535]:0;
+  long j3=j2-G_len[g2]; int g3= j3>=0? G_hist[j3&65535]:0;
+  if (mode==1) return (U32)(g1*8192+g2)*0x2545F491u;
+  if (mode==10) return (U32)(G_p3*8192+g1)*0x2545F491u ^ (U32)g2*0x85EBCA77u;   // round 35: the 4-gram's guessed next cell x the last two cells
+  if (mode==11) return (U32)(G_p3*8192+G_p2)*0x2545F491u ^ (U32)g1*0x85EBCA77u;  // both guesses x current cell
+  if (mode==9) return (U32)(g1*16+(G_reg[g2]&15))*0x2545F491u;   // round 27: current cell x previous cell's coarse region
+  if (mode>=5 && mode<=8) { int n = mode-1; U32 hh = (U32)(g1*8192+g2)*0x2545F491u ^ (U32)g3*0x85EBCA77u; long j=j3; int g=g3;   // 5..8: the last 4..7 cells
+    for (int i=3;i<n && j>=0;++i) { j-=G_len[g]; g = j>=0 ? G_hist[j&65535] : 0; hh = (hh + (U32)g*0xC2B2AE3Du)*0x27d4eb2fu; } return hh; }
+  if (mode==4) { long j4=j3-G_len[g3]; int g4= j4>=0? G_hist[j4&65535]:0; return (((U32)(g1*8192+g2)*0x2545F491u) ^ (U32)g3*0x85EBCA77u) + (U32)g4*0xC2B2AE3Du; }
+  if (mode==2) return ((U32)(g1*8192+g2)*0x2545F491u) ^ (U32)g3*0x85EBCA77u;
+  return (U32)((G_regB[g1]&127)*16384+(G_regB[g2]&127)*128+(G_regB[g3]&127))*0x27D4EB2Fu;
+}
 // ---- evolvable contexts: GENOME="fmask:bmask,..." (hex). Each gene is one context:
 // bmask bit i = include byte c(i+1) (i=0..7); fmask bits: 0 g1, 1 g2, 2 r1, 3 r2, 4 r3,
 // 5 f1, 6 f2, 7 word, 8 previous word, 9 page structure, 10 topic, 11 fold bytes (symmetry), 12 link/template depth
@@ -739,10 +829,29 @@ static void load_grid() {
   int m; if (fread(&m,4,1,in)!=1) quit("bad map");
   std::vector<std::vector<unsigned char> > cells(m);
   for (int i=0;i<m;++i){int l=getc(in); cells[i].resize(l); if ((int)fread(&cells[i][0],1,l,in)!=l) quit("bad map");}
+  G_lastb.resize(m); for (int i=0;i<m;++i) G_lastb[i] = cells[i].empty() ? -1 : cells[i].back();
   G_reg.resize(m); G_regB.resize(m);
   if ((int)fread(&G_reg[0],4,m,in)!=m || (int)fread(&G_regB[0],4,m,in)!=m) quit("bad map");
   if (GF&8) { if (fread(&G_NT,4,1,in)!=1) quit("map has no topics"); G_tlab.resize(m);
     if ((int)fread(&G_tlab[0],4,m,in)!=m) quit("bad topics"); const char* d=getenv("GDECAY"); if (d) G_decay=atof(d); }
+  // Optional sections after the topics, in this order: XY (tag 0x5859; per cell x<<4|y, second-nearest fine region,
+  // weight of the nearest in 16ths) and the region tree (tag 3; 16-, 64- and 256-leaf labels).
+  const char* mxs=getenv("MXSETS"); int ms = mxs ? atoi(mxs) : 0;
+  { const char* v; if ((v=getenv("FLKA"))) FL_ka=atoi(v); if ((v=getenv("FLKP"))) FL_kp=atoi(v);
+    if ((v=getenv("FLINIT"))) FL_init=atoi(v); if ((v=getenv("FLQ"))) FL_q=atoi(v); if (FL_q<1 || FL_q>6) quit("FLQ 1..6"); }
+  FL_on = (GF&4194304) || (ms&1024);
+  int want_xy = (GF&2097152) || (ms&(256|512)) || (FL_on && FL_init==1), want_tree = (GF&262144) || (ms&(64|128));
+  if ((want_xy || want_tree) && !(GF&8)) { int nt; if (fread(&nt,4,1,in)!=1) quit("map has no topics"); fseek(in, (long)m*4, SEEK_CUR); }
+  int tag=0, have=0; if (want_xy || want_tree) have = fread(&tag,4,1,in)==1;
+  if (have && tag==0x5859) {
+    if (want_xy) { G_x.resize(m); G_y.resize(m); G_rb2.resize(m); G_w2.resize(m);
+      for (int i=0;i<m;++i) { int b=getc(in), r2=getc(in), w=getc(in); if (w<0) quit("bad XY"); G_x[i]=b>>4; G_y[i]=b&15; G_rb2[i]=r2&127; G_w2[i]=w; } }
+    else fseek(in, (long)m*3, SEEK_CUR);
+    have = fread(&tag,4,1,in)==1; }
+  else if (want_xy) quit("map has no XY section");
+  if (want_tree) { if (!have || tag!=3) quit("map has no tree");
+    G_t16.resize(m); G_t64.resize(m); G_t256.resize(m);
+    if ((int)fread(&G_t16[0],4,m,in)!=m || (int)fread(&G_t64[0],4,m,in)!=m || (int)fread(&G_t256[0],4,m,in)!=m) quit("bad tree"); }
   fclose(in);
   // Aho-Corasick automaton: longest cell that ends at the current byte
   std::vector<std::vector<int> > go(1, std::vector<int>(256,-1));
@@ -757,13 +866,42 @@ static void load_grid() {
     for(int ch=0;ch<256;++ch){int nx=go[s][ch]; if(nx<0) G_go[s*256+ch]=G_go[fail[s]*256+ch];
       else {fail[nx]=G_go[fail[s]*256+ch]; G_go[s*256+ch]=nx; q.push_back(nx);}}}
   G_len.resize(m); for(int c=0;c<m;++c) G_len[c]=cells[c].size();
-  G_hist.assign(1<<16,0);
+  G_hist.assign(1<<16,0); G_next.assign(m,0);
+  if (FL_on) { FL_x.resize(m); FL_y.resize(m); FL_m.assign(m,1); FL_d.assign(1024,0);
+    for (int c=0;c<m;++c) {
+      if (FL_init==1) { FL_x[c]=(G_x[c]<<12)+2048; FL_y[c]=(G_y[c]<<12)+2048; }
+      else { U32 h=(U32)(c+1)*0x9E3779B1u; h^=h>>15; h*=0x85EBCA77u; h^=h>>13; h*=0xC2B2AE3Du; h^=h>>16; FL_x[c]=h>>16; FL_y[c]=h&0xffff; }
+      ++FL_d[fl_sq(c)]; } }
   if (GF&1) NCX+=3;
   if (GF&2) NCX+=3;
   if (GF&4) NCX+=2;
   if (GF&8) NCX+=2;
   if (GF&16) NCX+=2;
   if (GF&64) NCX+=3;
+  if (GF&128) NCX+=2;
+  if (GF&256) NCX+=2;
+  if (GF&512) NCX+=1;
+  if (GF&1024) NCX+=1;
+  if (GF&2048) NCX+=1;
+  if (GF&4096) NCX+=1;
+  if (GF&8192) NCX+=2;
+  if (GF&16384) NCX+=2;
+  if (GF&32768) NCX+=3;
+  if (GF&65536) NCX+=1;
+  if (GF&131072) NCX+=1;
+  if (GF&262144) NCX+=3;
+  if (GF&524288) NCX+=2;
+  if (GF&1048576) NCX+=1;
+  if (GF&2097152) NCX+=2;
+  if (GF&4194304) NCX+=2;
+  if (GF&8388608) NCX+=2;
+  if (GF&33554432) NCX+=2;
+  if (GF&67108864) NCX+=2;
+  if (GF&134217728) NCX+=2;
+  if (GF&268435456) NCX+=2;
+  if (GF&536870912) NCX+=2;  // round 36: the byte the cell guesses expect next, with its hit history  // round 33: confidence in the cell guesses (were the last ones right, do they agree)  // round 31: cell 4-gram: the cell that followed the last three cells the last time  // round 30: cell trigram: the cell that followed the last two cells the last time  // round 29: cell recency (bytes since the current / previous cell last ended here)
+  if (GF&16777216) NCX+=2;  // round 18: the two cells before the current one + 2 bytes (skip), three cells + 2 bytes   // round 15: plain contexts on the last four cells (+ last byte) and the last two cells (+ 2 bytes)
+  if (NCX>40) quit("too many contexts for NMAX");
   load_genome(); if (NGENE) NCX=1+NGENE;
 }
 static inline U32 hmix(U32 a, U32 b) {
@@ -794,8 +932,55 @@ static void struct_update(int c) {
 }
 static inline int orb(int c){ if(c>=65&&c<=90) return c+32; if(c>=48&&c<=57) return 48; return c; }
 
+// Round 3 contexts (GFLAGS 128 fields, 256 table columns, 512 previous word).
+// Fields: inside {{template|param=value}} the template and parameter names; inside [[target|label]]
+// the target while reading the label. F_h hashes the bytes since the field began.
+// Table columns: in a {| ... |} table, the cell's column (cells since the last |- row line) and the
+// bytes since the cell began.
+static U32 F_key=0, F_h=0, B_prev=0, B_cur=0, C_cellh=0;
+// Round 4 (GFLAGS 1024 two words back, 2048 the word before last skipping the previous one,
+// 4096 previous word with the last two bytes, 8192 indirect (what followed these bytes before), 16384 sparse bytes)
+static U32 B_prev2=0, I_t1[256]; static U16 I_t2[65536];
+// Round 5 (GFLAGS 32768 more indirect masks, 65536 indirect after three bytes, 131072 word indirect:
+// the word that followed the previous word the last time it appeared)
+static U16 I_t3[65536]; static U32 I_w[65536];
+static int F_depth=0, F_prev=0, L_part=0, C_intab=0, C_col=-1, C_bol=1, C_l1=0, C_pos=0;
+static U32 T_name[8], T_par[8], L_tgt=0; static int T_st[8];   // T_st: 1 template name, 2 param name, 3 param value
+static void wiki2_update(int c) {
+  int p=F_prev; F_prev=c;
+  if (c=='{' && p=='{') { if (F_depth<8) { T_name[F_depth]=0; T_par[F_depth]=0; T_st[F_depth]=1; } ++F_depth; F_h=0; }
+  else if (c=='}' && p=='}' && F_depth>0) { --F_depth; F_h=0; }
+  else if (c=='[' && p=='[') { L_part=1; L_tgt=0; F_h=0; }
+  else if (c==']' && p==']') { L_part=0; F_h=0; }
+  else if (c=='|' && L_part==1) { L_part=2; F_h=0; }
+  else if (F_depth>0 && F_depth<=8 && c=='|' && !L_part) { int d=F_depth-1; T_st[d]=2; T_par[d]=0; F_h=0; }
+  else if (F_depth>0 && F_depth<=8 && c=='=' && T_st[F_depth-1]==2) { T_st[F_depth-1]=3; F_h=0; }
+  else {
+    if (F_depth>0 && F_depth<=8) { int d=F_depth-1; if (T_st[d]==1 && c!='{') T_name[d]=hmix(T_name[d], orb(c));
+      else if (T_st[d]==2 && c!=' ') T_par[d]=hmix(T_par[d], orb(c)); }
+    if (L_part==1 && c!='[') L_tgt=hmix(L_tgt, orb(c));
+    F_h=hmix(F_h, c);
+  }
+  if (F_depth>0 && F_depth<=8) { int d=F_depth-1; F_key=hmix(T_name[d]+1, T_st[d]==3 ? T_par[d] : (U32)T_st[d]); }
+  else if (F_depth>8) F_key=9;
+  else F_key = L_part==2 ? hmix(77, L_tgt) : L_part==1 ? 78 : 0;
+  // tables
+  if (C_bol) { C_l1=c; C_pos=0; if (C_intab && (c=='|' || c=='!')) { ++C_col; C_cellh=0; } }
+  else if (C_pos==1) {
+    if (C_l1=='{' && c=='|') { C_intab=1; C_col=-1; }
+    else if (C_l1=='|' && c=='}') { C_intab=0; C_col=-1; }
+    else if (C_l1=='|' && c=='-') C_col=-1;
+    else C_cellh=hmix(C_cellh, c);
+  }
+  else if (C_intab && (c=='|' || c=='!') && p==c && F_depth==0 && !L_part) { ++C_col; C_cellh=0; }
+  else C_cellh=hmix(C_cellh, c);
+  ++C_pos; C_bol = c=='\n';
+  // previous word
+  if ((c|32)>='a' && (c|32)<='z') B_cur=hmix(B_cur, c|32); else if (B_cur) { B_prev2=B_prev; B_prev=B_cur; B_cur=0; I_w[B_prev2>>16]=B_prev; }
+}
+
 void Predictor::update(int y) {
-  enum {NMAX=24};
+  enum {NMAX=40};
   static U8 t0[0x10000];  // order 1 cxt -> state
   static HashTable<16> t(MEM*2);  // cxt -> state
   static int c0=1;  // last 0-7 bits with leading 1
@@ -805,19 +990,43 @@ void Predictor::update(int y) {
   static int init=0;
   static int bcount=0;  // bit count
   static StateMap sm[NMAX];
-  static APM a1(0x100), a2(0x4000);
+  static APM a1(0x100), a2(0x4000), a3(0x1000);
   static U32 h[NMAX];
   static Mixer* mp=0;
   static MatchModel mm(MEM);  // predicts next bit by matching context
+  static MatchModel* mm2 = getenv("MATCH2") ? new MatchModel(MEM, 3<<1, 3<<2) : 0;  // round 6 C: longer contexts (~23 and ~12 bytes)
   static RefModel* rm = getenv("REFMODEL") ? new RefModel() : 0;
   static ImmuneModel* im = getenv("IMMUNE") ? new ImmuneModel() : 0;
+  static ImmuneModel* im2 = getenv("IMMUNE2") ? new ImmuneModel(atoi(getenv("IMMUNE2"))) : 0;
+  static ImmuneModel* im3 = getenv("IMMUNE3") ? new ImmuneModel(atoi(getenv("IMMUNE3"))) : 0;   // a third memory, another key
   static int regk = getenv("REGIME") ? atoi(getenv("REGIME")) : 0;
+  // Co-stimulation (IMMCONS=1): one input from the memories' votes together: for each memory none / 0 / 1, the
+  // strongest voter's strength, the bit position. Agreement between a byte memory and a place memory is evidence
+  // neither has alone. IMMCONS=2 also adds the previous byte.
+  static int immcons = getenv("IMMCONS") ? atoi(getenv("IMMCONS")) : 0; static StateMap* csm = immcons ? new StateMap(27*16*8*256) : 0;
   static U32 msw_cur=0;
-  if (!init) { load_grid(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
-      if (getenv("MIX2")) { int sz[4]={s0, 256, 256*8, 32*10}; mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0), sz[0]+sz[1]+sz[2]+sz[3]); mp->layers(4, sz, 256*10); }
-      else mp=new Mixer(NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0), s0); } init=1; }
+  if (!init) { load_grid(); load_mx(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
+      int nin=NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0)+(getenv("IMMUNE2")?1:0)+(getenv("IMMUNE3")?1:0)+(immcons?1:0)+(MX_BIAS?1:0)+(getenv("MATCH2")?1:0);
+      if (getenv("MIX2")) { int sz[8]={s0, 256, 256*8, 32*10}; int K=4;
+        if ((MX_SETS&1) && K<8) sz[K++]=16*10; if ((MX_SETS&2) && K<8) sz[K++]=128; if ((MX_SETS&4) && K<8) sz[K++]=64;
+        if ((MX_SETS&8) && K<8) sz[K++]=8*10; if ((MX_SETS&16) && K<8) sz[K++]=256*8;
+        if ((MX_SETS&32) && K<8) sz[K++]=16*10; if ((MX_SETS&64) && K<8) sz[K++]=64; if ((MX_SETS&128) && K<8) sz[K++]=256;
+        if ((MX_SETS&256) && K<8) sz[K++]=64; if ((MX_SETS&512) && K<8) sz[K++]=128;
+        if ((MX_SETS&1024) && K<8) sz[K++]=1<<(2*FL_q);
+        if ((MX_SETS&2048) && K<8) sz[K++]=4096;   // round 23: a weight set per map cell (cell id & 4095)
+        if ((MX_SETS&4096) && K<8) sz[K++]=4096;   // round 24 control: a weight set by the last two bytes, hashed to 4096
+        if ((MX_SETS&8192) && K<8) sz[K++]=20480;  // round 24: by current cell x previous cell's coarse region
+        if ((MX_SETS&16384) && K<8) sz[K++]=20480; // round 25 control: by the last two bytes, hashed to 20,480 (same size)
+        if ((MX_SETS&32768) && K<8) sz[K++]=1280*128; // round 26: current cell x previous cell's fine region
+        if ((MX_SETS&65536) && K<8) sz[K++]=65536;    // round 26: current cell x previous cell, hashed to 65,536
+        if ((MX_SETS&131072) && K<8) sz[K++]=2048;    // round 32: guessed next cell's fine region x current cell's coarse region
+        int tot=0; for (int i=0;i<K;++i) tot+=sz[i];
+        mp=new Mixer(nin, tot); mp->layers(K, sz, MX_FINAL==2 ? 256*16 : MX_FINAL>=3 ? 256*256*(MX_FINAL==4 ? 10 : 1) : 256*10); }
+      else mp=new Mixer(nin, s0); } init=1; }
   Mixer& m=*mp;
   const int N=NCX;
+  if (D_on<0) { D_on = (MX_SETS&32) || MX_APM==3; for (int i=0;i<4096;++i) D_LT[i]=(int)(-log((i+0.5)/4096.0)/log(2.0)*256+0.5); }
+  if (D_on) { int q=pr<0?0:pr>4095?4095:pr; D_cost += y ? D_LT[q] : D_LT[4095-q]; }
 
   for (int i=0;i<N;++i) *cp[i]=nex(*cp[i], y);
   m.update(y);
@@ -829,6 +1038,9 @@ void Predictor::update(int y) {
     c8=c8<<8|(c4>>24&255);
     c4=c4<<8|c0;
     int byte=c0;
+    ++MX_nbytes;
+    if (D_on) { D_ema += (D_cost*16 - D_ema) >> 3; D_cost=0; D_q = D_ema>>11; if (D_q>15) D_q=15; }
+    if (MX_BOOST) MX_lr=MX_LR1+(int)((long long)MX_BOOST*MX_HALF*1024/((long long)MX_HALF*1024+MX_nbytes));
     h[0]=c0<<8;  // order 1
     h[1]=(c4&0xffff)<<5|0x57000000;  // order 2
     h[2]=(c4<<8)*3;  // order 3
@@ -862,6 +1074,58 @@ void Predictor::update(int y) {
         h[k++]=hmix(115,hmix(MS_sentw, h[5])); }
       if (GF&16) { struct_update(byte);
         h[k++]=hmix(111,S_state*65536+(c4&0xffff)); h[k++]=hmix(112,hmix(S_state*7+S_link*3+(S_tmpl>0),h[5])); }
+      if (GF&(128|256|512|1024|2048|4096|131072)) wiki2_update(byte);
+      if (GF&128) { h[k++]=hmix(201,hmix(F_key,F_h)); h[k++]=hmix(202,hmix(F_key,c4&0xffff)); }
+      if (GF&256) { int col = C_intab ? (C_col<0 ? 63 : C_col>62 ? 62 : C_col) : 64;
+        h[k++]=hmix(203,hmix(col,C_cellh)); h[k++]=hmix(204,hmix(col,c4&0xffffff)); }
+      if (GF&512) h[k++]=hmix(205,hmix(B_prev,h[5]));
+      if (GF&1024) h[k++]=hmix(206,hmix(B_prev2,hmix(B_prev,h[5])));
+      if (GF&2048) h[k++]=hmix(207,hmix(B_prev2,h[5]));
+      if (GF&4096) h[k++]=hmix(208,hmix(B_prev,c4&0xffff));
+      if (GF&(8192|32768)) { U32 d=c4&0xffff, cc=d&255; I_t1[d>>8]=I_t1[d>>8]<<8|cc; I_t2[c4>>8&0xffff]=(U16)(I_t2[c4>>8&0xffff]<<8|cc);
+        if (GF&8192) { h[k++]=hmix(209,(cc|I_t1[cc]<<8)&0xffffff); h[k++]=hmix(210,d|(U32)I_t2[d]<<16); }
+        if (GF&32768) { h[k++]=hmix(213,(cc|I_t1[cc]<<8)&0xffff); h[k++]=hmix(214,cc|I_t1[cc]<<8); h[k++]=hmix(215,(d|(U32)I_t2[d]<<16)&0xffffff); } }
+      if (GF&65536) { U32 i0=(c4>>8&0xffffff)*2654435761u>>16, i1=(c4&0xffffff)*2654435761u>>16;
+        I_t3[i0]=(U16)(I_t3[i0]<<8|(c4&255)); h[k++]=hmix(216,hmix(c4&0xffffff,I_t3[i1])); }
+      if (GF&131072) h[k++]=hmix(217,hmix(I_w[B_prev>>16],h[5]));
+      if (!G_x.empty()) { int dx=G_x[g1]-G_x[g2], dy=G_y[g1]-G_y[g2];
+        XY_dir = (dx==0 && dy==0) ? 8 : (int)((atan2((double)dy,(double)dx)+3.14159265358979)*(8/6.28318530717959))%8;
+        XY_px += ((G_x[g1]<<12) - XY_px) >> 6; XY_py += ((G_y[g1]<<12) - XY_py) >> 6; XY_place = (XY_px>>13)*8 + (XY_py>>13); }
+      if (GF&2097152) { h[k++]=hmix(224,hmix(XY_dir*64+XY_place, c4&0xffff)); h[k++]=hmix(225,hmix(XY_place, h[5])); }
+      if (FL_on) { fl_step(g2, g1); FL_p1 = fl_place(g1); FL_p2 = fl_place(g2); }
+      if (GF&4194304) { h[k++]=hmix(226,hmix(FL_p1*4096+FL_p2, c4&0xffff)); h[k++]=hmix(227,hmix(FL_p1, h[5])); }
+      static int ctxmode = getenv("CTXMODE") ? atoi(getenv("CTXMODE")) : 4;   // which cell key (imm_mapkey modes)
+      if (GF&8388608) { h[k++]=hmix(228,imm_mapkey(ctxmode)^(c4&255)*0x9E3779B1u); h[k++]=hmix(229,hmix(g1*8192+g2, c4&0xffff)); }
+      if (GF&16777216) { long jj=G_pos-G_len[g1]; int b2= jj>=0? G_hist[jj&65535]:0; long jk=jj-G_len[b2]; int b3= jk>=0? G_hist[jk&65535]:0;
+        h[k++]=hmix(230,hmix(b2*8192+b3, c4&0xffff)); h[k++]=hmix(231,hmix(imm_mapkey(2), c4&0xffff)); }
+      if (GF&33554432) { static std::vector<long> last; if (last.empty()) last.assign(G_len.size(),-1);
+        auto lb=[&](int g){ long d= last[g]<0 ? 0 : G_pos-last[g]; int b=0; while (d>1 && b<24) { d>>=1; ++b; } return last[g]<0 ? 25 : b; };
+        int r1=lb(g1), r2=lb(g2); last[g1]=G_pos;
+        h[k++]=hmix(232,hmix(g1*32+r1, c4&0xffff)); h[k++]=hmix(233,hmix(r1*32+r2, imm_mapkey(2)^(c4&255)*0x9E3779B1u)); }
+      if (GF&67108864) { static std::vector<int> nx2(1<<22,0); static int pg1=0,pg2=0;
+        static int nxv = getenv("NXVOTE") ? atoi(getenv("NXVOTE")) : 0;   // round 34: majority vote (low 13 bits cell, high bits count)
+        if (g1!=pg1 || g2!=pg2) { int& e=nx2[((U32)(g2*8192+g3)*0x9E3779B1u)>>10];
+          if (!nxv) e=g1; else { int c=e>>13; if ((e&8191)==g1) { if (c<nxv) e+=8192; } else if (c>0) e-=8192; else e=g1; } pg1=g1; pg2=g2; }
+        int p2=nx2[((U32)(g1*8192+g2)*0x9E3779B1u)>>10]&8191; G_p2=p2;
+        h[k++]=hmix(234,hmix(p2*8192+g1,G_state)); h[k++]=hmix(235,hmix(p2, c4&0xffff)); }
+      if (GF&134217728) { static std::vector<int> nx3(1<<22,0); static int qg1=0,qg2=0,qg3=0;
+        long j4=j3-G_len[g3]; int g4= j4>=0? G_hist[j4&65535]:0;
+        static int nxv3 = getenv("NXVOTE") ? atoi(getenv("NXVOTE")) : 0;
+        if (g1!=qg1 || g2!=qg2 || g3!=qg3) { int& e=nx3[(((U32)(g2*8192+g3)*0x9E3779B1u)^(U32)g4*0x85EBCA77u)>>10];
+          if (!nxv3) e=g1; else { int c=e>>13; if ((e&8191)==g1) { if (c<nxv3) e+=8192; } else if (c>0) e-=8192; else e=g1; } qg1=g1; qg2=g2; qg3=g3; }
+        int p3=nx3[(((U32)(g1*8192+g2)*0x9E3779B1u)^(U32)g3*0x85EBCA77u)>>10]&8191; G_p3=p3;
+        h[k++]=hmix(236,hmix(p3*8192+g1,G_state)); h[k++]=hmix(237,hmix(p3, c4&0xffff)); }
+      if (GF&268435456) { static int o2=0,o3=0,hr=0; int hit=(o2==g1)+2*(o3==g1); hr=(hr*4+hit)&255;   // last four bytes' hits
+        int ag= G_p2==G_p3; o2=G_p2; o3=G_p3;
+        h[k++]=hmix(238,hmix(hr*2+ag, hmix(G_p3*8192+g1, c4&255))); h[k++]=hmix(239,hmix(hr*2+ag, c4&0xffff)); }
+      if (GF&536870912) { static int e3=-1,hr=0; hr=(hr*2+(e3==(int)(c4&255)))&63;   // was the last expected byte right (6 bytes)
+        e3=G_lastb[G_p3]; int e2=G_lastb[G_p2];
+        h[k++]=hmix(240,(e3+1)*64+hr); h[k++]=hmix(241,hmix((e3+1)*512+(e2+1), c4&255)); }
+      if (GF&524288) { h[k++]=hmix(221,G_state); h[k++]=hmix(222,hmix(G_state,g2)); }
+      if (GF&1048576) { G_next[g2]=g1; h[k++]=hmix(223,hmix(G_next[g1],G_state)); }
+      if (GF&262144) { h[k++]=hmix(218,hmix(G_t16[g1]*256+G_t16[g2]*16+G_t16[g3], c4&255));
+        h[k++]=hmix(219,hmix(G_t64[g1]*64+G_t64[g2], c4&0xffff)); h[k++]=hmix(220,hmix(G_t256[g1]*256+G_t256[g2], c4&255)); }
+      if (GF&16384) { h[k++]=hmix(211,c4&0xffffff00); h[k++]=hmix(212,c4&0x00ff00ff); }
     }
     if (NGENE) {
       if ((byte|32)>=97 && (byte|32)<=122) W_cur=h[5]; else if (W_cur) { W_prev=W_cur; W_cur=0; }
@@ -897,8 +1161,15 @@ void Predictor::update(int y) {
 
   // predict
   int len=mm.p(y, m);
+  if (mm2) mm2->p(y, m);
   if (rm) rm->p(y, m);
   if (im) im->p(y, m, pr);
+  if (im2) im2->p(y, m, pr);
+  if (im3) im3->p(y, m, pr);
+  if (csm) { ImmuneModel* v[3]={im,im2,im3}; int combo=0, st=0;
+    for (int i=0;i<3;++i) { int s3 = v[i] ? v[i]->pb+1 : 0; combo=combo*3+s3; if (s3 && v[i]->ps>st) st=v[i]->ps; }
+    int cx = combo ? ((combo*16+(st>15?15:st))*8+bcount)*(immcons==2?256:1)+(immcons==2?(int)(c4&255):0) : 0;
+    m.add(stretch(csm->p(y, cx))); }
   int order=0;
   if (len==0) {
     if (*cp[4]) ++order;
@@ -908,15 +1179,58 @@ void Predictor::update(int y) {
   }
   else order=5+(len>=8)+(len>=12)+(len>=16)+(len>=32);
   for (int i=0;i<N;++i) m.add(stretch(sm[i].p(y, *cp[i])));
+  if (MX_BIAS) m.add(256);
+  int mx_r1 = GF ? G_reg[G_hist[G_pos&65535]] : 0, mx_s = (GF&16) ? S_state : 0;
   { static int msel = getenv("MIXSEL") ? atoi(getenv("MIXSEL")) : 0;   // 0 topic x struct, 1 struct only, 2 topic only
     int tp = (GF&8) && msel!=1 ? G_topic : 0, sp = (GF&16) && msel!=2 ? (regk ? REG_cur%10 : S_state) : 0;
     m.set(order+10*(h[0]>>13) + 80*(tp + ((GF&8) ? 64 : 1)*sp));
     static int mix2 = getenv("MIX2") ? 1 : 0;
     if (mix2) { m.setk(1, c0); m.setk(2, (c4&255)*8 + bcount); m.setk(3, ((len>15?15:len)*2 + (order>0))*10 + ((GF&16) ? S_state : 0));
-      m.setfinal(c0 + 256*((GF&16) ? S_state : 0)); } }
+      // round 28: MXFINAL=3 final layer by the current x previous cell's coarse regions, 4 = that x page structure
+      int fr = 0; if (MX_FINAL>=3 && !G_len.empty()) { int f1=G_hist[G_pos&65535]; long fj=G_pos-G_len[f1]; int f2= fj>=0 ? G_hist[fj&65535] : 0; fr=(G_reg[f1]&15)*16+(G_reg[f2]&15); }
+      m.setfinal(MX_FINAL==1 ? c0 : MX_FINAL==2 ? c0 + 256*mx_r1 : MX_FINAL==3 ? c0 + 256*fr : MX_FINAL==4 ? c0 + 256*(fr*10 + ((GF&16) ? S_state : 0)) : c0 + 256*((GF&16) ? S_state : 0));
+      if (MX_SETS) { int kk=4;
+        if ((MX_SETS&1) && kk<8) m.setk(kk++, mx_r1*10 + mx_s);
+        if ((MX_SETS&2) && kk<8) m.setk(kk++, GF ? G_regB[G_hist[G_pos&65535]]&127 : 0);
+        if ((MX_SETS&4) && kk<8) m.setk(kk++, G_topic&63);
+        if ((MX_SETS&8) && kk<8) m.setk(kk++, (MS_wc>7?7:MS_wc)*10 + mx_s);
+        if ((MX_SETS&16) && kk<8) m.setk(kk++, ((c4>>8)&255)*8 + bcount);
+        if ((MX_SETS&32) && kk<8) m.setk(kk++, D_q*10 + mx_s);
+        if ((MX_SETS&64) && kk<8) m.setk(kk++, G_t64.empty() ? 0 : G_t64[G_hist[G_pos&65535]]);
+        if ((MX_SETS&128) && kk<8) m.setk(kk++, G_t256.empty() ? 0 : G_t256[G_hist[G_pos&65535]]);
+        if ((MX_SETS&256) && kk<8) m.setk(kk++, XY_place);
+        if ((MX_SETS&512) && kk<8) { int c=G_hist[G_pos&65535]; m.setblend(kk++, G_regB[c]&127, G_rb2[c], G_w2[c]); }
+        if ((MX_SETS&1024) && kk<8) m.setk(kk++, FL_p1);
+        if ((MX_SETS&2048) && kk<8) m.setk(kk++, G_len.empty() ? 0 : G_hist[G_pos&65535]&4095);
+        if ((MX_SETS&4096) && kk<8) m.setk(kk++, (int)(((c4&0xffff)*2654435761u)>>20));
+        if ((MX_SETS&8192) && kk<8) { int q1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long qj = G_pos-(G_len.empty()?0:G_len[q1]);
+          int q2 = (qj>=0 && !G_len.empty()) ? G_hist[qj&65535] : 0; m.setk(kk++, q1*16 + (G_reg.empty() ? 0 : G_reg[q2]&15)); }
+        if ((MX_SETS&16384) && kk<8) m.setk(kk++, (int)((((c4&0xffff)*2654435761u)>>8)%20480));
+        if ((MX_SETS&131072) && kk<8) m.setk(kk++, G_len.empty() ? 0 : (G_regB[G_p2]&127)*16 + (G_reg[G_hist[G_pos&65535]]&15));
+        if (MX_SETS&(32768|65536)) { int q1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long qj = G_pos-(G_len.empty()?0:G_len[q1]);
+          int q2 = (qj>=0 && !G_len.empty()) ? G_hist[qj&65535] : 0;
+          if ((MX_SETS&32768) && kk<8) m.setk(kk++, (q1%1280)*128 + (G_regB.empty() ? 0 : G_regB[q2]&127));
+          if ((MX_SETS&65536) && kk<8) m.setk(kk++, (int)(((U32)(q1*8192+q2)*2654435761u)>>16)); } } } }
   pr=m.p();
   pr=pr+3*a1.pp(y, pr, c0)>>2;
   pr=pr+3*a2.pp(y, pr, c0^h[0]>>2)>>2;
+  if (MX_APM>=4) {   // round 19: a final APM keyed on map cells (4: hash of the last three cells, 5: the current cell), averaged in
+    // round 20: 6 = current cell x the previous cell's coarse region, 7 = the current cell's fine region, 8 = cell APM and
+    // fine-region APM both, 9 = cell APM given 3/4 of the weight
+    // round 21: 10 = control, the last two bytes hashed into 20,480 keys (same size as 6, no map); 11 = current cell x
+    // previous cell, hashed into 32,768; 12 = current cell x previous cell's fine region, hashed into 32,768
+    static APM* a4 = new APM(MX_APM==13 || MX_APM==14 ? 1 : MX_APM>=10 || MX_APM==6 ? 1<<23 : 1<<20); static APM* a5 = MX_APM==8 ? new APM(128*256) : 0;
+    int cg1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long cj = G_pos-(G_len.empty()?0:G_len[cg1]); int cg2 = (cj>=0 && !G_len.empty()) ? G_hist[cj&65535] : 0;
+    U32 kc = MX_APM==10 ? ((c4&0xffff)*2654435761u>>8)%20480 : MX_APM==11 ? ((U32)(cg1*8192+cg2)*2654435761u)>>17 :
+      MX_APM==12 ? ((U32)(cg1*128+(G_regB[cg2]&127))*2654435761u)>>17 : MX_APM==4 ? imm_mapkey(2)>>20 : MX_APM==6 ? (U32)(cg1*16 + (G_reg[cg2]&15)) : MX_APM==7 ? (U32)(G_regB[cg1]&127) : (U32)(cg1&4095);
+    // round 22: 13 = byte APM (as 10) + cell x previous region APM (as 6); 14 = control, two byte APMs (2 and 3 bytes)
+    if (MX_APM==13 || MX_APM==14) { static APM* b4 = new APM(20480*256); static APM* b5 = new APM(20480*256);
+      U32 kb = ((c4&0xffff)*2654435761u>>8)%20480, k2 = MX_APM==13 ? (U32)(cg1*16 + (G_reg[cg2]&15)) : ((c4&0xffffff)*2654435761u>>8)%20480;
+      int p1=b4->pp(y, pr, kb*256 + c0), p2=b5->pp(y, pr, k2*256 + c0); pr=(2*pr+p1+p2+2)>>2; }
+    else if (MX_APM==9) pr=pr+3*a4->pp(y, pr, kc*256 + c0)+2>>2;
+    else if (MX_APM==8) { int p1=a4->pp(y, pr, kc*256 + c0), p2=a5->pp(y, pr, (G_regB[cg1]&127)*256 + c0); pr=(2*pr+p1+p2+2)>>2; }
+    else pr=pr+a4->pp(y, pr, kc*256 + c0)+1>>1; }
+  else if (MX_APM) pr=pr+a3.pp(y, pr, (MX_APM==1 ? mx_s : MX_APM==3 ? D_q : mx_r1)*256 + c0)+1>>1;
 }
 
 //////////////////////////// Encoder ////////////////////////////
@@ -943,10 +1257,12 @@ private:
   U32 x;                 // Decompress mode: last 4 input bytes of archive
 
   // Compress bit y or return decompressed bit
+  FILE* dump; double dcost;  // env DUMPCOST (compress only): per byte, uint16 cost in 1/256 bit and uint16 map cell
   int code(int y=0) {
     int p=predictor.p();
     assert(p>=0 && p<4096);
     p+=p<2048;
+    if (dump) dcost -= log2(y ? p/4096.0 : 1-p/4096.0);
     U32 xmid=x1 + (x2-x1>>12)*p + ((x2-x1&0xfff)*p>>12);
     assert(xmid>=x1 && xmid<x2);
     if (mode==DECOMPRESS) y=x<=xmid;
@@ -973,6 +1289,8 @@ public:
     assert(mode==COMPRESS);
     for (int i=7; i>=0; --i)
       code((c>>i)&1);
+    if (dump) { int q=(int)(dcost*256+0.5); if (q>65535) q=65535; int cell = GF ? G_hist[G_pos&65535] : 0;
+      putc(q&255,dump); putc(q>>8,dump); putc(cell&255,dump); putc(cell>>8,dump); dcost=0; }
   }
 
   // Decompress and return one byte
@@ -985,7 +1303,8 @@ public:
 };
 
 Encoder::Encoder(Mode m, FILE* f):
-    mode(m), archive(f), x1(0), x2(0xffffffff), x(0) {
+    mode(m), archive(f), x1(0), x2(0xffffffff), x(0), dump(0), dcost(0) {
+  if (mode==COMPRESS && getenv("DUMPCOST")) { dump=fopen(getenv("DUMPCOST"),"wb"); if (!dump) quit("DUMPCOST"); }
   if (mode==DECOMPRESS) {  // x = first 4 bytes of archive
     for (int i=0; i<4; ++i)
       x=(x<<8)+(getc(archive)&255);

@@ -13,6 +13,8 @@ top.
 | enwik9 | 161,433,444 B (−1.9% vs lpaq1) | `GFLAGS=15` only; full stack not yet run on enwik9 |
 | cmix graft | compiles, **untested** | `cmix-graft/`; cmix needs about 32 GB of RAM, so cut-down "cmix-lite" was killed here at 8.3 GB |
 | Evolution, speciation, experiment 3 | see `results/` | finished runs are committed |
+| enwik8, local PC (2026-11-20) | **18,362,762 B** (−7.1% vs lpaq1) | round-3 settings + page, revision and contributor ids rebuilt from relations (`work/exp/headers.py`); see section 6 |
+| **enwik8, full5 (2026-11-21)** | **17,868,078 B** (about −9.5% vs lpaq1; −494,684 B vs 18,362,762) | map-native stack from rounds 10–31 (cell contexts and memories, cell-region weight set, cell trigram and 4-gram) + the three header fields; map, tree, permutation and side stream counted; decode verified (section 6) |
 
 The family tree of every experiment is `docs/gridzip-phylogeny.html`.
 
@@ -24,6 +26,12 @@ free disk.
 ```bash
 git clone https://github.com/Kyle-Wire/gridzip-lab && cd gridzip-lab
 ```
+
+On Windows, clone with `git -c core.autocrlf=false clone ...`. Windows line
+endings break `patch` and the shell scripts. In a WSL without `pip`,
+`python3-venv` or `unzip` (and no sudo), make the venv with
+`python3 -m venv --without-pip`, install into it with any other pip's
+`--python` option, and unzip with `python3 -m zipfile -e file.zip .`.
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate && pip install numpy==2.5.5 numba==0.68.1
@@ -103,10 +111,25 @@ GRIDMAP=work/map10.bin cmix/cmix -n work/e10 work/e10.cmixg
 GRIDMAP=work/map10.bin cmix/cmix -d work/e10.cmixg work/e10.check && cmp work/e10 work/e10.check
 ```
 
-Expect several hours per 10 MB run and about 32 GB of RAM. To fit the Hutter
-Prize limit of 10 GB, set `CMIX_PPMD_MB` (default 14000) and `CMIX_PAQ`
-(default 11) on **both** runs, for example `CMIX_PPMD_MB=4000 CMIX_PAQ=10`.
-Add the map's cost (4,959 B at 1,024 cells and 16 topics) before comparing.
+Expect about 2.7 hours per 10 MB pass (Ryzen 9 9900X). `CMIX_PPMD_MB`
+(default 14000) and `CMIX_PAQ` (default 11) set the memory; use the same
+values on **both** runs. Add the map's cost (4,959 B at 1,024 cells and 16
+topics) before comparing.
+
+Memory cmix reserves (VmPeak), measured; a 10 MB run grows into nearly all of it:
+
+| `CMIX_PPMD_MB` / `CMIX_PAQ` | Reserved |
+|---|---|
+| 14000 / 11 (default) | 32.6 GiB |
+| 4000 / 10 | 17.9 GiB |
+| 2000 / 10 | 16.0 GiB |
+| 4000 / 9 | 15.4 GiB |
+| 2000 / 9 | 13.5 GiB |
+| 1000 / 9 | 12.5 GiB |
+
+These two settings alone can't reach the Hutter Prize limit of 10 GB: about
+9 GiB sits in the rest of cmix (FXCM, the hash models, a 2 GB shared map). A
+prize-legal run needs those trimmed too, as fx2-cmix does.
 
 If the graft wins by 1% or more on 10 MB and on full enwik8, a prize attempt
 is worth planning: fx2-cmix is the strongest open base under the 10 GB limit.
@@ -146,6 +169,44 @@ is in `results/evolve.json`.
 - **GPU:** allowed for research, such as tuning many variants or training
   neural parts, but not in the submitted program (Hutter rules: CPU only,
   10 GB RAM, 70,000/T hours).
+
+## 6. Local PC, 2026-11-20 and overnight
+
+All on WSL (Ryzen 9 9900X, 26 GB), every size counting map, permutation and
+side stream, every archive decoded and compared. Quick-experiment harnesses are
+`work/exp/run_round*.py` (results in `round*.jsonl`, logs `round*.log`);
+`work/exp/run_full8.py` runs full enwik8.
+
+- **Champion, 17,868,078 B (2026-11-21):** `CONFIG=full5 TRANSFORM=hdr run_full8.py` (binary lpaq1g34 or later):
+  17,826,098 B archive + map with region tree 6,494 + permutation 18,750 + side stream 16,736. Encode and decode
+  444 s each, peak 1.46 GB; enwik8 rebuilt byte for byte.
+- **Previous champion, 18,362,762 B:** `CONFIG=candidate TRANSFORM=hdr run_full8.py`.
+  Page ids are rebuilt from the article permutation, revision ids from their
+  timestamps, and contributor ids from usernames seen before; side stream
+  16,736 B. The transform helps every compressor tried (10 MB: lpaq1 −0.34%,
+  xz −0.32%).
+- **Map-native stack, level 9, 10 MB, against the round-4 host:**
+  - cell contexts (the last three cells + a byte) and immune memories keyed
+    on the last four and two cells: −0.64%;
+  - with co-stimulation, next cell and the tree weight set ("full3"): −0.82%;
+  - plus a mixer weight set chosen by the current cell × the previous cell's
+    coarse region ("full4"): −1.27%;
+  - held out at 20 MB and 85 MB into the chain: −1.24% and −1.36%.
+
+  It is ready to run as `CONFIG=full4 TRANSFORM=hdr run_full8.py` (needs
+  `~/gz_exp/lpaq1g25` and `map_tree.bin`).
+- **Dead ends:**
+  - in lpaq: a fluid (moving) map, article order by physics, particle-layout
+    regions, a reversed chain, cell keys longer than four;
+  - covered by cmix: a final APM keyed on cells (a byte-keyed APM of the same
+    size does nearly as well).
+- **cmix:** the graft as first written loses on 10 MB once the map is
+  counted (+0.27%). New graft switches:
+  - GZFLAGS 2048/4096: four- or three-cell contexts;
+  - GZFLAGS 8192: a mixer by cell × previous region.
+
+  They're built in `~/gz_exp/cmixc` and queued in `work/exp/run_cmix_cell4.py`
+  after the 1 MB feature test (`run_cmix_feat.py`).
 
 ## Notes
 
