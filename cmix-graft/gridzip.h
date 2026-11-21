@@ -15,7 +15,7 @@ class GridState {
   static GridState& Get() { static GridState g; return g; }
   bool enabled = false;
   unsigned long long mix_ctx = 0;
-  enum { NCTX = 19 };
+  enum { NCTX = 24 };
   unsigned long long h[NCTX];
   // GZFLAGS picks the context groups, numbered as lpaq1g's GFLAGS: 1 grid, 2 regions, 4 symmetry,
   // 8 topics, 16 page structure, 64 multi-scale; 128 adds the mixer selected by page structure;
@@ -28,10 +28,14 @@ class GridState {
   // 4096 with 2048 keys the first on the last three cells instead (lpaq1g CTXMODE=2, rounds 16-17: better as a plain context).
   // 8192 adds a mixer selected by the current cell x the previous cell's coarse region (lpaq1g round 25, MXSETS 8192:
   // level 9 on 10 MB -0.45% on the full stack, -0.30% beyond a same-size byte-selected weight set).
+  // 16384 adds the cell guesses (lpaq1g rounds 30-31, GFLAGS 67108864 | 134217728, level 9 on 10 MB about -0.15% on
+  // full4, held out -0.15% and -0.17%): tables keyed on the last two and the last three cells remember the cell that
+  // followed them last time; each guess x current cell x automaton state, and each guess x two bytes.
+  // 32768 adds the next cell (lpaq1g round 7, GFLAGS 1048576): the cell that followed the current cell last time, x state.
   // Unset means 255, the graft as first written.
   unsigned flags = 255;
   unsigned long long mix_ctx2 = 0, mix_ctx3 = 0, mix_ctx4 = 0;
-  static int Group(int i) { static const int g[NCTX] = {1, 1, 1, 2, 2, 2, 4, 4, 8, 8, 16, 16, 64, 64, 64, 512, 512, 2048, 2048}; return g[i]; }
+  static int Group(int i) { static const int g[NCTX] = {1, 1, 1, 2, 2, 2, 4, 4, 8, 8, 16, 16, 64, 64, 64, 512, 512, 2048, 2048, 16384, 16384, 16384, 16384, 32768}; return g[i]; }
   bool Uses(int i) const { return enabled && (flags & Group(i)); }
 
   void Update(unsigned int byte) {
@@ -64,6 +68,14 @@ class GridState {
     if (flags & 2048) { long j4 = j3 - len_[g3]; int g4 = j4 >= 0 ? hist_[j4 & 65535] : 0;
       if (flags & 4096) g4 = 0;
       h[17] = M(18, M(M(g1 * 8192ULL + g2, g3 * 8192ULL + g4), c4_ & 255)); h[18] = M(19, M(g1 * 8192ULL + g2, c4_ & 0xffff)); }
+    if (flags & 16384) { long j4 = j3 - len_[g3]; int g4 = j4 >= 0 ? hist_[j4 & 65535] : 0;
+      if (g1 != pg1_ || g2 != pg2_) { nx2_[((unsigned)(g2 * 8192 + g3) * 0x9E3779B1u) >> 10] = g1; pg1_ = g1; pg2_ = g2; }
+      int p2 = nx2_[((unsigned)(g1 * 8192 + g2) * 0x9E3779B1u) >> 10];
+      if (g1 != qg1_ || g2 != qg2_ || g3 != qg3_) { nx3_[(((unsigned)(g2 * 8192 + g3) * 0x9E3779B1u) ^ (unsigned)g4 * 0x85EBCA77u) >> 10] = g1; qg1_ = g1; qg2_ = g2; qg3_ = g3; }
+      int p3 = nx3_[(((unsigned)(g1 * 8192 + g2) * 0x9E3779B1u) ^ (unsigned)g3 * 0x85EBCA77u) >> 10];
+      h[19] = M(20, M(p2 * 8192ULL + g1, st_)); h[20] = M(21, M(p2, c4_ & 0xffff));
+      h[21] = M(22, M(p3 * 8192ULL + g1, st_)); h[22] = M(23, M(p3, c4_ & 0xffff)); }
+    if (flags & 32768) { next_[g2] = g1; h[23] = M(24, M(next_[g1], st_)); }
     mix_ctx = sstate_;
     mix_ctx2 = regB_[g1] & 127;
     mix_ctx3 = t256_.empty() ? 0 : t256_[g1];
@@ -93,14 +105,16 @@ class GridState {
       for (int ch = 0; ch < 256; ++ch) { int nx = go[s][ch]; if (nx < 0) go_[s * 256 + ch] = go_[fail[s] * 256 + ch];
         else { fail[nx] = go_[fail[s] * 256 + ch]; go_[s * 256 + ch] = nx; q.push_back(nx); } } }
     len_.resize(m); for (int c = 0; c < m; ++c) len_[c] = cells[c].size();
-    hist_.assign(65536, 0); tv_.assign(64, 0.0);
+    hist_.assign(65536, 0); tv_.assign(64, 0.0); next_.assign(m, 0);
+    if (getenv("GZFLAGS") && (atoi(getenv("GZFLAGS")) & 16384)) { nx2_.assign(1 << 22, 0); nx3_.assign(1 << 22, 0); }
     for (int i = 0; i < NCTX; ++i) h[i] = 0;
     if (getenv("GZFLAGS")) flags = (unsigned)atoi(getenv("GZFLAGS"));
     enabled = true; return true;
   }
 
  private:
-  std::vector<int> go_, out_, len_, reg_, regB_, tlab_, hist_, t256_; std::vector<double> tv_;
+  std::vector<int> go_, out_, len_, reg_, regB_, tlab_, hist_, t256_, next_, nx2_, nx3_; std::vector<double> tv_;
+  int pg1_ = 0, pg2_ = 0, qg1_ = 0, qg2_ = 0, qg3_ = 0;
   int st_ = 0, nt_ = 1, topic_ = 0; long pos_ = 0; unsigned int c4_ = 0, c8_ = 0, word_ = 0, prevword_ = 0;
   int sstate_ = 0, tag_ = 0, ent_ = 0, url_ = 0, urlk_ = 0, link_ = 0, tmpl_ = 0, line_ = 0, prev_ = 0, bol_ = 1;
   unsigned int sentw_ = 0, sec_ = 0, head_ = 0; int wc_ = 0, inhead_ = 0, mbol_ = 1;

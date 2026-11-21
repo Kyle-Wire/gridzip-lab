@@ -899,7 +899,8 @@ static void load_grid() {
   if (GF&67108864) NCX+=2;
   if (GF&134217728) NCX+=2;
   if (GF&268435456) NCX+=2;
-  if (GF&536870912) NCX+=2;  // round 36: the byte the cell guesses expect next, with its hit history  // round 33: confidence in the cell guesses (were the last ones right, do they agree)  // round 31: cell 4-gram: the cell that followed the last three cells the last time  // round 30: cell trigram: the cell that followed the last two cells the last time  // round 29: cell recency (bytes since the current / previous cell last ended here)
+  if (GF&536870912) NCX+=2;
+  if (GF&1073741824) NCX+=2;  // round 37: next-cell guess keyed on the fine regions of the last three cells  // round 36: the byte the cell guesses expect next, with its hit history  // round 33: confidence in the cell guesses (were the last ones right, do they agree)  // round 31: cell 4-gram: the cell that followed the last three cells the last time  // round 30: cell trigram: the cell that followed the last two cells the last time  // round 29: cell recency (bytes since the current / previous cell last ended here)
   if (GF&16777216) NCX+=2;  // round 18: the two cells before the current one + 2 bytes (skip), three cells + 2 bytes   // round 15: plain contexts on the last four cells (+ last byte) and the last two cells (+ 2 bytes)
   if (NCX>40) quit("too many contexts for NMAX");
   load_genome(); if (NGENE) NCX=1+NGENE;
@@ -1121,6 +1122,11 @@ void Predictor::update(int y) {
       if (GF&536870912) { static int e3=-1,hr=0; hr=(hr*2+(e3==(int)(c4&255)))&63;   // was the last expected byte right (6 bytes)
         e3=G_lastb[G_p3]; int e2=G_lastb[G_p2];
         h[k++]=hmix(240,(e3+1)*64+hr); h[k++]=hmix(241,hmix((e3+1)*512+(e2+1), c4&255)); }
+      if (GF&1073741824) { static std::vector<int> nxr(1<<20,0); static U32 pk=0; long j4=j3-G_len[g3]; int g4= j4>=0? G_hist[j4&65535]:0;
+        U32 wk=(((U32)(G_regB[g2]&127)*16384+(G_regB[g3]&127)*128+(G_regB[g4]&127))*0x9E3779B1u)>>12;   // the last three cells' regions, one step back
+        if (wk!=pk) { nxr[wk]=g1; pk=wk; }
+        int pr=nxr[(((U32)(G_regB[g1]&127)*16384+(G_regB[g2]&127)*128+(G_regB[g3]&127))*0x9E3779B1u)>>12];
+        h[k++]=hmix(242,hmix(pr*8192+g1,G_state)); h[k++]=hmix(243,hmix(pr, c4&0xffff)); }
       if (GF&524288) { h[k++]=hmix(221,G_state); h[k++]=hmix(222,hmix(G_state,g2)); }
       if (GF&1048576) { G_next[g2]=g1; h[k++]=hmix(223,hmix(G_next[g1],G_state)); }
       if (GF&262144) { h[k++]=hmix(218,hmix(G_t16[g1]*256+G_t16[g2]*16+G_t16[g3], c4&255));

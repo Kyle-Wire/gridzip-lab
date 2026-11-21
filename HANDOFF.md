@@ -14,7 +14,8 @@ top.
 | cmix graft | compiles, **untested** | `cmix-graft/`; cmix needs about 32 GB of RAM, so cut-down "cmix-lite" was killed here at 8.3 GB |
 | Evolution, speciation, experiment 3 | see `results/` | finished runs are committed |
 | enwik8, local PC (2026-11-20) | **18,362,762 B** (−7.1% vs lpaq1) | round-3 settings + page, revision and contributor ids rebuilt from relations (`work/exp/headers.py`); see section 6 |
-| **enwik8, full5 (2026-11-21)** | **17,868,078 B** (about −9.5% vs lpaq1; −494,684 B vs 18,362,762) | map-native stack from rounds 10–31 (cell contexts and memories, cell-region weight set, cell trigram and 4-gram) + the three header fields; map, tree, permutation and side stream counted; decode verified (section 6) |
+| enwik8, full5 (2026-11-21) | 17,868,078 B (about −9.5% vs lpaq1; −494,684 B vs 18,362,762) | map-native stack from rounds 10–31 (cell contexts and memories, cell-region weight set, cell trigram and 4-gram) + the three header fields; map, tree, permutation and side stream counted; decode verified (section 6) |
+| **enwik8, full5 + word order (2026-11-21)** | **17,683,150 B** (−184,928 B, −1.03% vs 17,868,078) | the same compressor; articles chained by word similarity (hashed tf-idf over words of 3+ letters) instead of bags of map cells; the permutation costs the same 18,750 B; decode verified (section 6) |
 
 The family tree of every experiment is `docs/gridzip-phylogeny.html`.
 
@@ -177,7 +178,12 @@ side stream, every archive decoded and compared. Quick-experiment harnesses are
 `work/exp/run_round*.py` (results in `round*.jsonl`, logs `round*.log`);
 `work/exp/run_full8.py` runs full enwik8.
 
-- **Champion, 17,868,078 B (2026-11-21):** `CONFIG=full5 TRANSFORM=hdr run_full8.py` (binary lpaq1g34 or later):
+- **Champion, 17,683,150 B (2026-11-21):** `work/exp/build_wordchain.py` (12 s: word-vector greedy chain, writes
+  work/enwik8.wordchain and work/order.wordchain.npy, header transform with rebuild check), then
+  `CONFIG=full5 CHAIN=word TRANSFORM=hdr run_full8.py`: 17,641,170 B archive + map and tree 6,494 + permutation
+  18,750 + side stream 16,736. Encode 536 s, decode 478 s, peak 1.46 GB; enwik8 rebuilt byte for byte. On 10 MB
+  slices the word chain was −0.41% / −0.62% / −0.70% (order_ideas2.py); at 100 MB −1.04%.
+- **Previous champion, 17,868,078 B:** `CONFIG=full5 TRANSFORM=hdr run_full8.py` (binary lpaq1g34 or later):
   17,826,098 B archive + map with region tree 6,494 + permutation 18,750 + side stream 16,736. Encode and decode
   444 s each, peak 1.46 GB; enwik8 rebuilt byte for byte.
 - **Previous champion, 18,362,762 B:** `CONFIG=candidate TRANSFORM=hdr run_full8.py`.
