@@ -123,6 +123,15 @@ def fit(built: list[Built], y, rows=None, refine=True):
 
     def sse(a):
         X, off = _design(built, a, rows); z = yr - off; th = _lsq(X, z); e = z - X @ th; return float(e @ e)
+    if len(fam) > 1:   # A1: start the families one at a time, each at its best given those already started
+        done = [j for j, b in enumerate(built) if b.fn is None]
+        for j in fam:
+            sub = done + [j]; gj = built[j].grid; best = None
+            for v in gj:
+                a = [al[i] for i in sub]; a[-1] = float(v)
+                X1, o1 = _design([built[i] for i in sub], a, rows); z = yr - o1; e = z - X1 @ _lsq(X1, z); q = float(e @ e)
+                if best is None or q < best[0]: best = (q, float(v))
+            al[j] = best[1]; done.append(j)
     for _ in range(2 if len(fam) > 1 else 1):
         for j in fam:
             g = built[j].grid; s = []
@@ -155,39 +164,72 @@ def structure_bits(built, library_size):
 def n_params(built): return 1 + sum(b.k for b in built) + sum(1 for b in built if b.fn is not None)
 
 
-def approx_bits(built, y, g, library_size, rows=None):
+def _prev_in(prev, rows):
+    """Map each row's previous-reading index into positions within `rows` (-1 where it is not in rows)."""
+    if prev is None: return None
+    pos = np.full(len(prev), -1); pos[rows] = np.arange(len(rows)); p = np.asarray(prev)[rows]
+    return np.where(p >= 0, pos[np.maximum(p, 0)], -1)
+
+
+def serial_bits(yr, mu, pr, g, rho=None, sd=None):
+    """A1: residuals coded as AR(1) along `pr` (position of each reading's predecessor, -1 for the first of a block).
+
+    Each reading is coded given the one before it: N(mu + rho (y_prev - mu_prev), sd), the first of each block under the
+    stationary sd / sqrt(1 - rho^2). The decoder has the earlier readings, so this is a valid sequential code. Returns
+    (bits, rho, sd)."""
+    e = yr - mu; has = pr >= 0; ep = np.where(has, e[np.maximum(pr, 0)], 0.0)
+    if rho is None:
+        rho = float(np.clip((e[has] @ ep[has]) / max(ep[has] @ ep[has], 1e-300), -0.99, 0.99)) if has.sum() > 2 else 0.0
+    pred = mu + rho * ep
+    if sd is None: sd = max(float(np.sqrt(np.mean((yr - pred)[has] ** 2))) if has.any() else float(np.std(e)), g.res / 2)
+    sdv = np.where(has, sd, sd / math.sqrt(max(1 - rho ** 2, 1e-4)))
+    return bits_gaussian(yr, pred, sdv, g), rho, sd
+
+
+def approx_bits(built, y, g, library_size, rows=None, prev=None):
     """Search score: exact structure and residual bits at the least-squares fit, ~0.5 log2(n) + 2 bits per parameter."""
     rows = np.arange(len(y)) if rows is None else np.asarray(rows)
     th, al, X, off = fit(built, y, rows, refine=False)
     mu = X @ th + off; yr = y[rows]
     sd = max(float(np.sqrt(np.mean((yr - mu) ** 2))), g.res / 2)
-    n = len(rows); pb = (n_params(built) + 1) * (0.5 * math.log2(max(n, 2)) + 2)
+    n = len(rows); pb = (n_params(built) + 1 + (prev is not None)) * (0.5 * math.log2(max(n, 2)) + 2)
+    if prev is not None: return structure_bits(built, library_size) + pb + float(serial_bits(yr, mu, _prev_in(prev, rows), g)[0].sum())
     return structure_bits(built, library_size) + pb + float(bits_gaussian(yr, mu, sd, g).sum())
 
 
-def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17)):
+def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17), prev=None):
     """Total code length of the formula, every parameter rounded at its best step. Returns a result dict."""
     rows = np.arange(len(y)) if rows is None else np.asarray(rows)
     th, al, X, off = fit(built, y, rows)
     yr = y[rows]
     fam = [j for j, b in enumerate(built) if b.fn is not None]
-    vals = list(th) + [al[j] for j in fam]
+    pr = _prev_in(prev, rows)
+    # A1: a family parameter is sent relative to its range in the library (the decoder knows the range): a - lo, or
+    # ln(a / lo) for a log-scale family, so a date like 2022.0 costs what its position in the record costs
+    lg = {j: built[j].term.family[2] for j in fam}; lo0 = {j: float(min(built[j].grid[0], built[j].grid[-1])) for j in fam}
+    enc = lambda j, a: math.log(a / lo0[j]) if lg[j] else a - lo0[j]
+    dec = lambda j, u: lo0[j] * math.exp(u) if lg[j] else u + lo0[j]
+    vals = list(th) + [enc(j, al[j]) for j in fam]
     nth = len(th)
+    if pr is not None: vals.append(serial_bits(yr, X @ th + off, pr, g)[1])
 
     def total(steps):
         pb, rv = zip(*[M.param_bits(v, p) for v, p in zip(vals, steps)])
         a = al[:]
         for m, j in enumerate(fam):
-            lo, hi = built[j].grid[0], built[j].grid[-1]; a[j] = min(max(rv[nth + m], min(lo, hi)), max(lo, hi))
+            lo, hi = built[j].grid[0], built[j].grid[-1]; a[j] = min(max(dec(j, rv[nth + m]), min(lo, hi)), max(lo, hi))
         if fam: Xr, offr = _design(built, a, rows)
         else: Xr, offr = X, off
         mu = Xr @ np.array(rv[:nth]) + offr
         if not np.all(np.isfinite(mu)): return math.inf, None
-        sd0 = float(np.sqrt(np.mean((yr - mu) ** 2)))
+        if pr is not None:
+            rho = float(np.clip(rv[-1], -0.99, 0.99)); _, _, sd0 = serial_bits(yr, mu, pr, g, rho=rho)
+        else:
+            rho = None; sd0 = float(np.sqrt(np.mean((yr - mu) ** 2)))
         p_sd = max(0, -math.floor(math.log2(max(sd0, g.res)))) + 3
         sdb, sdr = M.param_bits(sd0, p_sd); sdr = max(sdr, g.res / 2)
-        rb = float(bits_gaussian(yr, mu, sdr, g).sum())
-        return sum(pb) + sdb + rb, dict(param_bits=float(sum(pb) + sdb), residual_bits=rb, sd=sdr, mu=mu, rounded=list(rv), alphas=a)
+        rb = float((serial_bits(yr, mu, pr, g, rho=rho, sd=sdr)[0] if pr is not None else bits_gaussian(yr, mu, sdr, g)).sum())
+        return sum(pb) + sdb + rb, dict(param_bits=float(sum(pb) + sdb), residual_bits=rb, sd=sdr, mu=mu, rounded=list(rv), alphas=a, rho=rho)
     steps = [8] * len(vals); best, info = total(steps)
     for _ in range(3):
         changed = False
@@ -203,7 +245,7 @@ def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17)):
         kk = b.k; coef[b.name] = [float(v) for v in th[k:k + kk]] if kk > 1 else float(th[k]); k += kk
     return {"terms": [b.name for b in built], "structure_bits": sb, "param_bits": info["param_bits"],
             "residual_bits": info["residual_bits"], "total_bits": sb + best, "bits_per_reading": (sb + best) / n,
-            "n": n, "sd": info["sd"], "coef": coef, "alpha": {built[j].name: float(al[j]) for j in fam},
+            "n": n, "sd": info["sd"], "rho": info.get("rho"), "coef": coef, "alpha": {built[j].name: float(al[j]) for j in fam},
             "_mu": info["mu"], "_steps": steps}
 
 
@@ -219,7 +261,7 @@ def _ok(state, built):
     return len(grp) == len(set(grp))
 
 
-def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_size=None, rows=None):
+def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_size=None, rows=None, prev=None):
     """Beam search over sparse formulas by approx bits; finalists (plus 'no term') re-scored exactly.
 
     Then backward elimination on the exact winner (drop a term while that shortens the code).
@@ -229,7 +271,7 @@ def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_
     memo = {}
 
     def A(state):
-        if state not in memo: memo[state] = approx_bits([built[i] for i in state], y, g, L, rows)
+        if state not in memo: memo[state] = approx_bits([built[i] for i in state], y, g, L, rows, prev)
         return memo[state]
     frontier = [()]; A(())
     for _ in range(max_terms):
@@ -244,53 +286,60 @@ def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_
         frontier = scored[:beam]
     ranked = sorted(memo, key=memo.get)[:finalists]
     if () not in ranked: ranked.append(())
-    ex = {s: exact_bits([built[i] for i in s], y, g, L, rows) for s in ranked}
+    ex = {s: exact_bits([built[i] for i in s], y, g, L, rows, prev=prev) for s in ranked}
     best = min(ex, key=lambda s: ex[s]["total_bits"])
     improved = True
     while improved and best:
         improved = False
         for i in best:
             s = tuple(j for j in best if j != i)
-            if s not in ex: ex[s] = exact_bits([built[j] for j in s], y, g, L, rows)
+            if s not in ex: ex[s] = exact_bits([built[j] for j in s], y, g, L, rows, prev=prev)
             if ex[s]["total_bits"] < ex[best]["total_bits"] - 1e-9: best, improved = s, True; break
     out = sorted(ex.values(), key=lambda r: r["total_bits"])
     return ex[best], out, len(memo)
 
 
-def ladder(built, winner_terms, y, g, library_size):
+def ladder(built, winner_terms, y, g, library_size, prev=None):
     """Add the winner's terms one at a time, each step the one that saves most: the bits waterfall."""
-    by = {b.name: b for b in built}; left = list(winner_terms); cur = []; steps = [exact_bits([], y, g, library_size)]
+    by = {b.name: b for b in built}; left = list(winner_terms); cur = []; steps = [exact_bits([], y, g, library_size, prev=prev)]
     steps[0]["added"] = "one correction"
     while left:
-        trial = [(exact_bits([by[t] for t in cur + [n]], y, g, library_size), n) for n in left]
+        trial = [(exact_bits([by[t] for t in cur + [n]], y, g, library_size, prev=prev), n) for n in left]
         r, nme = min(trial, key=lambda z: z[0]["total_bits"]); cur.append(nme); left.remove(nme); r["added"] = nme; steps.append(r)
     return steps
 
 
-def holdout(built, terms, y, g, train, test, library_size):
+def holdout(built, terms, y, g, train, test, library_size, prev=None):
     """Fit on train rows, then code test rows with that formula; bits per test reading, formula and none."""
     by = {b.name: b for b in built}; out = []
     for names in (terms, []):
         bb = [by[t] for t in names]
         th, al, _, _ = fit(bb, y, train)
         X, off = _design(bb, al, np.arange(len(y))); mu = X @ th + off
-        sd = max(float(np.sqrt(np.mean((y[train] - mu[train]) ** 2))), g.res / 2)
-        out.append(float(bits_gaussian(y[test], mu[test], sd, g).sum()) / len(test))
+        if prev is not None:
+            _, rho, sd = serial_bits(y[train], mu[train], _prev_in(prev, train), g)
+            out.append(float(serial_bits(y[test], mu[test], _prev_in(prev, test), g, rho=rho, sd=sd)[0].sum()) / len(test))
+        else:
+            sd = max(float(np.sqrt(np.mean((y[train] - mu[train]) ** 2))), g.res / 2)
+            out.append(float(bits_gaussian(y[test], mu[test], sd, g).sum()) / len(test))
     return {"formula_bpr": out[0], "one_correction_bpr": out[1], "transfers": out[0] < out[1]}
 
 
-def run_case(terms: Sequence[Term], ctx: dict, y, g, folds=(), max_terms=5, beam=6, name=""):
+def run_case(terms: Sequence[Term], ctx: dict, y, g, folds=(), max_terms=5, beam=6, name="", prev=None):
+    """prev (A1): index of each reading's predecessor in its own sequence (-1 for the first), to code the residuals as
+    AR(1); None codes them as independent."""
     """The whole case: assemble, search, ladder, hold-out folds, coder check. Arrays prefixed _ are not serialised."""
     y = np.asarray(y, np.float64); n = len(y)
     built = assemble(terms, ctx, n)
-    win, ranked, nscored = search(built, y, g, max_terms=max_terms, beam=beam)
-    lad = ladder(built, win["terms"], y, g, len(built))
-    ho = [dict(fold=f, **holdout(built, win["terms"], y, g, tr, te, len(built))) for f, tr, te in folds] if win["terms"] else []
+    win, ranked, nscored = search(built, y, g, max_terms=max_terms, beam=beam, prev=prev)
+    lad = ladder(built, win["terms"], y, g, len(built), prev=prev)
+    ho = [dict(fold=f, **holdout(built, win["terms"], y, g, tr, te, len(built), prev=prev)) for f, tr, te in folds] if win["terms"] else []
     meta = {b.name: {"formula": b.term.formula, "meaning": b.term.meaning, "physics": b.term.physics, "unit": b.term.unit} for b in built}
     return {"name": name, "n": n, "library": [b.name for b in built], "library_size": len(built), "formulas_scored": nscored,
             "winner": strip(win), "ranked": [strip(r) for r in ranked[:8]], "ladder": [strip(r) for r in lad],
             "holdout": ho, "transfers": all(h["transfers"] for h in ho) if ho else None,
-            "coder_check": verify(win, y, g), "terms_meta": meta,
+            "coder_check": verify(win, y, g) if prev is None else {"note": "AR(1) code: ideal bits only"}, "terms_meta": meta,
+            "noise_model": "AR(1)" if prev is not None else "independent",
             "bits_saved_per_reading": lad[0]["bits_per_reading"] - win["bits_per_reading"],
             "sd_before": lad[0]["sd"], "sd_after": win["sd"],
             "_y": y, "_mu": win["_mu"], "_mu0": lad[0]["_mu"], "_built": built}

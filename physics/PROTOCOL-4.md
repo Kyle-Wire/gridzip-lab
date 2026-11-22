@@ -76,3 +76,22 @@ library cannot name.
 A winning term is a lead for that model's own protocol, never a fix applied to a report. Heat errors are strongly
 correlated in time, so its effective sample is far below 360. F2 and G score against references, not measurements.
 The library only names what is in it: a gap with no term reads as a remainder, never as a discovery.
+
+## Amendment A1 (22 Nov 2026, after part A's first run, before any of part B)
+**What was seen.** The first full run of part A (`results/physlib/synthetic_independent.json`, 1,080 runs):
+independent noise named a term in 0 of 100 runs in every domain (rule 2 passes); AR(1) noise named one in 34 % of
+heat runs and 30 % of ground runs (rule 3, expected); rule 1 failed for three laws: station + direction (the 0.12
+direction part is below what 360 readings at sd 0.15 can show; named 15 %), the 3 mm datum (named 50 %, the other
+runs name `weir_exponent`, its near-twin over this depth range; explained 90 %), and the two reference jumps (named
+65 %, explained 55 %).
+
+**Changes (tool only; pass rules, scenarios, seeds and library unchanged):**
+1. Ordered data (heat: the hours of each station; ground: the dates of a series) codes its residuals as AR(1) along
+   that order: each reading under N(formula + ρ·previous residual, sd), the first of each block at the stationary
+   sd; ρ is one more parameter, paid for. Correlated noise then has a cheaper explanation than a spurious term.
+   Wind and flood cases have no order and keep the independent code.
+2. Two families in one formula (two jumps) start one at a time, each at its best given the ones already started,
+   instead of both at the same point.
+3. A family parameter is sent relative to its library range (a − lo, or ln(a/lo) for a log-scale family): a date
+   such as 2022.0 cost ~35 bits as an absolute number, which hid real two-jump formulas.
+Part A is rerun in full with these (`results/physlib/synthetic.json`); both runs are reported.

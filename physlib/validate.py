@@ -15,6 +15,7 @@ import numpy as np
 from . import engine as E, synth as S
 
 OUT = Path(__file__).resolve().parents[1] / "results" / "physlib"
+SERIAL = "--independent" not in sys.argv     # A1: ordered domains code residuals as AR(1); --independent = the first run
 
 
 def _groups(terms):
@@ -24,7 +25,8 @@ def _groups(terms):
 def one(args):
     domain, law, seed, scale, noise = args
     terms, ctx, y, g, planted = S.case(domain, law, seed, scale=scale, noise=noise)
-    res = E.run_case(terms, ctx, y, E.Grid(*g), name=f"{domain}:{law}:{seed}")
+    prev = S.prev_of(domain, len(y)) if SERIAL else None
+    res = E.run_case(terms, ctx, y, E.Grid(*g), name=f"{domain}:{law}:{seed}", prev=prev)
     found = res["winner"]["terms"]; grp = _groups(terms)
     named = sorted(grp[t] for t in found) == sorted(grp[t] for t in planted)
     rng = np.random.default_rng(seed); sig = (y - 0.1)  # noise included; recompute the clean planted signal
@@ -86,5 +88,5 @@ if __name__ == "__main__":
     with Pool() as p: rows = p.map(one, J, chunksize=4)
     OUT.mkdir(parents=True, exist_ok=True)
     summ = summarise(rows)
-    (OUT / ("synthetic_quick.json" if quick else "synthetic.json")).write_text(json.dumps({"summary": summ, "runs": rows}, indent=1, default=float))
+    (OUT / (("synthetic_quick" if quick else "synthetic") + ("" if SERIAL else "_independent") + ".json")).write_text(json.dumps({"summary": summ, "runs": rows}, indent=1, default=float))
     print(json.dumps(summ, indent=1, default=float)[:6000]); print(f"{len(J)} runs, {time.time() - t:.0f} s")

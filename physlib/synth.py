@@ -113,3 +113,11 @@ def case(domain, law_name, seed, scale=1.0, noise="iid", rho=0.8):
     e = rng.normal(0, sc["sd"], n) if noise == "iid" else ar1(rng, n, sc["sd"], rho, blocks)
     y = 0.1 + sig + e
     return _lib(domain, ctx), ctx, y, sc["grid"], [nm for nm, _, _ in law]
+
+
+def prev_of(domain, n):
+    """A1: ordered domains (heat: hours within each station; ground: dates) get the AR(1) residual code."""
+    if domain not in ("heat", "ground"): return None
+    blocks = 3 if domain == "heat" else 1; m = n // blocks; p = np.arange(n) - 1
+    p[np.arange(0, n, m)] = -1
+    return p
