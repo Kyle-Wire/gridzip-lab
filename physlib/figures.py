@@ -25,7 +25,7 @@ NICE = {"contrast": "speed-up contrast", "fetch_decay": "entrance decay", "fetch
         "splash_over": "splash-over", "weir_exponent": "depth exponent", "orifice_transition": "weir→orifice", "datum": "depth datum",
         "consolidation": "consolidation", "linear": "rate offset", "acceleration": "acceleration", "gust_factor": "gust factor / roughness",
         "log_law_z0": "roughness length", "direction": "wind direction", "diurnal_shape": "unnamed daily shape", "noise_level": "noise level",
-        "seasonal_amp": "seasonal amplitude", "flow": "flow size", "velocity_head": "velocity head", "frontal_share": "frontal share"}
+        "seasonal_amp": "seasonal amplitude", "flow": "flow size", "velocity_head": "velocity head", "frontal_share": "frontal share", "irrigation_cooling": "irrigation cooling", "sea_breeze": "sea breeze", "cold_pool": "cold-air pool", "canyon_trapping": "canyon heat trapping", "runway_siting": "runway siting", "flat_ground": "flat ground", "tide_backwater": "tide backwater", "frozen_soil": "frozen soil", "burned_soil": "burned soil", "karst_drain": "karst drainage", "valley_channel": "valley channelling", "water_fetch": "fetch over water", "radiation": "sunlight", "vegetation_et": "vegetation cooling", "night_decoupling": "calm-night cooling", "manning_slope": "Manning slope", "storage_hysteresis": "heat storage lag"}
 nice = lambda t: NICE.get(t, t.replace("_", " "))
 
 
@@ -41,17 +41,20 @@ def load(name):
 
 
 def ladder_ax(ax, res, title=None, color=AFTER):
-    lad = res["ladder"]; n = res["n"]
-    b = [s["bits_per_reading"] for s in lad]; labels = [nice(s["added"]) for s in lad]
-    x = np.arange(len(b))
-    ax.bar(x[:1], b[:1], color=MUTED, width=0.62)
-    for i in range(1, len(b)):
-        ax.bar(i, b[i - 1] - b[i], bottom=b[i], color=color, width=0.62)
-        ax.text(i, b[i - 1] + 0.01 * max(b), f"−{(b[i-1]-b[i]):.2f}", ha="center", va="bottom", fontsize=8, color=INK2)
-    ax.set_xticks(x); ax.set_xticklabels(["one\ncorrection"] + ["+ " + l for l in labels[1:]], fontsize=7.5, rotation=0)
-    lo = min(b) - 0.25 * (max(b) - min(b) + 0.05); ax.set_ylim(max(0, lo), max(b) + 0.12 * (max(b) - min(b) + 0.05))
-    ax.set_ylabel("bits per reading"); ax.grid(axis="y", color=GRID, lw=0.5)
-    ax.axhline(b[-1], color=INK2, lw=0.8, ls=":")
+    """Horizontal waterfall: bits per reading saved by each winning term, in the order they were added."""
+    lad = res["ladder"]; b = [st["bits_per_reading"] for st in lad]
+    if len(b) == 1:
+        ax.text(0.5, 0.5, f"nothing pays\n{b[0]:.2f} bits per reading", ha="center", va="center", transform=ax.transAxes, color=INK2)
+        ax.axis("off"); ax.set_title(title or ""); return
+    saves = [b[i - 1] - b[i] for i in range(1, len(b))]; names = [nice(st["added"]) for st in lad[1:]]
+    yy = np.arange(len(saves))[::-1]
+    ax.barh(yy, saves, color=color, height=0.6)
+    for y, v, nme in zip(yy, saves, names):
+        ax.text(0, y + 0.42, nme, fontsize=8, color=INK, va="center")
+        ax.text(v, y, f"  {v:.2f}", fontsize=8, color=INK2, va="center")
+    ax.set_yticks([]); ax.set_xlim(0, max(saves) * 1.35); ax.set_ylim(-0.6, len(saves) - 0.1)
+    ax.set_xlabel(f"bits per reading saved ({b[0]:.2f} → {b[-1]:.2f})"); ax.spines["left"].set_visible(False)
+    ax.grid(axis="x", color=GRID, lw=0.5)
     if title: ax.set_title(title)
 
 
@@ -80,8 +83,8 @@ def fig_how():
     ax = fig.add_subplot(gs[2])
     ax.plot(t, y - y.mean(), ".", ms=3, color=MUTED, label="errors")
     ax.plot(t, res["_mu"] - res["_mu"].mean(), color=AFTER, lw=2.2, label=f"found: onset at {res['winner']['alpha']['onset']:.2f} (planted 2022.0)")
-    rem = y - res["_mu"]; ax.plot(t, rem - rem.mean() - 40, ".", ms=3, color=YELLOW, label="what's left (shifted down)")
-    ax.set_title("3. What the term explains, and the remainder"); ax.set_xlabel("year"); ax.legend(fontsize=8, loc="lower left"); ax.grid(color=GRID, lw=0.5)
+    rem = y - res["_mu"]; ax.plot(t, rem - rem.mean() - 45, ".", ms=3, color=YELLOW, label="what's left (shifted down)")
+    ax.set_title("3. What the term explains, and the remainder"); ax.set_xlabel("year"); ax.set_ylim(-62, 22); ax.legend(fontsize=8, loc="upper right", bbox_to_anchor=(1.0, 1.0), ncol=1); ax.grid(color=GRID, lw=0.5)
     b0, b1 = res["ladder"][0]["bits_per_reading"], res["winner"]["bits_per_reading"]
     fig.suptitle(f"How the physics compressor works: storing the errors took {b0:.2f} bits per reading; with the onset term, {b1:.2f}", x=0.01, ha="left", fontsize=12, color=INK)
     fig.savefig(FIG / "11_how_it_works.png", dpi=170, bbox_inches="tight"); plt.close(fig)
@@ -132,11 +135,13 @@ def fig_validation():
     if fails:
         lines.append(("Misses (reported, not tuned away):", INK, 9.5))
         for k in fails:
-            v = A["planted"][k]; top = list(v["found_sets"].items())[0]
-            lines.append((f"• {k.split(': ')[1]}: named {v['named_exactly']:.0%}", INK2, 8.5))
-            lines.append((f"   most often found: {top[0] or '(nothing)'}", MUTED, 8))
+            from physlib import synth as S_
+            v = A["planted"][k]; d_, l_ = k.split(": ", 1); pl = " + ".join(sorted(t for t, _, _ in S_.SCENARIOS[d_]["laws"][l_]))
+            wrong = [(s_, c_) for s_, c_ in v["found_sets"].items() if " + ".join(sorted(s_.split(" + "))) != pl]
+            lines.append((f"• {k.split(': ')[1]}: named {v['named_exactly']:.0%}, explained {v['law_explained']:.0%}", INK2, 8.5))
+            lines.append((f"   else found: {wrong[0][0]} ({wrong[0][1]} of 20)", MUTED, 8))
     for i, (t, c, s) in enumerate(lines): ax.text(0, 0.98 - i * 0.062, t, color=c, fontsize=s, va="top", transform=ax.transAxes)
-    fig.suptitle("Does it find real laws, and stay quiet on noise? 1,080 synthetic cases, truth known", x=0.01, ha="left", fontsize=12.5)
+    fig.suptitle("Does it find real laws, and stay quiet on noise? 1,080 synthetic cases, truth known", x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "12_validation.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
@@ -152,10 +157,10 @@ def fig_wind():
         ax.set_title(f"{eng.upper()}: errors before (sd {r['sd_before']:.2f})"); ax.grid(color=GRID, lw=0.5); ax.set_ylim(-1.4, 1.4)
         ax = axs[row, 1]; ax.scatter(f, y - mu, s=9, color=AFTER, alpha=0.6, ec="none")
         ax.axhline(0, color=INK2, lw=0.8, ls=":"); ax.axhspan(-r["noise_floor_sd"], r["noise_floor_sd"], color=GRID, alpha=0.6, lw=0)
-        ax.set_title(f"after the winning terms (sd {r['sd_after']:.2f}; grey = tunnel repeatability)"); ax.set_xlabel("distance into the array (building widths)")
+        ax.set_title(f"after the winning terms (sd {r['sd_after']:.2f})\ngrey band = tunnel repeatability"); ax.set_xlabel("distance into the array (building widths)")
         ax.grid(color=GRID, lw=0.5); ax.set_ylim(-1.4, 1.4)
-        ladder_ax(axs[row, 2], r, f"bits saved ({'transfers' if r['transfers'] else 'does not transfer'} across layouts)")
-    fig.suptitle("WindSim, AIJ Case C wind tunnel: both engines exaggerate speed-ups and miss the entrance decay", x=0.01, ha="left", fontsize=12.5)
+        ladder_ax(axs[row, 2], r, f"which terms paid\n({'holds' if r['transfers'] else 'does not hold'} on every left-out layout)")
+    fig.suptitle("WindSim, AIJ Case C wind tunnel: both engines exaggerate speed-ups and miss the entrance decay", x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "13_wind_aij.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
@@ -184,11 +189,12 @@ def fig_heat():
         c = H[k]["winner"]["coef"]
         ax.bar(i - 0.2, -c.get("amplitude", 0), 0.38, color=VIOLET); ax.bar(i + 0.2, c.get("timing_shift", 0), 0.38, color=YELLOW)
     ax.set_xticks(x); ax.set_xticklabels([l for _, l in labs], fontsize=8)
-    ax.bar([], [], color=VIOLET, label="swing too big (share)"); ax.bar([], [], color=YELLOW, label="runs late (hours)")
-    ax.axvline(1.5, color=GRID, lw=1); ax.legend(fontsize=8); ax.grid(axis="y", color=GRID, lw=0.5)
+    from matplotlib.patches import Patch
+    ax.axvline(1.5, color=GRID, lw=1)
+    ax.legend(handles=[Patch(color=VIOLET, label="daily swing too big (share)"), Patch(color=YELLOW, label="cycle runs late (hours)")], fontsize=8); ax.grid(axis="y", color=GRID, lw=0.5)
     ax.set_title("What each run's winning formula says\n(left pair: stations on the wrong clock)")
     fig.suptitle("HeatSim, Philadelphia, 5 hot days, 3 stations: the timing gap is gone after the fix; a 20 % too-large daily swing is left",
-                 x=0.01, ha="left", fontsize=12.5)
+                 x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "14_heat.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
@@ -209,12 +215,13 @@ def fig_flood():
         if k in Fa: a = Fa[k]; ax.plot(a["SL"] * 100, a["y"], "o", color=col, ms=6, mec=SURF, label=f"{lab}: " + (" + ".join(nice(t) for t in F[k]["winner"]["terms"]) or "nothing"))
     ax.axhline(0, color=INK2, lw=0.8, ls=":"); ax.set_xlabel("street grade (%)"); ax.set_ylabel("ln(FloodSim share / HEC-22 share)")
     ax.legend(fontsize=8); ax.grid(color=GRID, lw=0.5); ax.set_title("Grate on a grade: the miss tracks the grade")
-    ax = axs[2]; keys = [k for k in ("F1_before", "F1_after", "F2_before", "F2_after") if k in F]
-    ax.bar(range(len(keys)), [F[k]["sd_before"] for k in keys], 0.38, color=MUTED, label="error sd, raw")
-    ax.bar(np.arange(len(keys)) + 0.4, [F[k]["sd_after"] for k in keys], 0.38, color=AFTER, label="after winning terms")
-    ax.set_xticks(np.arange(len(keys)) + 0.2); ax.set_xticklabels([k.replace("_", "\n") for k in keys], fontsize=8)
-    ax.legend(fontsize=8); ax.set_ylabel("sd of ln error"); ax.grid(axis="y", color=GRID, lw=0.5); ax.set_title("What is left")
-    fig.suptitle("FloodSim inlets: the weir coefficient fix removes the only term on the rig", x=0.01, ha="left", fontsize=12.5)
+    ax = axs[2]; keys = [k for k in ("F1_before", "F1_after", "F2_before", "F2_after") if k in Fa]
+    rms = lambda v: float(np.sqrt(np.mean(np.asarray(v) ** 2)))
+    ax.bar(np.arange(len(keys)), [rms(Fa[k]["y"]) for k in keys], 0.38, color=MUTED, label="model error (rms of ln ratio)")
+    ax.bar(np.arange(len(keys)) + 0.4, [rms(Fa[k]["y"] - Fa[k]["mu"]) for k in keys], 0.38, color=AFTER, label="left after the winning terms")
+    ax.set_xticks(np.arange(len(keys)) + 0.2); ax.set_xticklabels(["rig\nCw 0.5", "rig\nCw 0.32", "grate\nbefore", "grate\nafter"][:len(keys)], fontsize=8)
+    ax.legend(fontsize=8); ax.set_ylabel("rms of ln error"); ax.grid(axis="y", color=GRID, lw=0.5); ax.set_title("Error, and what is left")
+    fig.suptitle("FloodSim inlets: the weir coefficient fix removes the only term on the rig", x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "15_flood.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
@@ -228,65 +235,110 @@ def fig_ground():
         ax = axs[0, col]; ax.plot(a["t"], a["net"], ".", ms=3, color=MUTED)
         ax.plot(a["t"], a["net_mu"], color=BEFORE if lab == "before" else AFTER, lw=2,
                 label="found: " + (" + ".join(nice(t) for t in n["winner"]["terms"]) or "nothing"))
-        ax.set_title(f"Faulty reference town, {lab} A11: what every cell shares"); ax.set_xlabel("year"); ax.set_ylabel("median of (series − chain fit), mm")
+        ax.set_ylim(np.nanpercentile(a["net"], 0.5) - 3, np.nanpercentile(a["net"], 99.5) + 3)
+        ax.set_title(f"Faulty reference town, {lab} A11:\nwhat every cell shares"); ax.set_xlabel("year"); ax.set_ylabel("median of (series − chain fit), mm")
         ax.legend(fontsize=8); ax.grid(color=GRID, lw=0.5)
         cells = Gj[f"sinkhole_{lab}"]["cells"]; ax = axs[1, col]
-        d = np.array([c["dist_km"] for c in cells]) * 1000; on = np.array(["onset" in c["terms"] for c in cells])
-        other = np.array([bool(c["terms"]) and "onset" not in c["terms"] for c in cells])
+        d = np.array([c["dist_km"] for c in cells]) * 1000; rc = lambda c: "onset" in c["terms"] or "acceleration" in c["terms"]
+        on = np.array([rc(c) for c in cells]); other = np.array([bool(c["terms"]) and not rc(c) for c in cells])
         ax.scatter(d[~on & ~other], np.zeros((~on & ~other).sum()), s=14, color=MUTED, label="nothing left to name")
-        ax.scatter(d[on], np.ones(on.sum()), s=14, color=BEFORE if lab == "before" else AFTER, label="onset term wins")
+        ax.scatter(d[on], np.ones(on.sum()), s=14, color=BEFORE if lab == "before" else AFTER, label="rate change still in the series (onset / acceleration)")
         ax.scatter(d[other], 2 * np.ones(other.sum()), s=14, color=YELLOW, label="another term wins")
         ax.axvline(150, color=INK2, ls=":", lw=1); ax.text(155, 2.3, "A11 bend fit applied\nwithin 150 m", fontsize=7.5, color=INK2)
-        ax.set_yticks([0, 1, 2]); ax.set_yticklabels(["none", "onset", "other"]); ax.set_ylim(-0.5, 2.9); ax.set_xlabel("distance from the house (m)")
-        ax.set_title(f"Sinkhole town, {lab} A11: what each cell's series still holds"); ax.legend(fontsize=7.5, loc="center right")
+        ax.set_yticks([0, 1, 2]); ax.set_yticklabels(["nothing", "rate change", "other"]); ax.set_ylim(-0.5, 2.9); ax.set_xlabel("distance from the house (m)"); ax.set_xlim(0, 1200)
+        ax.set_title(f"Sinkhole town, {lab} A11:\nwhat each cell's series still holds"); ax.legend(fontsize=7.5, loc="upper right")
     ax = axs[0, 2]; towns = ["quiet", "sinkhole", "regional", "bad-reference"]; x = np.arange(4)
-    ax.bar(x - 0.2, [Gj[f"{t}_before"]["rate"]["sd_before"] for t in towns], 0.38, color=BEFORE, label="before A11")
-    ax.bar(x + 0.2, [Gj[f"{t}_after"]["rate"]["sd_before"] for t in towns], 0.38, color=AFTER, label="after A11")
-    ax.set_xticks(x); ax.set_xticklabels(towns, fontsize=8); ax.set_ylabel("sd of (truth − chain rate), mm/yr"); ax.legend(fontsize=8)
+    rms = lambda v: float(np.sqrt(np.mean(np.asarray(v) ** 2)))
+    ax.bar(x - 0.2, [rms(Ga[f"{t}_before"]["r"]) for t in towns], 0.38, color=BEFORE, label="before A11")
+    ax.bar(x + 0.2, [rms(Ga[f"{t}_after"]["r"]) for t in towns], 0.38, color=AFTER, label="after A11")
+    ax.set_xticks(x); ax.set_xticklabels(towns, fontsize=8); ax.set_ylabel("rms of (truth − chain rate), mm/yr"); ax.legend(fontsize=8)
     ax.set_title("Rate error per cell, every town"); ax.grid(axis="y", color=GRID, lw=0.5)
     ax = axs[1, 2]
     hb = [Gj[f"sinkhole_{l}"]["rate"]["house_100m"] for l in ("before", "after")]
     ax.bar([0, 1], [h["chain"] for h in hb], 0.5, color=[BEFORE, AFTER]); ax.axhline(hb[0]["truth"], color=INK, lw=1.5, ls="--")
-    ax.text(1.3, hb[0]["truth"], f"truth {hb[0]['truth']:.1f}", va="center", fontsize=8.5)
+    ax.text(1.32, hb[0]["truth"] + 0.15, f"truth {hb[0]['truth']:.1f}", va="bottom", fontsize=8.5)
     ax.set_xticks([0, 1]); ax.set_xticklabels(["before A11", "after A11"]); ax.set_ylabel("rate at the house (mm/yr)"); ax.set_xlim(-0.5, 1.9)
     ax.set_title("Sinkhole town: the house's rate"); ax.grid(axis="y", color=GRID, lw=0.5)
-    fig.suptitle("Ground (InSAR) chain on four made-up towns: A11 removes the jumps and the missed onset", x=0.01, ha="left", fontsize=12.5)
+    fig.suptitle("Ground (InSAR) chain on made-up towns: A11 removes the reference jumps and fixes the house; the sinkhole bowl is wider than its 150 m patch", x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "16_ground.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
 # ------------------------------------------------------------------------------------------------ 17 scoreboard
 def fig_scoreboard():
-    rows = []
-    W, _ = load("w1"); L1, _ = load("w2"); H, _ = load("heat"); F, _ = load("flood"); Gj, _ = load("ground")
-    if W: rows += [("Wind: AIJ tunnel, LBM", W["lbm"], None), ("Wind: AIJ tunnel, RANS", W["rans"], None)]
-    if L1: rows += [("Wind: storm gusts, thunder", L1["thunderstorm"], None), ("Wind: storm gusts, ordinary", L1["ordinary"], None)]
-    if H: rows += [("Heat: Philadelphia", H["before_round"], H["after_round"])]
-    if F: rows += [("Flood: Sheffield rig", F["F1_before"], F["F1_after"]), ("Flood: grate on a grade", F["F2_before"], F.get("F2_after"))]
+    W, Wa = load("w1"); L1, La = load("w2"); H, Ha = load("heat"); F, Fa = load("flood"); Gj, Ga = load("ground")
+    rows = []   # (label, json, y, mu)
+    def add(lab, j, a, ym="y", mm="mu"):
+        if j is not None and a is not None: rows.append((lab, j, np.asarray(a[ym], float), np.asarray(a[mm], float)))
+    if W: add("Wind · AIJ tunnel · LBM", W["lbm"], Wa["lbm"]); add("Wind · AIJ tunnel · RANS", W["rans"], Wa["rans"])
+    if L1: add("Wind · storm gusts · thunder", L1["thunderstorm"], La["thunderstorm"]); add("Wind · storm gusts · ordinary", L1["ordinary"], La["ordinary"])
+    if H: add("Heat · Philadelphia · before fix", H["before_round"], Ha["before_round"]); add("Heat · Philadelphia · after fix", H["after_round"], Ha["after_round"])
+    if F:
+        add("Flood · Sheffield rig · Cw 0.5", F["F1_before"], Fa["F1_before"]); add("Flood · Sheffield rig · Cw 0.32", F["F1_after"], Fa["F1_after"])
+        add("Flood · grate on a grade", F["F2_before"], Fa["F2_before"])
     if Gj:
         for t in ("sinkhole", "bad-reference"):
-            rows += [(f"Ground: {t} town (rate)", Gj[f"{t}_before"]["rate"], Gj[f"{t}_after"]["rate"])]
-    fig, ax = plt.subplots(figsize=(13, 0.62 * len(rows) + 1.6))
-    yy = np.arange(len(rows))[::-1]
-    for y, (lab, b, a) in zip(yy, rows):
-        sb = 1 - b["sd_after"] / b["sd_before"]
-        ax.barh(y + 0.18, sb, 0.34, color=BEFORE if a else MUTED)
-        ax.text(sb + 0.01, y + 0.18, " + ".join(nice(t) for t in b["winner"]["terms"]) or "nothing", va="center", fontsize=8, color=INK2)
-        if a:
-            sa = 1 - a["sd_after"] / a["sd_before"]
-            ax.barh(y - 0.18, sa, 0.34, color=AFTER)
-            ax.text(sa + 0.01, y - 0.18, " + ".join(nice(t) for t in a["winner"]["terms"]) or "nothing left to name", va="center", fontsize=8, color=INK2)
-    ax.set_yticks(yy); ax.set_yticklabels([r[0] for r in rows], fontsize=9)
-    ax.set_xlim(0, 1.15); ax.set_xticks([0, 0.25, 0.5, 0.75, 1]); ax.set_xticklabels(["0", "25 %", "50 %", "75 %", "100 %"])
-    ax.set_xlabel("share of the error spread the winning physics terms explain")
-    ax.barh([], [], color=BEFORE, label="before today's fix"); ax.barh([], [], color=AFTER, label="after the fix"); ax.barh([], [], color=MUTED, label="no fix today")
-    ax.legend(fontsize=8, loc="lower right"); ax.grid(axis="x", color=GRID, lw=0.5)
-    ax.set_title("Every model: how much of its error the library can name, before and after today's fixes (the rest is remainder)", fontsize=11.5)
+            for l in ("before", "after"): add(f"Ground · {t} town · {l} A11", Gj[f"{t}_{l}"]["rate"], Ga[f"{t}_{l}"], "r", "mu")
+    fig, ax = plt.subplots(figsize=(13.5, 0.5 * len(rows) + 1.8)); yy = np.arange(len(rows))[::-1]
+    for y, (lab, j, yv, mu) in zip(yy, rows):
+        tot = float(np.mean(yv ** 2)); lvl = float(np.mean(yv)) ** 2 / tot
+        rem = float(np.mean((yv - mu) ** 2)) / tot; phys = max(0.0, 1 - lvl - rem)
+        rms = math.sqrt(tot)
+        ax.barh(y, lvl, 0.62, color=MUTED); ax.barh(y, phys, 0.62, left=lvl, color=AFTER); ax.barh(y, rem, 0.62, left=lvl + phys, color="#d9d8d3")
+        names = " + ".join(nice(t) for t in j["winner"]["terms"]) or "no physics term pays"
+        ax.text(1.01, y, names, va="center", fontsize=7.8, color=INK2)
+    ax.set_yticks(yy); ax.set_yticklabels([r[0] for r in rows], fontsize=8.8)
+    ax.set_xlim(0, 1); ax.set_xticks([0, 0.25, 0.5, 0.75, 1]); ax.set_xticklabels(["0", "25 %", "50 %", "75 %", "100 %"])
+    ax.set_xlabel("share of each model's squared error")
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=MUTED, label="one overall correction (a bias or factor)"), Patch(color=AFTER, label="named physics terms"),
+                       Patch(color="#d9d8d3", label="remainder (noise + what the library can't name)")], fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.09 * 12 / len(rows)), ncol=3)
+    ax.set_title("Every model's error, split three ways: a single correction, physics the library names, and what's left", fontsize=11.5)
     fig.savefig(FIG / "17_scoreboard.png", dpi=170, bbox_inches="tight"); plt.close(fig)
+
+
+# ------------------------------------------------------------------------------------------------ 18 hard environments
+def fig_env():
+    p = RES / "envtests.json"
+    if not p.exists(): return
+    A = json.loads(p.read_text())["summary"]
+    from physlib import envtests as V, engine as E
+    fig = plt.figure(figsize=(16, 6.4)); gs = fig.add_gridspec(1, 3, width_ratios=[1.0, 0.9, 1.0], wspace=0.05)
+    ax = fig.add_subplot(gs[0]); envs = list(A); yy = np.arange(len(envs))[::-1]
+    tx = fig.add_subplot(gs[1], sharey=ax); tx.axis("off"); tx.set_xlim(0, 1)
+    for y, e in zip(yy, envs):
+        v = A[e]
+        ax.barh(y, v["named"], 0.55, color=AFTER)
+        ax.plot(v["false_flag"], y, "o", color=RED, ms=7, mec=SURF, zorder=3)
+        st = v["unnamed_stand_ins"]
+        txt = (f"without its term: flagged {v['unnamed_flagged']:.0%} via {', '.join(nice(k) for k in list(st)[:2])}" if v["unnamed_flagged"] >= 0.3
+               else "without its term: silent (remainder only)")
+        tx.text(0.04, y + 0.12, f"{nice(v['term'])}", va="center", fontsize=8.8, color=INK)
+        tx.text(0.04, y - 0.25, txt, va="center", fontsize=7.4, color=INK2)
+    ax.set_yticks(yy); ax.set_yticklabels(envs, fontsize=9); ax.set_xlim(0, 1.0); ax.set_xticks([0, 0.5, 1]); ax.set_xticklabels(["0", "50 %", "100 %"])
+    ax.plot([], [], "o", color=RED, label=f"false flags on clean controls: {sum(round(A[e]['false_flag'] * 10) for e in envs)} of {10 * len(envs)}"); ax.barh([], [], color=AFTER, label="named the right term (10 runs)")
+    ax.legend(fontsize=8, loc="lower left", bbox_to_anchor=(0, -0.13), ncol=2); ax.grid(axis="x", color=GRID, lw=0.5)
+    ax.set_title("Planted error: is the right cause named?")
+    tx.set_title("the tell-tale term, and what happens if the library lacks it", fontsize=9.5)
+    # example: the farmland bias
+    rng = np.random.default_rng(3); ctx = V.heat_ctx(rng); dom, mk, term, law, sd = V.ENVS["Irrigated farmland (heat)"]
+    full = V.library("heat", ctx); y = 0.1 + rng.normal(0, sd, len(ctx["sun"])) + V.plant(full, ctx, law)
+    n = len(y); prev = np.arange(n) - 1; prev[np.arange(0, n, 24)] = -1
+    res = E.run_case(full, ctx, y, E.Grid(0.1, -20, 20), prev=prev)
+    ax = fig.add_subplot(gs[2])
+    for s_, col, lab in ((1, YELLOW, "farm station, 70 % irrigated"), (3, VIOLET, "30 % irrigated"), (0, MUTED, "city station")):
+        m = ctx["station"] == s_
+        ax.plot(np.arange(24), hour_mean(ctx["hour"][m], y[m]), color=col, lw=2, label=lab)
+        ax.plot(np.arange(24), hour_mean(ctx["hour"][m], res["_mu"][m]), color=col, lw=1.2, ls="--")
+    ax.axhline(0.1, color=INK2, lw=0.8, ls=":"); ax.set_xticks(range(0, 24, 3)); ax.set_xlabel("local hour")
+    ax.set_ylabel("station − model (K)"); ax.legend(fontsize=8, loc="lower left"); ax.grid(color=GRID, lw=0.5)
+    ax.set_title(f"The farmland tell-tale: afternoons too warm only over irrigated fields\n(dashed = found: {' + '.join(nice(t) for t in res['winner']['terms'])})", fontsize=9.5)
+    fig.suptitle("Hard places as tell-tale tests: 12 environments where a model is likely to be wrong", x=0.01, ha="left", fontsize=12.5, y=1.0)
+    fig.savefig(FIG / "18_environments.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
 if __name__ == "__main__":
     import warnings; warnings.filterwarnings("ignore")
     sys.path.insert(0, str(ROOT))
-    for f in (fig_how, fig_validation, fig_wind, fig_heat, fig_flood, fig_ground, fig_scoreboard):
+    for f in (fig_how, fig_validation, fig_wind, fig_heat, fig_flood, fig_ground, fig_scoreboard, fig_env):
         try: f(); print("ok", f.__name__)
         except FileNotFoundError as e: print("skip", f.__name__, e)

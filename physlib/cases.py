@@ -274,16 +274,16 @@ def ground():
             out[key] = {"rate": finish(res, remainder=rem, extra={"house_100m": {"truth": float(truth[near].mean()), "chain": float(vel[near].mean())}})}
             # (ii) series level: what the chain's per-cell model leaves in the data
             R = Y - fitY
-            net = np.nanmedian(R, axis=1)
-            sctx = {"t": t}
-            half = np.arange(len(t)) < len(t) // 2
+            net = np.nanmedian(R, axis=1); okn = np.isfinite(net); tn = t[okn]; net = net[okn]
+            sctx = {"t": tn}
+            half = np.arange(len(tn)) < len(tn) // 2
             sf = [("first half -> second", np.where(half)[0], np.where(~half)[0]), ("second half -> first", np.where(~half)[0], np.where(half)[0])]
             seq = lambda n: np.r_[-1, np.arange(n - 1)]
-            rn = E.run_case(T.ground_terms(sctx), sctx, net, gs, sf, name=f"ground {name} network {lab}", prev=seq(len(t)))
+            rn = E.run_case(T.ground_terms(sctx), sctx, net, gs, sf, name=f"ground {name} network {lab}", prev=seq(len(tn)))
             out[key]["network"] = finish(rn)
             rng = np.random.default_rng(0)
-            close = np.where(dist <= 0.3)[0]; close = rng.choice(close, min(60, len(close)), replace=False)
-            rest = rng.choice(np.setdiff1d(np.arange(len(idx)), close), 60, replace=False)
+            close = np.where(dist <= 0.3)[0]; close = rng.choice(close, min(40, len(close)), replace=False)
+            rest = rng.choice(np.setdiff1d(np.arange(len(idx)), close), 40, replace=False)
             cells = np.r_[close, rest]; wins = []
             for k in cells:
                 yk = R[:, k]; okk = np.isfinite(yk)
@@ -293,7 +293,7 @@ def ground():
                 wins.append({"cell": int(k), "dist_km": float(dist[k]), "terms": rk["winner"]["terms"], "alpha": rk["winner"]["alpha"],
                              "bits_saved": rk["bits_saved_per_reading"]})
             out[key]["cells"] = wins
-            arr[key] = {"t": t, "net": net, "net_mu": rn["_mu"], "x": x, "y": y, "r": r, "mu": res["_mu"], "dist": dist}
+            arr[key] = {"t": tn, "net": net, "net_mu": rn["_mu"], "x": x, "y": y, "r": r, "mu": res["_mu"], "dist": dist}
             print("G", key, "rate", out[key]["rate"]["winner"]["terms"], "| network", rn["winner"]["terms"], rn["winner"]["alpha"],
                   "| cells near with onset", sum("onset" in w["terms"] for w in wins if w["dist_km"] <= 0.15), "/", sum(w["dist_km"] <= 0.15 for w in wins))
     return out, arr

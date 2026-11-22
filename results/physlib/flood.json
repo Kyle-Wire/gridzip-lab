@@ -1,0 +1,1127 @@
+{
+ "F1_before": {
+  "name": "Sheffield rig before",
+  "n": 15,
+  "library": [
+   "weir_exponent",
+   "orifice_transition",
+   "datum",
+   "approach_froude",
+   "flow"
+  ],
+  "library_size": 5,
+  "formulas_scored": 30,
+  "winner": {
+   "terms": [],
+   "structure_bits": 6.807354922057604,
+   "param_bits": 32.0,
+   "residual_bits": 67.47955371452322,
+   "total_bits": 106.28690863658082,
+   "bits_per_reading": 7.085793909105388,
+   "n": 15,
+   "sd": 0.025390625,
+   "rho": null,
+   "coef": {
+    "level": -0.44079756271285053
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [],
+    "structure_bits": 6.807354922057604,
+    "param_bits": 32.0,
+    "residual_bits": 67.47955371452322,
+    "total_bits": 106.28690863658082,
+    "bits_per_reading": 7.085793909105388,
+    "n": 15,
+    "sd": 0.025390625,
+    "rho": null,
+    "coef": {
+     "level": -0.44079756271285053
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "flow"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 40.0,
+    "residual_bits": 58.21140736555867,
+    "total_bits": 111.63347213173148,
+    "bits_per_reading": 7.442231475448765,
+    "n": 15,
+    "sd": 0.017578125,
+    "rho": null,
+    "coef": {
+     "level": -0.44079756271285064,
+     "flow": 0.12238339222485776
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 40.0,
+    "residual_bits": 59.18500383798091,
+    "total_bits": 112.60706860415371,
+    "bits_per_reading": 7.507137906943581,
+    "n": 15,
+    "sd": 0.017578125,
+    "rho": null,
+    "coef": {
+     "level": -0.44079756271285064,
+     "weir_exponent": 0.19484014281393688
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "approach_froude"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 38.0,
+    "residual_bits": 61.201863299007854,
+    "total_bits": 112.62392806518066,
+    "bits_per_reading": 7.508261871012044,
+    "n": 15,
+    "sd": 0.01953125,
+    "rho": null,
+    "coef": {
+     "level": -0.44079756271285087,
+     "approach_froude": 0.5765935563318737
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent",
+     "orifice_transition"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 48.0,
+    "residual_bits": 54.229064557845646,
+    "total_bits": 121.26583916813367,
+    "bits_per_reading": 8.084389277875578,
+    "n": 15,
+    "sd": 0.0146484375,
+    "rho": null,
+    "coef": {
+     "level": -0.4290369165040983,
+     "weir_exponent": 0.3382824584992627
+    },
+    "alpha": {
+     "orifice_transition": 0.010260179301330304
+    }
+   },
+   {
+    "terms": [
+     "weir_exponent",
+     "datum"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 54.0,
+    "residual_bits": 55.563963249120135,
+    "total_bits": 128.60073785940816,
+    "bits_per_reading": 8.573382523960543,
+    "n": 15,
+    "sd": 0.015625,
+    "rho": null,
+    "coef": {
+     "level": 0.3113833255617072,
+     "weir_exponent": -0.8183887187334916
+    },
+    "alpha": {
+     "datum": -0.00371939998142853
+    }
+   },
+   {
+    "terms": [
+     "orifice_transition",
+     "flow"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 54.0,
+    "residual_bits": 55.85571983010638,
+    "total_bits": 128.8924944403944,
+    "bits_per_reading": 8.59283296269296,
+    "n": 15,
+    "sd": 0.015625,
+    "rho": null,
+    "coef": {
+     "level": -0.4290247157502714,
+     "flow": 0.21204838555339017
+    },
+    "alpha": {
+     "orifice_transition": 0.010259709879862034
+    }
+   },
+   {
+    "terms": [
+     "datum"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 36.0,
+    "residual_bits": 83.27646620535087,
+    "total_bits": 132.6985309715237,
+    "bits_per_reading": 8.846568731434912,
+    "n": 15,
+    "sd": 0.05859375,
+    "rho": null,
+    "coef": {
+     "level": -0.2569006284061298
+    },
+    "alpha": {
+     "datum": -0.001091453457749168
+    }
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 6.807354922057604,
+    "param_bits": 32.0,
+    "residual_bits": 67.47955371452322,
+    "total_bits": 106.28690863658082,
+    "bits_per_reading": 7.085793909105388,
+    "n": 15,
+    "sd": 0.025390625,
+    "rho": null,
+    "coef": {
+     "level": -0.44079756271285053
+    },
+    "alpha": {},
+    "added": "one correction"
+   }
+  ],
+  "holdout": [],
+  "transfers": null,
+  "coder_check": {
+   "ideal_residual_bits": 67.47955371452322,
+   "coded_bits": 72,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "weir_exponent": {
+    "formula": "\u03b2 \u00b7 ln(h / h\u0304)",
+    "meaning": "flow follows a different power of depth than h^1.5",
+    "physics": true,
+    "unit": ""
+   },
+   "orifice_transition": {
+    "formula": "\u2212ln(h / h_t) for h > h_t",
+    "meaning": "the inlet drowns: weir becomes orifice (Q \u221d h^0.5) above h_t",
+    "physics": true,
+    "unit": "m"
+   },
+   "datum": {
+    "formula": "1.5 \u00b7 ln((h + \u03b4) / h)",
+    "meaning": "the depth is measured from the wrong level by \u03b4",
+    "physics": true,
+    "unit": "m"
+   },
+   "approach_froude": {
+    "formula": "b \u00b7 Fr",
+    "meaning": "approach velocity carries water past (or into) the inlet",
+    "physics": true,
+    "unit": ""
+   },
+   "flow": {
+    "formula": "b \u00b7 ln Q",
+    "meaning": "the miss scales with flow (a rating-curve shape error)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.025390625,
+  "sd_after": 0.025390625,
+  "cw": 0.5,
+  "median_ratio": 0.6416066130088097
+ },
+ "F1_after": {
+  "name": "Sheffield rig after",
+  "n": 15,
+  "library": [
+   "weir_exponent",
+   "orifice_transition",
+   "datum",
+   "approach_froude",
+   "flow"
+  ],
+  "library_size": 5,
+  "formulas_scored": 30,
+  "winner": {
+   "terms": [],
+   "structure_bits": 6.807354922057604,
+   "param_bits": 20.0,
+   "residual_bits": 66.32669017226777,
+   "total_bits": 93.13404509432537,
+   "bits_per_reading": 6.208936339621691,
+   "n": 15,
+   "sd": 0.02734375,
+   "rho": null,
+   "coef": {
+    "level": 0.005489539915568966
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [],
+    "structure_bits": 6.807354922057604,
+    "param_bits": 20.0,
+    "residual_bits": 66.32669017226777,
+    "total_bits": 93.13404509432537,
+    "bits_per_reading": 6.208936339621691,
+    "n": 15,
+    "sd": 0.02734375,
+    "rho": null,
+    "coef": {
+     "level": 0.005489539915568966
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "flow"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 28.0,
+    "residual_bits": 57.31938211927897,
+    "total_bits": 98.74144688545178,
+    "bits_per_reading": 6.582763125696785,
+    "n": 15,
+    "sd": 0.017578125,
+    "rho": null,
+    "coef": {
+     "level": 0.005489539915568967,
+     "flow": 0.12238339222485772
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "approach_froude"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 26.0,
+    "residual_bits": 60.25355831283657,
+    "total_bits": 99.67562307900937,
+    "bits_per_reading": 6.6450415386006245,
+    "n": 15,
+    "sd": 0.01953125,
+    "rho": null,
+    "coef": {
+     "level": 0.005489539915568797,
+     "approach_froude": 0.5765935563318738
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 28.0,
+    "residual_bits": 58.76901334567997,
+    "total_bits": 100.19107811185279,
+    "bits_per_reading": 6.679405207456853,
+    "n": 15,
+    "sd": 0.01953125,
+    "rho": null,
+    "coef": {
+     "level": 0.005489539915568967,
+     "weir_exponent": 0.19484014281393675
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent",
+     "orifice_transition"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 36.0,
+    "residual_bits": 56.68646776727414,
+    "total_bits": 111.72324237756216,
+    "bits_per_reading": 7.4482161585041435,
+    "n": 15,
+    "sd": 0.017578125,
+    "rho": null,
+    "coef": {
+     "level": 0.017250186124321346,
+     "weir_exponent": 0.33828245849926275
+    },
+    "alpha": {
+     "orifice_transition": 0.010260179301330304
+    }
+   },
+   {
+    "terms": [
+     "datum"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 32.0,
+    "residual_bits": 66.4728742504233,
+    "total_bits": 111.89493901659611,
+    "bits_per_reading": 7.459662601106407,
+    "n": 15,
+    "sd": 0.02734375,
+    "rho": null,
+    "coef": {
+     "level": 0.1893864742222897
+    },
+    "alpha": {
+     "datum": -0.001091453457749168
+    }
+   },
+   {
+    "terms": [
+     "orifice_transition",
+     "flow"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 48.0,
+    "residual_bits": 53.984991365571545,
+    "total_bits": 121.02176597585957,
+    "bits_per_reading": 8.068117731723971,
+    "n": 15,
+    "sd": 0.0146484375,
+    "rho": null,
+    "coef": {
+     "level": 0.017262386878148184,
+     "flow": 0.21204838555339017
+    },
+    "alpha": {
+     "orifice_transition": 0.010259709879862034
+    }
+   },
+   {
+    "terms": [
+     "orifice_transition",
+     "datum"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 40.0,
+    "residual_bits": 67.87880148755895,
+    "total_bits": 126.91557609784697,
+    "bits_per_reading": 8.461038406523132,
+    "n": 15,
+    "sd": 0.029296875,
+    "rho": null,
+    "coef": {
+     "level": 0.2548216880717843
+    },
+    "alpha": {
+     "orifice_transition": 0.010515266119771596,
+     "datum": -0.0014164695670551251
+    }
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 6.807354922057604,
+    "param_bits": 20.0,
+    "residual_bits": 66.32669017226777,
+    "total_bits": 93.13404509432537,
+    "bits_per_reading": 6.208936339621691,
+    "n": 15,
+    "sd": 0.02734375,
+    "rho": null,
+    "coef": {
+     "level": 0.005489539915568966
+    },
+    "alpha": {},
+    "added": "one correction"
+   }
+  ],
+  "holdout": [],
+  "transfers": null,
+  "coder_check": {
+   "ideal_residual_bits": 66.32669017226777,
+   "coded_bits": 72,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "weir_exponent": {
+    "formula": "\u03b2 \u00b7 ln(h / h\u0304)",
+    "meaning": "flow follows a different power of depth than h^1.5",
+    "physics": true,
+    "unit": ""
+   },
+   "orifice_transition": {
+    "formula": "\u2212ln(h / h_t) for h > h_t",
+    "meaning": "the inlet drowns: weir becomes orifice (Q \u221d h^0.5) above h_t",
+    "physics": true,
+    "unit": "m"
+   },
+   "datum": {
+    "formula": "1.5 \u00b7 ln((h + \u03b4) / h)",
+    "meaning": "the depth is measured from the wrong level by \u03b4",
+    "physics": true,
+    "unit": "m"
+   },
+   "approach_froude": {
+    "formula": "b \u00b7 Fr",
+    "meaning": "approach velocity carries water past (or into) the inlet",
+    "physics": true,
+    "unit": ""
+   },
+   "flow": {
+    "formula": "b \u00b7 ln Q",
+    "meaning": "the miss scales with flow (a rating-curve shape error)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.02734375,
+  "sd_after": 0.02734375,
+  "cw": 0.32,
+  "median_ratio": 1.0025103328262652
+ },
+ "F2_before": {
+  "name": "Grate on a grade before",
+  "n": 9,
+  "library": [
+   "weir_exponent",
+   "orifice_transition",
+   "datum",
+   "velocity_head",
+   "grade",
+   "manning_slope",
+   "splash_over",
+   "frontal_share",
+   "spread",
+   "flow"
+  ],
+  "library_size": 10,
+  "formulas_scored": 81,
+  "winner": {
+   "terms": [
+    "grade"
+   ],
+   "structure_bits": 15.754887502163468,
+   "param_bits": 46.0,
+   "residual_bits": 26.49350056437582,
+   "total_bits": 88.24838806653929,
+   "bits_per_reading": 9.805376451837699,
+   "n": 9,
+   "sd": 0.009765625,
+   "rho": null,
+   "coef": {
+    "level": -0.8954830692394943,
+    "grade": -8.067027812463987
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "grade"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 46.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 88.24838806653929,
+    "bits_per_reading": 9.805376451837699,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.067027812463987
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 20.0,
+    "residual_bits": 62.23525861933726,
+    "total_bits": 89.82022112005842,
+    "bits_per_reading": 9.98002456889538,
+    "n": 9,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "velocity_head"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 52.0,
+    "residual_bits": 29.137442794771438,
+    "total_bits": 96.8923302969349,
+    "bits_per_reading": 10.76581447743721,
+    "n": 9,
+    "sd": 0.01171875,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "velocity_head": -0.31755922938060827
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "frontal_share"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -7.867660583979815,
+     "frontal_share": -0.05460732237218049
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent",
+     "grade"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "weir_exponent": 0.016215643273607003,
+     "grade": -7.994025895930238
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "flow"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.06702781246399,
+     "flow": 0.008610103629801167
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "spread"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -7.893263780662324,
+     "spread": 0.012834238485884298
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "manning_slope"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 42.0,
+    "residual_bits": 40.75474212375596,
+    "total_bits": 98.50962962591943,
+    "bits_per_reading": 10.945514402879937,
+    "n": 9,
+    "sd": 0.02734375,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "manning_slope": -0.17555391335020468
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 20.0,
+    "residual_bits": 62.23525861933726,
+    "total_bits": 89.82022112005842,
+    "bits_per_reading": 9.98002456889538,
+    "n": 9,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "grade"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 46.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 88.24838806653929,
+    "bits_per_reading": 9.805376451837699,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.067027812463987
+    },
+    "alpha": {},
+    "added": "grade"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 50 mm/h",
+    "formula_bpr": 4.634815401838695,
+    "one_correction_bpr": 6.393287786478152,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 100 mm/h",
+    "formula_bpr": 3.526004128549433,
+    "one_correction_bpr": 6.462843801134281,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 200 mm/h",
+    "formula_bpr": 3.0214113011065558,
+    "one_correction_bpr": 6.319834846879957,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 26.49350056437582,
+   "coded_bits": 32,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "weir_exponent": {
+    "formula": "\u03b2 \u00b7 ln(h / h\u0304)",
+    "meaning": "flow follows a different power of depth than h^1.5",
+    "physics": true,
+    "unit": ""
+   },
+   "orifice_transition": {
+    "formula": "\u2212ln(h / h_t) for h > h_t",
+    "meaning": "the inlet drowns: weir becomes orifice (Q \u221d h^0.5) above h_t",
+    "physics": true,
+    "unit": "m"
+   },
+   "datum": {
+    "formula": "1.5 \u00b7 ln((h + \u03b4) / h)",
+    "meaning": "the depth is measured from the wrong level by \u03b4",
+    "physics": true,
+    "unit": "m"
+   },
+   "velocity_head": {
+    "formula": "b \u00b7 ln(1 + V\u00b2 / 2gh)",
+    "meaning": "the inlet sees the energy head, not only the depth",
+    "physics": true,
+    "unit": ""
+   },
+   "grade": {
+    "formula": "b \u00b7 S_L",
+    "meaning": "the miss grows with street grade (shallower, faster flow)",
+    "physics": true,
+    "unit": ""
+   },
+   "manning_slope": {
+    "formula": "b \u00b7 ln S_L",
+    "meaning": "the depth-slope exponent of Manning's law is off",
+    "physics": true,
+    "unit": ""
+   },
+   "splash_over": {
+    "formula": "b \u00b7 max(0, V \u2212 V0)",
+    "meaning": "above a splash-over speed V0 water jumps the grate",
+    "physics": true,
+    "unit": "m/s"
+   },
+   "frontal_share": {
+    "formula": "b \u00b7 E_o",
+    "meaning": "the frontal share of gutter flow (HEC-22) drives capture",
+    "physics": true,
+    "unit": ""
+   },
+   "spread": {
+    "formula": "b \u00b7 T",
+    "meaning": "flow spread across the street",
+    "physics": true,
+    "unit": ""
+   },
+   "flow": {
+    "formula": "b \u00b7 ln Q",
+    "meaning": "the miss scales with flow (a rating-curve shape error)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.17464811705768213,
+  "sd_before": 0.140625,
+  "sd_after": 0.009765625,
+  "run": "2026-11-17T22-43-34-587Z",
+  "median_share_ratio": 0.4200998823103218
+ },
+ "F2_after": {
+  "name": "Grate on a grade after",
+  "n": 9,
+  "library": [
+   "weir_exponent",
+   "orifice_transition",
+   "datum",
+   "velocity_head",
+   "grade",
+   "manning_slope",
+   "splash_over",
+   "frontal_share",
+   "spread",
+   "flow"
+  ],
+  "library_size": 10,
+  "formulas_scored": 81,
+  "winner": {
+   "terms": [
+    "grade"
+   ],
+   "structure_bits": 15.754887502163468,
+   "param_bits": 46.0,
+   "residual_bits": 26.49350056437582,
+   "total_bits": 88.24838806653929,
+   "bits_per_reading": 9.805376451837699,
+   "n": 9,
+   "sd": 0.009765625,
+   "rho": null,
+   "coef": {
+    "level": -0.8954830692394943,
+    "grade": -8.067027812463987
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "grade"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 46.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 88.24838806653929,
+    "bits_per_reading": 9.805376451837699,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.067027812463987
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 20.0,
+    "residual_bits": 62.23525861933726,
+    "total_bits": 89.82022112005842,
+    "bits_per_reading": 9.98002456889538,
+    "n": 9,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "velocity_head"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 52.0,
+    "residual_bits": 29.137442794771438,
+    "total_bits": 96.8923302969349,
+    "bits_per_reading": 10.76581447743721,
+    "n": 9,
+    "sd": 0.01171875,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "velocity_head": -0.31755922938060827
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "frontal_share"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -7.867660583979825,
+     "frontal_share": -0.05460732237217963
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent",
+     "grade"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "weir_exponent": 0.01621564327360721,
+     "grade": -7.994025895930236
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "flow"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.06702781246399,
+     "flow": 0.008610103629801167
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade",
+     "spread"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 48.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 97.4183130679816,
+    "bits_per_reading": 10.824257007553511,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -7.893263780662339,
+     "spread": 0.012834238485884702
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "manning_slope"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 42.0,
+    "residual_bits": 40.75474212375596,
+    "total_bits": 98.50962962591943,
+    "bits_per_reading": 10.945514402879937,
+    "n": 9,
+    "sd": 0.02734375,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "manning_slope": -0.17555391335020476
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 20.0,
+    "residual_bits": 62.23525861933726,
+    "total_bits": 89.82022112005842,
+    "bits_per_reading": 9.98002456889538,
+    "n": 9,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "grade"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 46.0,
+    "residual_bits": 26.49350056437582,
+    "total_bits": 88.24838806653929,
+    "bits_per_reading": 9.805376451837699,
+    "n": 9,
+    "sd": 0.009765625,
+    "rho": null,
+    "coef": {
+     "level": -0.8954830692394943,
+     "grade": -8.067027812463987
+    },
+    "alpha": {},
+    "added": "grade"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 50 mm/h",
+    "formula_bpr": 4.634815401838691,
+    "one_correction_bpr": 6.393287786478152,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 100 mm/h",
+    "formula_bpr": 3.526004128549436,
+    "one_correction_bpr": 6.462843801134281,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 200 mm/h",
+    "formula_bpr": 3.0214113011065558,
+    "one_correction_bpr": 6.319834846879957,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 26.49350056437582,
+   "coded_bits": 32,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "weir_exponent": {
+    "formula": "\u03b2 \u00b7 ln(h / h\u0304)",
+    "meaning": "flow follows a different power of depth than h^1.5",
+    "physics": true,
+    "unit": ""
+   },
+   "orifice_transition": {
+    "formula": "\u2212ln(h / h_t) for h > h_t",
+    "meaning": "the inlet drowns: weir becomes orifice (Q \u221d h^0.5) above h_t",
+    "physics": true,
+    "unit": "m"
+   },
+   "datum": {
+    "formula": "1.5 \u00b7 ln((h + \u03b4) / h)",
+    "meaning": "the depth is measured from the wrong level by \u03b4",
+    "physics": true,
+    "unit": "m"
+   },
+   "velocity_head": {
+    "formula": "b \u00b7 ln(1 + V\u00b2 / 2gh)",
+    "meaning": "the inlet sees the energy head, not only the depth",
+    "physics": true,
+    "unit": ""
+   },
+   "grade": {
+    "formula": "b \u00b7 S_L",
+    "meaning": "the miss grows with street grade (shallower, faster flow)",
+    "physics": true,
+    "unit": ""
+   },
+   "manning_slope": {
+    "formula": "b \u00b7 ln S_L",
+    "meaning": "the depth-slope exponent of Manning's law is off",
+    "physics": true,
+    "unit": ""
+   },
+   "splash_over": {
+    "formula": "b \u00b7 max(0, V \u2212 V0)",
+    "meaning": "above a splash-over speed V0 water jumps the grate",
+    "physics": true,
+    "unit": "m/s"
+   },
+   "frontal_share": {
+    "formula": "b \u00b7 E_o",
+    "meaning": "the frontal share of gutter flow (HEC-22) drives capture",
+    "physics": true,
+    "unit": ""
+   },
+   "spread": {
+    "formula": "b \u00b7 T",
+    "meaning": "flow spread across the street",
+    "physics": true,
+    "unit": ""
+   },
+   "flow": {
+    "formula": "b \u00b7 ln Q",
+    "meaning": "the miss scales with flow (a rating-curve shape error)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.17464811705768213,
+  "sd_before": 0.140625,
+  "sd_after": 0.009765625,
+  "run": "2026-11-22T21-37-38-536Z",
+  "median_share_ratio": 0.42009988231032175
+ },
+ "F2_note": "the PV-SS13 rerun at FloodSim 8f525e9 (capture 'hec22' default) gave the same shares as the 17 Nov run to 3 decimals, so 'after' does not yet carry the grate fix; reported to the fixes thread"
+}
