@@ -5,7 +5,7 @@ Inputs (paths default to sibling checkouts; override with env vars):
   results/physics/*.json, aij_c_arrays.npz  the PROTOCOL 1-3 data (WindSim AIJ C points, Layer 1 pairs, flood before)
   HEAT_NC   folder with fixes2_phl_noanchor_{stamp,hour_ending}_*.nc (HeatSim M1, Kyle's PC)
   HEAT_ISD  folder with the three stations' 2025 ISD csvs (AWS noaa-global-hourly-pds)
-  FLOOD_AFTER  FloodSim results dir of the run at 8f525e9 (PV-SS10, PV-SS13)
+  FLOOD_AFTER  FloodSim results dir for PV-SS13 after (FIXES-3, 6f9122f); FLOOD_RIG  results dir for PV-SS10 at Cw 0.32 (42b3d0c)
   CHI       climate-home-inspection checkout with A11 (main)
 Writes results/physlib/<case>.json; arrays for figures in results/physlib/<case>_arrays.npz.
 """
@@ -204,7 +204,8 @@ def flood():
     F1 = json.loads((PHYS / "flood.json").read_text())["F1_sheffield"]["data"]
     h = np.array(F1["h_mm"]) / 1000; meas = np.array(F1["measured_ls"]); Q1 = np.array(F1["Q1_ls"]) / 1000
     after_dir = Path(os.environ.get("FLOOD_AFTER", sorted((FS / "results").iterdir())[-1]))
-    rows = [r for r in json.loads((after_dir / "PV-SS10.json").read_text())["rows"] if r["quantity"].startswith("exchange")]
+    rig_dir = Path(os.environ.get("FLOOD_RIG", after_dir))  # the Cw 0.32 run; FIXES-3 kept Cw 0.5, which is 'before' on the rig
+    rows = [r for r in json.loads((rig_dir / "PV-SS10.json").read_text())["rows"] if r["quantity"].startswith("exchange")]
     sim_after = np.array([r["sim"] for r in rows]); ref_after = np.array([r["ref"] for r in rows])
     assert np.allclose(ref_after, meas, atol=1e-3), "PV-SS10 tests do not line up"
     ctx = {"h": h, "Fr": (Q1 / h) / np.sqrt(9.81 * h), "Q": Q1}
@@ -225,8 +226,9 @@ def flood():
         out[f"F2_{lab}"] = finish(res, extra={"run": path.parent.name, "median_share_ratio": float(np.exp(np.median(r)))})
         arr[f"F2_{lab}"] = arrays(res, SL=D["SL"], V=D["V"], rain=D["rain"])
         print("F2", lab, out[f"F2_{lab}"]["winner"]["terms"], out[f"F2_{lab}"]["winner"]["coef"], round(out[f"F2_{lab}"]["bits_saved_per_reading"], 3))
-    out["F2_note"] = ("'after' = PV-SS13 raw files rerun by the fixes thread at FloodSim 42b3d0c (results 2026-11-22T21-37-17-739Z, "
-                      "grate capture fix + Cw 0.32); pass FLOOD_AFTER=<results dir>")
+    out["F2_note"] = ("F2 'after' = FIXES-3 at FloodSim 6f9122f (grate capture on, Cw 0.5, results 2026-11-22T23-09-22-725Z; "
+                      "shares match the 42b3d0c run to 4 decimals). F1 'after' = Cw 0.32 (42b3d0c, FLOOD_RIG); FIXES-3 kept Cw 0.5, "
+                      "so the shipped default on the rig is F1 'before' (x0.64)")
     return out, arr
 
 

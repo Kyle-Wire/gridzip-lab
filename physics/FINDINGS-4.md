@@ -56,13 +56,14 @@ pending: WindSim F5 (station z0 from its own gusts) has code but no result files
   the daytime mixed layer.
 
 **Flood, FloodSim inlets.** ![flood](figures/library/15_flood.png)
-- Sheffield rig, Cw 0.5: one factor (×0.64), no physics term. Cw 0.32 (8f525e9): median ratio ×1.00 and **nothing
-  pays at all**. Calibration (0.32 was fitted to these tests), so it checks the fix landed, nothing more.
+- Sheffield rig, Cw 0.5: one factor (×0.64), no physics term. Cw 0.32 (42b3d0c): median ratio ×1.00 and **nothing
+  pays at all**. Calibration (0.32 was fitted to these tests), so it checks the fix landed, nothing more. FIXES-3
+  (FloodSim 6f9122f) kept Cw 0.5 as the default, so the shipped model still reads ×0.64 low on this rig.
 - Grate on a grade: before, street grade cuts the error spread from 0.14 to 0.01 (log units): the model's capture
-  misses track grade. **After** (PV-SS13 rerun by the fixes thread at FloodSim 42b3d0c, results
-  2026-11-22T21-37-17-739Z): **the grade term no longer pays; nothing does** (one level, −0.10). The grate fix removed
-  the error that tracked grade. Those defaults (with Cw 0.32) failed the fixes thread's own rule on SS3-x2, so it is
-  retesting capture alone with Cw 0.5; that run is rescored here when it lands.
+  misses track grade. **After** (FIXES-3, FloodSim 6f9122f, grate capture on with Cw 0.5, results
+  2026-11-22T23-09-22-725Z): **the grade term no longer pays; nothing does.** What is left is one level: shares about
+  10 % below HEC-22 everywhere (0.60-0.83 against 0.69-0.91), within each row's pass limit. The 42b3d0c run (Cw 0.32)
+  gives the same shares to 4 decimals, so Cw does not touch the grate.
 
 **Ground chain, synthetic towns, before and after CHI A11.** ![ground](figures/library/16_ground.png)
 - Faulty reference: before, what every cell shares is a reference jump (−39.5 mm in 2020.3) plus a ramp; the rate

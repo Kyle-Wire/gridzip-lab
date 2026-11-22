@@ -821,7 +821,7 @@
    "flow"
   ],
   "library_size": 10,
-  "formulas_scored": 89,
+  "formulas_scored": 86,
   "winner": {
    "terms": [],
    "structure_bits": 7.584962500721156,
@@ -833,7 +833,7 @@
    "sd": 0.021484375,
    "rho": null,
    "coef": {
-    "level": -0.09741644897683611
+    "level": -0.09740758288624912
    },
    "alpha": {}
   },
@@ -849,7 +849,7 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611
+     "level": -0.09740758288624912
     },
     "alpha": {}
    },
@@ -866,8 +866,8 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611,
-     "spread": -0.032590010992415694
+     "level": -0.09740758288624912,
+     "spread": -0.032641703059161975
     },
     "alpha": {}
    },
@@ -884,26 +884,8 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611,
-     "flow": -0.02071935706938178
-    },
-    "alpha": {}
-   },
-   {
-    "terms": [
-     "frontal_share"
-    ],
-    "structure_bits": 15.754887502163468,
-    "param_bits": 32.0,
-    "residual_bits": 36.662076423750506,
-    "total_bits": 84.41696392591398,
-    "bits_per_reading": 9.379662658434887,
-    "n": 9,
-    "sd": 0.021484375,
-    "rho": null,
-    "coef": {
-     "level": -0.09741644897683611,
-     "frontal_share": 0.11036705302113482
+     "level": -0.09740758288624912,
+     "flow": -0.020738661476424558
     },
     "alpha": {}
    },
@@ -920,8 +902,26 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611,
-     "weir_exponent": -0.006779547253430448
+     "level": -0.09740758288624912,
+     "weir_exponent": -0.011878836500570675
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "frontal_share"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
+    "n": 9,
+    "sd": 0.021484375,
+    "rho": null,
+    "coef": {
+     "level": -0.09740758288624912,
+     "frontal_share": 0.11059189887550226
     },
     "alpha": {}
    },
@@ -938,8 +938,8 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683613,
-     "velocity_head": 0.005268922812381155
+     "level": -0.09740758288624912,
+     "velocity_head": 0.01004383884057371
     },
     "alpha": {}
    },
@@ -956,8 +956,8 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611,
-     "manning_slope": 0.0041707562310877525
+     "level": -0.09740758288624912,
+     "manning_slope": 0.004229317781808023
     },
     "alpha": {}
    },
@@ -974,8 +974,8 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611,
-     "grade": 0.05244730402922988
+     "level": -0.09740758288624912,
+     "grade": 0.0555543350737325
     },
     "alpha": {}
    }
@@ -992,7 +992,7 @@
     "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.09741644897683611
+     "level": -0.09740758288624912
     },
     "alpha": {},
     "added": "one correction"
@@ -1071,8 +1071,8 @@
   "bits_saved_per_reading": 0.0,
   "sd_before": 0.021484375,
   "sd_after": 0.021484375,
-  "run": "2026-11-22T21-37-17-739Z",
-  "median_share_ratio": 0.9060382461183467
+  "run": "2026-11-22T23-09-22-725Z",
+  "median_share_ratio": 0.9062363256076917
  },
- "F2_note": "the PV-SS13 rerun at FloodSim 8f525e9 (capture 'hec22' default) gave the same shares as the 17 Nov run to 3 decimals, so 'after' does not yet carry the grate fix; reported to the fixes thread"
+ "F2_note": "F2 'after' = FIXES-3 at FloodSim 6f9122f (grate capture on, Cw 0.5, results 2026-11-22T23-09-22-725Z; shares match the 42b3d0c run to 4 decimals). F1 'after' = Cw 0.32 (42b3d0c, FLOOD_RIG); FIXES-3 kept Cw 0.5, so the shipped default on the rig is F1 'before' (x0.64)"
 }

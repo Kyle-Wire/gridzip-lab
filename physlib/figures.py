@@ -219,9 +219,9 @@ def fig_flood():
     rms = lambda v: float(np.sqrt(np.mean(np.asarray(v) ** 2)))
     ax.bar(np.arange(len(keys)), [rms(Fa[k]["y"]) for k in keys], 0.38, color=MUTED, label="model error (rms of ln ratio)")
     ax.bar(np.arange(len(keys)) + 0.4, [rms(Fa[k]["y"] - Fa[k]["mu"]) for k in keys], 0.38, color=AFTER, label="left after the winning terms")
-    ax.set_xticks(np.arange(len(keys)) + 0.2); ax.set_xticklabels(["rig\nCw 0.5", "rig\nCw 0.32", "grate\nbefore", "grate\nafter"][:len(keys)], fontsize=8)
+    ax.set_xticks(np.arange(len(keys)) + 0.2); ax.set_xticklabels(["rig Cw 0.5\n(shipped)", "rig\nCw 0.32", "grate\nbefore", "grate\nafter"][:len(keys)], fontsize=8)
     ax.legend(fontsize=8); ax.set_ylabel("rms of ln error"); ax.grid(axis="y", color=GRID, lw=0.5); ax.set_title("Error, and what is left")
-    fig.suptitle("FloodSim inlets: the weir coefficient fix removes the only term on the rig", x=0.01, ha="left", fontsize=12.5, y=1.03)
+    fig.suptitle("FloodSim inlets: the shipped grate fix removes the grade term; the rig gap (×0.64) stays at the shipped Cw 0.5", x=0.01, ha="left", fontsize=12.5, y=1.03)
     fig.savefig(FIG / "15_flood.png", dpi=170, bbox_inches="tight"); plt.close(fig)
 
 
@@ -273,8 +273,8 @@ def fig_scoreboard():
     if L1: add("Wind · storm gusts · thunder", L1["thunderstorm"], La["thunderstorm"]); add("Wind · storm gusts · ordinary", L1["ordinary"], La["ordinary"])
     if H: add("Heat · Philadelphia · before fix", H["before_round"], Ha["before_round"]); add("Heat · Philadelphia · after fix", H["after_round"], Ha["after_round"])
     if F:
-        add("Flood · Sheffield rig · Cw 0.5", F["F1_before"], Fa["F1_before"]); add("Flood · Sheffield rig · Cw 0.32", F["F1_after"], Fa["F1_after"])
-        add("Flood · grate on a grade · before fix", F["F2_before"], Fa["F2_before"]); add("Flood · grate on a grade · after fix", F["F2_after"], Fa["F2_after"])
+        add("Flood · Sheffield rig · Cw 0.5 (shipped)", F["F1_before"], Fa["F1_before"]); add("Flood · Sheffield rig · Cw 0.32 (not shipped)", F["F1_after"], Fa["F1_after"])
+        add("Flood · grate on a grade · before fix", F["F2_before"], Fa["F2_before"]); add("Flood · grate on a grade · after fix (shipped)", F["F2_after"], Fa["F2_after"])
     if Gj:
         for t in ("sinkhole", "bad-reference"):
             for l in ("before", "after"): add(f"Ground · {t} town · {l} A11", Gj[f"{t}_{l}"]["rate"], Ga[f"{t}_{l}"], "r", "mu")
