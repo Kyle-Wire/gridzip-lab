@@ -35,6 +35,12 @@ stations feed ERA5, so the comparison is not independent.
   candidates: too little heat capacity or storage in the ground and grass, or a daytime mixed layer that is too
   shallow. Before either, rule out a timing convention. ERA5 accumulated fields are stamped at the end of their
   hour, and a one-hour slip would produce exactly a late, oversized cycle.
+- **Timing check (post hoc, HeatSim `a5fd110`):** the core run treats ERA5 sunlight as if it were the value at
+  each hour stamp. Between stamps it interpolates linearly (`simulate.py`, the substep loop over `V[i]`, `V[i+1]`).
+  But the stamp holds the mean over the hour *ending* there, and HeatSim's own `street.py` says so and corrects
+  for it with the mid-hour sun (line 506). The core run therefore gets its sunlight about 30 minutes late. That
+  accounts for some of the late timing but not for the 25 % excess in range. Test it in HeatSim's own protocol by
+  shifting S, Sdir and Sdif back by half an hour and rerunning these five days with the station correction off.
 
 ## Flood: the inlet law has the right shape and the wrong size; a grate on a grade misses with the grade
 ![flood](figures/07_flood_exchange.png)
