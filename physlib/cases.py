@@ -225,8 +225,8 @@ def flood():
         out[f"F2_{lab}"] = finish(res, extra={"run": path.parent.name, "median_share_ratio": float(np.exp(np.median(r)))})
         arr[f"F2_{lab}"] = arrays(res, SL=D["SL"], V=D["V"], rain=D["rain"])
         print("F2", lab, out[f"F2_{lab}"]["winner"]["terms"], out[f"F2_{lab}"]["winner"]["coef"], round(out[f"F2_{lab}"]["bits_saved_per_reading"], 3))
-    out["F2_note"] = ("the PV-SS13 rerun at FloodSim 8f525e9 (capture 'hec22' default) gave the same shares as the 17 Nov run to 3 "
-                      "decimals, so 'after' does not yet carry the grate fix; reported to the fixes thread")
+    out["F2_note"] = ("'after' = PV-SS13 raw files rerun by the fixes thread at FloodSim 42b3d0c (results 2026-11-22T21-37-17-739Z, "
+                      "grate capture fix + Cw 0.32); pass FLOOD_AFTER=<results dir>")
     return out, arr
 
 

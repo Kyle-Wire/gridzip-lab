@@ -821,56 +821,107 @@
    "flow"
   ],
   "library_size": 10,
-  "formulas_scored": 81,
+  "formulas_scored": 89,
   "winner": {
-   "terms": [
-    "grade"
-   ],
-   "structure_bits": 15.754887502163468,
-   "param_bits": 46.0,
-   "residual_bits": 26.49350056437582,
-   "total_bits": 88.24838806653929,
-   "bits_per_reading": 9.805376451837699,
+   "terms": [],
+   "structure_bits": 7.584962500721156,
+   "param_bits": 30.0,
+   "residual_bits": 36.662076423750506,
+   "total_bits": 74.24703892447167,
+   "bits_per_reading": 8.249670991607964,
    "n": 9,
-   "sd": 0.009765625,
+   "sd": 0.021484375,
    "rho": null,
    "coef": {
-    "level": -0.8954830692394943,
-    "grade": -8.067027812463987
+    "level": -0.09741644897683611
    },
    "alpha": {}
   },
   "ranked": [
    {
-    "terms": [
-     "grade"
-    ],
-    "structure_bits": 15.754887502163468,
-    "param_bits": 46.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 88.24838806653929,
-    "bits_per_reading": 9.805376451837699,
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 30.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 74.24703892447167,
+    "bits_per_reading": 8.249670991607964,
     "n": 9,
-    "sd": 0.009765625,
+    "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.8954830692394943,
-     "grade": -8.067027812463987
+     "level": -0.09741644897683611
     },
     "alpha": {}
    },
    {
-    "terms": [],
-    "structure_bits": 7.584962500721156,
-    "param_bits": 20.0,
-    "residual_bits": 62.23525861933726,
-    "total_bits": 89.82022112005842,
-    "bits_per_reading": 9.98002456889538,
+    "terms": [
+     "spread"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
     "n": 9,
-    "sd": 0.140625,
+    "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.8954830692394943
+     "level": -0.09741644897683611,
+     "spread": -0.032590010992415694
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "flow"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
+    "n": 9,
+    "sd": 0.021484375,
+    "rho": null,
+    "coef": {
+     "level": -0.09741644897683611,
+     "flow": -0.02071935706938178
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "frontal_share"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
+    "n": 9,
+    "sd": 0.021484375,
+    "rho": null,
+    "coef": {
+     "level": -0.09741644897683611,
+     "frontal_share": 0.11036705302113482
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "weir_exponent"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
+    "n": 9,
+    "sd": 0.021484375,
+    "rho": null,
+    "coef": {
+     "level": -0.09741644897683611,
+     "weir_exponent": -0.006779547253430448
     },
     "alpha": {}
    },
@@ -879,96 +930,16 @@
      "velocity_head"
     ],
     "structure_bits": 15.754887502163468,
-    "param_bits": 52.0,
-    "residual_bits": 29.137442794771438,
-    "total_bits": 96.8923302969349,
-    "bits_per_reading": 10.76581447743721,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
     "n": 9,
-    "sd": 0.01171875,
+    "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.8954830692394943,
-     "velocity_head": -0.31755922938060827
-    },
-    "alpha": {}
-   },
-   {
-    "terms": [
-     "grade",
-     "frontal_share"
-    ],
-    "structure_bits": 22.92481250360578,
-    "param_bits": 48.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 97.4183130679816,
-    "bits_per_reading": 10.824257007553511,
-    "n": 9,
-    "sd": 0.009765625,
-    "rho": null,
-    "coef": {
-     "level": -0.8954830692394943,
-     "grade": -7.867660583979825,
-     "frontal_share": -0.05460732237217963
-    },
-    "alpha": {}
-   },
-   {
-    "terms": [
-     "weir_exponent",
-     "grade"
-    ],
-    "structure_bits": 22.92481250360578,
-    "param_bits": 48.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 97.4183130679816,
-    "bits_per_reading": 10.824257007553511,
-    "n": 9,
-    "sd": 0.009765625,
-    "rho": null,
-    "coef": {
-     "level": -0.8954830692394943,
-     "weir_exponent": 0.01621564327360721,
-     "grade": -7.994025895930236
-    },
-    "alpha": {}
-   },
-   {
-    "terms": [
-     "grade",
-     "flow"
-    ],
-    "structure_bits": 22.92481250360578,
-    "param_bits": 48.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 97.4183130679816,
-    "bits_per_reading": 10.824257007553511,
-    "n": 9,
-    "sd": 0.009765625,
-    "rho": null,
-    "coef": {
-     "level": -0.8954830692394943,
-     "grade": -8.06702781246399,
-     "flow": 0.008610103629801167
-    },
-    "alpha": {}
-   },
-   {
-    "terms": [
-     "grade",
-     "spread"
-    ],
-    "structure_bits": 22.92481250360578,
-    "param_bits": 48.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 97.4183130679816,
-    "bits_per_reading": 10.824257007553511,
-    "n": 9,
-    "sd": 0.009765625,
-    "rho": null,
-    "coef": {
-     "level": -0.8954830692394943,
-     "grade": -7.893263780662339,
-     "spread": 0.012834238485884702
+     "level": -0.09741644897683613,
+     "velocity_head": 0.005268922812381155
     },
     "alpha": {}
    },
@@ -977,16 +948,34 @@
      "manning_slope"
     ],
     "structure_bits": 15.754887502163468,
-    "param_bits": 42.0,
-    "residual_bits": 40.75474212375596,
-    "total_bits": 98.50962962591943,
-    "bits_per_reading": 10.945514402879937,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
     "n": 9,
-    "sd": 0.02734375,
+    "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.8954830692394943,
-     "manning_slope": -0.17555391335020476
+     "level": -0.09741644897683611,
+     "manning_slope": 0.0041707562310877525
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grade"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 84.41696392591398,
+    "bits_per_reading": 9.379662658434887,
+    "n": 9,
+    "sd": 0.021484375,
+    "rho": null,
+    "coef": {
+     "level": -0.09741644897683611,
+     "grade": 0.05244730402922988
     },
     "alpha": {}
    }
@@ -995,63 +984,25 @@
    {
     "terms": [],
     "structure_bits": 7.584962500721156,
-    "param_bits": 20.0,
-    "residual_bits": 62.23525861933726,
-    "total_bits": 89.82022112005842,
-    "bits_per_reading": 9.98002456889538,
+    "param_bits": 30.0,
+    "residual_bits": 36.662076423750506,
+    "total_bits": 74.24703892447167,
+    "bits_per_reading": 8.249670991607964,
     "n": 9,
-    "sd": 0.140625,
+    "sd": 0.021484375,
     "rho": null,
     "coef": {
-     "level": -0.8954830692394943
+     "level": -0.09741644897683611
     },
     "alpha": {},
     "added": "one correction"
-   },
-   {
-    "terms": [
-     "grade"
-    ],
-    "structure_bits": 15.754887502163468,
-    "param_bits": 46.0,
-    "residual_bits": 26.49350056437582,
-    "total_bits": 88.24838806653929,
-    "bits_per_reading": 9.805376451837699,
-    "n": 9,
-    "sd": 0.009765625,
-    "rho": null,
-    "coef": {
-     "level": -0.8954830692394943,
-     "grade": -8.067027812463987
-    },
-    "alpha": {},
-    "added": "grade"
    }
   ],
-  "holdout": [
-   {
-    "fold": "leave out 50 mm/h",
-    "formula_bpr": 4.634815401838691,
-    "one_correction_bpr": 6.393287786478152,
-    "transfers": true
-   },
-   {
-    "fold": "leave out 100 mm/h",
-    "formula_bpr": 3.526004128549436,
-    "one_correction_bpr": 6.462843801134281,
-    "transfers": true
-   },
-   {
-    "fold": "leave out 200 mm/h",
-    "formula_bpr": 3.0214113011065558,
-    "one_correction_bpr": 6.319834846879957,
-    "transfers": true
-   }
-  ],
-  "transfers": true,
+  "holdout": [],
+  "transfers": null,
   "coder_check": {
-   "ideal_residual_bits": 26.49350056437582,
-   "coded_bits": 32,
+   "ideal_residual_bits": 36.662076423750506,
+   "coded_bits": 40,
    "roundtrip_ok": true
   },
   "terms_meta": {
@@ -1117,11 +1068,11 @@
    }
   },
   "noise_model": "independent",
-  "bits_saved_per_reading": 0.17464811705768213,
-  "sd_before": 0.140625,
-  "sd_after": 0.009765625,
-  "run": "2026-11-22T21-37-38-536Z",
-  "median_share_ratio": 0.42009988231032175
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.021484375,
+  "sd_after": 0.021484375,
+  "run": "2026-11-22T21-37-17-739Z",
+  "median_share_ratio": 0.9060382461183467
  },
  "F2_note": "the PV-SS13 rerun at FloodSim 8f525e9 (capture 'hec22' default) gave the same shares as the 17 Nov run to 3 decimals, so 'after' does not yet carry the grate fix; reported to the fixes thread"
 }
