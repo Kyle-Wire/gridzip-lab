@@ -102,4 +102,4 @@ to a report.
 | sinkhole | house (100 m) chain −2.1 against truth −5.1 | **−5.4** against −5.1, from the after-onset rate |
 | quiet, regional | | unchanged |
 
-The sinkhole's best per-cell formula is still velocity + acceleration + near the house (5.24 → 5.19 bits per point), because the after-onset rate is applied only within 150 m of the house. Cells farther out still have the straight line.
+The sinkhole's best per-cell formula is still velocity + acceleration + near the house (5.24 → 5.19 bits per point), because this rescore (`ground_rescore.py`, not CHI) put the after-onset rate on cells within 150 m of the house only. CHI's A11 reports one after-change rate for the house patch and leaves every cell's series as the engine gave it, so the onset still seen 150-250 m out is real ground motion, not a leftover of A11. Running CHI's change test on the near ring would show how far the moving ground reaches.
