@@ -94,3 +94,12 @@ CHI's four synthetic towns, where the planted truth is known (3,000 cells each).
 
 Nothing here validates or changes a model. Each lead goes to its own repository's protocol, and none is applied
 to a report.
+
+## Ground after CHI's A11 fixes (rescore, `physics/ground_rescore.py`, CHI c78b4cc)
+| Town | Before | After |
+|---|---|---|
+| bad reference | offset +13.1 mm/yr (planted −7) | **+7.07**: the reference step check removes the jump doubling. The planted −7 is left, which only a GNSS tie can remove |
+| sinkhole | house (100 m) chain −2.1 against truth −5.1 | **−5.4** against −5.1, from the after-onset rate |
+| quiet, regional | | unchanged |
+
+The sinkhole's best per-cell formula is still velocity + acceleration + near the house (5.24 → 5.19 bits per point), because the after-onset rate is applied only within 150 m of the house. Cells farther out still have the straight line.
