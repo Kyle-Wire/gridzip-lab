@@ -108,12 +108,28 @@ STATIONS = {"72030464752": "Wings Field", "72408013739": "PHL airport", "7240859
 HDAYS = ("2025-07-08", "2025-07-25", "2025-07-28", "2025-07-29", "2025-07-30")
 
 
-def heat_rows(ncdir, isddir, variant):
+def isd_round(path):
+    """A2: as physics/heat.py isd(), but each report goes to the nearest hour (HeatSim fetch_isd's rule) instead of
+    the hour it falls in, and summary reports (SOD, SOM, PCP15, PCP60) are dropped."""
+    import pandas as pd
+    d = pd.read_csv(path, low_memory=False, usecols=["DATE", "REPORT_TYPE", "LATITUDE", "LONGITUDE", "WND", "TMP", "DEW", "GF1", "GA1"])
+    d = d[~d["REPORT_TYPE"].astype(str).str.strip().isin(["SOD", "SOM", "PCP15", "PCP60"])].reset_index(drop=True)
+    t = pd.to_datetime(d["DATE"]).dt.round("h")
+    def num(col, i, scale, bad):
+        v = d[col].astype(str).str.split(",").str[i]; v = pd.to_numeric(v, errors="coerce"); return v.where(v != bad) / scale
+    T = num("TMP", 0, 10, 9999); Td = num("DEW", 0, 10, 9999); W = num("WND", 3, 10, 9999)
+    gf = num("GF1", 0, 1, 99); ga = num("GA1", 0, 1, 99); cl = gf.where(gf <= 8).fillna(ga.where(ga <= 8)) / 8
+    f = pd.DataFrame({"t": t, "T": T, "Td": Td, "W": W, "cloud": cl}).groupby("t").mean()
+    return f, float(d["LATITUDE"].iloc[0]), float(d["LONGITUDE"].iloc[0])
+
+
+def heat_rows(ncdir, isddir, variant, rule="floor"):
     import pandas as pd, xarray as xr
     from pyproj import Transformer
     import heat as H
     to_utm = Transformer.from_crs("EPSG:4326", "EPSG:32618", always_xy=True).transform
-    obs = {s: H.isd(Path(isddir) / f"{s}.csv") for s in STATIONS}
+    rd = H.isd if rule == "floor" else isd_round
+    obs = {s: rd(Path(isddir) / f"{s}.csv") for s in STATIONS}
     rows = []
     for day in HDAYS:
         ds = xr.open_dataset(Path(ncdir) / f"fixes2_phl_noanchor_{variant}_{day}.nc"); assert int(ds.attrs["anchored"]) == 0
@@ -140,8 +156,9 @@ def heat():
     ncdir = os.environ.get("HEAT_NC", "/mnt/user-data/uploads/Climate Inspection/runs/heatsim")
     isddir = os.environ.get("HEAT_ISD", "/tmp/claude-0/isd")
     g = E.Grid(0.1, -20.0, 20.0); out, arr = {}, {}
-    for variant, lab in (("stamp", "before"), ("hour_ending", "after")):
-        df, ver = heat_rows(ncdir, isddir, variant)
+    for variant, lab, rule in (("stamp", "before", "floor"), ("hour_ending", "after", "floor"),
+                               ("stamp", "before_round", "round"), ("hour_ending", "after_round", "round")):
+        df, ver = heat_rows(ncdir, isddir, variant, rule)
         r = (df["To"] - df["Tm"]).values
         lat, lon = df["lat"].values, df["lon"].values
         sun_at = lambda tau: np.maximum(H.sun_sin(df["t"] - pd.to_timedelta(tau, unit="h"), lat, lon), 0)
@@ -152,14 +169,16 @@ def heat():
                "station": df["sid"].values, "hour": hl}
         folds = [(f"leave out {d}", np.where(df["day"] != d)[0], np.where(df["day"] == d)[0]) for d in HDAYS] + \
                 [(f"leave out {STATIONS[s]}", np.where(df["sid"] != s)[0], np.where(df["sid"] == s)[0]) for s in STATIONS]
-        res = E.run_case(T.HEAT, ctx, r, g, folds, name=f"HeatSim {ver} {variant}")
+        blk = (df["day"] + df["sid"]).values; prev = np.arange(len(r)) - 1; prev[0] = -1
+        prev[1:][blk[1:] != blk[:-1]] = -1
+        res = E.run_case(T.HEAT, ctx, r, g, folds, name=f"HeatSim {ver} {variant}", prev=prev)
         keyt = df["t"].astype(str).values; order = np.random.default_rng(0).permutation(len(r)); cx = np.full((len(r), 2), -1)
         for i, j in enumerate(order):
             same = [q for q in np.where(keyt == keyt[j])[0] if q != j][:2]; cx[i, :len(same)] = same
         groups = [np.where(df["sid"] == s)[0] for s in STATIONS]
         rem = {"before": neighbour(r - res["_mu0"], order, cx, g, groups), "after": neighbour(r - res["_mu"], order, cx, g, groups)}
         dr = df.groupby(["day", "sid"]).agg(mo=("Tm", lambda v: v.max() - v.min()), ob=("To", lambda v: v.max() - v.min()))
-        out[lab] = finish(res, extra={"heatsim_version": ver, "sun_timing": variant, "rmse_K": float(np.sqrt(np.mean(r ** 2))),
+        out[lab] = finish(res, extra={"heatsim_version": ver, "sun_timing": variant, "station_hour_rule": rule, "rmse_K": float(np.sqrt(np.mean(r ** 2))),
                                       "bias_K": float(np.mean(r)), "range_ratio": float((dr["mo"] / dr["ob"]).mean())}, remainder=rem)
         arr[lab] = arrays(res, hour=hl, sid=df["sid"].values, day=df["day"].values, Tm=df["Tm"].values, To=df["To"].values)
         print("H", lab, out[lab]["winner"]["terms"], {k: v for k, v in out[lab]["winner"]["coef"].items()}, out[lab]["winner"]["alpha"],
@@ -259,7 +278,8 @@ def ground():
             sctx = {"t": t}
             half = np.arange(len(t)) < len(t) // 2
             sf = [("first half -> second", np.where(half)[0], np.where(~half)[0]), ("second half -> first", np.where(~half)[0], np.where(half)[0])]
-            rn = E.run_case(T.ground_terms(sctx), sctx, net, gs, sf, name=f"ground {name} network {lab}")
+            seq = lambda n: np.r_[-1, np.arange(n - 1)]
+            rn = E.run_case(T.ground_terms(sctx), sctx, net, gs, sf, name=f"ground {name} network {lab}", prev=seq(len(t)))
             out[key]["network"] = finish(rn)
             rng = np.random.default_rng(0)
             close = np.where(dist <= 0.3)[0]; close = rng.choice(close, min(60, len(close)), replace=False)
@@ -269,7 +289,7 @@ def ground():
                 yk = R[:, k]; okk = np.isfinite(yk)
                 if okk.sum() < 50: continue
                 c2 = {"t": t[okk]}
-                rk = E.run_case(T.ground_terms(c2), c2, yk[okk], gs, (), max_terms=3, beam=4)
+                rk = E.run_case(T.ground_terms(c2), c2, yk[okk], gs, (), max_terms=3, beam=4, prev=seq(int(okk.sum())))
                 wins.append({"cell": int(k), "dist_km": float(dist[k]), "terms": rk["winner"]["terms"], "alpha": rk["winner"]["alpha"],
                              "bits_saved": rk["bits_saved_per_reading"]})
             out[key]["cells"] = wins

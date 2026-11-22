@@ -95,3 +95,28 @@ runs name `weir_exponent`, its near-twin over this depth range; explained 90 %),
 3. A family parameter is sent relative to its library range (a − lo, or ln(a/lo) for a log-scale family): a date
    such as 2022.0 cost ~35 bits as an absolute number, which hid real two-jump formulas.
 Part A is rerun in full with these (`results/physlib/synthetic.json`); both runs are reported.
+
+## Amendment A2 (22 Nov 2026, during part B, after the heat case's first run)
+**What was seen.** The heat case's first run (protocol as written: station reports put in the hour they fall in, as
+`physics/heat.py` did for PROTOCOL-2) gave an RMSE of 2.83 K where HeatSim's own M1 score of the same runs reads
+2.35 K. The difference is the station clock: ISD's routine reports come at about 51 to 54 minutes past the hour, so
+putting each in the hour it falls in labels it almost an hour early; HeatSim's `fetch_isd` (used by M1) rounds to
+the nearest hour. The first run's winner included `timing_shift` (+1.0 h), which that labelling alone could produce.
+**Change.** The heat case is also run with reports rounded to the nearest hour and summary reports dropped
+(`isd_round`). Both are reported; the rounded one is the right clock, and the PROTOCOL-2 timing finding is re-read
+in its light. No other case is affected.
+
+## Amendment A3 (22 Nov 2026): part C, hard environments as tell-tale tests (written before any part C run)
+Kyle asked (22 Nov 2026) which environments are likely to raise errors and whether the compressor can flag them,
+e.g. a farmland bias. Part C plants, on synthetic inputs, the error a model would make in each hard environment
+when it lacks that process, and asks whether the compressor flags it and names the right term. Each environment
+term is added to its domain's library only for part C (`physlib/envtests.py`); the part B libraries are unchanged.
+
+Twelve environments: heat (irrigated farmland, coastal sea breeze, valley cold-air pools, high-rise canyons at
+night, a station beside a runway), flood (very flat floodplains, tidal backwater, frozen soil, burned soil, karst
+sinks), wind (valley channelling, onshore wind off water). Each has: (1) **flag** runs, the environment's error
+plus noise at a stated size, 10 seeds; (2) **control** runs, the same inputs and no planted error, 10 seeds;
+(3) **unnamed** runs, the flag case with the environment's term taken out of the library, 10 seeds, to see what a
+missing term looks like (a stand-in term, or only a remainder).
+**Read-out (no gate; this is a capability map):** flagged = the winner beats one correction; named = the winner
+contains the environment's term; false flag = a control run names anything. Ordered heat data uses the AR(1) code (A1).
