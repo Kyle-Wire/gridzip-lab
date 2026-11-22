@@ -1,0 +1,85 @@
+
+== Q1 thunderstorm, after F2: n 903  one 7.795  sd 0.250
+   ['lnpred', 'stn_loo'] 7.616 {'c': -0.032, 'lnpred': -0.306, 'stn_loo': 0.713} {} sd 0.219
+   ['lnpred', 'stn_loo', 'ca'] 7.621 {'c': -0.032, 'lnpred': -0.424, 'stn_loo': 0.705, 'ca': -0.14} {} sd 0.219
+   ['lnz0', 'lnpred', 'stn_loo'] 7.631 {'c': -0.032, 'lnz0': -0.003, 'lnpred': -0.305, 'stn_loo': 0.713} {} sd 0.219
+   ['kzt', 'lnpred', 'stn_loo'] 7.631 {'c': -0.032, 'kzt': -0.189, 'lnpred': -0.304, 'stn_loo': 0.712} {} sd 0.219
+   ['near_km', 'lnpred', 'stn_loo'] 7.631 {'c': -0.032, 'near_km': -0.001, 'lnpred': -0.301, 'stn_loo': 0.709} {} sd 0.219
+   ['n_nb', 'lnpred', 'stn_loo'] 7.631 {'c': -0.032, 'n_nb': 0.007, 'lnpred': -0.33, 'stn_loo': 0.718} {} sd 0.219
+   HO ['lnpred', 'stn_loo'] places 0.92 cal->blind True counts True
+   HO ['lnpred', 'stn_loo', 'ca'] places 1.0 cal->blind False counts False
+   HO ['lnz0', 'lnpred', 'stn_loo'] places 0.85 cal->blind False counts False
+   HO ['kzt', 'lnpred', 'stn_loo'] places 0.92 cal->blind True counts True
+   HO ['near_km', 'lnpred', 'stn_loo'] places 0.92 cal->blind True counts True
+   HO ['n_nb', 'lnpred', 'stn_loo'] places 0.92 cal->blind True counts True
+   HO ['dz_elev', 'lnpred', 'stn_loo'] places 0.92 cal->blind True counts True
+   HO ['elev', 'lnpred', 'stn_loo'] places 0.85 cal->blind True counts True
+   nb storm {'bits_per_reading': 8.099627548413777, 'null_mean': 7.990384127862102, 'null_sd': 0.026275562262424095, 'p': 1.0} 
+   nb station {'bits_per_reading': 7.72985835445539, 'null_mean': 7.970565073959109, 'null_sd': 0.023127194419357625, 'p': 0.01}
+  spread per place -0.1827  desert -0.013
+
+== Q2 ordinary storms, after F2: n 1085  one 7.169  sd 0.172
+   ['lnpred', 'stn_loo'] 6.856 {'c': -0.022, 'lnpred': -0.2, 'stn_loo': 0.834} {} sd 0.141
+   ['stn_loo'] 6.861 {'c': -0.022, 'stn_loo': 0.864} {} sd 0.141
+   ['kzt', 'stn_loo'] 6.864 {'c': -0.022, 'kzt': -0.25, 'stn_loo': 0.822} {} sd 0.141
+   ['lnpred', 'stn_loo', 'ca'] 6.865 {'c': -0.022, 'lnpred': -0.232, 'stn_loo': 0.817, 'ca': -0.033} {} sd 0.125
+   ['lnz0', 'lnpred', 'stn_loo'] 6.865 {'c': -0.022, 'lnz0': -0.015, 'lnpred': -0.225, 'stn_loo': 0.821} {} sd 0.125
+   ['kzt', 'lnpred', 'stn_loo'] 6.867 {'c': -0.022, 'kzt': -0.167, 'lnpred': -0.19, 'stn_loo': 0.807} {} sd 0.141
+   HO ['lnpred', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['stn_loo'] places 1.0 cal->blind True counts True
+   HO ['kzt', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['lnpred', 'stn_loo', 'ca'] places 1.0 cal->blind True counts True
+   HO ['lnz0', 'lnpred', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['kzt', 'lnpred', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['lnpred', 'lnreg', 'stn_loo'] places 0.93 cal->blind True counts True
+   HO ['near_km', 'lnpred', 'stn_loo'] places 0.93 cal->blind True counts True
+   nb storm {'bits_per_reading': 7.488111030341585, 'null_mean': 7.3733524785179245, 'null_sd': 0.02559264884454336, 'p': 1.0} 
+   nb station {'bits_per_reading': 6.995162816927871, 'null_mean': 7.361405617162168, 'null_sd': 0.024846862924784694, 'p': 0.01}
+   CA-HO ['lnpred', 'stn_loo'] True [(7.518, 7.604), (6.864, 7.882), (7.123, 7.605)]
+   CA-HO ['stn_loo'] True [(7.394, 7.604), (6.897, 7.882), (7.23, 7.605)]
+   CA-HO ['kzt', 'stn_loo'] True [(7.307, 7.604), (6.924, 7.882), (7.238, 7.605)]
+   CA-HO ['lnpred', 'stn_loo', 'ca'] True [(7.506, 7.604), (6.876, 7.882), (7.291, 7.605)]
+   CA-HO ['lnz0', 'lnpred', 'stn_loo'] True [(7.479, 7.604), (6.848, 7.882), (7.116, 7.605)]
+   CA-HO ['kzt', 'lnpred', 'stn_loo'] True [(7.431, 7.604), (6.882, 7.882), (7.126, 7.605)]
+   CA-HO ['lnpred', 'lnreg', 'stn_loo'] True [(7.542, 7.604), (6.843, 7.882), (7.092, 7.605)]
+   CA-HO ['near_km', 'lnpred', 'stn_loo'] True [(7.539, 7.604), (6.864, 7.882), (7.123, 7.605)]
+   one-term {'ca': 7.18, 'offshore_ca': 7.18, 'dz_elev': 7.164, 'elev': 7.18, 'msin': 7.18, 'mcos': 7.18, 'lnz0': 7.18, 'near_km': 7.18}
+  spread per place -0.1338  CA 0.007
+
+== Q3 before F2 (tropical inside ordinary): n 846  one 7.121  sd 0.172
+   ['kzt', 'lnpred', 'stn_loo'] 6.837 {'c': -0.021, 'kzt': -0.254, 'lnpred': -0.148, 'stn_loo': 0.775} {} sd 0.125
+   ['lnpred', 'stn_loo'] 6.839 {'c': -0.021, 'lnpred': -0.165, 'stn_loo': 0.833} {} sd 0.125
+   ['kzt', 'stn_loo'] 6.849 {'c': -0.021, 'kzt': -0.331, 'stn_loo': 0.775} {} sd 0.141
+   ['stn_loo'] 6.85 {'c': -0.021, 'stn_loo': 0.853} {} sd 0.141
+   ['lnpred', 'stn_loo', 'ca'] 6.853 {'c': -0.021, 'lnpred': -0.258, 'stn_loo': 0.796, 'ca': -0.071} {} sd 0.125
+   ['near_km', 'lnpred', 'stn_loo'] 6.856 {'c': -0.021, 'near_km': -0.0, 'lnpred': -0.164, 'stn_loo': 0.832} {} sd 0.125
+   HO ['kzt', 'lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['kzt', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['stn_loo'] places 1.0 cal->blind None counts True
+   HO ['lnpred', 'stn_loo', 'ca'] places 0.9 cal->blind None counts True
+   HO ['near_km', 'lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['n_nb', 'lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['dz_elev', 'lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   nb storm {'bits_per_reading': 7.351313109992328, 'null_mean': 7.322582639575365, 'null_sd': 0.04665620573266154, 'p': 0.79} 
+   nb station {'bits_per_reading': 6.957362106699609, 'null_mean': 7.315920278596635, 'null_sd': 0.041813837773712004, 'p': 0.01}
+
+== Q3 after F2 (ordinary only): n 852  one 7.117  sd 0.172
+   ['lnpred', 'stn_loo'] 6.837 {'c': -0.021, 'lnpred': -0.19, 'stn_loo': 0.829} {} sd 0.125
+   ['lnpred', 'stn_loo', 'ca'] 6.844 {'c': -0.021, 'lnpred': -0.288, 'stn_loo': 0.791, 'ca': -0.071} {} sd 0.125
+   ['stn_loo'] 6.846 {'c': -0.021, 'stn_loo': 0.854} {} sd 0.141
+   ['kzt', 'lnpred', 'stn_loo'] 6.849 {'c': -0.021, 'kzt': -0.194, 'lnpred': -0.175, 'stn_loo': 0.785} {} sd 0.125
+   ['dz_elev', 'lnpred', 'stn_loo'] 6.849 {'c': -0.021, 'dz_elev': -0.066, 'lnpred': -0.179, 'stn_loo': 0.796} {} sd 0.125
+   ['lnz0', 'lnpred', 'stn_loo'] 6.851 {'c': -0.021, 'lnz0': -0.022, 'lnpred': -0.229, 'stn_loo': 0.816} {} sd 0.125
+   HO ['lnpred', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['lnpred', 'stn_loo', 'ca'] places 0.9 cal->blind None counts True
+   HO ['stn_loo'] places 1.0 cal->blind None counts True
+   HO ['kzt', 'lnpred', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['dz_elev', 'lnpred', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['lnz0', 'lnpred', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['kzt', 'stn_loo'] places 1.0 cal->blind None counts True
+   HO ['near_km', 'lnpred', 'stn_loo'] places 0.9 cal->blind None counts True
+   nb storm {'bits_per_reading': 7.430962790410658, 'null_mean': 7.310764795774762, 'null_sd': 0.03821735162992626, 'p': 1.0} 
+   nb station {'bits_per_reading': 6.992234638534578, 'null_mean': 7.302781309186194, 'null_sd': 0.03712014208479402, 'p': 0.01}
+
+Q3 tropical pairs in before 100 tropical alone 7.125 shared 746 (7.136697796549473, 7.136697796549473) tropical after {'n': 402, 'one_correction_bpr': 7.107239779373381, 'sd': 0.1585046828183314}
