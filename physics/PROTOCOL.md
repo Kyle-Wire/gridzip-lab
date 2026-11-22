@@ -75,3 +75,8 @@ Wind is +x; the front row spans x = -0.5 to -0.3 m.
 is fitted. A free slope on it would trade against alpha (slope x alpha is what a small k sees), so alpha could not
 be read. Reported parameters are the least-squares values; the MDL-rounded values the code length uses are given
 beside them.
+
+## Amendment A2 (22 Nov 2026, after the first run stopped on an error, before any search result was read)
+The grid range is widened from -2.5..2.5 to -4..4. RANS |U| falls to 0.04-0.06 m/s at four points (recirculation
+centres) where the thermistors read 1.2-1.6 m/s, so r reaches 3.75 and the coder refused it. Nothing else changes;
+every number below is on the -4..4 grid.
