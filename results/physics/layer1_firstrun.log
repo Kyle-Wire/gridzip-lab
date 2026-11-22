@@ -1,0 +1,99 @@
+
+== Q1 thunderstorm, after F2: n 903  one 7.795  sd 0.250
+   ['lnpred', 'storm_loo', 'stn_loo'] 7.272 {'c': -0.032, 'lnpred': -0.194, 'storm_loo': -2.62, 'stn_loo': 0.434} {} sd 0.172
+   ['storm_loo', 'stn_loo'] 7.284 {'c': -0.032, 'storm_loo': -2.711, 'stn_loo': 0.44} {} sd 0.172
+   ['mcos', 'storm_loo', 'stn_loo'] 7.292 {'c': -0.024, 'mcos': 0.018, 'storm_loo': -2.719, 'stn_loo': 0.44} {} sd 0.172
+   ['yr', 'storm_loo', 'stn_loo'] 7.292 {'c': -0.032, 'yr': 0.004, 'storm_loo': -2.744, 'stn_loo': 0.444} {} sd 0.172
+   ['n_nb', 'storm_loo', 'stn_loo'] 7.293 {'c': -0.032, 'n_nb': -0.002, 'storm_loo': -2.717, 'stn_loo': 0.437} {} sd 0.172
+   ['kzt', 'storm_loo', 'stn_loo'] 7.294 {'c': -0.032, 'kzt': -0.611, 'storm_loo': -2.712, 'stn_loo': 0.437} {} sd 0.172
+   HO ['lnpred', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['mcos', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['yr', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['n_nb', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['kzt', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['lnz0', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['near_km', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   nb storm {'bits_per_reading': 8.099627548413777, 'null_mean': 7.990384127862102, 'null_sd': 0.026275562262424095, 'p': 1.0} 
+   nb station {'bits_per_reading': 7.72985835445539, 'null_mean': 7.970565073959109, 'null_sd': 0.023127194419357625, 'p': 0.01}
+  spread per place -0.1827  desert -0.013
+
+== Q2 ordinary storms, after F2: n 1085  one 7.169  sd 0.172
+   ['storm_loo', 'stn_loo', 'ca'] 6.653 {'c': -0.022, 'storm_loo': -1.985, 'stn_loo': 0.644, 'ca': -0.094} {} sd 0.117
+   ['kzt', 'storm_loo', 'stn_loo'] 6.699 {'c': -0.022, 'kzt': -0.362, 'storm_loo': -1.602, 'stn_loo': 0.654} {} sd 0.117
+   ['offshore_ca', 'storm_loo', 'stn_loo'] 6.699 {'c': -0.022, 'offshore_ca': -0.065, 'storm_loo': -1.722, 'stn_loo': 0.692} {} sd 0.117
+   ['storm_loo', 'stn_loo'] 6.701 {'c': -0.022, 'storm_loo': -1.561, 'stn_loo': 0.719} {} sd 0.125
+   ['msin', 'storm_loo', 'stn_loo'] 6.705 {'c': -0.031, 'msin': 0.023, 'storm_loo': -1.603, 'stn_loo': 0.718} {} sd 0.117
+   ['dir_c', 'storm_loo', 'stn_loo'] 6.709 {'c': -0.031, 'dir_c': -0.034, 'storm_loo': -1.716, 'stn_loo': 0.695} {'dir_c': 53.2} sd 0.117
+   HO ['storm_loo', 'stn_loo', 'ca'] places 1.0 cal->blind True counts True
+   HO ['kzt', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['offshore_ca', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['msin', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['dir_c', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['dz_elev', 'storm_loo', 'stn_loo'] places 1.0 cal->blind True counts True
+   HO ['lnz0', 'storm_loo', 'stn_loo'] places 0.93 cal->blind True counts True
+   nb storm {'bits_per_reading': 7.488111030341585, 'null_mean': 7.3733524785179245, 'null_sd': 0.02559264884454336, 'p': 1.0} 
+   nb station {'bits_per_reading': 6.995162816927871, 'null_mean': 7.361405617162168, 'null_sd': 0.024846862924784694, 'p': 0.01}
+   CA-HO ['storm_loo', 'stn_loo', 'ca'] True [(7.187, 7.604), (7.018, 7.882), (7.252, 7.605)]
+   CA-HO ['kzt', 'storm_loo', 'stn_loo'] True [(7.535, 7.604), (6.97, 7.882), (7.114, 7.605)]
+   CA-HO ['offshore_ca', 'storm_loo', 'stn_loo'] True [(7.413, 7.604), (6.86, 7.882), (7.541, 7.605)]
+   CA-HO ['storm_loo', 'stn_loo'] True [(7.519, 7.604), (6.907, 7.882), (7.09, 7.605)]
+   CA-HO ['msin', 'storm_loo', 'stn_loo'] True [(7.544, 7.604), (6.866, 7.882), (7.134, 7.605)]
+   CA-HO ['dir_c', 'storm_loo', 'stn_loo'] True [(7.484, 7.604), (6.827, 7.882), (7.403, 7.605)]
+   CA-HO ['dz_elev', 'storm_loo', 'stn_loo'] True [(7.528, 7.604), (6.93, 7.882), (7.101, 7.605)]
+   CA-HO ['lnz0', 'storm_loo', 'stn_loo'] False [(7.536, 7.604), (6.907, 7.882), (7.793, 7.605)]
+   one-term {'ca': 7.18, 'offshore_ca': 7.18, 'dz_elev': 7.164, 'elev': 7.18, 'msin': 7.18, 'mcos': 7.18, 'lnz0': 7.18, 'near_km': 7.18}
+  spread per place -0.1338  CA 0.007
+
+== Q3 before F2 (tropical inside ordinary): n 846  one 7.121  sd 0.172
+   ['storm_loo', 'stn_loo', 'ca'] 6.59 {'c': -0.021, 'storm_loo': -2.591, 'stn_loo': 0.613, 'ca': -0.134} {} sd 0.109
+   ['offshore_ca', 'storm_loo', 'stn_loo'] 6.653 {'c': -0.021, 'offshore_ca': -0.12, 'storm_loo': -2.208, 'stn_loo': 0.673} {} sd 0.117
+   ['lnz0', 'storm_loo', 'stn_loo'] 6.66 {'c': -0.021, 'lnz0': -0.029, 'storm_loo': -2.044, 'stn_loo': 0.686} {} sd 0.117
+   ['kzt', 'storm_loo', 'stn_loo'] 6.664 {'c': -0.021, 'kzt': -0.423, 'storm_loo': -1.941, 'stn_loo': 0.608} {} sd 0.117
+   ['storm_loo', 'stn_loo'] 6.664 {'c': -0.021, 'storm_loo': -1.887, 'stn_loo': 0.712} {} sd 0.117
+   ['dz_elev', 'storm_loo', 'stn_loo'] 6.673 {'c': -0.021, 'dz_elev': -0.139, 'storm_loo': -1.91, 'stn_loo': 0.636} {} sd 0.117
+   HO ['storm_loo', 'stn_loo', 'ca'] places 0.9 cal->blind None counts True
+   HO ['offshore_ca', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['lnz0', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['kzt', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['dz_elev', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['dir_c', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['near_km', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   nb storm {'bits_per_reading': 7.351313109992328, 'null_mean': 7.322582639575365, 'null_sd': 0.04665620573266154, 'p': 0.79} 
+   nb station {'bits_per_reading': 6.957362106699609, 'null_mean': 7.315920278596635, 'null_sd': 0.041813837773712004, 'p': 0.01}
+
+== Q3 after F2 (ordinary only): n 852  one 7.117  sd 0.172
+   ['storm_loo', 'stn_loo', 'ca'] 6.612 {'c': -0.021, 'storm_loo': -2.481, 'stn_loo': 0.625, 'ca': -0.128} {} sd 0.109
+   ['offshore_ca', 'storm_loo', 'stn_loo'] 6.66 {'c': -0.021, 'offshore_ca': -0.116, 'storm_loo': -2.122, 'stn_loo': 0.682} {} sd 0.117
+   ['lnz0', 'storm_loo', 'stn_loo'] 6.664 {'c': -0.021, 'lnz0': -0.033, 'storm_loo': -2.015, 'stn_loo': 0.692} {} sd 0.117
+   ['storm_loo', 'stn_loo'] 6.671 {'c': -0.021, 'storm_loo': -1.819, 'stn_loo': 0.719} {} sd 0.117
+   ['kzt', 'storm_loo', 'stn_loo'] 6.675 {'c': -0.021, 'kzt': -0.387, 'storm_loo': -1.876, 'stn_loo': 0.623} {} sd 0.117
+   ['dz_elev', 'storm_loo', 'stn_loo'] 6.68 {'c': -0.021, 'dz_elev': -0.137, 'storm_loo': -1.843, 'stn_loo': 0.645} {} sd 0.117
+   HO ['storm_loo', 'stn_loo', 'ca'] places 0.9 cal->blind None counts True
+   HO ['offshore_ca', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['lnz0', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['kzt', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['dz_elev', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['near_km', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   HO ['n_nb', 'storm_loo', 'stn_loo'] places 0.9 cal->blind None counts True
+   nb storm {'bits_per_reading': 7.430962790410658, 'null_mean': 7.310764795774762, 'null_sd': 0.03821735162992626, 'p': 1.0} 
+   nb station {'bits_per_reading': 6.992234638534578, 'null_mean': 7.302781309186194, 'null_sd': 0.03712014208479402, 'p': 0.01}
+Traceback (most recent call last):
+  File "/home/user/gridzip-lab/physics/layer1.py", line 215, in <module>
+    main(*sys.argv[1:4])
+    ~~~~^^^^^^^^^^^^^^^^
+  File "/home/user/gridzip-lab/physics/layer1.py", line 202, in main
+    q3["shared_one_correction_before_after"] = (L.score({}, [], b.y.values, G, rows=np.where(shared)[0])["bits_per_reading"],
+                                                ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/gridzip-lab/codelen/lawsearch.py", line 107, in score
+    X, off = _design(lib, terms, alphas, rows); th = _lstsq(X, y[rows] - off); yr = y[rows]
+             ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/gridzip-lab/codelen/lawsearch.py", line 56, in _design
+    X = np.column_stack([np.ones(n)] + cols); off = np.zeros(n) if off is None else off
+                         ~~~~~~~^^^
+  File "/usr/local/lib/python3.13/site-packages/numpy/_core/numeric.py", line 232, in ones
+    a = empty(shape, dtype, order, device=device)
+TypeError: Use () not None as shape arguments

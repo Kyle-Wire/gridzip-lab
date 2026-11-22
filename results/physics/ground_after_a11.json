@@ -1,0 +1,1884 @@
+{
+ "quiet": {
+  "n": 3000,
+  "candidates": 64,
+  "one_correction": {
+   "terms": [],
+   "structure_bits": 7.169925001442312,
+   "param_bits": 8.0,
+   "sd_bits": 16,
+   "residual_bits": 20171.935502939803,
+   "sd": 0.25,
+   "total_bits": 20203.105427941246,
+   "bits_per_reading": 6.734368475980415,
+   "n": 3000,
+   "coef": {
+    "c": -1.5
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -1.480229773590142
+   },
+   "fit_alpha": {},
+   "steps": [
+    1
+   ]
+  },
+  "top": [
+   {
+    "terms": [
+     "vel"
+    ],
+    "structure_bits": 14.509775004326936,
+    "param_bits": 32.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2236.017994523633,
+    "bits_per_reading": 0.7453393315078778,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999998
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "std": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999991,
+     "std": -2.1277151840328424e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "amp": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999993,
+     "amp": -1.7059237499671897e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "late": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999997,
+     "late": -1.1102230246076379e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "accel"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "accel": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.4802297735901422,
+     "vel": -1.0000000000000002,
+     "accel": 8.227424811002543e-27
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "dist"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "dist": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999999,
+     "dist": 3.1677608115652063e-17
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "near"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 34.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2244.357844526518,
+    "bits_per_reading": 0.7481192815088393,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "near": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.4802297735901415,
+     "vel": -1.0000000000000002,
+     "near": -1.1102230246202018e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "amp"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 36.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2255.6976945294023,
+    "bits_per_reading": 0.7518992315098008,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "std": 0.0,
+     "amp": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.480229773590142,
+     "vel": -0.9999999999999997,
+     "std": 8.712365976787555e-16,
+     "amp": 4.0165820313357574e-17
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "late"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 36.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2255.6976945294023,
+    "bits_per_reading": 0.7518992315098008,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "std": 0.0,
+     "late": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.4802297735901415,
+     "vel": -1.0000000000000002,
+     "std": 2.6349506409079847e-15,
+     "late": -3.3306690738578115e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "accel"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 36.0,
+    "sd_bits": 10,
+    "residual_bits": 2179.5082195193063,
+    "sd": 0.005,
+    "total_bits": 2255.6976945294023,
+    "bits_per_reading": 0.7518992315098008,
+    "n": 3000,
+    "coef": {
+     "c": -1.48046875,
+     "vel": -1.0,
+     "std": 0.0,
+     "accel": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": -1.4802297735901424,
+     "vel": -0.9999999999999994,
+     "std": -2.2396422916381255e-15,
+     "accel": 1.1102230247066262e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     0,
+     0
+    ]
+   }
+  ],
+  "coder_check": {
+   "ideal_residual_bits": 2179.5082195193063,
+   "coder_ideal_bits": 2179.508793633242,
+   "coded_bits": 2184,
+   "roundtrip_ok": true
+  },
+  "holdout": [
+   {
+    "terms": [
+     "vel"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7233447772576372,
+      "one_correction_bpr": 6.83216988951724
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7263674054520414,
+      "one_correction_bpr": 6.639670384757132
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "std"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7233447772576383,
+      "one_correction_bpr": 6.83216988951724
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.726367405452041,
+      "one_correction_bpr": 6.639670384757132
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "amp"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7233447772576415,
+      "one_correction_bpr": 6.83216988951724
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.726367405452039,
+      "one_correction_bpr": 6.639670384757132
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "late"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7233447772576401,
+      "one_correction_bpr": 6.83216988951724
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7263674054520395,
+      "one_correction_bpr": 6.639670384757132
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "accel"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.723344777257635,
+      "one_correction_bpr": 6.83216988951724
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7263674054520407,
+      "one_correction_bpr": 6.639670384757132
+     }
+    ],
+    "transfers": true
+   }
+  ],
+  "reference_check": {
+   "result": "no jumps",
+   "steps": [],
+   "bad_dates": []
+  },
+  "house_100m": {
+   "truth": 0.0,
+   "chain": 1.1141560841877005,
+   "cells": 5
+  }
+ },
+ "sinkhole": {
+  "n": 3000,
+  "candidates": 64,
+  "one_correction": {
+   "terms": [],
+   "structure_bits": 7.169925001442312,
+   "param_bits": 2.0,
+   "sd_bits": 16,
+   "residual_bits": 20233.965138923646,
+   "sd": 0.25,
+   "total_bits": 20259.13506392509,
+   "bits_per_reading": 6.753045021308363,
+   "n": 3000,
+   "coef": {
+    "c": 0.0
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": 0.01412177796951959
+   },
+   "fit_alpha": {},
+   "steps": [
+    0
+   ]
+  },
+  "top": [
+   {
+    "terms": [
+     "vel",
+     "accel",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 46.0,
+    "sd_bits": 16,
+    "residual_bits": 15479.808410266098,
+    "sd": 0.109375,
+    "total_bits": 15571.997885276194,
+    "bits_per_reading": 5.190665961758731,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -0.8125,
+     "accel": 0.234375,
+     "near": -1.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.026610589157662155,
+     "vel": -0.7825256292958849,
+     "accel": 0.24059696979410547,
+     "near": -1.1452007224497167
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     4,
+     6,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 52.0,
+    "sd_bits": 16,
+    "residual_bits": 15655.985783195552,
+    "sd": 0.1171875,
+    "total_bits": 15754.175258205649,
+    "bits_per_reading": 5.251391752735216,
+    "n": 3000,
+    "coef": {
+     "c": 0.0234375,
+     "vel": -0.78125,
+     "std": -4.0,
+     "near": -1.375
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.024857570829572906,
+     "vel": -0.7724958355174146,
+     "std": -5.057929907590219,
+     "near": -1.4003208078330427
+    },
+    "fit_alpha": {},
+    "steps": [
+     7,
+     5,
+     -2,
+     3
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "near"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 28.0,
+    "sd_bits": 16,
+    "residual_bits": 15795.426144665731,
+    "sd": 0.125,
+    "total_bits": 15860.275769672942,
+    "bits_per_reading": 5.28675858989098,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -0.75,
+     "near": -1.5
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.026084436627174336,
+     "vel": -0.7230531902260174,
+     "near": -1.5603467814332295
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     2,
+     1
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 15795.426144665731,
+    "sd": 0.125,
+    "total_bits": 15871.615619675827,
+    "bits_per_reading": 5.2905385398919424,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -0.75,
+     "amp": 0.0,
+     "near": -1.5
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.026063345440567078,
+     "vel": -0.7227363436188751,
+     "amp": -0.01360996508835355,
+     "near": -1.557595757093152
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     2,
+     0,
+     1
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 15795.426144665731,
+    "sd": 0.125,
+    "total_bits": 15871.615619675827,
+    "bits_per_reading": 5.2905385398919424,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -0.75,
+     "late": 0.0,
+     "near": -1.5
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.026125970713459054,
+     "vel": -0.7235152470241507,
+     "late": -0.012632645608949868,
+     "near": -1.568431097873372
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     2,
+     0,
+     1
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "dist",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 15795.426144665731,
+    "sd": 0.125,
+    "total_bits": 15871.615619675827,
+    "bits_per_reading": 5.2905385398919424,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -0.75,
+     "dist": 0.0,
+     "near": -1.5
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.02594502375159084,
+     "vel": -0.7220421253762831,
+     "dist": 0.007650070147723593,
+     "near": -1.5421624933136409
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     2,
+     0,
+     1
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "accel"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 60.0,
+    "sd_bits": 16,
+    "residual_bits": 16554.63713101369,
+    "sd": 0.140625,
+    "total_bits": 16660.826606023784,
+    "bits_per_reading": 5.553608868674595,
+    "n": 3000,
+    "coef": {
+     "c": 0.01953125,
+     "vel": -1.0,
+     "std": -5.03125,
+     "accel": 0.34375
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.019407740002885743,
+     "vel": -0.7700540197474757,
+     "std": -5.042296647750987,
+     "accel": 0.34289764636423453
+    },
+    "fit_alpha": {},
+    "steps": [
+     8,
+     0,
+     5,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late",
+     "accel"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 40.0,
+    "sd_bits": 16,
+    "residual_bits": 16808.855995411293,
+    "sd": 0.15625,
+    "total_bits": 16895.045470421388,
+    "bits_per_reading": 5.631681823473796,
+    "n": 3000,
+    "coef": {
+     "c": 0.03125,
+     "vel": -1.0,
+     "late": -0.125,
+     "accel": 0.421875
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.02053693543607831,
+     "vel": -0.736442581366302,
+     "late": -0.08632413801905367,
+     "accel": 0.4252111385438879
+    },
+    "fit_alpha": {},
+    "steps": [
+     5,
+     0,
+     3,
+     6
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "accel"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 32.0,
+    "sd_bits": 16,
+    "residual_bits": 16830.118128801245,
+    "sd": 0.140625,
+    "total_bits": 16898.967753808458,
+    "bits_per_reading": 5.632989251269486,
+    "n": 3000,
+    "coef": {
+     "c": 0.0234375,
+     "vel": -0.75,
+     "accel": 0.375
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.020190495633539925,
+     "vel": -0.7255787820130993,
+     "accel": 0.3936746027130382
+    },
+    "fit_alpha": {},
+    "steps": [
+     7,
+     2,
+     3
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp",
+     "accel"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 34.0,
+    "sd_bits": 16,
+    "residual_bits": 16830.118128801245,
+    "sd": 0.140625,
+    "total_bits": 16910.30760381134,
+    "bits_per_reading": 5.636769201270447,
+    "n": 3000,
+    "coef": {
+     "c": 0.0234375,
+     "vel": -0.75,
+     "amp": 0.0,
+     "accel": 0.375
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.020176989546250697,
+     "vel": -0.7251760199453675,
+     "amp": -0.015348260150726661,
+     "accel": 0.39279846975676025
+    },
+    "fit_alpha": {},
+    "steps": [
+     7,
+     2,
+     0,
+     3
+    ]
+   }
+  ],
+  "coder_check": {
+   "ideal_residual_bits": 15479.808410266098,
+   "coder_ideal_bits": 15479.808842182721,
+   "coded_bits": 15488,
+   "roundtrip_ok": true
+  },
+  "holdout": [
+   {
+    "terms": [
+     "vel",
+     "accel",
+     "near"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 1.317920388675336,
+      "one_correction_bpr": 6.880379794424645
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 5.410660517545048,
+      "one_correction_bpr": 6.649758626563566
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "near"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 1.3178724802234183,
+      "one_correction_bpr": 6.880379794424645
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 5.466118375766731,
+      "one_correction_bpr": 6.649758626563566
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "near"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 1.3179066472553471,
+      "one_correction_bpr": 6.880379794424645
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 5.555248667189164,
+      "one_correction_bpr": 6.649758626563566
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "amp",
+     "near"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 1.3180186488131327,
+      "one_correction_bpr": 6.880379794424645
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 5.574874026536214,
+      "one_correction_bpr": 6.649758626563566
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "late",
+     "near"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 1.317902983929462,
+      "one_correction_bpr": 6.880379794424645
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 5.55444610118587,
+      "one_correction_bpr": 6.649758626563566
+     }
+    ],
+    "transfers": true
+   }
+  ],
+  "reference_check": {
+   "result": "no jumps",
+   "steps": [],
+   "bad_dates": []
+  },
+  "house_100m": {
+   "truth": -5.095228545651226,
+   "chain": -5.3745499869336,
+   "cells": 5
+  }
+ },
+ "regional": {
+  "n": 3000,
+  "candidates": 64,
+  "one_correction": {
+   "terms": [],
+   "structure_bits": 7.169925001442312,
+   "param_bits": 2.0,
+   "sd_bits": 16,
+   "residual_bits": 20157.803575693135,
+   "sd": 0.25,
+   "total_bits": 20182.973500694578,
+   "bits_per_reading": 6.72765783356486,
+   "n": 3000,
+   "coef": {
+    "c": 0.0
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": 0.008715748051718385
+   },
+   "fit_alpha": {},
+   "steps": [
+    0
+   ]
+  },
+  "top": [
+   {
+    "terms": [
+     "vel",
+     "dist"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 28.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18867.200690106416,
+    "bits_per_reading": 6.289066896702138,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "dist": -0.03125
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.4128525748039792,
+     "dist": -0.02914008938828439
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "dist"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18878.540540109298,
+    "bits_per_reading": 6.2928468467031,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "std": 0.0,
+     "dist": -0.03125
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.41285940446039965,
+     "std": -0.16573453283904044,
+     "dist": -0.029153293279832584
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp",
+     "dist"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18878.540540109298,
+    "bits_per_reading": 6.2928468467031,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "amp": 0.0,
+     "dist": -0.03125
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.41428494879070615,
+     "amp": 0.03133316573389429,
+     "dist": -0.02995001724710426
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late",
+     "dist"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18878.540540109298,
+    "bits_per_reading": 6.2928468467031,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "late": 0.0,
+     "dist": -0.03125
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008726843336407487,
+     "vel": -0.41281081041827855,
+     "late": 0.006825732958687523,
+     "dist": -0.029076303425486325
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "accel",
+     "dist"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18878.540540109298,
+    "bits_per_reading": 6.2928468467031,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "accel": 0.0,
+     "dist": -0.03125
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008671185242542614,
+     "vel": -0.4128792436434623,
+     "accel": 0.011086798975530762,
+     "dist": -0.029177400802530108
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "dist",
+     "near"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 30.0,
+    "sd_bits": 16,
+    "residual_bits": 18802.351065099203,
+    "sd": 0.1875,
+    "total_bits": 18878.540540109298,
+    "bits_per_reading": 6.2928468467031,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "dist": -0.03125,
+     "near": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008946016378028603,
+     "vel": -0.4126065611107104,
+     "dist": -0.029733303819771295,
+     "near": -0.030034999083966504
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     5,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel"
+    ],
+    "structure_bits": 14.509775004326936,
+    "param_bits": 18.0,
+    "sd_bits": 16,
+    "residual_bits": 18843.634781607616,
+    "sd": 0.1875,
+    "total_bits": 18892.144556611944,
+    "bits_per_reading": 6.297381518870648,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.4054267911303281
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 20.0,
+    "sd_bits": 16,
+    "residual_bits": 18843.634781607616,
+    "sd": 0.1875,
+    "total_bits": 18900.48440661483,
+    "bits_per_reading": 6.300161468871609,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "std": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.4054297783096313,
+     "std": -0.1428839127502162
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 20.0,
+    "sd_bits": 16,
+    "residual_bits": 18843.634781607616,
+    "sd": 0.1875,
+    "total_bits": 18900.48440661483,
+    "bits_per_reading": 6.300161468871609,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "amp": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008715748051718385,
+     "vel": -0.4063771691411742,
+     "amp": 0.024289433704262505
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 20.0,
+    "sd_bits": 16,
+    "residual_bits": 18843.634781607616,
+    "sd": 0.1875,
+    "total_bits": 18900.48440661483,
+    "bits_per_reading": 6.300161468871609,
+    "n": 3000,
+    "coef": {
+     "c": 0.0,
+     "vel": -0.40625,
+     "late": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 0.008731586869409698,
+     "vel": -0.40539037523719995,
+     "late": 0.009743917616448522
+    },
+    "fit_alpha": {},
+    "steps": [
+     0,
+     5,
+     0
+    ]
+   }
+  ],
+  "coder_check": {
+   "ideal_residual_bits": 18802.351065099203,
+   "coder_ideal_bits": 18802.351639094795,
+   "coded_bits": 18808,
+   "roundtrip_ok": true
+  },
+  "holdout": [
+   {
+    "terms": [
+     "vel",
+     "dist"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 6.283526376843174,
+      "one_correction_bpr": 6.740453976036942
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 6.314043065293376,
+      "one_correction_bpr": 6.750043479386278
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "dist"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 6.284450212315686,
+      "one_correction_bpr": 6.740453976036942
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 6.315087282864514,
+      "one_correction_bpr": 6.750043479386278
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "amp",
+     "dist"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 6.283420811341717,
+      "one_correction_bpr": 6.740453976036942
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 6.310750808067373,
+      "one_correction_bpr": 6.750043479386278
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "late",
+     "dist"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 6.283462504517952,
+      "one_correction_bpr": 6.740453976036942
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 6.314417894991186,
+      "one_correction_bpr": 6.750043479386278
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "accel",
+     "dist"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 6.283459336151798,
+      "one_correction_bpr": 6.740453976036942
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 6.3147773080953815,
+      "one_correction_bpr": 6.750043479386278
+     }
+    ],
+    "transfers": true
+   }
+  ],
+  "reference_check": {
+   "result": "no jumps",
+   "steps": [],
+   "bad_dates": []
+  },
+  "house_100m": {
+   "truth": -4.714549306710684,
+   "chain": -4.587879911648692,
+   "cells": 5
+  }
+ },
+ "bad-reference": {
+  "n": 3000,
+  "candidates": 64,
+  "one_correction": {
+   "terms": [],
+   "structure_bits": 7.169925001442312,
+   "param_bits": 22.0,
+   "sd_bits": 16,
+   "residual_bits": 25612.978756805198,
+   "sd": 0.875,
+   "total_bits": 25658.14868180664,
+   "bits_per_reading": 8.55271622726888,
+   "n": 3000,
+   "coef": {
+    "c": 7.0625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": 7.073087466567683
+   },
+   "fit_alpha": {},
+   "steps": [
+    4
+   ]
+  },
+  "top": [
+   {
+    "terms": [
+     "vel"
+    ],
+    "structure_bits": 14.509775004326936,
+    "param_bits": 40.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2225.4587914364683,
+    "bits_per_reading": 0.7418195971454894,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567683,
+     "vel": -1.0
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "std": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567683,
+     "vel": -1.0000000000000002,
+     "std": 2.728873558081313e-15
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "amp"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "amp": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567683,
+     "vel": -1.0000000000000007,
+     "amp": -1.998702554589676e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "late"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "late": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567684,
+     "vel": -1.0000000000000007,
+     "late": 1.1102230236130623e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "accel"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "accel": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567679,
+     "vel": -1.0000000000000002,
+     "accel": -8.436192905264757e-25
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "dist"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "dist": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567683,
+     "vel": -0.9999999999999994,
+     "dist": -2.0000125617962201e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "near"
+    ],
+    "structure_bits": 20.84962500721156,
+    "param_bits": 42.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2233.798641439353,
+    "bits_per_reading": 0.744599547146451,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "near": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567685,
+     "vel": -0.9999999999999998,
+     "near": -2.2204460494004077e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "amp"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 44.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2245.1384914422374,
+    "bits_per_reading": 0.7483794971474125,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "std": 0.0,
+     "amp": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567683,
+     "vel": -1.0000000000000004,
+     "std": 2.324989771772595e-15,
+     "amp": -2.3371826234328696e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "late"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 44.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2245.1384914422374,
+    "bits_per_reading": 0.7483794971474125,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "std": 0.0,
+     "late": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567692,
+     "vel": -1.0000000000000002,
+     "std": 1.2914589450788287e-14,
+     "late": 5.551115122113688e-16
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "terms": [
+     "vel",
+     "std",
+     "accel"
+    ],
+    "structure_bits": 30.189475010096185,
+    "param_bits": 44.0,
+    "sd_bits": 10,
+    "residual_bits": 2160.9490164321414,
+    "sd": 0.005,
+    "total_bits": 2245.1384914422374,
+    "bits_per_reading": 0.7483794971474125,
+    "n": 3000,
+    "coef": {
+     "c": 7.0732421875,
+     "vel": -1.0,
+     "std": 0.0,
+     "accel": 0.0
+    },
+    "alpha": {},
+    "fit_coef": {
+     "c": 7.073087466567689,
+     "vel": -1.0000000000000009,
+     "std": -5.380432275714075e-15,
+     "accel": -8.442310521584746e-25
+    },
+    "fit_alpha": {},
+    "steps": [
+     10,
+     0,
+     0,
+     0
+    ]
+   }
+  ],
+  "coder_check": {
+   "ideal_residual_bits": 2160.9490164321414,
+   "coder_ideal_bits": 2160.9495905459607,
+   "coded_bits": 2168,
+   "roundtrip_ok": true
+  },
+  "holdout": [
+   {
+    "terms": [
+     "vel"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7205749677126754,
+      "one_correction_bpr": 8.646194773700218
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7195348928567928,
+      "one_correction_bpr": 8.458933759403033
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "std"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7205749677126717,
+      "one_correction_bpr": 8.646194773700218
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7195348928567941,
+      "one_correction_bpr": 8.458933759403033
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "amp"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7205749677126764,
+      "one_correction_bpr": 8.646194773700218
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7195348928567825,
+      "one_correction_bpr": 8.458933759403033
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "late"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7205749677126742,
+      "one_correction_bpr": 8.646194773700218
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7195348928568066,
+      "one_correction_bpr": 8.458933759403033
+     }
+    ],
+    "transfers": true
+   },
+   {
+    "terms": [
+     "vel",
+     "accel"
+    ],
+    "folds": [
+     {
+      "fold": "west->east",
+      "formula_bpr": 0.7205749677126756,
+      "one_correction_bpr": 8.646194773700218
+     },
+     {
+      "fold": "east->west",
+      "formula_bpr": 0.7195348928567965,
+      "one_correction_bpr": 8.458933759403033
+     }
+    ],
+    "transfers": true
+   }
+  ],
+  "reference_check": {
+   "result": "corrected",
+   "steps": [
+    {
+     "decimal_year": 2020.3110882956817,
+     "jump_mm": -39.77,
+     "fitted_mm": -40.0
+    }
+   ],
+   "bad_dates": [
+    2023.3336755646706
+   ]
+  },
+  "house_100m": {
+   "truth": 0.0,
+   "chain": -8.24934833087525,
+   "cells": 5
+  }
+ }
+}

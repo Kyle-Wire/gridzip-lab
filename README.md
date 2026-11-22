@@ -402,3 +402,7 @@ cd src && python sweep_v3.py ../data/enwik8 10000000 0,512,1024,2048,4096 2,3,4 
 ```
 
 The specialist docs set comes from a private project and is not included.
+
+## physics/: finding what a model is missing, by code length (22 Nov 2026)
+`codelen.lawsearch` ranks short correction formulas for a model's errors by total code length (MDL), checks them on
+held-out data and against a neighbour-context coder. First case: WindSim on AIJ Case C. See `physics/FINDINGS.md`.
