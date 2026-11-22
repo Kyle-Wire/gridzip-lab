@@ -274,7 +274,7 @@ def fig_scoreboard():
     if H: add("Heat · Philadelphia · before fix", H["before_round"], Ha["before_round"]); add("Heat · Philadelphia · after fix", H["after_round"], Ha["after_round"])
     if F:
         add("Flood · Sheffield rig · Cw 0.5", F["F1_before"], Fa["F1_before"]); add("Flood · Sheffield rig · Cw 0.32", F["F1_after"], Fa["F1_after"])
-        add("Flood · grate on a grade", F["F2_before"], Fa["F2_before"])
+        add("Flood · grate on a grade · before fix", F["F2_before"], Fa["F2_before"]); add("Flood · grate on a grade · after fix", F["F2_after"], Fa["F2_after"])
     if Gj:
         for t in ("sinkhole", "bad-reference"):
             for l in ("before", "after"): add(f"Ground · {t} town · {l} A11", Gj[f"{t}_{l}"]["rate"], Ga[f"{t}_{l}"], "r", "mu")
