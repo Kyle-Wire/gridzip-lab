@@ -435,7 +435,7 @@ class Mixer {
   int cxt;         // context of set 0 (lpaq API)
   int nx;          // Number of inputs in tx, 0 to N
   int pr;          // final result (scaled 12 bits)
-  enum {KMAX=8};
+  enum {KMAX=10};   // round 40: 10 (was 8); runs with up to 8 sets are unchanged
   int K, base[KMAX], cx[KMAX], prk[KMAX];
   int* fw; int fx[KMAX+1]; int fcx, FM;
   int bk, bcx2, bw;  // blended set (MXSETS 512): set bk mixes weights cx[bk] and bcx2, bw/16 and (16-bw)/16
@@ -759,6 +759,8 @@ static std::vector<int> G_t16, G_t64, G_t256;
 // GFLAGS 1048576: next-cell indirect: the cell that followed the current cell the last time, with the automaton state.
 static std::vector<int> G_next;
 static int G_p2=0, G_p3=0;
+static int NV_lvl=0, NV_nf=0;   // round 38: word novelty (NOVEL)
+static int PG_st=0, PG_cnt=0;   // round 40: 0 not in a word, 1 this word prefix has occurred in this article, 2 it has not
 static std::vector<int> G_lastb;   // round 36: each cell's last byte (-1 for an empty cell)   // round 32: the cell trigram's guess (GFLAGS 67108864), read by MXSETS 131072
 // Round 7b (GFLAGS 2097152; MXSETS 256): the correlogram's two signals. Each cell's position in the map plane
 // (two 4-bit coordinates, an 'XY' section after the topics); the direction of the last step between cells,
@@ -901,8 +903,9 @@ static void load_grid() {
   if (GF&268435456) NCX+=2;
   if (GF&536870912) NCX+=2;
   if (GF&1073741824) NCX+=2;  // round 37: next-cell guess keyed on the fine regions of the last three cells  // round 36: the byte the cell guesses expect next, with its hit history  // round 33: confidence in the cell guesses (were the last ones right, do they agree)  // round 31: cell 4-gram: the cell that followed the last three cells the last time  // round 30: cell trigram: the cell that followed the last two cells the last time  // round 29: cell recency (bytes since the current / previous cell last ended here)
+  { const char* v; if ((v=getenv("NOVEL")) && (atoi(v)&2)) NCX+=2; if ((v=getenv("ENTITY"))) { int e=atoi(v); if (e&1) NCX+=2-!!(e&32)-!!(e&64); if (e&2) NCX+=2; if (e&256) NCX+=2; if (e&512) NCX+=1; if (e&1024) NCX+=1; if (e&16384) NCX+=1; if (e&262144) NCX+=1; } }  // round 38 (39: parts)
   if (GF&16777216) NCX+=2;  // round 18: the two cells before the current one + 2 bytes (skip), three cells + 2 bytes   // round 15: plain contexts on the last four cells (+ last byte) and the last two cells (+ 2 bytes)
-  if (NCX>40) quit("too many contexts for NMAX");
+  if (NCX>48) quit("too many contexts for NMAX");
   load_genome(); if (NGENE) NCX=1+NGENE;
 }
 static inline U32 hmix(U32 a, U32 b) {
@@ -981,7 +984,7 @@ static void wiki2_update(int c) {
 }
 
 void Predictor::update(int y) {
-  enum {NMAX=40};
+  enum {NMAX=48};   // round 43: 48 (was 40)
   static U8 t0[0x10000];  // order 1 cxt -> state
   static HashTable<16> t(MEM*2);  // cxt -> state
   static int c0=1;  // last 0-7 bits with leading 1
@@ -1008,19 +1011,21 @@ void Predictor::update(int y) {
   static U32 msw_cur=0;
   if (!init) { load_grid(); load_mx(); for (int i=0;i<NMAX;++i) cp[i]=t0, h[i]=0; { int s0=80*(GF&8 ? 64 : 1)*(GF&16 ? 10 : 1);
       int nin=NCX+1+(getenv("REFMODEL")?1:0)+(getenv("IMMUNE")?1:0)+(getenv("IMMUNE2")?1:0)+(getenv("IMMUNE3")?1:0)+(immcons?1:0)+(MX_BIAS?1:0)+(getenv("MATCH2")?1:0);
-      if (getenv("MIX2")) { int sz[8]={s0, 256, 256*8, 32*10}; int K=4;
-        if ((MX_SETS&1) && K<8) sz[K++]=16*10; if ((MX_SETS&2) && K<8) sz[K++]=128; if ((MX_SETS&4) && K<8) sz[K++]=64;
-        if ((MX_SETS&8) && K<8) sz[K++]=8*10; if ((MX_SETS&16) && K<8) sz[K++]=256*8;
-        if ((MX_SETS&32) && K<8) sz[K++]=16*10; if ((MX_SETS&64) && K<8) sz[K++]=64; if ((MX_SETS&128) && K<8) sz[K++]=256;
-        if ((MX_SETS&256) && K<8) sz[K++]=64; if ((MX_SETS&512) && K<8) sz[K++]=128;
-        if ((MX_SETS&1024) && K<8) sz[K++]=1<<(2*FL_q);
-        if ((MX_SETS&2048) && K<8) sz[K++]=4096;   // round 23: a weight set per map cell (cell id & 4095)
-        if ((MX_SETS&4096) && K<8) sz[K++]=4096;   // round 24 control: a weight set by the last two bytes, hashed to 4096
-        if ((MX_SETS&8192) && K<8) sz[K++]=20480;  // round 24: by current cell x previous cell's coarse region
-        if ((MX_SETS&16384) && K<8) sz[K++]=20480; // round 25 control: by the last two bytes, hashed to 20,480 (same size)
-        if ((MX_SETS&32768) && K<8) sz[K++]=1280*128; // round 26: current cell x previous cell's fine region
-        if ((MX_SETS&65536) && K<8) sz[K++]=65536;    // round 26: current cell x previous cell, hashed to 65,536
-        if ((MX_SETS&131072) && K<8) sz[K++]=2048;    // round 32: guessed next cell's fine region x current cell's coarse region
+      if (getenv("MIX2")) { int sz[10]={s0, 256, 256*8, 32*10}; int K=4;
+        if ((MX_SETS&1) && K<10) sz[K++]=16*10; if ((MX_SETS&2) && K<10) sz[K++]=128; if ((MX_SETS&4) && K<10) sz[K++]=64;
+        if ((MX_SETS&8) && K<10) sz[K++]=8*10; if ((MX_SETS&16) && K<10) sz[K++]=256*8;
+        if ((MX_SETS&32) && K<10) sz[K++]=16*10; if ((MX_SETS&64) && K<10) sz[K++]=64; if ((MX_SETS&128) && K<10) sz[K++]=256;
+        if ((MX_SETS&256) && K<10) sz[K++]=64; if ((MX_SETS&512) && K<10) sz[K++]=128;
+        if ((MX_SETS&1024) && K<10) sz[K++]=1<<(2*FL_q);
+        if ((MX_SETS&2048) && K<10) sz[K++]=4096;   // round 23: a weight set per map cell (cell id & 4095)
+        if ((MX_SETS&4096) && K<10) sz[K++]=4096;   // round 24 control: a weight set by the last two bytes, hashed to 4096
+        if ((MX_SETS&8192) && K<10) sz[K++]=20480;  // round 24: by current cell x previous cell's coarse region
+        if ((MX_SETS&16384) && K<10) sz[K++]=20480; // round 25 control: by the last two bytes, hashed to 20,480 (same size)
+        if ((MX_SETS&32768) && K<10) sz[K++]=1280*128; // round 26: current cell x previous cell's fine region
+        if ((MX_SETS&65536) && K<10) sz[K++]=65536;    // round 26: current cell x previous cell, hashed to 65,536
+        if ((MX_SETS&131072) && K<10) sz[K++]=2048;    // round 32: guessed next cell's fine region x current cell's coarse region
+        if ((MX_SETS&262144) && K<10) sz[K++]=8*2*10;  // round 38: word novelty level x new-word flag x page structure
+        if ((MX_SETS&524288) && K<10) sz[K++]=(getenv("ENTITY") && (atoi(getenv("ENTITY"))&8192) ? 5 : 3)*2*10;  // round 43: 5 count states  // round 40: article hit x new-word flag x page structure
         int tot=0; for (int i=0;i<K;++i) tot+=sz[i];
         mp=new Mixer(nin, tot); mp->layers(K, sz, MX_FINAL==2 ? 256*16 : MX_FINAL>=3 ? 256*256*(MX_FINAL==4 ? 10 : 1) : 256*10); }
       else mp=new Mixer(nin, s0); } init=1; }
@@ -1127,6 +1132,84 @@ void Predictor::update(int y) {
         if (wk!=pk) { nxr[wk]=g1; pk=wk; }
         int pr=nxr[(((U32)(G_regB[g1]&127)*16384+(G_regB[g2]&127)*128+(G_regB[g3]&127))*0x9E3779B1u)>>12];
         h[k++]=hmix(242,hmix(pr*8192+g1,G_state)); h[k++]=hmix(243,hmix(pr, c4&0xffff)); }
+      // round 38 (the review's "novelty" and "entities", read from the text the decoder already has):
+      // NOVEL: word novelty. A word is new if it has not ended anywhere earlier in the file; NV_lvl = moving share of
+      // new words among the last ~16 (0..7); NV_nf = the word being typed has never ended before. NOVEL&1 picks a
+      // mixer weight set by them (MXSETS 262144 must also be set), NOVEL&2 adds two contexts.
+      // ENTITY&1: the page title as a context (with 2 bytes, and with the current word); ENTITY&2: the last [[link]]
+      // target the same way.
+      { static int nov = getenv("NOVEL") ? atoi(getenv("NOVEL")) : 0, ent = getenv("ENTITY") ? atoi(getenv("ENTITY")) : 0;
+        if (nov) { static std::vector<unsigned char> seen(1<<24, 0); static U32 last=0; static int ema=0;
+          if (h[5]==0 && last) { U32 i=(last*0x9E3779B1u)>>8; ema += (((int)!seen[i]<<12) - ema) >> 4; seen[i]=1; }
+          last=h[5]; NV_lvl = ema>>9; if (NV_lvl>7) NV_lvl=7; NV_nf = h[5] ? !seen[(h[5]*0x9E3779B1u)>>8] : 0;
+          if (nov&4) { U32 r=hmix(91,(U32)(G_pos>>12)); NV_lvl=r>>29; NV_nf = h[5] ? (hmix(92,h[5])>>31) : 0; }   // control: same shape, no meaning
+          if (nov&2) { h[k++]=hmix(244,hmix(NV_lvl*2+NV_nf, c4&0xffff)); h[k++]=hmix(245,hmix(NV_lvl*2+NV_nf, h[5])); } }
+        // round 39, interventions on the article scope (causal test of the ENTITY=5 gain): ENTITY&8 the id changes every
+        // PGCHUNK bytes (default 8100) whatever the articles; &16 the new id arrives PGLAG bytes (default 1000) after
+        // "<title>"; &32 drops the 2-byte context, &64 drops the word context.
+        if (ent) { static U32 title=0, link=0, cap=0, pendid=0; static int md=0; static long bp=0, pend=-1;
+          static long CH = getenv("PGCHUNK") ? atol(getenv("PGCHUNK")) : 8100, LAG = getenv("PGLAG") ? atol(getenv("PGLAG")) : 1000; ++bp;
+          if (md==1) { if (byte=='<') { title=cap; md=0; } else cap=hmix(cap, byte); }
+          else if (md==2) { if (byte==']' || byte=='|') { if (cap) link=cap; md= byte==']' ? 0 : 3; } else cap=hmix(cap, byte|32); }
+          else if (md==3) { if (byte==']') md=0; }
+          if (md==0 && (c4&0xffff)==0x5B5B) { md=2; cap=0; }
+          if (c4==0x746C653Eu && (c8&0xffffff)==0x3C7469u) { md=1; cap=0; link=0;   // "<title>"
+            if (ent&4) { static U32 pgc=0; ++pgc; if (ent&16) { pend=bp+LAG; pendid=hmix(93, pgc); } else title=hmix(93, pgc); md=0; } }   // control: a page counter, not the title
+          if ((ent&16) && pend>=0 && bp>=pend) { title=pendid; pend=-1; }
+          if (ent&8) title=hmix(94, (U32)(bp/CH));
+          // round 40 (causal analysis: the article contexts save 1.4% on words repeated within the article but cost 0.9%
+          // on words seen elsewhere and new to this article): has the current word prefix occurred in this article?
+          // A byte table tagged with 8 bits of the article id; every prefix is recorded after it is looked up.
+          { static std::vector<unsigned char> ps(1<<24, 0); if (!h[5]) PG_st=0; else {
+              U32 i=hmix(95, hmix(title, h[5]))>>8; unsigned char tg=(unsigned char)((title>>24)|1);
+              PG_st = ps[i]==tg ? 1 : 2; ps[i]=tg;
+              if (ent&128) PG_st = 1 + (hmix(96, h[5]^(U32)bp)>>31); } }
+          // round 43: how many times this word prefix has occurred in this article before (0..3), a table tagged with 6 bits
+          // of the article id. ENTITY&8192: the article-hit weight set keyed on the count (5 states); &16384: a context on
+          // article x word x count beside the pooled one; &32768 control: the count replaced by noise of the same shape.
+          if (ent&(8192|16384)) { static std::vector<unsigned char> pc(1<<24, 0); if (!h[5]) PG_cnt=0; else {
+              U32 i=hmix(98, hmix(title, h[5]))>>8; unsigned char tg=(unsigned char)(((title>>26)|1)<<2);
+              PG_cnt = (pc[i]&0xfc)==tg ? pc[i]&3 : 0; pc[i] = tg | (PG_cnt<3 ? PG_cnt+1 : 3);
+              if (ent&32768) PG_cnt = hmix(99, h[5]^(U32)bp)>>30; }
+            if (ent&16384) h[k++]=hmix(254, hmix(hmix(title, h[5]), h[5] ? PG_cnt+1 : 0)); }   // control: same shape, a meaningless split
+          // round 44, ENTITY&262144 section scope: a section id (article id x count of newline-"==" headings so far in the article)
+          // x current word; &524288 control: the count steps at pseudo-random bytes instead (about one per 1,500 bytes).
+          if (ent&262144) { static U32 sec=0, lastt=0; if (title!=lastt) { sec=0; lastt=title; }
+            if (ent&524288) { if ((hmix(100, (U32)bp)&2047)<1) ++sec; } else if ((c4&0xffffff)==0x0A3D3Du) ++sec;
+            h[k++]=hmix(255, hmix(hmix(title, sec), h[5])); }
+          if (ent&1) { if (!(ent&32)) h[k++]=hmix(246,hmix(title, c4&0xffff)); if (!(ent&64)) h[k++]=hmix(247,hmix(title, h[5])); }
+          // round 41. ENTITY&256 subject name: the title's words (lower case letters) are kept; when the word being typed is the
+          // start of a title word, the next letter of that word is the expected byte (at a word start: the first letter of
+          // the title's first word). Two contexts: expected byte x match state x last byte; x previous word was a title
+          // word x last 2 bytes. &2048 control: the title of the article 8 back. ENTITY&512: previous article's id x
+          // current word; &1024: the one before that, too; &4096 control: articles 64 and 65 back instead.
+          if (ent&(256|512|1024)) { static char ring[8][96]; static int rl[8], ri=0, tc=0, tn=0; static char tw[96]; static int ws[24], wl2[24], nw=0; static char ar[8][64], cb[164]; static int arl[8], am=0; static long bt=0;
+            static unsigned char wp[32]; static int wl=0, ptw=0, cur=0; static U32 ids[128]; static U32 pg=0;
+            if (c4==0x746C653Eu && (c8&0xffffff)==0x3C7469u) { tc=1; tn=0; ++pg; ids[pg&127]=hmix(97, pg); }
+            else if (tc) { if (byte=='<' || tn>=95) { tc=0; ri=(ri+1)&7; memcpy(ring[ri], tw, tn); rl[ri]=tn; arl[ri]=0; am=0; bt=0; cur=1; }
+                           else tw[tn++]=(byte>='A'&&byte<='Z') ? byte+32 : byte; }
+            // round 43, ENTITY&65536 subject aliases: the bolded terms (between triple quotes) in the first 3,000 bytes after
+            // the title (Wikipedia bolds the subject's name and its variants in the lead) join the title's words; &131072
+            // control: the bolded terms of the article 8 back instead.
+            ++bt;
+            if (ent&65536) { if ((c4&0xffffff)==0x272727u && ((c4>>24)&255)!=0x27) { if (am) { am=0; cur=1; } else if (bt<3000 && arl[ri]<56) { am=1; ar[ri][arl[ri]++]=' '; } }
+              else if (am && byte!=0x27 && arl[ri]<63) ar[ri][arl[ri]++]=(byte>='A'&&byte<='Z') ? byte+32 : byte; }
+            if (cur) { cur=0; int r=(ent&2048) ? (ri-7)&7 : ri, ra=(ent&131072) ? (ri-7)&7 : ri; nw=0; int i=0, n=rl[r];   // split the active title (+ aliases) into words
+              memcpy(cb, ring[r], n); if (ent&65536) { cb[n++]=' '; memcpy(cb+n, ar[ra], arl[ra]); n+=arl[ra]; }
+              while (i<n && nw<24) { while (i<n && !(cb[i]>='a'&&cb[i]<='z')) ++i; int st=i; while (i<n && cb[i]>='a'&&cb[i]<='z') ++i;
+                if (i>st) { ws[nw]=st; wl2[nw]=i-st; ++nw; } } }
+            const char* T=cb;
+            int lb=(byte>='A'&&byte<='Z') ? byte+32 : byte;
+            if (lb>='a'&&lb<='z') { if (wl<32) wp[wl]=lb; ++wl; }
+            else { if (wl>0 && wl<=32) { ptw=0; for (int j=0;j<nw;++j) if (wl2[j]==wl && !memcmp(T+ws[j], wp, wl)) { ptw=1; break; } } wl=0; }
+            int ex=0, ms=0;
+            if (wl==0) { if (nw) { ex=T[ws[0]]; ms=1; } }
+            else if (wl<32) for (int j=0;j<nw;++j) if (wl2[j]>=wl && !memcmp(T+ws[j], wp, wl)) { ex = wl2[j]>wl ? T[ws[j]+wl] : ' '; ms = wl2[j]>wl ? 2 : 3; break; }
+            if (ent&256) { h[k++]=hmix(250, hmix(ex*4+ms, ((wl>7?7:wl)<<8)|(c4&255))); h[k++]=hmix(251, hmix(ex*8+ms*2+ptw, c4&0xffff)); }
+            U32 p1 = (ent&4096) ? ids[(pg-64)&127] : ids[(pg-1)&127], p2 = (ent&4096) ? ids[(pg-65)&127] : ids[(pg-2)&127];
+            if (ent&512) h[k++]=hmix(252, hmix(p1, h[5]));
+            if (ent&1024) h[k++]=hmix(253, hmix(p2, h[5])); }
+          if (ent&2) { h[k++]=hmix(248,hmix(link, c4&0xffff)); h[k++]=hmix(249,hmix(link, h[5])); } } }
       if (GF&524288) { h[k++]=hmix(221,G_state); h[k++]=hmix(222,hmix(G_state,g2)); }
       if (GF&1048576) { G_next[g2]=g1; h[k++]=hmix(223,hmix(G_next[g1],G_state)); }
       if (GF&262144) { h[k++]=hmix(218,hmix(G_t16[g1]*256+G_t16[g2]*16+G_t16[g3], c4&255));
@@ -1196,27 +1279,30 @@ void Predictor::update(int y) {
       int fr = 0; if (MX_FINAL>=3 && !G_len.empty()) { int f1=G_hist[G_pos&65535]; long fj=G_pos-G_len[f1]; int f2= fj>=0 ? G_hist[fj&65535] : 0; fr=(G_reg[f1]&15)*16+(G_reg[f2]&15); }
       m.setfinal(MX_FINAL==1 ? c0 : MX_FINAL==2 ? c0 + 256*mx_r1 : MX_FINAL==3 ? c0 + 256*fr : MX_FINAL==4 ? c0 + 256*(fr*10 + ((GF&16) ? S_state : 0)) : c0 + 256*((GF&16) ? S_state : 0));
       if (MX_SETS) { int kk=4;
-        if ((MX_SETS&1) && kk<8) m.setk(kk++, mx_r1*10 + mx_s);
-        if ((MX_SETS&2) && kk<8) m.setk(kk++, GF ? G_regB[G_hist[G_pos&65535]]&127 : 0);
-        if ((MX_SETS&4) && kk<8) m.setk(kk++, G_topic&63);
-        if ((MX_SETS&8) && kk<8) m.setk(kk++, (MS_wc>7?7:MS_wc)*10 + mx_s);
-        if ((MX_SETS&16) && kk<8) m.setk(kk++, ((c4>>8)&255)*8 + bcount);
-        if ((MX_SETS&32) && kk<8) m.setk(kk++, D_q*10 + mx_s);
-        if ((MX_SETS&64) && kk<8) m.setk(kk++, G_t64.empty() ? 0 : G_t64[G_hist[G_pos&65535]]);
-        if ((MX_SETS&128) && kk<8) m.setk(kk++, G_t256.empty() ? 0 : G_t256[G_hist[G_pos&65535]]);
-        if ((MX_SETS&256) && kk<8) m.setk(kk++, XY_place);
-        if ((MX_SETS&512) && kk<8) { int c=G_hist[G_pos&65535]; m.setblend(kk++, G_regB[c]&127, G_rb2[c], G_w2[c]); }
-        if ((MX_SETS&1024) && kk<8) m.setk(kk++, FL_p1);
-        if ((MX_SETS&2048) && kk<8) m.setk(kk++, G_len.empty() ? 0 : G_hist[G_pos&65535]&4095);
-        if ((MX_SETS&4096) && kk<8) m.setk(kk++, (int)(((c4&0xffff)*2654435761u)>>20));
-        if ((MX_SETS&8192) && kk<8) { int q1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long qj = G_pos-(G_len.empty()?0:G_len[q1]);
+        if ((MX_SETS&1) && kk<10) m.setk(kk++, mx_r1*10 + mx_s);
+        if ((MX_SETS&2) && kk<10) m.setk(kk++, GF ? G_regB[G_hist[G_pos&65535]]&127 : 0);
+        if ((MX_SETS&4) && kk<10) m.setk(kk++, G_topic&63);
+        if ((MX_SETS&8) && kk<10) m.setk(kk++, (MS_wc>7?7:MS_wc)*10 + mx_s);
+        if ((MX_SETS&16) && kk<10) m.setk(kk++, ((c4>>8)&255)*8 + bcount);
+        if ((MX_SETS&32) && kk<10) m.setk(kk++, D_q*10 + mx_s);
+        if ((MX_SETS&64) && kk<10) m.setk(kk++, G_t64.empty() ? 0 : G_t64[G_hist[G_pos&65535]]);
+        if ((MX_SETS&128) && kk<10) m.setk(kk++, G_t256.empty() ? 0 : G_t256[G_hist[G_pos&65535]]);
+        if ((MX_SETS&256) && kk<10) m.setk(kk++, XY_place);
+        if ((MX_SETS&512) && kk<10) { int c=G_hist[G_pos&65535]; m.setblend(kk++, G_regB[c]&127, G_rb2[c], G_w2[c]); }
+        if ((MX_SETS&1024) && kk<10) m.setk(kk++, FL_p1);
+        if ((MX_SETS&2048) && kk<10) m.setk(kk++, G_len.empty() ? 0 : G_hist[G_pos&65535]&4095);
+        if ((MX_SETS&4096) && kk<10) m.setk(kk++, (int)(((c4&0xffff)*2654435761u)>>20));
+        if ((MX_SETS&8192) && kk<10) { int q1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long qj = G_pos-(G_len.empty()?0:G_len[q1]);
           int q2 = (qj>=0 && !G_len.empty()) ? G_hist[qj&65535] : 0; m.setk(kk++, q1*16 + (G_reg.empty() ? 0 : G_reg[q2]&15)); }
-        if ((MX_SETS&16384) && kk<8) m.setk(kk++, (int)((((c4&0xffff)*2654435761u)>>8)%20480));
-        if ((MX_SETS&131072) && kk<8) m.setk(kk++, G_len.empty() ? 0 : (G_regB[G_p2]&127)*16 + (G_reg[G_hist[G_pos&65535]]&15));
+        if ((MX_SETS&16384) && kk<10) m.setk(kk++, (int)((((c4&0xffff)*2654435761u)>>8)%20480));
+        if ((MX_SETS&131072) && kk<10) m.setk(kk++, G_len.empty() ? 0 : (G_regB[G_p2]&127)*16 + (G_reg[G_hist[G_pos&65535]]&15));
+        if ((MX_SETS&262144) && kk<10) m.setk(kk++, (NV_lvl*2 + NV_nf)*10 + mx_s);
+        if ((MX_SETS&524288) && kk<10) { static int e43 = getenv("ENTITY") ? atoi(getenv("ENTITY")) : 0;
+          m.setk(kk++, (((e43&8192) ? (PG_st ? 1+PG_cnt : 0) : PG_st)*2 + NV_nf)*10 + mx_s); }
         if (MX_SETS&(32768|65536)) { int q1 = G_len.empty() ? 0 : G_hist[G_pos&65535]; long qj = G_pos-(G_len.empty()?0:G_len[q1]);
           int q2 = (qj>=0 && !G_len.empty()) ? G_hist[qj&65535] : 0;
-          if ((MX_SETS&32768) && kk<8) m.setk(kk++, (q1%1280)*128 + (G_regB.empty() ? 0 : G_regB[q2]&127));
-          if ((MX_SETS&65536) && kk<8) m.setk(kk++, (int)(((U32)(q1*8192+q2)*2654435761u)>>16)); } } } }
+          if ((MX_SETS&32768) && kk<10) m.setk(kk++, (q1%1280)*128 + (G_regB.empty() ? 0 : G_regB[q2]&127));
+          if ((MX_SETS&65536) && kk<10) m.setk(kk++, (int)(((U32)(q1*8192+q2)*2654435761u)>>16)); } } } }
   pr=m.p();
   pr=pr+3*a1.pp(y, pr, c0)>>2;
   pr=pr+3*a2.pp(y, pr, c0^h[0]>>2)>>2;

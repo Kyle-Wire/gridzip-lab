@@ -15,7 +15,9 @@ top.
 | Evolution, speciation, experiment 3 | see `results/` | finished runs are committed |
 | enwik8, local PC (2026-11-20) | **18,362,762 B** (−7.1% vs lpaq1) | round-3 settings + page, revision and contributor ids rebuilt from relations (`work/exp/headers.py`); see section 6 |
 | enwik8, full5 (2026-11-21) | 17,868,078 B (about −9.5% vs lpaq1; −494,684 B vs 18,362,762) | map-native stack from rounds 10–31 (cell contexts and memories, cell-region weight set, cell trigram and 4-gram) + the three header fields; map, tree, permutation and side stream counted; decode verified (section 6) |
-| **enwik8, full5 + word order (2026-11-21)** | **17,683,150 B** (−184,928 B, −1.03% vs 17,868,078) | the same compressor; articles chained by word similarity (hashed tf-idf over words of 3+ letters) instead of bags of map cells; the permutation costs the same 18,750 B; decode verified (section 6) |
+| **enwik8, full8 + word order (2026-11-21)** | **17,623,113 B** (−25,625 B, −0.145% vs 17,648,738) | full7 + mixer weight set by "word prefix seen in this article" (MXSETS 524288) + subject name (ENTITY=261: next letter of the title word being spelled); lpaq1g41, `run_full8.py CONFIG=full8 CHAIN=word TRANSFORM=hdr`; decode verified, enwik8 rebuilt identical |
+| enwik8, full7 + word order (2026-11-21) | 17,648,738 B (−34,412 B, −0.195% vs 17,683,150) | full5 + article-scoped contexts (ENTITY=5: page counter x 2 bytes, x current word) + word novelty (NOVEL=3, MXSETS 262144); lpaq1g39, `run_full8.py CONFIG=full7 CHAIN=word TRANSFORM=hdr`; decode verified, enwik8 rebuilt identical. `champion/` still holds the 17,683,150 B recipe |
+| enwik8, full5 + word order (2026-11-21) | 17,683,150 B (−184,928 B, −1.03% vs 17,868,078) | the same compressor; articles chained by word similarity (hashed tf-idf over words of 3+ letters) instead of bags of map cells; the permutation costs the same 18,750 B; decode verified (section 6) |
 
 The family tree of every experiment is `docs/gridzip-phylogeny.html`.
 
@@ -213,6 +215,64 @@ side stream, every archive decoded and compared. Quick-experiment harnesses are
 
   They're built in `~/gz_exp/cmixc` and queued in `work/exp/run_cmix_cell4.py`
   after the 1 MB feature test (`run_cmix_feat.py`).
+
+## 7. 2026-11-21: article scope, what transfers, and the cmix plan
+
+**Champion: 17,623,113 B** (`champion/`, settings "full8"; `CONFIG=full8 CHAIN=word TRANSFORM=hdr run_full8.py`,
+binary lpaq1g41 or later): archive 17,581,133 + map and tree 6,494 + permutation 18,750 + side stream 16,736.
+Decoded and rebuilt to enwik8 byte for byte. Steps on the way, each a verified full run:
+
+| step | total | change |
+|---|---|---|
+| full5 + word chain | 17,683,150 | |
+| full7: + contexts scoped to the current article (`ENTITY=5`), word novelty (`NOVEL=3`, MXSETS 262144) | 17,648,738 | −34,412 |
+| full8: + article-hit weight set (MXSETS 524288), subject name (`ENTITY=261`) | 17,623,113 | −25,625 |
+
+What was learned (scripts and results in `work/exp/`):
+
+- **Every idea ran against a control.** A page counter did as well as the title (so the gain is scope, not the
+  title's meaning); fixed-length chunks in place of articles lose the whole gain; `causal_page.py` has the
+  interventions and the per-byte attribution. Dropped after losing to a control or to words alone: years, edit time,
+  links and geography as article orders; link and difficulty contexts; previous-article vocabulary; hit counts;
+  bold lead terms as subject aliases; section scope (rounds 38–44, `order_ideas6/7.py`).
+- **Slices overstate gains about twofold.** `learning_curves.py` (per-byte costs on the full file): the stack's saving
+  over full5 is flat along the file, 0.25% to 0.34% per 10 MB window, so it is persistent; a model started fresh on
+  a 10 MB slice shows about twice that. Expect half of a slice gain on the full file.
+- **The route solver lost because of reversals.** 2-opt + Or-opt on the word chain won on every 10 MB slice and lost
+  the full file twice (+23,941 B, +29,056 B). On the first 30 MB of articles (`order_ideas8.py`): with reversals
+  +0.50%, without +0.009%. The word chain stays; judge order ideas on 30 MB or more.
+- **Vocabulary activation is real but small** (`vocab_probe.py`, offline): word associations from an article's prefix
+  predict its coming known words 0.17 to 0.32 bits better than document frequency (13.6 bits per word); a random
+  prefix gains 0.00. Below the 0.5-bit bar set for a compressor build.
+- **The order and the header transform do not depend on the host** (`transfer_test.py`, full enwik8, 25 archives
+  decompressed): word chain + header transform against the original order: zlib −4.43%, bzip2 −4.73%, zstd −1.76%,
+  xz −1.44%, plain lpaq1 −2.16%, permutation and side stream counted. The map contexts are lpaq-only: in cmix the
+  graft was at noise level (section 4, and the 1 MB feature tests).
+- **Where the champion's bits go** (`bit_budget.py`): prose words 57% (new to the article 4.96 MB, repeated in it
+  4.44 MB, new to the file 0.55 MB), link targets 2.25 MB, spaces and punctuation 2.05 MB, URLs 0.76 MB, numbers
+  0.35 MB at 3.0 bits per byte, all header fields 0.2 MB. What is left is ordinary language, which is what a
+  stronger model class is for.
+- **Map cost audit:** every merged cell is two earlier cells, so the table rebuilds from 1,024 merges; merges 2,559 B
+  + region labels 1,760 B = 4,319 B, tree 1,535 B. Results count 4,959 + 1,535 B: about 640 B on the safe side. The
+  cost is computed, not from a serialized file.
+- Small keeper not yet in the champion: the expected-byte context (GFLAGS 536870912) on full8, −0.02% to −0.03% at
+  level 9; needs lpaq1g44 or later (41 contexts).
+
+**cmix plan.** The earlier cmix test asked whether the map helps cmix (it does not). The question now is whether the
+pipeline does: `work/exp/cmix_pipe.py` takes the 1,325 whole pages of the first 10 MB of enwik8 as A original order,
+B the same pages word-chained (+1,480 B permutation), C word chain + header transform (+3,561 B), then decodes C and
+rebuilds A. `prep` is done (rebuild verified; plain lpaq1 on the same files: B −0.88%, C −1.20%). `run` is queued by
+`queue_cmix_pipe.sh` behind the sparc-transformers night queue (about 01:30 on 2026-11-22; about 12 GB, 10.5 h,
+passes in the order A, C, B, decode; results in `cmix_pipe.jsonl`; it stops itself if memory runs short). The first
+attempt at a cmix 10 MB test on 2026-11-21 was lost to a wildcard `rm` in `~/gz_exp`: scratch files now go in their
+own subfolders.
+
+If C beats A in cmix by about 1% or more: (1) the same three arrangements on full enwik8 (about 26 h per pass at
+these settings, so it needs days without training); (2) for a prize-legal build, the pipeline is a preprocessor in
+front of fx2-cmix (the strongest open base under the 10 GB limit): the decompressor gains `headers.rebuild` and the
+inverse permutation (small, deterministic code), the archive gains the permutation (18,750 B) and the side stream
+(16,736 B), and the word chain is built at compression time only. cmix-based prize entries already reorder
+articles, so the order gain there may be partly taken; the test tells.
 
 ## Notes
 

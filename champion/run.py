@@ -1,12 +1,12 @@
 """Step 2 of the champion: compress, decode, compare, rebuild enwik8, and count every byte.
 
-Compresses OUT/enwik8.word.hdr (from build_order.py) with lpaq1g at level 9 and the "full5" settings below, decodes
+Compresses OUT/enwik8.word.hdr (from build_order.py) with lpaq1g at level 9 and the "full8" settings below, decodes
 it, checks the decoded file byte for byte, rebuilds enwik8 from it (headers.rebuild with the order and side stream)
 and checks that too. Prints one JSON line with the total:
   archive + map and region tree 6,494 B + permutation 18,750 B + header side stream
 The map cost: 4,959 B for the grid map as counted in every result since round 1 (HANDOFF.md), plus 1,535 B for
 the region tree's labels and split order (make_tree_map.py). The decoder is lpaq1g built from lpaq1g/lpaq1g.cpp.
-Encode and decode take about 9 minutes each on a Ryzen 9 9900X (WSL), peak 1.5 GB.
+Encode and decode take about 16 minutes each on a Ryzen 9 9900X (WSL), peak 1.5 GB.
 Usage (repo root):  python champion/run.py path/to/lpaq1g data/enwik8 champion/out"""
 import json, math, os, subprocess, sys, time
 import numpy as np
@@ -16,19 +16,24 @@ import headers
 HERE = os.path.dirname(os.path.abspath(__file__))
 MAP = os.path.join(HERE, "map_tree.bin")
 MAP_COST = 4959 + 1535
-FULL5 = {"GFLAGS": str(29399 | 8388608 | 1048576 | 67108864 | 134217728), "MIX2": "1", "MIXSEL": "1", "IMMUNE": "1",
-         "MXBIAS": "1", "MXSETS": str(2 | 128 | 8192), "IMMTHR": "1", "IMMUNE2": "4", "IMMUNE3": "1", "IMMCONS": "2",
-         "CTXMODE": "2"}
+FULL8 = {"GFLAGS": str(29399 | 8388608 | 1048576 | 67108864 | 134217728), "MIX2": "1", "MIXSEL": "1", "IMMUNE": "1",
+         "MXBIAS": "1", "MXSETS": str(2 | 128 | 8192 | 262144 | 524288), "IMMTHR": "1", "IMMUNE2": "4", "IMMUNE3": "1", "IMMCONS": "2",
+         "CTXMODE": "2", "ENTITY": str(1 | 4 | 256), "NOVEL": "3"}
 # GFLAGS bits: 29399 = the round-4 host (grid cells, spatial map, previous word, fields, page structure, ...),
 # 8388608 cell contexts, 1048576 next cell, 67108864 cell trigram guess, 134217728 cell 4-gram guess.
 # MXSETS 2|128|8192: mixer weight sets by byte context, region tree, and cell x previous cell's coarse region.
 # IMMTHR/IMMUNE2/IMMUNE3/IMMCONS: immune memories keyed on the last four and two cells, with co-stimulation.
+# Added on 2026-11-21 ("full7", "full8"), all read from text the decoder already has:
+# ENTITY 1|4: contexts scoped to the current article (a page counter x 2 bytes, x current word); 256: the subject name
+# (the next letter of the title word being spelled). NOVEL 3: word novelty (has this word ever been seen?) as
+# contexts and, with MXSETS 262144, a mixer weight set. MXSETS 524288: a weight set by "this word prefix has
+# occurred in this article".
 
 
 def main(exe, enwik8, out):
     src, side_p, order_p = (os.path.join(out, f) for f in ("enwik8.word.hdr", "enwik8.word.hdr.side", "order.wordchain.npy"))
     arc, back = os.path.join(out, "champion.lpq"), os.path.join(out, "champion.back")
-    env = {**{k: v for k, v in os.environ.items() if k not in FULL5}, **FULL5, "GRIDMAP": MAP}
+    env = {**{k: v for k, v in os.environ.items() if k not in FULL8}, **FULL8, "GRIDMAP": MAP}
     t = time.time(); subprocess.run([exe, "9", src, arc], env=env, check=True, stdout=subprocess.DEVNULL); enc = time.time() - t
     t = time.time(); subprocess.run([exe, "d", arc, back], env=env, check=True, stdout=subprocess.DEVNULL); dec = time.time() - t
     decoded = open(back, "rb").read(); ok = decoded == open(src, "rb").read()
