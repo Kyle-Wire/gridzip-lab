@@ -69,3 +69,9 @@ Wind is +x; the front row spans x = -0.5 to -0.3 m.
 - Case C has been seen by WindSim's own diagnosis, and here it is fitted. Nothing found here is validated: a
   formula becomes a model change only through WindSim's own protocol and a held-out case (B or D).
 - An empirical correction fitted to Case C must not be applied to reports. Its use is to point at the physics.
+
+## Amendment A1 (22 Nov 2026, before any real-data search; nothing but the planted-law unit tests had run)
+`kfrac(alpha)` enters with its coefficient fixed at 1, as the law measured = sqrt(U^2 + alpha 2k) says; only alpha
+is fitted. A free slope on it would trade against alpha (slope x alpha is what a small k sees), so alpha could not
+be read. Reported parameters are the least-squares values; the MDL-rounded values the code length uses are given
+beside them.
