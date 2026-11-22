@@ -69,3 +69,11 @@ Place:
   set's, and the `tropical` term pays before.
 
 Nothing here changes the chain or a gate. Findings go to the WindSim thread as leads for its own protocols.
+
+## Amendment A1 (22 Nov 2026, after the first run, before any write-up)
+The first run's winner in every set used `storm_loo` with a coefficient of −2 to −2.7, and the same-storm neighbour
+test coded *worse* than its shuffles (p = 1.0). That is the check's own construction, not physics: each station is
+predicted from the other stations of the same storm, so a station that reads high pushes its neighbours' predictions
+up and their errors down. Errors within a storm are anti-correlated by design. `storm_loo` is therefore dropped from
+the vocabulary and the search is rerun unchanged otherwise. The same-storm neighbour test is kept in the record and is
+read only as a sign of this coupling; storm-wide misses cannot be tested from these files. Both runs are reported.
