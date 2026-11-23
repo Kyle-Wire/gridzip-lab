@@ -230,3 +230,28 @@ no overlay of any input on the perimeter or the damage record); the synthetic an
   fires only, by bits per building, and the fitted values and the runs tried are listed in the findings.
 - **Runs.** FireSim `scripts/run_fire.py` with `fires/<fire>.json`, on THE-COW; every result pins the FireSim
   commit and refuses nothing silently (a dirty tree is recorded in the result).
+
+**A6 (23 Nov 2026, after the first Camp runs, before any HRRR value was read).** What had been seen: the three
+first Camp runs under A5 (FireSim f8a466b, `results/camp_2018/`), which failed. Spread only: 91 km2 against 376 mapped
+at 21 h, overlap (Jaccard) 0.16, building AUC 0.51. With embers and houses, one seed, uncalibrated: 332 km2, Jaccard
+0.26, AUC 0.52, 3.96 bits per building against 0.99 for the fire's own burned share. The modelled fire ran
+south-southwest and was far too slow in the first 9 hours (10 km2 against about 300); the mapped fire ran west.
+Reading: the wind input. The inverse-distance mean blends the canyon station (Jarbo Gap, wind from the north-north-
+east) with valley stations (from the north-north-west), uses 10-minute or 2-minute means of 3 to 6 m/s, and no gusts.
+- **Wind source W2.** NOAA HRRR analysis (hour f00, 3 km, US government work, public domain), 10 m wind components
+  and surface gust, fetched from NOAA's open archive, turned from the HRRR grid to true north to the fire grid,
+  interpolated bilinearly, divided by 1.15 to 20 ft. This replaces station wind W1 for candidates M1 to M3; W1
+  results stay on record. Dead fuel moisture stays as in A5 (stations).
+- **Gust share g.** Effective wind = mean + g x (gust - mean), direction unchanged. g is a calibrated number: 0 and
+  0.5 are run on Camp, and the one with the lower bits per building (ties: higher Jaccard at the 21 h satellite
+  perimeter) is carried to the other calibration fires, where it is checked, not refitted, before any freeze.
+- **Check of the source, reported with every W2 result:** HRRR 10 m wind at the stations against the station
+  readings over the window (mean speed ratio and mean direction difference per station). This is a description, not
+  a gate.
+- **Perimeters.** The GeoMAC outline stamped 2018-11-08 17:54Z carries 222 km2 at 3.35 h after ignition, which the
+  9.45 h outlines (285 and 331 km2) and the incident record make implausible as a mapping time. It is reported but
+  left out of any pooled perimeter score, here and for any outline whose stamped area exceeds the next later
+  outline's area times 0.75 while being under 4 hours old. The rule is stated now and applied by time and area only.
+- **Blind fires.** W2 is weather, allowed by section 2 (hindcast, stated). HRRR starts in 2014 (v1) and is used at
+  whatever version the archive holds for the date; a fire with no HRRR hour falls back to W1 and says so.
+- A terrain-following wind at finer scale than 3 km (WindSim, candidate M4's part) is not in W2.
