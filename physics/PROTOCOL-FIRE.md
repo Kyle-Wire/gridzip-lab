@@ -156,3 +156,16 @@ the section 1 fires is not yet known.
   California, as A1 says. Lahaina (Hawaii) and the 2024-2025 fires are outside the release.
 - The release's other fires are not added to either set by this amendment. Using them (a wider blind test across
   many fires) needs its own amendment naming the split rule before their outcomes are read.
+
+**A3 (23 Nov 2026, after the USGS release was downloaded; its points were not opened).** Seen: the release's file
+list, attribute names, licence text (CC0-1.0, use constraints "None"), and its per-fire summary table of exposed and
+destroyed building counts for all 362 fires, which includes the section 1 fires Marshall, Almeda, East Troublesome,
+Chimney Tops 2, Camp and Tubbs. So the destroyed totals of those fires are known before any run; G4 (count) is
+read with that said beside it. No building point, perimeter or raster has been opened.
+- With A2, blind fires with a damage record are Almeda, Eaton, Palisades and Chimney Tops 2. A1's condition (four,
+  one outside California) is met only when Chimney Tops 2 has pre-fire fuels (LANDFIRE 1.4.0, on request). Until
+  then the house-level gates stay "not scored" on three fires, and the three are reported.
+- `expos_type` "Direct" (inside the perimeter or within 100 m) is population A for these fires; "Direct" plus
+  "Indirect" is population B.
+- Ignition times now come from official records for Camp, Tubbs, Lahaina and Chimney Tops 2 (the last is the time
+  the fire was reported). Marshall's is still approximate; no Marshall run until an official time is cited.
