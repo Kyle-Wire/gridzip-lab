@@ -114,3 +114,32 @@ For each candidate on calibration fires (and, after its freeze, on blind fires a
 Calibration fires are spent for testing. Damage records outside California differ in classes and completeness; each
 fire's record is described beside its score. Suppression and structure defence are not modelled and not seen, so
 survival near engines reads as model error. Footprints may postdate a fire; the release date is reported.
+
+## Amendments
+
+**A1 (23 Nov 2026, after the data inventory, before any data file was opened by scoring code).** Seen: the list of
+what was downloaded for each fire and each source's licence text; no perimeter, damage point or raster was read,
+plotted or scored.
+- Damage records that are openly licensed exist only for the four California fires (CAL FIRE DINS: Camp 23,624
+  points, Tubbs 6,023, Eaton 18,428, Palisades 12,137). Boulder County and FEMA (Marshall) state no licence, Maui
+  County (Lahaina) is not open, and Almeda, East Troublesome, Chimney Tops 2 and Smokehouse Creek have none. As
+  section 1 stands, the blind set has two fires with damage records, both in California, so gates G1, G2, G4 and G5
+  read **"not scored"** until at least two more blind fires, one outside California, have open damage records. The
+  rule is not relaxed. A search for open records (FEMA, NIST, DesignSafe and state sources) is added; any found for
+  a fire already in section 1 is used in that fire's existing set.
+- G3 (area overlap) and the arrival-time score need only perimeters and are scored on every fire that has pre-fire
+  fuels. Chimney Tops 2 has none yet (LANDFIRE 1.4.0 is archived, on request) and is dropped from G3 until it does.
+- Fuels: Almeda and East Troublesome use LANDFIRE 2016 (the 2019 version is no longer served; 2020 includes the
+  fires). Terrain is LANDFIRE 2020 for all fires (terrain does not carry a burn scar).
+- B1 (federal risk map) is built on LANDFIRE 2020 fuels, so for fires of 2016-2020 it has seen the burn scar. It is
+  scored as a baseline only on fires of 2021 or later (Eaton, Palisades; Marshall, Lahaina and Smokehouse Creek for
+  area), and that is stated beside every B1 number. B0 and B2 are unaffected.
+- Footprints are Overture release 2026-11-18.0, after every fire, so buildings destroyed and not rebuilt may be
+  missing. For population A the damage record's own point is the building; footprints are joined to it where one
+  exists within 15 m, and the share without a footprint is reported per fire.
+- Ignition times marked APPROXIMATE in the data (Camp, Tubbs, Chimney Tops 2, Lahaina, Marshall) are replaced from the
+  incident record or the official investigation, with the source cited, before any run of that fire.
+- Reference code: ELMFIRE changed licence on 18 Jun 2026 (AGPL-3.0 with Commons Clause). Only the tag `2025.0717`
+  (EPL-2.0) may be run as a reference, and no ELMFIRE code enters FireSim either way.
+- DINS points carry addresses, parcel numbers and assessed values. They are used for scoring only; no per-address
+  output is published.
