@@ -44,3 +44,14 @@ is fixed and re-run before any real fit.
 **Limits, stated now:** Case C 1D is calibration for every run here, so nothing found is validated; a fix found
 this way goes through WindSim's own protocol and a held-out case. One layout, one direction, one height. The 8
 runs share the inflow, domain, scoring and measurements, so S4 cannot separate those; the ledgers do that.
+
+## A1 (23 Nov 2026, after the synthetic check, before any real fit)
+**Seen:** the synthetic check. (a) uniform only: no term named in 10 of 10; (d) pool, point pattern + resolution:
+10 of 10. (b) lateral 0.08: 5 of 10; (c) near_wall 0.10: 0 of 10, with no false term in any seed. The cause is the
+planted size, not the tool: no point lies on a block face (the nearest is 0.25 D away), so (c)'s signal sd is
+0.012 in ln, a fifth of the noise; (b)'s is 0.035. The check as written could not pass.
+**Change:** the check now measures power instead. For `lateral`, `near_wall` (L = 0.25 D), `fetch_decay` (L = 1 D)
+and `canyon_along`, the planted signal is scaled to sd 0.01, 0.015, 0.02, 0.03, 0.04 and 0.06 (ln), 10 seeds each,
+and the **minimum detectable effect** (MDE) is the smallest sd named in at least 8 of 10. (a) and (d) stay as pass
+tests. On the real data, "does not pay" for a term is read as "smaller than its MDE", reported with it. Nothing
+else changes.
