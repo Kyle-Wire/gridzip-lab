@@ -143,3 +143,16 @@ plotted or scored.
   (EPL-2.0) may be run as a reference, and no ELMFIRE code enters FireSim either way.
 - DINS points carry addresses, parcel numbers and assessed values. They are used for scoring only; no per-address
   output is published.
+
+**A2 (23 Nov 2026, before the file below was downloaded or opened).** Seen: the USGS catalogue page for "Wildfire
+building destruction and exposure in the conterminous United States, 2002-2022" (released 16 Dec 2025,
+doi.org/10.5066/P1QX6UXD, CC0 1.0): building points classed burned or unburned from pre- and post-fire aerial imagery,
+inside each perimeter and a 2.4 km buffer, for the 362 fires with at least 10 buildings destroyed. Whether it holds
+the section 1 fires is not yet known.
+- For a section 1 fire with no DINS record, this release is its damage record: "burned" is destroyed, "unburned" is
+  survived, and its 2.4 km buffer stands in for population B's 2 km. Where both this release and DINS exist (Camp,
+  Tubbs), DINS scores and the agreement between the two is reported.
+- A1's "not scored" for G1, G2, G4, G5 lifts only if this gives at least two more blind fires, one outside
+  California, as A1 says. Lahaina (Hawaii) and the 2024-2025 fires are outside the release.
+- The release's other fires are not added to either set by this amendment. Using them (a wider blind test across
+  many fires) needs its own amendment naming the split rule before their outcomes are read.
