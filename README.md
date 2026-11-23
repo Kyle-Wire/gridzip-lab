@@ -352,6 +352,13 @@ Sizes in KB, map included.
 | Random bytes, 500 KB | 500 | 503 | 500 | 500 | not run |
 | Sparse bits, 1% ones (true minimum 40) | 55 | 48 | 49 | 40 (no grid) | 40 (no grid) |
 
+## Surprise score (`surprise/`)
+A per-house "unlike its neighbours" score in bits, built on `codelen`: each house's modelled readings (FloodSim's
+deepest water around it, storm by storm) are coded with a neighbour mixture, and the score is the extra bits over a
+typical house. Real South Street block (1,062 houses): round trip exact, odd houses cluster (95th percentile 12.4 bits
+vs 5.3 shuffled). Synthetic street with three planted lots: the back-yard low spot is first by 6 bits; the other two
+plants left the modelled water unchanged, so the protocol's P1–P3 fail. `surprise/PROTOCOL.md`, `surprise/FINDINGS.md`.
+
 ## Experiment 3: kid to PhD (`src/exp3.py`)
 
 A small byte-level transformer (0.9 M parameters, 4,000 steps) is trained five
