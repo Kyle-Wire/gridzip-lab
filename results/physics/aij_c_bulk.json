@@ -1,0 +1,1028 @@
+{
+ "protocol": "physics/PROTOCOL-5.md",
+ "windsim_files": "bf9e352",
+ "synthetic": {
+  "a uniform only": {
+   "hits": 10,
+   "of": 10,
+   "winners": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+   ]
+  },
+  "power": {
+   "lateral": {
+    "found_of_10_by_sd": {
+     "0.01": 0,
+     "0.015": 0,
+     "0.02": 0,
+     "0.03": 3,
+     "0.04": 7,
+     "0.06": 10
+    },
+    "mde_sd_ln": 0.06
+   },
+   "near_wall": {
+    "found_of_10_by_sd": {
+     "0.01": 0,
+     "0.015": 0,
+     "0.02": 0,
+     "0.03": 0,
+     "0.04": 4,
+     "0.06": 10
+    },
+    "mde_sd_ln": 0.06
+   },
+   "fetch_decay": {
+    "found_of_10_by_sd": {
+     "0.01": 0,
+     "0.015": 0,
+     "0.02": 0,
+     "0.03": 0,
+     "0.04": 1,
+     "0.06": 3
+    },
+    "mde_sd_ln": null
+   },
+   "canyon_along": {
+    "found_of_10_by_sd": {
+     "0.01": 0,
+     "0.015": 0,
+     "0.02": 0,
+     "0.03": 3,
+     "0.04": 9,
+     "0.06": 10
+    },
+    "mde_sd_ln": 0.04
+   }
+  },
+  "d pool: pattern + resolution": {
+   "hits": 10,
+   "of": 10,
+   "winners": [
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ],
+    [
+     "point_pattern",
+     "res"
+    ]
+   ]
+  },
+  "passed": true
+ },
+ "run_levels": {
+  "d16": {
+   "median_ratio_model_over_measured": 1.4139039118146113,
+   "mean_ln": -0.3312967138695864,
+   "n": 16,
+   "z0": 0,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d16_z0tunnel": {
+   "median_ratio_model_over_measured": 1.328914932151193,
+   "mean_ln": -0.26543424827568735,
+   "n": 16,
+   "z0": 1,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d20": {
+   "median_ratio_model_over_measured": 1.4493204500104686,
+   "mean_ln": -0.3531602838084419,
+   "n": 20,
+   "z0": 0,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d24": {
+   "median_ratio_model_over_measured": 1.3837144177012044,
+   "mean_ln": -0.3117079057995209,
+   "n": 24,
+   "z0": 0,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d32_z0tunnel": {
+   "median_ratio_model_over_measured": 1.2995233451388721,
+   "mean_ln": -0.25808030856895814,
+   "n": 32,
+   "z0": 1,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d32_walls": {
+   "median_ratio_model_over_measured": 1.3226334931342791,
+   "mean_ln": -0.2725516816215411,
+   "n": 32,
+   "z0": 1,
+   "walls": 1,
+   "L05": 0,
+   "cs17": 0
+  },
+  "d32_L0.5D": {
+   "median_ratio_model_over_measured": 1.2958539354587912,
+   "mean_ln": -0.2542292148494904,
+   "n": 32,
+   "z0": 1,
+   "walls": 0,
+   "L05": 1,
+   "cs17": 0
+  },
+  "d32_cs0.17": {
+   "median_ratio_model_over_measured": 1.303793998669348,
+   "mean_ln": -0.2721289478000478,
+   "n": 32,
+   "z0": 1,
+   "walls": 0,
+   "L05": 0,
+   "cs17": 1
+  }
+ },
+ "ledgers": {
+  "level_ln": -0.26424753821000935,
+  "level_factor": 1.3024505626811613,
+  "S1_inflow": {
+   "U_model_up_0.02": [
+    2.46963482428115,
+    2.440629073482428,
+    2.4557434504792335
+   ],
+   "U_measured_0.02": 2.43,
+   "ln": 0.010372269591112917,
+   "share": 0.03925209544570898,
+   "U_model_up_D": [
+    3.8199,
+    3.8475,
+    3.8149
+   ]
+  },
+  "S2_height": {
+   "slope_dlnU_dlnz_at_0.02": {
+    "street_behind_first_row_x-0.2": -0.0015407169517660977,
+    "side_street_x0_y0.2": 0.2120277540144623,
+    "array_mean": 0.1068879578441592
+   },
+   "height_error_m": 0.003125,
+   "ln_bound": 0.030782615470634444,
+   "share_bound": 0.11649158845207527
+  },
+  "S3_domain": {
+   "frontal_blockage": 0.05555555555555556,
+   "ln_blockage_bound": 0.05715841383994864,
+   "share_blockage_bound": 0.21630632484652434,
+   "over_array_ln_vs_upstream_1.25_to_2D": 0.11802727431121378,
+   "share_over_array": 0.4466542057902247
+  },
+  "made_inside_array_share": 0.7444415797077667
+ },
+ "S4_pool": {
+  "name": "AIJ C 1D, 8 LBM runs pooled",
+  "n": 960,
+  "library": [
+   "point_pattern",
+   "res",
+   "z0_tunnel",
+   "walls",
+   "L05",
+   "cs17"
+  ],
+  "library_size": 6,
+  "formulas_scored": 44,
+  "winner": {
+   "terms": [
+    "point_pattern",
+    "z0_tunnel"
+   ],
+   "structure_bits": 20.0,
+   "param_bits": 54.0,
+   "residual_bits": 4640.192082302781,
+   "total_bits": 4714.192082302781,
+   "bits_per_reading": 4.91061675239873,
+   "n": 960,
+   "sd": 0.0703125,
+   "rho": null,
+   "coef": {
+    "level": -0.28982366307415935,
+    "point_pattern": 0.960599980316032,
+    "z0_tunnel": 0.07684263400572064
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel"
+    ],
+    "structure_bits": 20.0,
+    "param_bits": 54.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4714.192082302781,
+    "bits_per_reading": 4.91061675239873,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.960599980316032,
+     "z0_tunnel": 0.07684263400572064
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel",
+     "L05"
+    ],
+    "structure_bits": 29.0,
+    "param_bits": 56.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4725.192082302781,
+    "bits_per_reading": 4.922075085732064,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9607767646705541,
+     "z0_tunnel": 0.07392851681730866,
+     "L05": 0.014579118323718901
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel",
+     "walls"
+    ],
+    "structure_bits": 29.0,
+    "param_bits": 56.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4725.192082302781,
+    "bits_per_reading": 4.922075085732064,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9607093545930658,
+     "z0_tunnel": 0.07913717054399834,
+     "walls": -0.011467403813188663
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel",
+     "cs17"
+    ],
+    "structure_bits": 29.0,
+    "param_bits": 56.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4725.192082302781,
+    "bits_per_reading": 4.922075085732064,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9606981914876518,
+     "z0_tunnel": 0.07901687184446858,
+     "cs17": -0.01086644909554633
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "res",
+     "z0_tunnel"
+    ],
+    "structure_bits": 29.0,
+    "param_bits": 56.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4725.192082302781,
+    "bits_per_reading": 4.922075085732064,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9606507530960147,
+     "res": 0.010227790423905233,
+     "z0_tunnel": 0.07331472537460569
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel",
+     "walls",
+     "cs17"
+    ],
+    "structure_bits": 35.0,
+    "param_bits": 58.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4733.192082302781,
+    "bits_per_reading": 4.930408419065397,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9608766868172414,
+     "z0_tunnel": 0.08280112837727652,
+     "walls": -0.01512993924400596,
+     "cs17": -0.014649177554826644
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel",
+     "walls",
+     "L05"
+    ],
+    "structure_bits": 35.0,
+    "param_bits": 58.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4733.192082302781,
+    "bits_per_reading": 4.930408419065397,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9608310569849792,
+     "z0_tunnel": 0.07601509425803192,
+     "walls": -0.00834429299975663,
+     "L05": 0.012493144503031357
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "res",
+     "z0_tunnel",
+     "walls"
+    ],
+    "structure_bits": 35.0,
+    "param_bits": 58.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4733.192082302781,
+    "bits_per_reading": 4.930408419065397,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9608044610719488,
+     "res": 0.014372896474348166,
+     "z0_tunnel": 0.07467785888878675,
+     "walls": -0.013958173981013606
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.0,
+    "param_bits": 32.0,
+    "residual_bits": 5629.186188992956,
+    "total_bits": 5668.186188992956,
+    "bits_per_reading": 5.904360613534329,
+    "n": 960,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "point_pattern"
+    ],
+    "structure_bits": 14.0,
+    "param_bits": 40.0,
+    "residual_bits": 4817.916597315793,
+    "total_bits": 4871.916597315793,
+    "bits_per_reading": 5.074913122203951,
+    "n": 960,
+    "sd": 0.078125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.9491057685011866
+    },
+    "alpha": {},
+    "added": "point_pattern"
+   },
+   {
+    "terms": [
+     "point_pattern",
+     "z0_tunnel"
+    ],
+    "structure_bits": 20.0,
+    "param_bits": 54.0,
+    "residual_bits": 4640.192082302781,
+    "total_bits": 4714.192082302781,
+    "bits_per_reading": 4.91061675239873,
+    "n": 960,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.28982366307415935,
+     "point_pattern": 0.960599980316032,
+     "z0_tunnel": 0.07684263400572064
+    },
+    "alpha": {},
+    "added": "z0_tunnel"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out d16",
+    "formula_bpr": 5.128096395237325,
+    "one_correction_bpr": 6.243423871725214,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d16_z0tunnel",
+    "formula_bpr": 5.325409680769957,
+    "one_correction_bpr": 6.244336842905808,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d20",
+    "formula_bpr": 5.248865516866179,
+    "one_correction_bpr": 6.275623580574257,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d24",
+    "formula_bpr": 4.492586966532906,
+    "one_correction_bpr": 5.7723605107916995,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d32_z0tunnel",
+    "formula_bpr": 4.918232109713163,
+    "one_correction_bpr": 5.62348805371119,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d32_walls",
+    "formula_bpr": 4.885526652976013,
+    "one_correction_bpr": 5.543302408273606,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d32_L0.5D",
+    "formula_bpr": 4.570787855374947,
+    "one_correction_bpr": 5.780953877099502,
+    "transfers": true
+   },
+   {
+    "fold": "leave out d32_cs0.17",
+    "formula_bpr": 4.745891220562803,
+    "one_correction_bpr": 5.6510560891270325,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 4640.192082302781,
+   "coded_bits": 4648,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "point_pattern": {
+    "formula": "\u03b4 \u00b7 (the same point's mean miss in the other runs)",
+    "meaning": "the pattern is fixed by something every run shares (measurements, inflow, domain, scoring)",
+    "physics": true,
+    "unit": ""
+   },
+   "res": {
+    "formula": "b \u00b7 ln(cells per D)",
+    "meaning": "the level moves with grid resolution",
+    "physics": true,
+    "unit": ""
+   },
+   "z0_tunnel": {
+    "formula": "\u03b4 \u00b7 [tunnel ground z0]",
+    "meaning": "the ground roughness setting moves the level",
+    "physics": true,
+    "unit": ""
+   },
+   "walls": {
+    "formula": "\u03b4 \u00b7 [building wall model]",
+    "meaning": "the wall model moves the level",
+    "physics": true,
+    "unit": ""
+   },
+   "L05": {
+    "formula": "\u03b4 \u00b7 [inflow length 0.5 D]",
+    "meaning": "the inflow eddy size moves the level",
+    "physics": true,
+    "unit": ""
+   },
+   "cs17": {
+    "formula": "\u03b4 \u00b7 [Cs 0.17]",
+    "meaning": "the subgrid constant moves the level",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.9937438611355986,
+  "sd_before": 0.140625,
+  "sd_after": 0.0703125,
+  "single_term_savings_bits": {
+   "point_pattern": 796.2695916771627,
+   "res": -2.6494794094041936,
+   "z0_tunnel": 20.13979896787623,
+   "walls": -9.0,
+   "L05": -9.0,
+   "cs17": -9.0
+  }
+ },
+ "S5_d32": {
+  "name": "AIJ C 1D D/32, mean of 4 runs",
+  "n": 120,
+  "library": [
+   "contrast",
+   "fetch_decay",
+   "fetch_linear",
+   "canyon_along",
+   "canyon_cross",
+   "corner",
+   "contrast_along",
+   "fetch_decay_along",
+   "lateral",
+   "near_wall"
+  ],
+  "library_size": 10,
+  "formulas_scored": 125,
+  "winner": {
+   "terms": [],
+   "structure_bits": 7.584962500721156,
+   "param_bits": 24.0,
+   "residual_bits": 659.5656342344657,
+   "total_bits": 691.1505967351869,
+   "bits_per_reading": 5.759588306126558,
+   "n": 120,
+   "sd": 0.109375,
+   "rho": null,
+   "coef": {
+    "level": -0.26424753821000946
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 24.0,
+    "residual_bits": 659.5656342344657,
+    "total_bits": 691.1505967351869,
+    "bits_per_reading": 5.759588306126558,
+    "n": 120,
+    "sd": 0.109375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canyon_cross",
+     "lateral"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 40.0,
+    "residual_bits": 632.4227794868225,
+    "total_bits": 695.3475919904283,
+    "bits_per_reading": 5.794563266586903,
+    "n": 120,
+    "sd": 0.09375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "canyon_cross": 0.11507967368093885,
+     "lateral": 0.12065300442288651
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast",
+     "lateral"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 40.0,
+    "residual_bits": 633.0337455549161,
+    "total_bits": 695.9585580585219,
+    "bits_per_reading": 5.799654650487683,
+    "n": 120,
+    "sd": 0.09375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "contrast": -0.18551292389891136,
+     "lateral": 0.11961710602211582
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast"
+    ],
+    "structure_bits": 15.754887502163468,
+    "param_bits": 32.0,
+    "residual_bits": 648.576327134981,
+    "total_bits": 696.3312146371445,
+    "bits_per_reading": 5.802760121976204,
+    "n": 120,
+    "sd": 0.1015625,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "contrast": -0.12224304355054587
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast",
+     "contrast_along",
+     "lateral"
+    ],
+    "structure_bits": 33.094737505048094,
+    "param_bits": 46.0,
+    "residual_bits": 617.2814588314034,
+    "total_bits": 696.3761963364515,
+    "bits_per_reading": 5.803134969470429,
+    "n": 120,
+    "sd": 0.0859375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "contrast": -0.23290742585463595,
+     "contrast_along": 0.35013807547412296,
+     "lateral": 0.13597615320556214
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast",
+     "corner"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 40.0,
+    "residual_bits": 633.539090147118,
+    "total_bits": 696.4639026507239,
+    "bits_per_reading": 5.803865855422699,
+    "n": 120,
+    "sd": 0.09375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "contrast": -0.16124972276372057,
+     "corner": -0.09693185997468694
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast",
+     "canyon_along",
+     "lateral"
+    ],
+    "structure_bits": 33.094737505048094,
+    "param_bits": 50.0,
+    "residual_bits": 621.786536742935,
+    "total_bits": 704.8812742479831,
+    "bits_per_reading": 5.874010618733193,
+    "n": 120,
+    "sd": 0.0859375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "contrast": -0.15055004710607275,
+     "canyon_along": -0.06516844933206876,
+     "lateral": 0.12630527996324234
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canyon_cross",
+     "corner"
+    ],
+    "structure_bits": 22.92481250360578,
+    "param_bits": 44.0,
+    "residual_bits": 638.2902692328109,
+    "total_bits": 705.2150817364168,
+    "bits_per_reading": 5.876792347803473,
+    "n": 120,
+    "sd": 0.09375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946,
+     "canyon_cross": 0.08631995171173479,
+     "corner": -0.08504921377475569
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.584962500721156,
+    "param_bits": 24.0,
+    "residual_bits": 659.5656342344657,
+    "total_bits": 691.1505967351869,
+    "bits_per_reading": 5.759588306126558,
+    "n": 120,
+    "sd": 0.109375,
+    "rho": null,
+    "coef": {
+     "level": -0.26424753821000946
+    },
+    "alpha": {},
+    "added": "one correction"
+   }
+  ],
+  "holdout": [],
+  "transfers": null,
+  "coder_check": {
+   "ideal_residual_bits": 659.5656342344657,
+   "coded_bits": 664,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "contrast": {
+    "formula": "\u03b2 \u00b7 ln(U_model / U_ref)",
+    "meaning": "the model exaggerates (\u03b2<0) or flattens (\u03b2>0) its own speed-ups",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay": {
+    "formula": "A \u00b7 exp(\u2212x / L)",
+    "meaning": "an entrance or internal boundary layer: the miss decays with distance x",
+    "physics": true,
+    "unit": "L"
+   },
+   "fetch_linear": {
+    "formula": "b \u00b7 x",
+    "meaning": "the miss grows steadily with distance into the array",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_along": {
+    "formula": "\u03b4 \u00b7 [street along the wind]",
+    "meaning": "channelling along streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_cross": {
+    "formula": "\u03b4 \u00b7 [street across the wind]",
+    "meaning": "sheltering in cross streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "corner": {
+    "formula": "\u03b4 \u00b7 [near a tall corner]",
+    "meaning": "corner jets / downwash are off",
+    "physics": true,
+    "unit": ""
+   },
+   "contrast_along": {
+    "formula": "\u03b2 \u00b7 [along] \u00b7 ln(U/U_ref)",
+    "meaning": "speed-up contrast differs in along-wind streets",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay_along": {
+    "formula": "A \u00b7 [along] \u00b7 exp(\u2212x/L)",
+    "meaning": "entrance decay only in along-wind streets",
+    "physics": true,
+    "unit": "L"
+   },
+   "lateral": {
+    "formula": "b \u00b7 |y| / D",
+    "meaning": "outer streets (nearer the model's side boundaries) are faster: a domain or blockage effect",
+    "physics": true,
+    "unit": ""
+   },
+   "near_wall": {
+    "formula": "A \u00b7 exp(\u2212d_wall / L)",
+    "meaning": "the miss is concentrated next to building faces (wall drag)",
+    "physics": true,
+    "unit": "L (D)"
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.109375,
+  "sd_after": 0.109375,
+  "single_term_savings_bits": {
+   "contrast": -5.180617901957589,
+   "fetch_decay": -25.930516637255664,
+   "fetch_linear": -10.169925001442266,
+   "canyon_along": -8.228794320135762,
+   "canyon_cross": -9.407990672750088,
+   "corner": -9.40409974256363,
+   "contrast_along": -10.169925001442266,
+   "fetch_decay_along": -15.205360659937583,
+   "lateral": -10.169925001442266,
+   "near_wall": -14.905810757139648
+  }
+ },
+ "S5_each": {
+  "d32_z0tunnel": {
+   "winner": [
+    "contrast",
+    "lateral"
+   ],
+   "transfers": true,
+   "bits_saved_per_reading": 0.03690477142976434
+  },
+  "d32_walls": {
+   "winner": [],
+   "transfers": null,
+   "bits_saved_per_reading": 0.0
+  },
+  "d32_L0.5D": {
+   "winner": [
+    "contrast",
+    "corner"
+   ],
+   "transfers": true,
+   "bits_saved_per_reading": 0.06368580685300174
+  },
+  "d32_cs0.17": {
+   "winner": [],
+   "transfers": null,
+   "bits_saved_per_reading": 0.0
+  }
+ },
+ "S7_neighbours": {
+  "before": {
+   "bits_per_reading": 5.6059073294097495,
+   "null_mean": 5.7890209300638515,
+   "null_sd": 0.06640447489053249,
+   "structure_left_bits": 0.1831136006541021,
+   "p": 0.005
+  },
+  "after_S5": {
+   "bits_per_reading": 5.595754094690547,
+   "null_mean": 5.7849395387794065,
+   "null_sd": 0.0664447910462422,
+   "structure_left_bits": 0.18918544408885918,
+   "p": 0.005
+  }
+ },
+ "S6_rans": {
+  "corr_lbm_rans": -0.2528578592332667,
+  "corr_from_shared_measurement_noise_alone": 0.0617514274197563,
+  "corr_between_d32_runs": 0.9089143542276706,
+  "rans_level_factor": 0.5448389246684859,
+  "lbm_level_factor": 1.3024505626811613,
+  "sd_pattern_lbm": 0.10818152304373826,
+  "sd_pattern_rans": 0.5941293492155022
+ },
+ "ranking": [
+  {
+   "suspect": "S1 approach flow near the ground",
+   "evidence": "model upstream 2.46 vs measured 2.43 m/s",
+   "share": 0.03925209544570898,
+   "verdict": "ruled out"
+  },
+  {
+   "suspect": "S2 evaluation height 0.02 m",
+   "evidence": "slope \u2264 0.21, half-cell error",
+   "share": 0.11649158845207527,
+   "verdict": "a part"
+  },
+  {
+   "suspect": "S3 domain blockage / fixed top",
+   "evidence": "frontal blockage bound; lateral term does not pay",
+   "share": 0.21630632484652434,
+   "verdict": "a part (upper bound)"
+  },
+  {
+   "suspect": "S4 setting: res",
+   "evidence": "-2.6 bits alone",
+   "share": null,
+   "verdict": "does not pay"
+  },
+  {
+   "suspect": "S4 setting: z0_tunnel",
+   "evidence": "20.1 bits alone",
+   "share": null,
+   "verdict": "contributes"
+  },
+  {
+   "suspect": "S4 setting: walls",
+   "evidence": "-9.0 bits alone",
+   "share": null,
+   "verdict": "does not pay"
+  },
+  {
+   "suspect": "S4 setting: L05",
+   "evidence": "-9.0 bits alone",
+   "share": null,
+   "verdict": "does not pay"
+  },
+  {
+   "suspect": "S4 setting: cs17",
+   "evidence": "-9.0 bits alone",
+   "share": null,
+   "verdict": "does not pay"
+  },
+  {
+   "suspect": "S5 street-scale mechanism",
+   "evidence": "winner one factor only",
+   "share": null,
+   "verdict": "does not pay"
+  },
+  {
+   "suspect": "S6 shared with RANS (measurements, probe, geometry)",
+   "evidence": "pattern corr -0.25 (noise alone 0.06); levels LBM \u00d71.30, RANS \u00d70.54",
+   "share": null,
+   "verdict": "not shared"
+  },
+  {
+   "suspect": "S7 unnamed structure",
+   "evidence": "0.19 bit/point left, p 0.005",
+   "share": null,
+   "verdict": "present"
+  },
+  {
+   "suspect": "made inside the array (what is left)",
+   "evidence": "1 \u2212 S1 \u2212 S3 bound",
+   "share": 0.7444415797077667,
+   "verdict": "the main cause"
+  }
+ ]
+}
