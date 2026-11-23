@@ -154,16 +154,34 @@ def allowed(terms, exclusive):
     return True
 
 
-def search(lib, y, g, max_terms=3, rows=None, exclusive=(), keep=20, candidates=None):
-    """Every formula of up to max_terms library terms (plus intercept), ranked by total bits."""
+def _quick_bits(lib, terms, y, rows):
+    """Fast stand-in for the total bits of a formula without families: the Gaussian code length of the least-squares
+    residuals (n/2 log2 of the residual variance) plus 0.5 log2 n per fitted value. Used only to choose which
+    formulas the exact scorer sees; it never decides a ranking on its own."""
+    X, off = _design(lib, terms, [None] * len(terms), rows); yr = y[rows] - off
+    th = _lstsq(X, yr); r = yr - X @ th; n = len(rows)
+    return 0.5 * n * math.log2(max(float(r @ r) / n, 1e-12)) + 0.5 * (len(th) + 1) * math.log2(n)
+
+
+def search(lib, y, g, max_terms=3, rows=None, exclusive=(), keep=20, candidates=None, prescreen=None):
+    """Every formula of up to max_terms library terms (plus intercept), ranked by total bits.
+
+    ``prescreen`` (an int): when the library has no families, every formula is first ranked by `_quick_bits`, and only
+    the best ``prescreen`` of them (and every formula of fewer than 2 terms) get the exact MDL score. Large libraries
+    (tens of features and their products) are then searched in minutes; the count returned is still every formula
+    considered. Checked against the exhaustive search in codelen/test_lawsearch.py (test_prescreen_matches_exhaustive)."""
     names = list(lib) if candidates is None else list(candidates)
-    out = []
-    for k in range(max_terms + 1):
-        for terms in itertools.combinations(names, k):
-            if not allowed(terms, exclusive): continue
-            out.append(score(lib, terms, y, g, rows))
+    rows_ = np.arange(len(y)) if rows is None else np.asarray(rows)
+    combos = [t for k in range(max_terms + 1) for t in itertools.combinations(names, k) if allowed(t, exclusive)]
+    if prescreen and not any(isinstance(lib[t], Family) for t in names):
+        q = sorted(combos, key=lambda t: _quick_bits(lib, t, y, rows_))
+        chosen = set(q[:prescreen]) | {t for t in combos if len(t) < 2}
+        todo = [t for t in combos if t in chosen]
+    else:
+        todo = combos
+    out = [score(lib, terms, y, g, rows) for terms in todo]
     out.sort(key=lambda r: r["total_bits"])
-    return out[:keep], len(out)
+    return out[:keep], len(combos)
 
 
 def holdout(lib, terms, y, g, train, test):

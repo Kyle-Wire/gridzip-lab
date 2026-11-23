@@ -9,8 +9,8 @@ from codelen import lawsearch as L
 def strip(d): return {k: v for k, v in d.items() if not k.startswith("_") and k not in ("rounded", "alphas")}
 
 
-def case(lib, y, g, folds, exclusive=(), max_terms=3, keep=10, n_hold=5):
-    top, n = L.search(lib, y, g, max_terms=max_terms, exclusive=exclusive, keep=keep)
+def case(lib, y, g, folds, exclusive=(), max_terms=3, keep=10, n_hold=5, prescreen=None):
+    top, n = L.search(lib, y, g, max_terms=max_terms, exclusive=exclusive, keep=keep, prescreen=prescreen)
     none = L.score(lib, [], y, g)
     hold = []
     for res in top[:n_hold]:

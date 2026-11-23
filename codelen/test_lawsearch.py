@@ -50,6 +50,19 @@ def test_null_picks_bias_only():
     assert top[0]["terms"] == [], top[0]["terms"]
 
 
+def test_prescreen_matches_exhaustive():
+    """The prescreened search returns the exhaustive search's top formulas on a 12-feature library with a planted law."""
+    rng = np.random.default_rng(5); n = 600
+    lib = {f"x{i}": rng.normal(0, 1, n) for i in range(12)}
+    y = 0.1 + 0.4 * lib["x3"] - 0.25 * lib["x7"] + rng.normal(0, 0.2, n)
+    g = L.Grid(0.01, -3.0, 3.0)
+    full, nf = L.search(lib, y, g, max_terms=3, keep=5)
+    fast, nq = L.search(lib, y, g, max_terms=3, keep=5, prescreen=40)
+    assert nf == nq
+    assert [r["terms"] for r in full] == [r["terms"] for r in fast], ([r["terms"] for r in full], [r["terms"] for r in fast])
+    assert sorted(full[0]["terms"]) == ["x3", "x7"]
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"): fn(); print("ok", name)
