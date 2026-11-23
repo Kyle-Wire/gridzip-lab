@@ -82,9 +82,15 @@ def w1():
 
 # ================================================================================================ W2 Layer 1
 def w2():
-    L1 = json.loads((PHYS / "layer1.json").read_text()); out, arr = {}, {}
+    out, arr = {}, {}
     g = E.Grid(0.005, -3.0, 3.0)
-    for q, lab in (("Q1_thunderstorm", "thunderstorm"), ("Q2_ordinary", "ordinary")):
+    sets = [("layer1.json", "")]
+    if (PHYS / "layer1_f5.json").exists():   # built by physics/layer1_f5.py from WindSim's F5 result files
+        sets.append(("layer1_f5.json", "_after_f5"))
+    for fname, suf in sets:
+      L1 = json.loads((PHYS / fname).read_text())
+      for q, lab0 in (("Q1_thunderstorm", "thunderstorm"), ("Q2_ordinary", "ordinary")):
+        lab = lab0 + suf
         D = L1[q]["data"]; y = np.array(D["y"], float); n = len(y)
         st = np.array(D["station"]); pl = np.array(D["place"])
         key = np.char.add(np.char.add(pl, "|"), st)
@@ -99,7 +105,8 @@ def w2():
         res = E.run_case(T.WIND, ctx, y, g, folds, name=f"Layer 1 {lab}")
         out[lab] = finish(res); arr[lab] = arrays(res, place=pl, station=st)
         print("W2", lab, out[lab]["winner"]["terms"], round(out[lab]["bits_saved_per_reading"], 3), out[lab]["transfers"])
-    out["after"] = "pending: WindSim F5 (station z0 from its own gusts) has a protocol and code (WindSim 01d1864) but no result files yet"
+    out["after"] = ("F5 (WindSim, adopted for ordinary storms only; results 33af0a7 + e41b6c5): *_after_f5, 14 calibration + 4 new blind places"
+                    if len(sets) > 1 else "pending: no F5 result files")
     return out, arr
 
 

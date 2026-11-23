@@ -39,8 +39,15 @@ output). ![wind](figures/library/13_wind_aij.png)
 
 **Wind, Layer 1 storm gusts.** Only the station's own offset pays (coefficient 0.74 thunder, 0.86 ordinary); it
 transfers to all 14 left-out places for ordinary storms and fails at Phoenix and Riverside for thunder. Roughness,
-gust-factor, elevation, direction, stability and season terms don't pay. Agrees with FINDINGS-3. **After** is
-pending: WindSim F5 (station z0 from its own gusts) has code but no result files yet.
+gust-factor, elevation, direction, stability and season terms don't pay. Agrees with FINDINGS-3.
+**After F5** (WindSim, 23 Nov 2026; each station's z0 from its own gust record, adopted for ordinary storms only;
+results 33af0a7 + e41b6c5, 14 calibration places plus 4 new blind ones: Baltimore, Minneapolis, San Diego, Tampa;
+built by `physics/layer1_f5.py`): nothing changes. The station's own offset is still the only term that pays, at the
+same strength (ordinary 0.32 bits/reading saved, coefficient 0.87, sd 0.17 → 0.14; thunder 0.17, coefficient 0.73).
+The roughness term still doesn't pay. So the per-station misses are not roughness as a gust factor sees it. That
+matches WindSim's own F5 diagnostic, where variant B barely moved the per-station spread. The station term transfers
+at 17 of 18 left-out places for ordinary storms; it fails only at Tampa, which has 37 pairs. For thunder it
+transfers at 14 of 16; it fails at Phoenix and San Diego.
 
 **Heat, HeatSim 0.6.1, Philadelphia, 5 days, 3 stations, before and after the sunlight-timing fix.**
 ![heat](figures/library/14_heat.png)
