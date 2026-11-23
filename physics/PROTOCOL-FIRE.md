@@ -189,3 +189,44 @@ FireSim has today (commit pinned in the result). Embers and house-to-house sprea
   (a); `crown_fuel` for (b); `shelter` for (c)), it holds in hold-out both ways (seeds 20-25 against 26-31), and no
   term of another mechanism's group is in the winner. Twin passes if the winner has no term. A fail is reported as a
   limit of what the compressor can tell apart from arrival times; it then says which real-fire findings can be read.
+
+**A5 (23 Nov 2026, before any real-fire run).** How a real fire is set up for candidates M1 to M3, fixed for the
+first calibration fire (Camp) and used for every fire after it unless a later amendment says otherwise. What had been
+seen when this was written: the file layout, grids, field names and label counts of the Camp inputs (no model output,
+no overlay of any input on the perimeter or the damage record); the synthetic and closed-case results in FireSim
+`sandbox/REPORT.md`; one end-to-end run of the runner on a made-up fire.
+- **Grid.** LANDFIRE 30 m fuels and canopy; solver on 10 m cells (each fuel cell split 3 x 3), because 30 m solver
+  cells failed the synthetic landscapes. Slope and upslope direction are computed from the LANDFIRE elevation layer
+  on its own grid. Wind bearings are turned from true north to grid north (about 15 degrees in northern California).
+- **Ignition.** One point at the place and time of the official record, radius 15 m. Camp: the origin in NIST TN
+  2135 Appendix F (39.81461, -121.434004), 2018-11-08T14:33Z (CAL FIRE). The NIST timeline is otherwise an outcome
+  record: only its origin row is read by a candidate.
+- **Window.** The first 24 hours. Perimeter overlap is scored at every mapped perimeter time inside the window
+  (GeoMAC incident perimeters; NASA FEDS satellite perimeters reported apart, they are 375 m estimates), not against
+  the final perimeter, because suppression is not modelled and the final perimeter is days later. Buildings are
+  scored on the whole record, which for a fire that kept destroying buildings after 24 hours counts against the
+  candidate; the share of the record inside the 24-hour modelled or mapped area is reported beside it.
+- **Weather.** Hourly means of the ASOS and RAWS stations in the fire folder. Wind: inverse-distance (power 2) mean
+  of the station wind vectors at each place, ASOS 10 m wind divided by 1.15 to 20 ft, RAWS as read; gusts not used.
+  Dead fuel moisture, one value per hour for the whole fire, from the inverse-distance mean temperature and humidity
+  at the ignition point: EMC by Bradshaw et al. 1983 (INT-169) Appendix C, 1-hour = 1.03 EMC, 10-hour = the RAWS
+  fuel stick where read, else 1.28 EMC, 100-hour = 1-hour + 2 points (the spacing of the Scott and Burgan scenarios).
+  No fuel-level sun correction (INT-169 Table 6).
+- **Live moisture.** Not measured. Per fire, one of the Scott and Burgan live scenarios, stated in the fire's config
+  with the reason, chosen from the season and recent rain before any run of that fire. Camp: L1 (herbaceous 30 %,
+  woody 60 %; fully cured: November, after a rainless autumn). Foliar moisture 100 %.
+- **Buildings.** Positions from the USGS CC0 building points (the pre-fire inventory; amendment A2) for fires in
+  that release, each a 150 m2 footprint. This replaces the Overture footprints of A1 for those fires: Overture's
+  release is from 2026, so buildings destroyed and not rebuilt are missing from it. The runner reads positions for
+  the model and keeps the burned/unburned field apart for scoring. For California fires the DINS record is scored
+  as well, matched to the nearest building point within 30 m. For a blind fire this file is opened only after the
+  freeze, as section 1 requires.
+- **Ensemble.** M1 has no random part beyond house ignition by flame. M2/M3: seeds 0 to N-1, N stated per result;
+  a building's probability is the share of runs in which it lights. Wind speed and direction error enter the
+  ensemble only under a later amendment (the synthetic landscapes showed burned area changing up to 74 times
+  between 4 and 8 m/s, so this matters and is stated as a limit of the first runs).
+- **Calibration.** The ember and house numbers in FireSim `embers.PRIORS` and `structures.PRIORS` are starting
+  guesses. The first Camp runs use them as they stand and are reported as such. Fitting them is done on calibration
+  fires only, by bits per building, and the fitted values and the runs tried are listed in the findings.
+- **Runs.** FireSim `scripts/run_fire.py` with `fires/<fire>.json`, on THE-COW; every result pins the FireSim
+  commit and refuses nothing silently (a dirty tree is recorded in the result).
