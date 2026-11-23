@@ -1,0 +1,1877 @@
+{
+ "before": {
+  "name": "HeatSim 0.6.1 stamp",
+  "n": 360,
+  "library": [
+   "radiation",
+   "radiation_lag",
+   "storage_hysteresis",
+   "amplitude",
+   "timing_shift",
+   "wind_mixing",
+   "night_decoupling",
+   "sky_cooling",
+   "cloud_shading",
+   "humidity",
+   "vegetation_et",
+   "built_storage",
+   "station_offsets",
+   "diurnal_shape"
+  ],
+  "library_size": 14,
+  "formulas_scored": 234,
+  "winner": {
+   "terms": [
+    "amplitude",
+    "timing_shift",
+    "sky_cooling",
+    "station_offsets"
+   ],
+   "structure_bits": 44.0,
+   "param_bits": 60.0,
+   "residual_bits": 1833.992267407541,
+   "total_bits": 1937.992267407541,
+   "bits_per_reading": 5.383311853909836,
+   "n": 360,
+   "sd": 0.875,
+   "rho": 0.75,
+   "coef": {
+    "level": -1.3610357243775064,
+    "amplitude": -0.3217230998768837,
+    "timing_shift": 1.0321368947993041,
+    "sky_cooling": -0.8634447700358654,
+    "station_offsets": [
+     2.0949084008195915,
+     1.5925496135727657
+    ]
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "sky_cooling",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 60.0,
+    "residual_bits": 1833.992267407541,
+    "total_bits": 1937.992267407541,
+    "bits_per_reading": 5.383311853909836,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775064,
+     "amplitude": -0.3217230998768837,
+     "timing_shift": 1.0321368947993041,
+     "sky_cooling": -0.8634447700358654,
+     "station_offsets": [
+      2.0949084008195915,
+      1.5925496135727657
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "built_storage",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 64.0,
+    "residual_bits": 1833.6608293314305,
+    "total_bits": 1941.6608293314305,
+    "bits_per_reading": 5.393502303698418,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775066,
+     "amplitude": -0.3061028788185982,
+     "timing_shift": 1.0700760271751668,
+     "built_storage": -1.3104350916411,
+     "station_offsets": [
+      2.237129136087726,
+      1.55736605769115
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1875.9783641894714,
+    "total_bits": 1942.9783641894714,
+    "bits_per_reading": 5.397162122748532,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775066,
+     "amplitude": -0.27397744783566486,
+     "timing_shift": 1.1445770946921676
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "station_offsets"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 54.0,
+    "residual_bits": 1855.7690921118406,
+    "total_bits": 1945.7690921118406,
+    "bits_per_reading": 5.404914144755113,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775069,
+     "amplitude": -0.27396700998472107,
+     "timing_shift": 1.1418110828579524,
+     "station_offsets": [
+      2.1987759402804117,
+      1.6055880036152563
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "sky_cooling",
+     "humidity",
+     "station_offsets"
+    ],
+    "structure_bits": 52.0,
+    "param_bits": 62.0,
+    "residual_bits": 1833.992267407541,
+    "total_bits": 1947.992267407541,
+    "bits_per_reading": 5.411089631687614,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775066,
+     "amplitude": -0.32692975224671894,
+     "timing_shift": 1.0316403836020862,
+     "sky_cooling": -0.875111518985781,
+     "humidity": -0.054126957569544,
+     "station_offsets": [
+      2.104701521270847,
+      1.5450604049620946
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "radiation_lag",
+     "amplitude",
+     "timing_shift",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 68.0,
+    "residual_bits": 1836.8645793163746,
+    "total_bits": 1948.8645793163746,
+    "bits_per_reading": 5.413512720323263,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -2.2923650755226976,
+     "radiation_lag": 2.6689924545165957,
+     "amplitude": -0.45147289926620165,
+     "timing_shift": 1.4647162144576051,
+     "station_offsets": [
+      2.1927649216886986,
+      1.607770479378575
+     ]
+    },
+    "alpha": {
+     "radiation_lag": 3.9999990674148016
+    }
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "sky_cooling"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 48.0,
+    "residual_bits": 1864.8947291172974,
+    "total_bits": 1948.8947291172974,
+    "bits_per_reading": 5.413596469770271,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775069,
+     "amplitude": -0.3412827801509723,
+     "timing_shift": 0.9896408283268561,
+     "sky_cooling": -1.2169258527081153
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "wind_mixing",
+     "sky_cooling",
+     "station_offsets"
+    ],
+    "structure_bits": 52.0,
+    "param_bits": 64.0,
+    "residual_bits": 1833.992267407541,
+    "total_bits": 1949.992267407541,
+    "bits_per_reading": 5.416645187243169,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775066,
+     "amplitude": -0.3294503689026491,
+     "timing_shift": 0.9982270999346522,
+     "wind_mixing": 0.7330206307910454,
+     "sky_cooling": -0.7419030568681755,
+     "station_offsets": [
+      2.2024511668876405,
+      1.645587288005823
+     ]
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.0,
+    "param_bits": 32.0,
+    "residual_bits": 1990.0624912550722,
+    "total_bits": 2030.0624912550722,
+    "bits_per_reading": 5.639062475708534,
+    "n": 360,
+    "sd": 1.125,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3610357243775064
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "timing_shift"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 34.0,
+    "residual_bits": 1953.4212825680079,
+    "total_bits": 2004.4212825680079,
+    "bits_per_reading": 5.567836896022244,
+    "n": 360,
+    "sd": 1.125,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3610357243775066,
+     "timing_shift": 1.1319787538742159
+    },
+    "alpha": {},
+    "added": "timing_shift"
+   },
+   {
+    "terms": [
+     "timing_shift",
+     "amplitude"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1875.9783641894714,
+    "total_bits": 1942.9783641894714,
+    "bits_per_reading": 5.397162122748532,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775066,
+     "timing_shift": 1.1445770946921672,
+     "amplitude": -0.27397744783566463
+    },
+    "alpha": {},
+    "added": "amplitude"
+   },
+   {
+    "terms": [
+     "timing_shift",
+     "amplitude",
+     "station_offsets"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 54.0,
+    "residual_bits": 1855.7690921118406,
+    "total_bits": 1945.7690921118406,
+    "bits_per_reading": 5.404914144755113,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775064,
+     "timing_shift": 1.1418110828579526,
+     "amplitude": -0.2739670099847208,
+     "station_offsets": [
+      2.198775940280414,
+      1.6055880036152566
+     ]
+    },
+    "alpha": {},
+    "added": "station_offsets"
+   },
+   {
+    "terms": [
+     "timing_shift",
+     "amplitude",
+     "station_offsets",
+     "sky_cooling"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 60.0,
+    "residual_bits": 1833.992267407541,
+    "total_bits": 1937.992267407541,
+    "bits_per_reading": 5.383311853909836,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3610357243775064,
+     "timing_shift": 1.0321368947993046,
+     "amplitude": -0.32172309987688347,
+     "station_offsets": [
+      2.0949084008195906,
+      1.5925496135727657
+     ],
+     "sky_cooling": -0.8634447700358631
+    },
+    "alpha": {},
+    "added": "sky_cooling"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 2025-07-08",
+    "formula_bpr": 5.536476144909835,
+    "one_correction_bpr": 5.912474841105901,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-25",
+    "formula_bpr": 5.410397282724024,
+    "one_correction_bpr": 5.76913332017383,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-28",
+    "formula_bpr": 4.85463383908779,
+    "one_correction_bpr": 5.225837081704516,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-29",
+    "formula_bpr": 5.051259615727512,
+    "one_correction_bpr": 5.469918676518042,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-30",
+    "formula_bpr": 5.102655618918943,
+    "one_correction_bpr": 5.46178111719757,
+    "transfers": true
+   },
+   {
+    "fold": "leave out Wings Field",
+    "formula_bpr": 5.8585979130234875,
+    "one_correction_bpr": 5.596360490976019,
+    "transfers": false
+   },
+   {
+    "fold": "leave out PHL airport",
+    "formula_bpr": 5.295586548329097,
+    "one_correction_bpr": 5.412440383537019,
+    "transfers": true
+   },
+   {
+    "fold": "leave out NE PHL airport",
+    "formula_bpr": 5.326236424549425,
+    "one_correction_bpr": 5.715977666595827,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "note": "AR(1) code: ideal bits only"
+  },
+  "terms_meta": {
+   "radiation": {
+    "formula": "a \u00b7 sin(e)\u207a",
+    "meaning": "daytime heating by sunlight is too strong or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "radiation_lag": {
+    "formula": "a \u00b7 sin(e)\u207a at t \u2212 \u03c4",
+    "meaning": "sunlight's heating arrives late or early by \u03c4 hours",
+    "physics": true,
+    "unit": "h"
+   },
+   "storage_hysteresis": {
+    "formula": "a \u00b7 d sin(e)\u207a / dt",
+    "meaning": "heat storage releases with a phase lag (OHM a2 term)",
+    "physics": true,
+    "unit": ""
+   },
+   "amplitude": {
+    "formula": "a \u00b7 (T_model \u2212 daily mean)",
+    "meaning": "the model's daily swing is too large (a<0) or small (a>0)",
+    "physics": true,
+    "unit": ""
+   },
+   "timing_shift": {
+    "formula": "\u03b4 \u00b7 dT_model / dt",
+    "meaning": "the model's daily cycle runs late (\u03b4>0, h) or early",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_mixing": {
+    "formula": "a \u00b7 sin(e)\u207a / U",
+    "meaning": "daytime mixing: light-wind days heat more than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "night_decoupling": {
+    "formula": "a \u00b7 [night] / U",
+    "meaning": "calm nights decouple and cool more",
+    "physics": true,
+    "unit": ""
+   },
+   "sky_cooling": {
+    "formula": "a \u00b7 [night] \u00b7 (1 \u2212 cloud)",
+    "meaning": "clear nights radiate more heat away",
+    "physics": true,
+    "unit": ""
+   },
+   "cloud_shading": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 cloud",
+    "meaning": "clouds cut sunlight more or less than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "humidity": {
+    "formula": "a \u00b7 (T_dew \u2212 mean)",
+    "meaning": "moisture: evaporation or latent heat off",
+    "physics": true,
+    "unit": ""
+   },
+   "vegetation_et": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 f_veg",
+    "meaning": "evapotranspiration by trees and grass off by day",
+    "physics": true,
+    "unit": ""
+   },
+   "built_storage": {
+    "formula": "a \u00b7 [night] \u00b7 f_built",
+    "meaning": "roofs and paving release stored heat at night",
+    "physics": true,
+    "unit": ""
+   },
+   "station_offsets": {
+    "formula": "\u03b4_s per station",
+    "meaning": "a siting offset at each station",
+    "physics": true,
+    "unit": ""
+   },
+   "diurnal_shape": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "a daily shape with no physics name (a gap the library can't name)",
+    "physics": false,
+    "unit": ""
+   }
+  },
+  "noise_model": "AR(1)",
+  "bits_saved_per_reading": 0.2557506217986978,
+  "sd_before": 1.125,
+  "sd_after": 0.875,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 6.579740416959521,
+    "null_mean": 7.0720870287070925,
+    "null_sd": 0.030110510848069632,
+    "structure_left_bits": 0.4923466117475712,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 5.814992170712234,
+    "null_mean": 5.983355374175097,
+    "null_sd": 0.047699584988001434,
+    "structure_left_bits": 0.16836320346286282,
+    "p": 0.01
+   }
+  },
+  "heatsim_version": "0.6.1",
+  "sun_timing": "stamp",
+  "station_hour_rule": "floor",
+  "rmse_K": 2.8283201935402076,
+  "bias_K": -1.361035724377506,
+  "range_ratio": 1.2040235870789013
+ },
+ "after": {
+  "name": "HeatSim 0.6.1 hour_ending",
+  "n": 360,
+  "library": [
+   "radiation",
+   "radiation_lag",
+   "storage_hysteresis",
+   "amplitude",
+   "timing_shift",
+   "wind_mixing",
+   "night_decoupling",
+   "sky_cooling",
+   "cloud_shading",
+   "humidity",
+   "vegetation_et",
+   "built_storage",
+   "station_offsets",
+   "diurnal_shape"
+  ],
+  "library_size": 14,
+  "formulas_scored": 232,
+  "winner": {
+   "terms": [
+    "amplitude",
+    "timing_shift",
+    "station_offsets"
+   ],
+   "structure_bits": 36.0,
+   "param_bits": 58.0,
+   "residual_bits": 1839.0934423324438,
+   "total_bits": 1933.0934423324438,
+   "bits_per_reading": 5.369704006479011,
+   "n": 360,
+   "sd": 0.875,
+   "rho": 0.75,
+   "coef": {
+    "level": -1.386690072115137,
+    "amplitude": -0.24672782236058666,
+    "timing_shift": 1.0665445137661023,
+    "station_offsets": [
+     2.1950244034013635,
+     1.6044145017752975
+    ]
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "station_offsets"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 58.0,
+    "residual_bits": 1839.0934423324438,
+    "total_bits": 1933.0934423324438,
+    "bits_per_reading": 5.369704006479011,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.386690072115137,
+     "amplitude": -0.24672782236058666,
+     "timing_shift": 1.0665445137661023,
+     "station_offsets": [
+      2.1950244034013635,
+      1.6044145017752975
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "built_storage",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 58.0,
+    "residual_bits": 1834.3568456016865,
+    "total_bits": 1936.3568456016865,
+    "bits_per_reading": 5.37876901556024,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3866900721151365,
+     "amplitude": -0.26457979398779147,
+     "timing_shift": 1.027333246658089,
+     "built_storage": -0.6903659868398995,
+     "station_offsets": [
+      2.215231537775926,
+      1.579011338472049
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1869.8495253607402,
+    "total_bits": 1936.8495253607402,
+    "bits_per_reading": 5.380137570446501,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3866900721151365,
+     "amplitude": -0.24673959748178664,
+     "timing_shift": 1.0693931366364156
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "sky_cooling",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 60.0,
+    "residual_bits": 1833.38984158878,
+    "total_bits": 1937.38984158878,
+    "bits_per_reading": 5.381638448857722,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3866900721151367,
+     "amplitude": -0.28429376915494087,
+     "timing_shift": 0.9817826472525201,
+     "sky_cooling": -0.6436692267295254,
+     "station_offsets": [
+      2.1175974039117187,
+      1.5946978933347769
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "humidity",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 60.0,
+    "residual_bits": 1839.0934423324438,
+    "total_bits": 1943.0934423324438,
+    "bits_per_reading": 5.397481784256788,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.386690072115137,
+     "amplitude": -0.25124267926840577,
+     "timing_shift": 1.0683056247930431,
+     "humidity": -0.05331564776584056,
+     "station_offsets": [
+      2.2060400437656,
+      1.5578155324213396
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "radiation_lag",
+     "amplitude",
+     "timing_shift",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 72.0,
+    "residual_bits": 1830.945517217925,
+    "total_bits": 1946.945517217925,
+    "bits_per_reading": 5.408181992272014,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -2.194667044745389,
+     "radiation_lag": 2.3154781990482127,
+     "amplitude": -0.40014707522721465,
+     "timing_shift": 1.3715180017895752,
+     "station_offsets": [
+      2.1895729458246223,
+      1.606338385015946
+     ]
+    },
+    "alpha": {
+     "radiation_lag": 3.9833323844098283
+    }
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "wind_mixing",
+     "station_offsets"
+    ],
+    "structure_bits": 44.0,
+    "param_bits": 66.0,
+    "residual_bits": 1838.9873177249835,
+    "total_bits": 1948.9873177249835,
+    "bits_per_reading": 5.4138536603471765,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.386690072115137,
+     "amplitude": -0.2676970643767054,
+     "timing_shift": 1.0000166538984174,
+     "wind_mixing": 0.9930523325086134,
+     "station_offsets": [
+      2.3208636507978673,
+      1.6738010314736007
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "built_storage"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 44.0,
+    "residual_bits": 1869.8495253607402,
+    "total_bits": 1949.8495253607402,
+    "bits_per_reading": 5.416248681557612,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.386690072115137,
+     "amplitude": -0.25631218873620776,
+     "timing_shift": 1.0484266396732522,
+     "built_storage": -0.37017891388727453
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.0,
+    "param_bits": 30.0,
+    "residual_bits": 1969.9048258644063,
+    "total_bits": 2007.9048258644063,
+    "bits_per_reading": 5.577513405178906,
+    "n": 360,
+    "sd": 1.125,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3866900721151367
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "timing_shift"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 34.0,
+    "residual_bits": 1918.3070392819916,
+    "total_bits": 1969.3070392819916,
+    "bits_per_reading": 5.470297331338865,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3866900721151367,
+     "timing_shift": 1.05659845667672
+    },
+    "alpha": {},
+    "added": "timing_shift"
+   },
+   {
+    "terms": [
+     "timing_shift",
+     "amplitude"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1869.8495253607402,
+    "total_bits": 1936.8495253607402,
+    "bits_per_reading": 5.380137570446501,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3866900721151367,
+     "timing_shift": 1.0693931366364162,
+     "amplitude": -0.24673959748178692
+    },
+    "alpha": {},
+    "added": "amplitude"
+   },
+   {
+    "terms": [
+     "timing_shift",
+     "amplitude",
+     "station_offsets"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 58.0,
+    "residual_bits": 1839.0934423324438,
+    "total_bits": 1933.0934423324438,
+    "bits_per_reading": 5.369704006479011,
+    "n": 360,
+    "sd": 0.875,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3866900721151367,
+     "timing_shift": 1.066544513766103,
+     "amplitude": -0.2467278223605869,
+     "station_offsets": [
+      2.1950244034013617,
+      1.6044145017752962
+     ]
+    },
+    "alpha": {},
+    "added": "station_offsets"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 2025-07-08",
+    "formula_bpr": 5.324375732930708,
+    "one_correction_bpr": 5.811503881200274,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-25",
+    "formula_bpr": 5.510058274443072,
+    "one_correction_bpr": 5.712336863325789,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-28",
+    "formula_bpr": 4.85013595403999,
+    "one_correction_bpr": 5.154617883107914,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-29",
+    "formula_bpr": 5.066437347955206,
+    "one_correction_bpr": 5.3914996996630045,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-30",
+    "formula_bpr": 5.139036658029915,
+    "one_correction_bpr": 5.374999488780978,
+    "transfers": true
+   },
+   {
+    "fold": "leave out Wings Field",
+    "formula_bpr": 5.891418205755517,
+    "one_correction_bpr": 5.524436876238053,
+    "transfers": false
+   },
+   {
+    "fold": "leave out PHL airport",
+    "formula_bpr": 5.340547612990323,
+    "one_correction_bpr": 5.349681519194991,
+    "transfers": true
+   },
+   {
+    "fold": "leave out NE PHL airport",
+    "formula_bpr": 5.320416648499219,
+    "one_correction_bpr": 5.61428157632696,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "note": "AR(1) code: ideal bits only"
+  },
+  "terms_meta": {
+   "radiation": {
+    "formula": "a \u00b7 sin(e)\u207a",
+    "meaning": "daytime heating by sunlight is too strong or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "radiation_lag": {
+    "formula": "a \u00b7 sin(e)\u207a at t \u2212 \u03c4",
+    "meaning": "sunlight's heating arrives late or early by \u03c4 hours",
+    "physics": true,
+    "unit": "h"
+   },
+   "storage_hysteresis": {
+    "formula": "a \u00b7 d sin(e)\u207a / dt",
+    "meaning": "heat storage releases with a phase lag (OHM a2 term)",
+    "physics": true,
+    "unit": ""
+   },
+   "amplitude": {
+    "formula": "a \u00b7 (T_model \u2212 daily mean)",
+    "meaning": "the model's daily swing is too large (a<0) or small (a>0)",
+    "physics": true,
+    "unit": ""
+   },
+   "timing_shift": {
+    "formula": "\u03b4 \u00b7 dT_model / dt",
+    "meaning": "the model's daily cycle runs late (\u03b4>0, h) or early",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_mixing": {
+    "formula": "a \u00b7 sin(e)\u207a / U",
+    "meaning": "daytime mixing: light-wind days heat more than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "night_decoupling": {
+    "formula": "a \u00b7 [night] / U",
+    "meaning": "calm nights decouple and cool more",
+    "physics": true,
+    "unit": ""
+   },
+   "sky_cooling": {
+    "formula": "a \u00b7 [night] \u00b7 (1 \u2212 cloud)",
+    "meaning": "clear nights radiate more heat away",
+    "physics": true,
+    "unit": ""
+   },
+   "cloud_shading": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 cloud",
+    "meaning": "clouds cut sunlight more or less than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "humidity": {
+    "formula": "a \u00b7 (T_dew \u2212 mean)",
+    "meaning": "moisture: evaporation or latent heat off",
+    "physics": true,
+    "unit": ""
+   },
+   "vegetation_et": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 f_veg",
+    "meaning": "evapotranspiration by trees and grass off by day",
+    "physics": true,
+    "unit": ""
+   },
+   "built_storage": {
+    "formula": "a \u00b7 [night] \u00b7 f_built",
+    "meaning": "roofs and paving release stored heat at night",
+    "physics": true,
+    "unit": ""
+   },
+   "station_offsets": {
+    "formula": "\u03b4_s per station",
+    "meaning": "a siting offset at each station",
+    "physics": true,
+    "unit": ""
+   },
+   "diurnal_shape": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "a daily shape with no physics name (a gap the library can't name)",
+    "physics": false,
+    "unit": ""
+   }
+  },
+  "noise_model": "AR(1)",
+  "bits_saved_per_reading": 0.20780939869989545,
+  "sd_before": 1.125,
+  "sd_after": 0.875,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 6.538608748084847,
+    "null_mean": 6.98278901554706,
+    "null_sd": 0.029818352704522492,
+    "structure_left_bits": 0.4441802674622126,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 5.862792215435933,
+    "null_mean": 6.007526765889048,
+    "null_sd": 0.04747304047596843,
+    "structure_left_bits": 0.14473455045311479,
+    "p": 0.01
+   }
+  },
+  "heatsim_version": "0.6.1",
+  "sun_timing": "hour_ending",
+  "station_hour_rule": "floor",
+  "rmse_K": 2.701779424024369,
+  "bias_K": -1.3866900721151363,
+  "range_ratio": 1.1764829067601603
+ },
+ "before_round": {
+  "name": "HeatSim 0.6.1 stamp",
+  "n": 360,
+  "library": [
+   "radiation",
+   "radiation_lag",
+   "storage_hysteresis",
+   "amplitude",
+   "timing_shift",
+   "wind_mixing",
+   "night_decoupling",
+   "sky_cooling",
+   "cloud_shading",
+   "humidity",
+   "vegetation_et",
+   "built_storage",
+   "station_offsets",
+   "diurnal_shape"
+  ],
+  "library_size": 14,
+  "formulas_scored": 237,
+  "winner": {
+   "terms": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "structure_bits": 25.0,
+   "param_bits": 44.0,
+   "residual_bits": 1874.5848675864,
+   "total_bits": 1943.5848675864,
+   "bits_per_reading": 5.398846854406666,
+   "n": 360,
+   "sd": 0.9375,
+   "rho": 0.75,
+   "coef": {
+    "level": -1.3653707111499926,
+    "amplitude": -0.21728959956434013,
+    "timing_shift": 0.5592900494943142
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 44.0,
+    "residual_bits": 1874.5848675864,
+    "total_bits": 1943.5848675864,
+    "bits_per_reading": 5.398846854406666,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499926,
+     "amplitude": -0.21728959956434013,
+     "timing_shift": 0.5592900494943142
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 38.0,
+    "residual_bits": 1888.6164952078154,
+    "total_bits": 1943.6164952078154,
+    "bits_per_reading": 5.398934708910598,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3653707111499926,
+     "amplitude": -0.2151790568331385
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift",
+     "station_offsets"
+    ],
+    "structure_bits": 36.0,
+    "param_bits": 56.0,
+    "residual_bits": 1858.974529355286,
+    "total_bits": 1950.974529355286,
+    "bits_per_reading": 5.419373692653572,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499929,
+     "amplitude": -0.21727929875510757,
+     "timing_shift": 0.5565603534685076,
+     "station_offsets": [
+      2.1717257983788856,
+      1.5869666889153144
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "radiation",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 40.0,
+    "residual_bits": 1886.5858777479982,
+    "total_bits": 1951.5858777479982,
+    "bits_per_reading": 5.421071882633329,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499929,
+     "radiation": -3.352206118759307,
+     "timing_shift": 1.038743685791608
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "built_storage"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1884.9162264878742,
+    "total_bits": 1951.9162264878742,
+    "bits_per_reading": 5.4219895180218725,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499929,
+     "amplitude": -0.26808977799777184,
+     "built_storage": -2.1395682391576094
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "station_offsets"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 52.0,
+    "residual_bits": 1877.0515901721228,
+    "total_bits": 1954.0515901721228,
+    "bits_per_reading": 5.427921083811452,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499929,
+     "amplitude": -0.21517905683313895,
+     "station_offsets": [
+      2.1816945128970673,
+      1.5831794910430903
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "vegetation_et"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 46.0,
+    "residual_bits": 1883.9554186050684,
+    "total_bits": 1954.9554186050684,
+    "bits_per_reading": 5.430431718347412,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3653707111499926,
+     "amplitude": -0.3376951459894123,
+     "vegetation_et": 3.1324413541520206
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "radiation",
+     "amplitude"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 44.0,
+    "residual_bits": 1886.1764856341263,
+    "total_bits": 1955.1764856341263,
+    "bits_per_reading": 5.431045793428129,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499924,
+     "radiation": 2.079172714105544,
+     "amplitude": -0.3464769685917309
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.0,
+    "param_bits": 30.0,
+    "residual_bits": 1925.4726070007005,
+    "total_bits": 1963.4726070007005,
+    "bits_per_reading": 5.4540905750019455,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3653707111499926
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "amplitude"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 38.0,
+    "residual_bits": 1888.6164952078154,
+    "total_bits": 1943.6164952078154,
+    "bits_per_reading": 5.398934708910598,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3653707111499926,
+     "amplitude": -0.2151790568331385
+    },
+    "alpha": {},
+    "added": "amplitude"
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 44.0,
+    "residual_bits": 1874.5848675864,
+    "total_bits": 1943.5848675864,
+    "bits_per_reading": 5.398846854406666,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3653707111499926,
+     "amplitude": -0.21728959956434013,
+     "timing_shift": 0.5592900494943142
+    },
+    "alpha": {},
+    "added": "timing_shift"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 2025-07-08",
+    "formula_bpr": 5.454350666282846,
+    "one_correction_bpr": 5.651264339336509,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-25",
+    "formula_bpr": 5.622461192824131,
+    "one_correction_bpr": 5.707360625072876,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-28",
+    "formula_bpr": 4.888713189860671,
+    "one_correction_bpr": 5.0249221190622615,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-29",
+    "formula_bpr": 5.168067411292027,
+    "one_correction_bpr": 5.315014116499203,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-30",
+    "formula_bpr": 5.120225332724827,
+    "one_correction_bpr": 5.224880419461631,
+    "transfers": true
+   },
+   {
+    "fold": "leave out Wings Field",
+    "formula_bpr": 5.91635087595669,
+    "one_correction_bpr": 5.4322151591936425,
+    "transfers": false
+   },
+   {
+    "fold": "leave out PHL airport",
+    "formula_bpr": 5.345050964818432,
+    "one_correction_bpr": 5.3552862265403745,
+    "transfers": true
+   },
+   {
+    "fold": "leave out NE PHL airport",
+    "formula_bpr": 5.168087980234797,
+    "one_correction_bpr": 5.366317302833454,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "note": "AR(1) code: ideal bits only"
+  },
+  "terms_meta": {
+   "radiation": {
+    "formula": "a \u00b7 sin(e)\u207a",
+    "meaning": "daytime heating by sunlight is too strong or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "radiation_lag": {
+    "formula": "a \u00b7 sin(e)\u207a at t \u2212 \u03c4",
+    "meaning": "sunlight's heating arrives late or early by \u03c4 hours",
+    "physics": true,
+    "unit": "h"
+   },
+   "storage_hysteresis": {
+    "formula": "a \u00b7 d sin(e)\u207a / dt",
+    "meaning": "heat storage releases with a phase lag (OHM a2 term)",
+    "physics": true,
+    "unit": ""
+   },
+   "amplitude": {
+    "formula": "a \u00b7 (T_model \u2212 daily mean)",
+    "meaning": "the model's daily swing is too large (a<0) or small (a>0)",
+    "physics": true,
+    "unit": ""
+   },
+   "timing_shift": {
+    "formula": "\u03b4 \u00b7 dT_model / dt",
+    "meaning": "the model's daily cycle runs late (\u03b4>0, h) or early",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_mixing": {
+    "formula": "a \u00b7 sin(e)\u207a / U",
+    "meaning": "daytime mixing: light-wind days heat more than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "night_decoupling": {
+    "formula": "a \u00b7 [night] / U",
+    "meaning": "calm nights decouple and cool more",
+    "physics": true,
+    "unit": ""
+   },
+   "sky_cooling": {
+    "formula": "a \u00b7 [night] \u00b7 (1 \u2212 cloud)",
+    "meaning": "clear nights radiate more heat away",
+    "physics": true,
+    "unit": ""
+   },
+   "cloud_shading": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 cloud",
+    "meaning": "clouds cut sunlight more or less than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "humidity": {
+    "formula": "a \u00b7 (T_dew \u2212 mean)",
+    "meaning": "moisture: evaporation or latent heat off",
+    "physics": true,
+    "unit": ""
+   },
+   "vegetation_et": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 f_veg",
+    "meaning": "evapotranspiration by trees and grass off by day",
+    "physics": true,
+    "unit": ""
+   },
+   "built_storage": {
+    "formula": "a \u00b7 [night] \u00b7 f_built",
+    "meaning": "roofs and paving release stored heat at night",
+    "physics": true,
+    "unit": ""
+   },
+   "station_offsets": {
+    "formula": "\u03b4_s per station",
+    "meaning": "a siting offset at each station",
+    "physics": true,
+    "unit": ""
+   },
+   "diurnal_shape": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "a daily shape with no physics name (a gap the library can't name)",
+    "physics": false,
+    "unit": ""
+   }
+  },
+  "noise_model": "AR(1)",
+  "bits_saved_per_reading": 0.05524372059527938,
+  "sd_before": 1.0,
+  "sd_after": 0.9375,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 6.44084800731976,
+    "null_mean": 6.729690532222259,
+    "null_sd": 0.031585159959287595,
+    "structure_left_bits": 0.28884252490249906,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 6.313788816545985,
+    "null_mean": 6.395299949973684,
+    "null_sd": 0.026891420123480864,
+    "structure_left_bits": 0.081511133427699,
+    "p": 0.01
+   }
+  },
+  "heatsim_version": "0.6.1",
+  "sun_timing": "stamp",
+  "station_hour_rule": "round",
+  "rmse_K": 2.3617562935291434,
+  "bias_K": -1.3653707111499929,
+  "range_ratio": 1.1958078667647252
+ },
+ "after_round": {
+  "name": "HeatSim 0.6.1 hour_ending",
+  "n": 360,
+  "library": [
+   "radiation",
+   "radiation_lag",
+   "storage_hysteresis",
+   "amplitude",
+   "timing_shift",
+   "wind_mixing",
+   "night_decoupling",
+   "sky_cooling",
+   "cloud_shading",
+   "humidity",
+   "vegetation_et",
+   "built_storage",
+   "station_offsets",
+   "diurnal_shape"
+  ],
+  "library_size": 14,
+  "formulas_scored": 235,
+  "winner": {
+   "terms": [
+    "amplitude"
+   ],
+   "structure_bits": 17.0,
+   "param_bits": 38.0,
+   "residual_bits": 1881.5989894234435,
+   "total_bits": 1936.5989894234435,
+   "bits_per_reading": 5.379441637287343,
+   "n": 360,
+   "sd": 1.0,
+   "rho": 0.875,
+   "coef": {
+    "level": -1.3910250588876232,
+    "amplitude": -0.19570487462225047
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "amplitude"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 38.0,
+    "residual_bits": 1881.5989894234435,
+    "total_bits": 1936.5989894234435,
+    "bits_per_reading": 5.379441637287343,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.19570487462225047
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "built_storage"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 40.0,
+    "residual_bits": 1878.6368238646141,
+    "total_bits": 1943.6368238646141,
+    "bits_per_reading": 5.398991177401706,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.2332036996734357,
+     "built_storage": -1.4370951925186035
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "timing_shift"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 44.0,
+    "residual_bits": 1876.1541917559716,
+    "total_bits": 1945.1541917559716,
+    "bits_per_reading": 5.403206088211032,
+    "n": 360,
+    "sd": 0.9375,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.1975662425661737,
+     "timing_shift": 0.4502998487292903
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "humidity"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 40.0,
+    "residual_bits": 1881.5989894234435,
+    "total_bits": 1946.5989894234435,
+    "bits_per_reading": 5.4072194150651205,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.1977667621800196,
+     "humidity": -0.02562662039197593
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "station_offsets"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 52.0,
+    "residual_bits": 1870.5939239941295,
+    "total_bits": 1947.5939239941295,
+    "bits_per_reading": 5.409983122205915,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.1957048746222503,
+     "station_offsets": [
+      2.1759529484642877,
+      1.5828140112558997
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "radiation",
+     "amplitude"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 40.0,
+    "residual_bits": 1882.6740634731555,
+    "total_bits": 1947.6740634731555,
+    "bits_per_reading": 5.410205731869876,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.75,
+    "coef": {
+     "level": -1.3910250588876232,
+     "radiation": 1.4165742022961338,
+     "amplitude": -0.2896963702564477
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "amplitude",
+     "wind_mixing"
+    ],
+    "structure_bits": 25.0,
+    "param_bits": 42.0,
+    "residual_bits": 1881.5989894234435,
+    "total_bits": 1948.5989894234435,
+    "bits_per_reading": 5.412774970620676,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.20932774122740758,
+     "wind_mixing": 0.644714276389345
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [],
+    "structure_bits": 8.0,
+    "param_bits": 30.0,
+    "residual_bits": 1910.893672412,
+    "total_bits": 1948.893672412,
+    "bits_per_reading": 5.413593534477777,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.391025058887623
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.0,
+    "param_bits": 30.0,
+    "residual_bits": 1910.893672412,
+    "total_bits": 1948.893672412,
+    "bits_per_reading": 5.413593534477777,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.391025058887623
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "amplitude"
+    ],
+    "structure_bits": 17.0,
+    "param_bits": 38.0,
+    "residual_bits": 1881.5989894234435,
+    "total_bits": 1936.5989894234435,
+    "bits_per_reading": 5.379441637287343,
+    "n": 360,
+    "sd": 1.0,
+    "rho": 0.875,
+    "coef": {
+     "level": -1.3910250588876232,
+     "amplitude": -0.19570487462225047
+    },
+    "alpha": {},
+    "added": "amplitude"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 2025-07-08",
+    "formula_bpr": 5.459377207311726,
+    "one_correction_bpr": 5.593823428612042,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-25",
+    "formula_bpr": 5.5024075355736874,
+    "one_correction_bpr": 5.6514389912234755,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-28",
+    "formula_bpr": 4.925112149879521,
+    "one_correction_bpr": 4.990918258532091,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-29",
+    "formula_bpr": 5.197390122628729,
+    "one_correction_bpr": 5.263276905925285,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2025-07-30",
+    "formula_bpr": 5.138078674367894,
+    "one_correction_bpr": 5.167264970104729,
+    "transfers": true
+   },
+   {
+    "fold": "leave out Wings Field",
+    "formula_bpr": 5.611289093863637,
+    "one_correction_bpr": 5.397801771713409,
+    "transfers": false
+   },
+   {
+    "fold": "leave out PHL airport",
+    "formula_bpr": 5.272373387371429,
+    "one_correction_bpr": 5.336432137256975,
+    "transfers": true
+   },
+   {
+    "fold": "leave out NE PHL airport",
+    "formula_bpr": 5.170984965775902,
+    "one_correction_bpr": 5.290490537009612,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "note": "AR(1) code: ideal bits only"
+  },
+  "terms_meta": {
+   "radiation": {
+    "formula": "a \u00b7 sin(e)\u207a",
+    "meaning": "daytime heating by sunlight is too strong or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "radiation_lag": {
+    "formula": "a \u00b7 sin(e)\u207a at t \u2212 \u03c4",
+    "meaning": "sunlight's heating arrives late or early by \u03c4 hours",
+    "physics": true,
+    "unit": "h"
+   },
+   "storage_hysteresis": {
+    "formula": "a \u00b7 d sin(e)\u207a / dt",
+    "meaning": "heat storage releases with a phase lag (OHM a2 term)",
+    "physics": true,
+    "unit": ""
+   },
+   "amplitude": {
+    "formula": "a \u00b7 (T_model \u2212 daily mean)",
+    "meaning": "the model's daily swing is too large (a<0) or small (a>0)",
+    "physics": true,
+    "unit": ""
+   },
+   "timing_shift": {
+    "formula": "\u03b4 \u00b7 dT_model / dt",
+    "meaning": "the model's daily cycle runs late (\u03b4>0, h) or early",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_mixing": {
+    "formula": "a \u00b7 sin(e)\u207a / U",
+    "meaning": "daytime mixing: light-wind days heat more than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "night_decoupling": {
+    "formula": "a \u00b7 [night] / U",
+    "meaning": "calm nights decouple and cool more",
+    "physics": true,
+    "unit": ""
+   },
+   "sky_cooling": {
+    "formula": "a \u00b7 [night] \u00b7 (1 \u2212 cloud)",
+    "meaning": "clear nights radiate more heat away",
+    "physics": true,
+    "unit": ""
+   },
+   "cloud_shading": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 cloud",
+    "meaning": "clouds cut sunlight more or less than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "humidity": {
+    "formula": "a \u00b7 (T_dew \u2212 mean)",
+    "meaning": "moisture: evaporation or latent heat off",
+    "physics": true,
+    "unit": ""
+   },
+   "vegetation_et": {
+    "formula": "a \u00b7 sin(e)\u207a \u00b7 f_veg",
+    "meaning": "evapotranspiration by trees and grass off by day",
+    "physics": true,
+    "unit": ""
+   },
+   "built_storage": {
+    "formula": "a \u00b7 [night] \u00b7 f_built",
+    "meaning": "roofs and paving release stored heat at night",
+    "physics": true,
+    "unit": ""
+   },
+   "station_offsets": {
+    "formula": "\u03b4_s per station",
+    "meaning": "a siting offset at each station",
+    "physics": true,
+    "unit": ""
+   },
+   "diurnal_shape": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "a daily shape with no physics name (a gap the library can't name)",
+    "physics": false,
+    "unit": ""
+   }
+  },
+  "noise_model": "AR(1)",
+  "bits_saved_per_reading": 0.03415189719043443,
+  "sd_before": 1.0,
+  "sd_after": 1.0,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 6.401648245706747,
+    "null_mean": 6.657806700227816,
+    "null_sd": 0.03167987667078477,
+    "structure_left_bits": 0.2561584545210689,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 6.348519676106644,
+    "null_mean": 6.502637853090247,
+    "null_sd": 0.03578397147215531,
+    "structure_left_bits": 0.1541181769836033,
+    "p": 0.01
+   }
+  },
+  "heatsim_version": "0.6.1",
+  "sun_timing": "hour_ending",
+  "station_hour_rule": "round",
+  "rmse_K": 2.2979746022711325,
+  "bias_K": -1.391025058887623,
+  "range_ratio": 1.1684968427476627
+ }
+}

@@ -1,0 +1,939 @@
+{
+ "lbm": {
+  "name": "AIJ Case C LBM D/10",
+  "n": 360,
+  "library": [
+   "contrast",
+   "fetch_decay",
+   "fetch_linear",
+   "canyon_along",
+   "canyon_cross",
+   "height_ratio",
+   "corner",
+   "contrast_along",
+   "fetch_decay_along"
+  ],
+  "library_size": 9,
+  "formulas_scored": 102,
+  "winner": {
+   "terms": [
+    "contrast",
+    "fetch_decay",
+    "height_ratio",
+    "fetch_decay_along"
+   ],
+   "structure_bits": 39.134884567735675,
+   "param_bits": 66.0,
+   "residual_bits": 2154.796903467036,
+   "total_bits": 2259.9317880347717,
+   "bits_per_reading": 6.277588300096588,
+   "n": 360,
+   "sd": 0.15625,
+   "rho": null,
+   "coef": {
+    "level": -0.2561128730713954,
+    "contrast": -0.5529661024452017,
+    "fetch_decay": 1.4232740235390777,
+    "height_ratio": 0.08373706490450107,
+    "fetch_decay_along": -0.16762777015158642
+   },
+   "alpha": {
+    "fetch_decay": 0.7888143354382089,
+    "fetch_decay_along": 2.470668452863959
+   }
+  },
+  "ranked": [
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio",
+     "fetch_decay_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 2154.796903467036,
+    "total_bits": 2259.9317880347717,
+    "bits_per_reading": 6.277588300096588,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2561128730713954,
+     "contrast": -0.5529661024452017,
+     "fetch_decay": 1.4232740235390777,
+     "height_ratio": 0.08373706490450107,
+     "fetch_decay_along": -0.16762777015158642
+    },
+    "alpha": {
+     "fetch_decay": 0.7888143354382089,
+     "fetch_decay_along": 2.470668452863959
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_along",
+     "height_ratio",
+     "contrast_along"
+    ],
+    "structure_bits": 46.05374780501027,
+    "param_bits": 68.0,
+    "residual_bits": 2148.0441584777705,
+    "total_bits": 2262.0979062827805,
+    "bits_per_reading": 6.283605295229946,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.27670061254558775,
+     "contrast": -0.5315992257546178,
+     "fetch_decay": 1.5079953881054289,
+     "canyon_along": -0.07473577270671038,
+     "height_ratio": 0.07053248684701399,
+     "contrast_along": -0.1862602863339184
+    },
+    "alpha": {
+     "fetch_decay": 0.7603158648124194
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio",
+     "corner"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 60.0,
+    "residual_bits": 2163.226739324722,
+    "total_bits": 2262.361623892458,
+    "bits_per_reading": 6.284337844145716,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2777715657851909,
+     "contrast": -0.5744688485677016,
+     "fetch_decay": 1.3468699468713183,
+     "height_ratio": 0.07757034313523564,
+     "corner": 0.026250596132530734
+    },
+    "alpha": {
+     "fetch_decay": 0.8071547737515417
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio",
+     "contrast_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 64.0,
+    "residual_bits": 2160.504469480571,
+    "total_bits": 2263.639354048307,
+    "bits_per_reading": 6.28788709457863,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.28222211890944543,
+     "contrast": -0.5634055876554191,
+     "fetch_decay": 1.4375618692976024,
+     "height_ratio": 0.07257258389149596,
+     "contrast_along": -0.1345038473412795
+    },
+    "alpha": {
+     "fetch_decay": 0.7965952778526147
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_along",
+     "height_ratio"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 68.0,
+    "residual_bits": 2160.161630766166,
+    "total_bits": 2267.296515333902,
+    "bits_per_reading": 6.298045875927505,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.27599134558531296,
+     "contrast": -0.5578045210035266,
+     "fetch_decay": 1.2310344555187058,
+     "canyon_along": -0.0574614177155299,
+     "height_ratio": 0.08343237066183319
+    },
+    "alpha": {
+     "fetch_decay": 0.8378885849101636
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 78.0,
+    "residual_bits": 2157.339124280635,
+    "total_bits": 2267.555145611096,
+    "bits_per_reading": 6.298764293364156,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2801575555983711,
+     "contrast": -0.5779661851439778,
+     "fetch_decay": 1.2588071375685734,
+     "height_ratio": 0.08216271138946073
+    },
+    "alpha": {
+     "fetch_decay": 0.844114597417114
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio",
+     "contrast_along",
+     "fetch_decay_along"
+    ],
+    "structure_bits": 46.05374780501027,
+    "param_bits": 84.0,
+    "residual_bits": 2140.580644998962,
+    "total_bits": 2270.634392803972,
+    "bits_per_reading": 6.307317757788811,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2524124807279686,
+     "contrast": -0.5313426707538712,
+     "fetch_decay": 1.6142775570796153,
+     "height_ratio": 0.07175296408430738,
+     "contrast_along": -0.17084344122586495,
+     "fetch_decay_along": -0.13233429559737891
+    },
+    "alpha": {
+     "fetch_decay": 0.7432642813859827,
+     "fetch_decay_along": 4.351077950403875
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "height_ratio"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 80.0,
+    "residual_bits": 2157.339124280635,
+    "total_bits": 2276.474008848371,
+    "bits_per_reading": 6.323538913467697,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2803770667214072,
+     "contrast": -0.5795940129215141,
+     "fetch_decay": 1.2605249751364673,
+     "canyon_cross": -0.0023272055632734285,
+     "height_ratio": 0.08206020067322328
+    },
+    "alpha": {
+     "fetch_decay": 0.8443470704100182
+    }
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 24.0,
+    "residual_bits": 2563.645672442849,
+    "total_bits": 2595.105104061486,
+    "bits_per_reading": 7.208625289059683,
+    "n": 360,
+    "sd": 0.34375,
+    "rho": null,
+    "coef": {
+     "level": -0.16471252327355018
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "contrast"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 36.0,
+    "residual_bits": 2298.6428226635603,
+    "total_bits": 2350.021117519472,
+    "bits_per_reading": 6.52783643755409,
+    "n": 360,
+    "sd": 0.203125,
+    "rho": null,
+    "coef": {
+     "level": -0.16471252327355024,
+     "contrast": -0.5480910274638359
+    },
+    "alpha": {},
+    "added": "contrast"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 52.0,
+    "residual_bits": 2205.2332898235063,
+    "total_bits": 2279.530447916693,
+    "bits_per_reading": 6.332029021990814,
+    "n": 360,
+    "sd": 0.171875,
+    "rho": null,
+    "coef": {
+     "level": -0.2818114572892282,
+     "contrast": -0.5930519680418828,
+     "fetch_decay": 1.272517604475896
+    },
+    "alpha": {
+     "fetch_decay": 0.8455878235785792
+    },
+    "added": "fetch_decay"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 78.0,
+    "residual_bits": 2157.339124280635,
+    "total_bits": 2267.555145611096,
+    "bits_per_reading": 6.298764293364156,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2801575555983711,
+     "contrast": -0.5779661851439778,
+     "fetch_decay": 1.2588071375685734,
+     "height_ratio": 0.08216271138946073
+    },
+    "alpha": {
+     "fetch_decay": 0.844114597417114
+    },
+    "added": "height_ratio"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "height_ratio",
+     "fetch_decay_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 2154.796903467036,
+    "total_bits": 2259.9317880347717,
+    "bits_per_reading": 6.277588300096588,
+    "n": 360,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": -0.2561128730713954,
+     "contrast": -0.5529661024452017,
+     "fetch_decay": 1.4232740235390777,
+     "height_ratio": 0.08373706490450107,
+     "fetch_decay_along": -0.16762777015158642
+    },
+    "alpha": {
+     "fetch_decay": 0.7888143354382089,
+     "fetch_decay_along": 2.470668452863959
+    },
+    "added": "fetch_decay_along"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 0D",
+    "formula_bpr": 6.759114584107577,
+    "one_correction_bpr": 7.13341023393727,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 1D",
+    "formula_bpr": 5.852558162916466,
+    "one_correction_bpr": 7.77601532788554,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2D",
+    "formula_bpr": 6.171288039196226,
+    "one_correction_bpr": 6.933116807346335,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 2154.796903467036,
+   "coded_bits": 2160,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "contrast": {
+    "formula": "\u03b2 \u00b7 ln(U_model / U_ref)",
+    "meaning": "the model exaggerates (\u03b2<0) or flattens (\u03b2>0) its own speed-ups",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay": {
+    "formula": "A \u00b7 exp(\u2212x / L)",
+    "meaning": "an entrance or internal boundary layer: the miss decays with distance x",
+    "physics": true,
+    "unit": "L"
+   },
+   "fetch_linear": {
+    "formula": "b \u00b7 x",
+    "meaning": "the miss grows steadily with distance into the array",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_along": {
+    "formula": "\u03b4 \u00b7 [street along the wind]",
+    "meaning": "channelling along streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_cross": {
+    "formula": "\u03b4 \u00b7 [street across the wind]",
+    "meaning": "sheltering in cross streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "height_ratio": {
+    "formula": "b \u00b7 H_c / H",
+    "meaning": "a taller neighbour changes the flow more than the model says",
+    "physics": true,
+    "unit": ""
+   },
+   "corner": {
+    "formula": "\u03b4 \u00b7 [near a tall corner]",
+    "meaning": "corner jets / downwash are off",
+    "physics": true,
+    "unit": ""
+   },
+   "contrast_along": {
+    "formula": "\u03b2 \u00b7 [along] \u00b7 ln(U/U_ref)",
+    "meaning": "speed-up contrast differs in along-wind streets",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay_along": {
+    "formula": "A \u00b7 [along] \u00b7 exp(\u2212x/L)",
+    "meaning": "entrance decay only in along-wind streets",
+    "physics": true,
+    "unit": "L"
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.9310369889630952,
+  "sd_before": 0.34375,
+  "sd_after": 0.15625,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 6.616956142089104,
+    "null_mean": 7.294999834383115,
+    "null_sd": 0.0382013613378739,
+    "structure_left_bits": 0.6780436922940112,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 5.697321507282596,
+    "null_mean": 6.2357428612653045,
+    "null_sd": 0.043473035525821095,
+    "structure_left_bits": 0.5384213539827085,
+    "p": 0.01
+   }
+  },
+  "noise_floor_sd": 0.06297318608418027
+ },
+ "rans": {
+  "name": "AIJ Case C RANS D/10",
+  "n": 360,
+  "library": [
+   "contrast",
+   "fetch_decay",
+   "fetch_linear",
+   "canyon_along",
+   "canyon_cross",
+   "height_ratio",
+   "corner",
+   "contrast_along",
+   "fetch_decay_along"
+  ],
+  "library_size": 9,
+  "formulas_scored": 102,
+  "winner": {
+   "terms": [
+    "contrast",
+    "fetch_decay",
+    "canyon_cross",
+    "contrast_along"
+   ],
+   "structure_bits": 39.134884567735675,
+   "param_bits": 64.0,
+   "residual_bits": 2257.5357933321748,
+   "total_bits": 2360.6706778999105,
+   "bits_per_reading": 6.557418549721974,
+   "n": 360,
+   "sd": 0.1875,
+   "rho": null,
+   "coef": {
+    "level": 0.4432357840942276,
+    "contrast": -0.842575187091642,
+    "fetch_decay": 1.1158723810114521,
+    "canyon_cross": -0.28310545403988085,
+    "contrast_along": 0.012887987136125994
+   },
+   "alpha": {
+    "fetch_decay": 0.9304863575529204
+   }
+  },
+  "ranked": [
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "contrast_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 64.0,
+    "residual_bits": 2257.5357933321748,
+    "total_bits": 2360.6706778999105,
+    "bits_per_reading": 6.557418549721974,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4432357840942276,
+     "contrast": -0.842575187091642,
+     "fetch_decay": 1.1158723810114521,
+     "canyon_cross": -0.28310545403988085,
+     "contrast_along": 0.012887987136125994
+    },
+    "alpha": {
+     "fetch_decay": 0.9304863575529204
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 74.0,
+    "residual_bits": 2255.4602625582293,
+    "total_bits": 2361.6762838886903,
+    "bits_per_reading": 6.560211899690806,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4449853860302592,
+     "contrast": -0.8354484829678399,
+     "fetch_decay": 1.137935625631834,
+     "canyon_cross": -0.2746960935534198
+    },
+    "alpha": {
+     "fetch_decay": 0.913412203440746
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "fetch_decay_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 70.0,
+    "residual_bits": 2258.2132569933447,
+    "total_bits": 2367.3481415610804,
+    "bits_per_reading": 6.57596705989189,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4582606977839156,
+     "contrast": -0.8400001816465625,
+     "fetch_decay": 1.2041423031100473,
+     "canyon_cross": -0.2996777942947846,
+     "fetch_decay_along": -0.08401096479272088
+    },
+    "alpha": {
+     "fetch_decay": 0.8957638687147133,
+     "fetch_decay_along": 3.859362383369625
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "height_ratio",
+     "contrast_along"
+    ],
+    "structure_bits": 46.05374780501027,
+    "param_bits": 66.0,
+    "residual_bits": 2257.5357933321748,
+    "total_bits": 2369.589541137185,
+    "bits_per_reading": 6.582193169825514,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.43985157467871155,
+     "contrast": -0.8549688784653175,
+     "fetch_decay": 1.130444997467291,
+     "canyon_cross": -0.28883431210406285,
+     "height_ratio": 0.033328641500441146,
+     "contrast_along": 0.020103214831479834
+    },
+    "alpha": {
+     "fetch_decay": 0.937787497089446
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_linear",
+     "canyon_cross"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 68.0,
+    "residual_bits": 2269.6381811731912,
+    "total_bits": 2369.8542025036522,
+    "bits_per_reading": 6.582928340287923,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.5661678761000045,
+     "contrast": -0.8197391233157681,
+     "fetch_linear": -0.09720822570978828,
+     "canyon_cross": -0.2663604134514227
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_along",
+     "canyon_cross"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 76.0,
+    "residual_bits": 2255.460262558229,
+    "total_bits": 2370.5951471259646,
+    "bits_per_reading": 6.584986519794346,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4441209495416992,
+     "contrast": -0.8401122288543168,
+     "fetch_decay": 1.1394595599976451,
+     "canyon_along": -0.04188030130579491,
+     "canyon_cross": -0.2977640872483078
+    },
+    "alpha": {
+     "fetch_decay": 0.9162793836974594
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "height_ratio"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 76.0,
+    "residual_bits": 2255.4602625582293,
+    "total_bits": 2370.595147125965,
+    "bits_per_reading": 6.584986519794347,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4427351647364795,
+     "contrast": -0.843412905421348,
+     "fetch_decay": 1.163453401635641,
+     "canyon_cross": -0.2756647076731252,
+     "height_ratio": 0.03158469555648155
+    },
+    "alpha": {
+     "fetch_decay": 0.9115428396208283
+    }
+   },
+   {
+    "terms": [
+     "contrast",
+     "fetch_decay",
+     "canyon_cross",
+     "corner"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 76.0,
+    "residual_bits": 2255.4602625582293,
+    "total_bits": 2370.595147125965,
+    "bits_per_reading": 6.584986519794347,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4480212221657746,
+     "contrast": -0.8359388366913912,
+     "fetch_decay": 1.22840349004565,
+     "canyon_cross": -0.2777164220878605,
+     "corner": 0.025374963512727503
+    },
+    "alpha": {
+     "fetch_decay": 0.8651852667124305
+    }
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 22.0,
+    "residual_bits": 2827.441764608956,
+    "total_bits": 2856.901196227593,
+    "bits_per_reading": 7.9358366561877585,
+    "n": 360,
+    "sd": 0.5625,
+    "rho": null,
+    "coef": {
+     "level": 0.5661678761000044
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "contrast"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 44.0,
+    "residual_bits": 2401.532459908509,
+    "total_bits": 2460.9107547644207,
+    "bits_per_reading": 6.835863207678947,
+    "n": 360,
+    "sd": 0.25,
+    "rho": null,
+    "coef": {
+     "level": 0.5661678761000045,
+     "contrast": -0.7598409862377514
+    },
+    "alpha": {},
+    "added": "contrast"
+   },
+   {
+    "terms": [
+     "contrast",
+     "canyon_cross"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 50.0,
+    "residual_bits": 2325.9301179972886,
+    "total_bits": 2398.2272760904752,
+    "bits_per_reading": 6.661742433584654,
+    "n": 360,
+    "sd": 0.21875,
+    "rho": null,
+    "coef": {
+     "level": 0.5661678761000045,
+     "contrast": -0.7726755964707865,
+     "canyon_cross": -0.2614416023645415
+    },
+    "alpha": {},
+    "added": "canyon_cross"
+   },
+   {
+    "terms": [
+     "contrast",
+     "canyon_cross",
+     "fetch_decay"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 74.0,
+    "residual_bits": 2255.460262558229,
+    "total_bits": 2361.67628388869,
+    "bits_per_reading": 6.560211899690805,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.4449853860302592,
+     "contrast": -0.835448482967839,
+     "canyon_cross": -0.27469609355342023,
+     "fetch_decay": 1.1379356256318334
+    },
+    "alpha": {
+     "fetch_decay": 0.913412203440746
+    },
+    "added": "fetch_decay"
+   },
+   {
+    "terms": [
+     "contrast",
+     "canyon_cross",
+     "fetch_decay",
+     "contrast_along"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 64.0,
+    "residual_bits": 2257.5357933321748,
+    "total_bits": 2360.6706778999105,
+    "bits_per_reading": 6.557418549721974,
+    "n": 360,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.44323578409422726,
+     "contrast": -0.842575187091642,
+     "canyon_cross": -0.28310545403988163,
+     "fetch_decay": 1.1158723810114537,
+     "contrast_along": 0.012887987136126213
+    },
+    "alpha": {
+     "fetch_decay": 0.9304863575529204
+    },
+    "added": "contrast_along"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out 0D",
+    "formula_bpr": 6.616530901649451,
+    "one_correction_bpr": 7.8680544927306455,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 1D",
+    "formula_bpr": 6.323944262508023,
+    "one_correction_bpr": 8.2373302660616,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2D",
+    "formula_bpr": 7.4717073299631505,
+    "one_correction_bpr": 7.685311424091717,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 2257.5357933321748,
+   "coded_bits": 2264,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "contrast": {
+    "formula": "\u03b2 \u00b7 ln(U_model / U_ref)",
+    "meaning": "the model exaggerates (\u03b2<0) or flattens (\u03b2>0) its own speed-ups",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay": {
+    "formula": "A \u00b7 exp(\u2212x / L)",
+    "meaning": "an entrance or internal boundary layer: the miss decays with distance x",
+    "physics": true,
+    "unit": "L"
+   },
+   "fetch_linear": {
+    "formula": "b \u00b7 x",
+    "meaning": "the miss grows steadily with distance into the array",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_along": {
+    "formula": "\u03b4 \u00b7 [street along the wind]",
+    "meaning": "channelling along streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canyon_cross": {
+    "formula": "\u03b4 \u00b7 [street across the wind]",
+    "meaning": "sheltering in cross streets is off",
+    "physics": true,
+    "unit": ""
+   },
+   "height_ratio": {
+    "formula": "b \u00b7 H_c / H",
+    "meaning": "a taller neighbour changes the flow more than the model says",
+    "physics": true,
+    "unit": ""
+   },
+   "corner": {
+    "formula": "\u03b4 \u00b7 [near a tall corner]",
+    "meaning": "corner jets / downwash are off",
+    "physics": true,
+    "unit": ""
+   },
+   "contrast_along": {
+    "formula": "\u03b2 \u00b7 [along] \u00b7 ln(U/U_ref)",
+    "meaning": "speed-up contrast differs in along-wind streets",
+    "physics": true,
+    "unit": ""
+   },
+   "fetch_decay_along": {
+    "formula": "A \u00b7 [along] \u00b7 exp(\u2212x/L)",
+    "meaning": "entrance decay only in along-wind streets",
+    "physics": true,
+    "unit": "L"
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 1.3784181064657846,
+  "sd_before": 0.5625,
+  "sd_after": 0.1875,
+  "remainder_structure": {
+   "before": {
+    "bits_per_reading": 7.8340947063142545,
+    "null_mean": 8.115139874879066,
+    "null_sd": 0.06405116017070565,
+    "structure_left_bits": 0.28104516856481165,
+    "p": 0.01
+   },
+   "after": {
+    "bits_per_reading": 5.945412018149748,
+    "null_mean": 6.513881684776027,
+    "null_sd": 0.05805364767113684,
+    "structure_left_bits": 0.568469666626279,
+    "p": 0.01
+   }
+  },
+  "noise_floor_sd": 0.06297318608418027
+ }
+}

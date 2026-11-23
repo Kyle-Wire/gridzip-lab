@@ -1,0 +1,4879 @@
+{
+ "summary": {
+  "Irrigated farmland (heat)": {
+   "term": "irrigation_cooling",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.9,
+   "unnamed_stand_ins": {
+    "vegetation_et": 5,
+    "station_offsets": 5,
+    "radiation": 3,
+    "cold_pool": 2,
+    "wind_mixing": 1,
+    "runway_siting": 1
+   },
+   "bits_saved_flag": 0.1007358815315178,
+   "sd_explained_flag": 0.07857142857142854,
+   "sd_explained_unnamed": 0.049999999999999975
+  },
+  "Coastal sea breeze (heat)": {
+   "term": "sea_breeze",
+   "flagged": 0.9,
+   "named": 0.9,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.1,
+   "unnamed_stand_ins": {
+    "storage_hysteresis": 1
+   },
+   "bits_saved_flag": 0.09977908156514666,
+   "sd_explained_flag": 0.062380952380952356,
+   "sd_explained_unnamed": 0.0
+  },
+  "Valley cold-air pools (heat)": {
+   "term": "cold_pool",
+   "flagged": 0.6,
+   "named": 0.6,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.003278456573776012,
+   "sd_explained_flag": 0.0076923076923076875,
+   "sd_explained_unnamed": 0.0
+  },
+  "High-rise canyons at night (heat)": {
+   "term": "canyon_trapping",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 1.0,
+   "unnamed_stand_ins": {
+    "built_storage": 8,
+    "station_offsets": 5,
+    "cold_pool": 4,
+    "night_decoupling": 2
+   },
+   "bits_saved_flag": 0.19480587601547966,
+   "sd_explained_flag": 0.1271428571428571,
+   "sd_explained_unnamed": 0.06714285714285713
+  },
+  "Station beside a runway (heat)": {
+   "term": "runway_siting",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.7,
+   "unnamed_stand_ins": {
+    "station_offsets": 6,
+    "vegetation_et": 2,
+    "radiation": 1,
+    "built_storage": 1
+   },
+   "bits_saved_flag": 0.10871988855768197,
+   "sd_explained_flag": 0.07857142857142854,
+   "sd_explained_unnamed": 0.02857142857142856
+  },
+  "Very flat floodplain (flood)": {
+   "term": "flat_ground",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 1.0,
+   "unnamed_stand_ins": {
+    "manning_slope": 10
+   },
+   "bits_saved_flag": 0.3835538250676113,
+   "sd_explained_flag": 0.40763888888888883,
+   "sd_explained_unnamed": 0.27305555555555555
+  },
+  "Tidal backwater (flood)": {
+   "term": "tide_backwater",
+   "flagged": 0.9,
+   "named": 0.9,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.3280562197500568,
+   "sd_explained_flag": 0.34228327228327227,
+   "sd_explained_unnamed": 0.0
+  },
+  "Frozen soil (flood)": {
+   "term": "frozen_soil",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.25698000428609297,
+   "sd_explained_flag": 0.31742216117216115,
+   "sd_explained_unnamed": 0.0
+  },
+  "Burned soil after wildfire (flood)": {
+   "term": "burned_soil",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.1335432926624847,
+   "sd_explained_flag": 0.26164418914418913,
+   "sd_explained_unnamed": 0.0
+  },
+  "Karst sinks (flood)": {
+   "term": "karst_drain",
+   "flagged": 0.9,
+   "named": 0.9,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.10555843991754274,
+   "sd_explained_flag": 0.23282051282051283,
+   "sd_explained_unnamed": 0.0
+  },
+  "Valley channelling (wind)": {
+   "term": "valley_channel",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 1.0,
+   "unnamed_stand_ins": {
+    "direction": 10
+   },
+   "bits_saved_flag": 0.25389197217045567,
+   "sd_explained_flag": 0.20407925407925404,
+   "sd_explained_unnamed": 0.05641025641025641
+  },
+  "Onshore wind off water (wind)": {
+   "term": "water_fetch",
+   "flagged": 1.0,
+   "named": 1.0,
+   "false_flag": 0.0,
+   "unnamed_flagged": 0.0,
+   "unnamed_stand_ins": {},
+   "bits_saved_flag": 0.07812928633560609,
+   "sd_explained_flag": 0.09363636363636366,
+   "sd_explained_unnamed": 0.0
+  }
+ },
+ "runs": [
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08907200542235749,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10353326673416952,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.13168847053422095,
+   "sd_before": 0.875,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09139294323798541,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09406960953469312,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.12027403199718023,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08219906019468404,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10046477011935018,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09046987311105337,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "irrigation_cooling"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10419478442948371,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.75,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [
+    "radiation",
+    "vegetation_et"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.07136154556768926,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [
+    "vegetation_et",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.031657003159694774,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [
+    "vegetation_et",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.020301656564014614,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [
+    "radiation",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.003057385098226284,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [
+    "wind_mixing"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.00023888512120695538,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [
+    "radiation",
+    "vegetation_et",
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.026384738448480327,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [
+    "station_offsets",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.017677216457407496,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "station_offsets",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.03378579757011835,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Irrigated farmland (heat)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [
+    "vegetation_et"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.011384979585309374,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 6.163135712953673
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.0459022333471335,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 5.46571135741046
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.19603532312838556,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 2.527390680960597
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.05834542942297194,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 4.548261537692985
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1837952292877123,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 6.243882200479639
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.07075227668982276,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 6.508117926661554
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09627582333546325,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 4.1688642457665095
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.11804431410093041,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 4.882806060209512
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.11938287354789079,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "sea_breeze"
+   ],
+   "alpha": {
+    "sea_breeze": 5.210876696718588
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10925731279115602,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.75,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.9375,
+   "sd_after": 0.9375
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.9375,
+   "sd_after": 0.9375
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "storage_hysteresis"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.0004145185863508871,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Coastal sea breeze (heat)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.008802064200617465,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.006987314444888426,
+   "sd_before": 0.8125,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.009842452380155464,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.0046917701891127095,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.0005726979431415202,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.001888266579844533,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.75,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Valley cold-air pools (heat)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1710288806711393,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2160771842074949,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.20959605597552233,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.19504466803606046,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.20966585078737765,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.19177486281521094,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.16753745863534864,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.18795700611440225,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.20607635662908308,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "canyon_trapping"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.19330043628315696,
+   "sd_before": 0.9375,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.75,
+   "sd_after": 0.75
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.017691480651729208,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [
+    "night_decoupling",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.022597822718200433,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [
+    "built_storage",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.06803894781238018,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [
+    "built_storage",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.059563703031196624,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [
+    "built_storage",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.05454135563263396,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [
+    "built_storage",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.08429500298094883,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [
+    "built_storage",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.05881696212873955,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [
+    "built_storage"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.05732086636692646,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "built_storage",
+    "cold_pool"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.10917038511048727,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "High-rise canyons at night (heat)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [
+    "built_storage",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.03468641271231121,
+   "sd_before": 0.9375,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10687506098860489,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10909900667501038,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.14180205894273268,
+   "sd_before": 0.875,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.088763351642136,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.13138690856427448,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.11727497687747679,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10047189599437445,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09441452058248423,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.07769335631475549,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "runway_siting"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.11941774899497037,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.75,
+   "sd_after": 0.75
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.8125,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.01510283587784933,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [
+    "vegetation_et",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.018573672128893826,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [
+    "radiation",
+    "vegetation_et"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.021462764349856833,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.014223864393420271,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.011351957286362513,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [
+    "built_storage",
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.006673831621031745,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "station_offsets"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.018433593620752475,
+   "sd_before": 0.875,
+   "sd_after": 0.8125
+  },
+  {
+   "env": "Station beside a runway (heat)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.875,
+   "sd_after": 0.875
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0029353342731130933
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.3725059721361985,
+   "sd_before": 0.1171875,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0025349301024381902
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.3086414124961774,
+   "sd_before": 0.1171875,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0025857509502233084
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5046012133614504,
+   "sd_before": 0.140625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0032326852357123614
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.34159204793592846,
+   "sd_before": 0.125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0027569690259721807
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.24488488332495795,
+   "sd_before": 0.140625,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.003819625457146039
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.4719784010271395,
+   "sd_before": 0.140625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0026766666372826944
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.29014722370846435,
+   "sd_before": 0.140625,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.00351486424297805
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.36361230626547947,
+   "sd_before": 0.125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.0024149017577641584
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.41207660979340854,
+   "sd_before": 0.140625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "flat_ground"
+   ],
+   "alpha": {
+    "flat_ground": 0.003022856941833905
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5254981806269088,
+   "sd_before": 0.125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.05859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.1918907517791517,
+   "sd_before": 0.1171875,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.01116674047930033,
+   "sd_before": 0.1171875,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.15920542815017313,
+   "sd_before": 0.140625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.08597777856741295,
+   "sd_before": 0.125,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.1818712457038929,
+   "sd_before": 0.140625,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.22055799123622943,
+   "sd_before": 0.140625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.0017456534362905174,
+   "sd_before": 0.140625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.21116370539613083,
+   "sd_before": 0.125,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.032453249684921914,
+   "sd_before": 0.140625,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Very flat floodplain (flood)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [
+    "manning_slope"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.1453740622908004,
+   "sd_before": 0.125,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5897145991852533,
+   "sd_before": 0.1171875,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08665817241650764,
+   "sd_before": 0.1015625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.39579999203783167,
+   "sd_before": 0.140625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.065220732865515,
+   "sd_before": 0.109375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.41835142676420833,
+   "sd_before": 0.125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5138355956267677,
+   "sd_before": 0.15625,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.34420433522947036,
+   "sd_before": 0.1171875,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.31900206303363543,
+   "sd_before": 0.125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "tide_backwater"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5477752803413782,
+   "sd_before": 0.140625,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.05859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Tidal backwater (flood)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.500790891370622,
+   "sd_before": 0.109375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.17401182919282654,
+   "sd_before": 0.109375,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2527061082500204,
+   "sd_before": 0.1171875,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.31212387541545716,
+   "sd_before": 0.125,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1012633333073154,
+   "sd_before": 0.109375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.26615544231111343,
+   "sd_before": 0.125,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1241581209824183,
+   "sd_before": 0.125,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.16186061718507716,
+   "sd_before": 0.1015625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1644812956707149,
+   "sd_before": 0.1171875,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "frozen_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.5122485291753645,
+   "sd_before": 0.125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.05859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Frozen soil (flood)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.16353004226091983,
+   "sd_before": 0.0859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.07255959704961157,
+   "sd_before": 0.1015625,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.4593801045133983,
+   "sd_before": 0.125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.15109688342759586,
+   "sd_before": 0.1171875,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2114052909251818,
+   "sd_before": 0.1171875,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.05093925262886678,
+   "sd_before": 0.1015625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09301901909793475,
+   "sd_before": 0.109375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.0662479752894436,
+   "sd_before": 0.09375,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.015606626165697968,
+   "sd_before": 0.1015625,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "burned_soil"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.051648135266196604,
+   "sd_before": 0.09375,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.05859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.125,
+   "sd_after": 0.125
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.09375,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Burned soil after wildfire (flood)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.09375,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2338175367107862,
+   "sd_before": 0.09375,
+   "sd_after": 0.0625
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.1440774071058195,
+   "sd_before": 0.109375,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.16655245054924706,
+   "sd_before": 0.109375,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08700400074289227,
+   "sd_before": 0.109375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.07613158962517108,
+   "sd_before": 0.109375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.06202602729110662,
+   "sd_before": 0.1171875,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.051682198971009896,
+   "sd_before": 0.1015625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.12248680812800039,
+   "sd_before": 0.1171875,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "karst_drain"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.11180638005139443,
+   "sd_before": 0.1015625,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.05859375,
+   "sd_after": 0.05859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0859375,
+   "sd_after": 0.0859375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.078125,
+   "sd_after": 0.078125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.0703125,
+   "sd_after": 0.0703125
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.09375,
+   "sd_after": 0.09375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.109375,
+   "sd_after": 0.109375
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1171875,
+   "sd_after": 0.1171875
+  },
+  {
+   "env": "Karst sinks (flood)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.1015625,
+   "sd_after": 0.1015625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 40.269915804686065
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.30866937131607664,
+   "sd_before": 0.1875,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 38.610935076844704
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.17247217493774336,
+   "sd_before": 0.1875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 40.02074966504514
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.20496453956319627,
+   "sd_before": 0.1875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 40.163667115846316
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.3144508891196711,
+   "sd_before": 0.203125,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 42.89737608096243
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2845540863405285,
+   "sd_before": 0.203125,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 39.224229235483776
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.23292667526636546,
+   "sd_before": 0.1875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 38.906932596133984
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.2623243553801977,
+   "sd_before": 0.203125,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 34.79391325121136
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.20057733084167584,
+   "sd_before": 0.1875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 38.65033489468521
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.28937129628362435,
+   "sd_before": 0.1875,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "valley_channel"
+   ],
+   "alpha": {
+    "valley_channel": 44.61291232036997
+   },
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.26860900265547727,
+   "sd_before": 0.171875,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.09011340207500407,
+   "sd_before": 0.1875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.046001009216442235,
+   "sd_before": 0.1875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.005690301935969977,
+   "sd_before": 0.1875,
+   "sd_after": 0.1875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.07844306273483959,
+   "sd_before": 0.203125,
+   "sd_after": 0.1875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.04235523054482737,
+   "sd_before": 0.203125,
+   "sd_after": 0.1875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.05108972030469072,
+   "sd_before": 0.1875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.06282146604936134,
+   "sd_before": 0.203125,
+   "sd_after": 0.1875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.014659682232143645,
+   "sd_before": 0.1875,
+   "sd_after": 0.1875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.04810200572223522,
+   "sd_before": 0.1875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Valley channelling (wind)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [
+    "direction"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": false,
+   "bits_saved": 0.06652410242895712,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 0,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.07421662331047241,
+   "sd_before": 0.15625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 1,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.04501170990503933,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 2,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.06175303476612992,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 3,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09083135568373812,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 4,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08518671538584854,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 5,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.10307674106008502,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 6,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.05096000902015341,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 7,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09021938983295108,
+   "sd_before": 0.171875,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 8,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.08364819968239434,
+   "sd_before": 0.15625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "flag",
+   "seed": 9,
+   "found": [
+    "water_fetch"
+   ],
+   "alpha": {},
+   "flagged": true,
+   "named": true,
+   "bits_saved": 0.09638908470924878,
+   "sd_before": 0.15625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "control",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.140625,
+   "sd_after": 0.140625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 0,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 1,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 2,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 3,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 4,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 5,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 6,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 7,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.171875,
+   "sd_after": 0.171875
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 8,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  },
+  {
+   "env": "Onshore wind off water (wind)",
+   "mode": "unnamed",
+   "seed": 9,
+   "found": [],
+   "alpha": {},
+   "flagged": false,
+   "named": false,
+   "bits_saved": 0.0,
+   "sd_before": 0.15625,
+   "sd_after": 0.15625
+  }
+ ]
+}
