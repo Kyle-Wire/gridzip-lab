@@ -1,0 +1,674 @@
+{
+ "n": 8980,
+ "candidates": 12384,
+ "one_correction": {
+  "terms": [],
+  "structure_bits": 9.459431618637296,
+  "param_bits": 12.0,
+  "sd_bits": 16,
+  "residual_bits": 55175.59719643208,
+  "sd": 0.171875,
+  "total_bits": 55213.05662805071,
+  "bits_per_reading": 6.148447285974467,
+  "n": 8980,
+  "coef": {
+   "c": -0.046875
+  },
+  "alpha": {},
+  "fit_coef": {
+   "c": -0.045064126786093
+  },
+  "fit_alpha": {},
+  "steps": [
+   6
+  ]
+ },
+ "top": [
+  {
+   "terms": [
+    "sm1",
+    "blh",
+    "sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54604.61479837967,
+   "sd": 0.171875,
+   "total_bits": 54712.83081971013,
+   "bits_per_reading": 6.092742852974402,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm1": -0.03125,
+    "blh": -0.0234375,
+    "sun": 0.046875
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.045064126786093,
+    "sm1": -0.02879601155938699,
+    "blh": -0.02103471754899725,
+    "sun": 0.04368211193309799
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    5,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "sm1",
+    "sun",
+    "lai_lo"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 54621.3871024064,
+   "sd": 0.171875,
+   "total_bits": 54725.60312373686,
+   "bits_per_reading": 6.094165158545307,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm1": -0.03125,
+    "sun": 0.03125,
+    "lai_lo": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.04506412678609299,
+    "sm1": -0.029028694959377422,
+    "sun": 0.033726416896616804,
+    "lai_lo": 0.015886394386808746
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    5,
+    5,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "sm1",
+    "wind",
+    "sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54626.3538770123,
+   "sd": 0.171875,
+   "total_bits": 54734.56989834276,
+   "bits_per_reading": 6.0951636857842715,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm1": -0.015625,
+    "wind": 0.015625,
+    "sun": 0.0390625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.04506412678609299,
+    "sm1": -0.019406661863077296,
+    "wind": 0.014787300266836065,
+    "sun": 0.03554191362077455
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    6,
+    6,
+    7
+   ]
+  },
+  {
+   "terms": [
+    "sm1",
+    "sun",
+    "sm1*sm2"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 54.0,
+   "sd_bits": 16,
+   "residual_bits": 54621.63837654696,
+   "sd": 0.171875,
+   "total_bits": 54737.85439787742,
+   "bits_per_reading": 6.09552944297076,
+   "n": 8980,
+   "coef": {
+    "c": -0.0546875,
+    "sm1": -0.0234375,
+    "sun": 0.0390625,
+    "sm1*sm2": 0.01171875
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.056650965370805204,
+    "sm1": -0.022291770859705642,
+    "sun": 0.03545043387039744,
+    "sm1*sm2": 0.012727006046921016
+   },
+   "fit_alpha": {},
+   "steps": [
+    7,
+    7,
+    7,
+    8
+   ]
+  },
+  {
+   "terms": [
+    "sm2",
+    "blh",
+    "sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54630.776014195,
+   "sd": 0.171875,
+   "total_bits": 54738.99203552546,
+   "bits_per_reading": 6.095656128677668,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm2": -0.0234375,
+    "blh": -0.015625,
+    "sun": 0.046875
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.045064126786093,
+    "sm2": -0.024689667974517136,
+    "blh": -0.01953194708809373,
+    "sun": 0.04822361934129778
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    7,
+    6,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "sm1",
+    "dd",
+    "sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 44.0,
+   "sd_bits": 16,
+   "residual_bits": 54633.651019736135,
+   "sd": 0.171875,
+   "total_bits": 54739.867041066595,
+   "bits_per_reading": 6.095753568047505,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm1": -0.03125,
+    "dd": -0.015625,
+    "sun": 0.046875
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.045064126786093,
+    "sm1": -0.030187562814231145,
+    "dd": -0.01824299228142068,
+    "sun": 0.043230139063457074
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    5,
+    6,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "sm2",
+    "sun",
+    "sm1*sm2"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54632.28244337767,
+   "sd": 0.171875,
+   "total_bits": 54740.49846470813,
+   "bits_per_reading": 6.0958238824842015,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "sm2": -0.0234375,
+    "sun": 0.0390625,
+    "sm1*sm2": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05774436066488321,
+    "sm2": -0.020330914169725333,
+    "sun": 0.03942884203396007,
+    "sm1*sm2": 0.013927993565446292
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "sm2",
+    "wind",
+    "sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54634.22374743091,
+   "sd": 0.171875,
+   "total_bits": 54742.43976876137,
+   "bits_per_reading": 6.0960400633364555,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "sm2": -0.015625,
+    "wind": 0.015625,
+    "sun": 0.0390625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.045064126786093,
+    "sm2": -0.016876793437129268,
+    "wind": 0.015861159969384194,
+    "sun": 0.039100097270506486
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    6,
+    6,
+    7
+   ]
+  },
+  {
+   "terms": [
+    "wind",
+    "sun",
+    "lai_hi"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 54635.00617596462,
+   "sd": 0.171875,
+   "total_bits": 54743.22219729508,
+   "bits_per_reading": 6.096127193462704,
+   "n": 8980,
+   "coef": {
+    "c": -0.046875,
+    "wind": 0.0234375,
+    "sun": 0.046875,
+    "lai_hi": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.045064126786093,
+    "wind": 0.026544324679133573,
+    "sun": 0.044595577396965236,
+    "lai_hi": 0.01796230205758906
+   },
+   "fit_alpha": {},
+   "steps": [
+    6,
+    7,
+    6,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "wind",
+    "sun",
+    "sm1*sm2"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 54642.12302890468,
+   "sd": 0.171875,
+   "total_bits": 54746.33905023514,
+   "bits_per_reading": 6.096474281763379,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "wind": 0.015625,
+    "sun": 0.046875,
+    "sm1*sm2": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05759422322775386,
+    "wind": 0.019198542230082896,
+    "sun": 0.04358964139141118,
+    "sm1*sm2": 0.013763082312368516
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    6,
+    6,
+    6
+   ]
+  }
+ ],
+ "coder_check": {
+  "ideal_residual_bits": 54604.61479837967,
+  "coder_ideal_bits": 54604.63637499437,
+  "coded_bits": 54608,
+  "roundtrip_ok": true
+ },
+ "holdout": [
+  {
+   "terms": [
+    "sm1",
+    "blh",
+    "sun"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.058870253723054,
+     "one_correction_bpr": 6.106797236417846
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 6.114934297370945,
+     "one_correction_bpr": 6.192620865926458
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.100598029487303,
+     "one_correction_bpr": 6.164756872326465
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.0780553227100595,
+     "one_correction_bpr": 6.159549781898378
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.038657515935321,
+     "one_correction_bpr": 6.107351031021449
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.085733641212905,
+     "one_correction_bpr": 6.158400595141954
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.069284150341969,
+     "one_correction_bpr": 6.129288458342961
+    }
+   ],
+   "transfers": true
+  },
+  {
+   "terms": [
+    "sm1",
+    "sun",
+    "lai_lo"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.090524990753446,
+     "one_correction_bpr": 6.106797236417846
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 6.104307932293479,
+     "one_correction_bpr": 6.192620865926458
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.093676961688107,
+     "one_correction_bpr": 6.164756872326465
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.074631410446314,
+     "one_correction_bpr": 6.159549781898378
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.047404627309721,
+     "one_correction_bpr": 6.107351031021449
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.086345459621077,
+     "one_correction_bpr": 6.158400595141954
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.077150035573187,
+     "one_correction_bpr": 6.129288458342961
+    }
+   ],
+   "transfers": true
+  },
+  {
+   "terms": [
+    "sm1",
+    "wind",
+    "sun"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.069047160585157,
+     "one_correction_bpr": 6.106797236417846
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 6.126672545842235,
+     "one_correction_bpr": 6.192620865926458
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.098973730106519,
+     "one_correction_bpr": 6.164756872326465
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.0747056452217425,
+     "one_correction_bpr": 6.159549781898378
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.03529275366632,
+     "one_correction_bpr": 6.107351031021449
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.136638097319412,
+     "one_correction_bpr": 6.158400595141954
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.079396905039814,
+     "one_correction_bpr": 6.129288458342961
+    }
+   ],
+   "transfers": true
+  },
+  {
+   "terms": [
+    "sm1",
+    "sun",
+    "sm1*sm2"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.067417365078285,
+     "one_correction_bpr": 6.106797236417846
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 6.117977041380735,
+     "one_correction_bpr": 6.192620865926458
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.098598434005669,
+     "one_correction_bpr": 6.164756872326465
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.072036801950214,
+     "one_correction_bpr": 6.159549781898378
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.040981757638043,
+     "one_correction_bpr": 6.107351031021449
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.088383127719479,
+     "one_correction_bpr": 6.158400595141954
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.1170387963395205,
+     "one_correction_bpr": 6.129288458342961
+    }
+   ],
+   "transfers": true
+  },
+  {
+   "terms": [
+    "sm2",
+    "blh",
+    "sun"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.064384744718842,
+     "one_correction_bpr": 6.106797236417846
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 6.115981041839992,
+     "one_correction_bpr": 6.192620865926458
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.102458118260838,
+     "one_correction_bpr": 6.164756872326465
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.08140977855775,
+     "one_correction_bpr": 6.159549781898378
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.0448328447759145,
+     "one_correction_bpr": 6.107351031021449
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.087672967942056,
+     "one_correction_bpr": 6.158400595141954
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.070625816212391,
+     "one_correction_bpr": 6.129288458342961
+    }
+   ],
+   "transfers": true
+  }
+ ],
+ "label": "col070",
+ "n_days": 8980,
+ "n_stations": 158,
+ "scale": {
+  "sm1": [
+   0.2939279494641879,
+   0.08568883363230592
+  ],
+  "sm2": [
+   0.2879465837575047,
+   0.07842400476172627
+  ],
+  "ef": [
+   0.7205223990611266,
+   0.1444628432793214
+  ],
+  "blh": [
+   1615.690717205226,
+   528.110102637407
+  ],
+  "cloud": [
+   0.5206092312481599,
+   0.2784828328745598
+  ],
+  "wind": [
+   2.7041083823456034,
+   1.1174727174742747
+  ],
+  "dd": [
+   11.76380599941602,
+   4.899788293495752
+  ],
+  "sun": [
+   0.8025158949053661,
+   0.1659789503437129
+  ],
+  "lai_lo": [
+   2.1787054840068776,
+   0.7748802669200409
+  ],
+  "lai_hi": [
+   2.970178141121344,
+   1.4932061012229307
+  ],
+  "cvh": [
+   0.46131106043910663,
+   0.3875057733749787
+  ],
+  "dz": [
+   -9.07398813020413,
+   29.630269482642966
+  ],
+  "sdor": [
+   19.01376500796214,
+   10.377785026740625
+  ],
+  "lat": [
+   38.27048697104677,
+   4.857840833840817
+  ]
+ },
+ "mean_r": -0.045064126786093,
+ "sd_r": 0.17190377650372338
+}

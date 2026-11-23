@@ -1,0 +1,670 @@
+{
+ "n": 8980,
+ "candidates": 12384,
+ "one_correction": {
+  "terms": [],
+  "structure_bits": 9.459431618637296,
+  "param_bits": 16.0,
+  "sd_bits": 16,
+  "residual_bits": 54015.09390610189,
+  "sd": 0.15625,
+  "total_bits": 54056.55333772052,
+  "bits_per_reading": 6.019660728031239,
+  "n": 8980,
+  "coef": {
+   "c": -0.0703125
+  },
+  "alpha": {},
+  "fit_coef": {
+   "c": -0.06744346337844442
+  },
+  "fit_alpha": {},
+  "steps": [
+   7
+  ]
+ },
+ "top": [
+  {
+   "terms": [
+    "blh",
+    "dd",
+    "sm1*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 53816.38350983027,
+   "sd": 0.15625,
+   "total_bits": 53920.59953116073,
+   "bits_per_reading": 6.0045211059199035,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "blh": -0.03125,
+    "dd": 0.046875,
+    "sm1*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.0581884658538644,
+    "blh": -0.028143996544563014,
+    "dd": 0.04263987218659416,
+    "sm1*dd": 0.01657442136411319
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    5,
+    6,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "blh",
+    "dd",
+    "sm2*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 53836.74344364455,
+   "sd": 0.15625,
+   "total_bits": 53944.95946497501,
+   "bits_per_reading": 6.007233793427061,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "blh": -0.0234375,
+    "dd": 0.0390625,
+    "sm2*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.06021966590131097,
+    "blh": -0.02710143573858763,
+    "dd": 0.04030309836501504,
+    "sm2*dd": 0.016534141608347173
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "lai_lo",
+    "sm1*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 53854.16521872449,
+   "sd": 0.15625,
+   "total_bits": 53958.38124005495,
+   "bits_per_reading": 6.008728423168702,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.0234375,
+    "lai_lo": 0.0078125,
+    "sm1*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05941181606021032,
+    "dd": 0.022156923266678806,
+    "lai_lo": 0.010540440053224142,
+    "sm1*dd": 0.014383570232926936
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "sm1*dd",
+    "sm1*sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 44.0,
+   "sd_bits": 16,
+   "residual_bits": 53852.7477937816,
+   "sd": 0.15625,
+   "total_bits": 53958.96381511206,
+   "bits_per_reading": 6.008793297896666,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.0234375,
+    "sm1*dd": 0.0234375,
+    "sm1*sun": -0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05934002588853826,
+    "dd": 0.025813899177528934,
+    "sm1*dd": 0.02534229299575517,
+    "sm1*sun": -0.016487268611558324
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "lai_hi",
+    "sm1*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 53857.567112251454,
+   "sd": 0.15625,
+   "total_bits": 53961.783133581914,
+   "bits_per_reading": 6.009107253182841,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.0234375,
+    "lai_hi": 0.0078125,
+    "sm1*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05965822402375731,
+    "dd": 0.019579350856947446,
+    "lai_hi": 0.009508000085854519,
+    "sm1*dd": 0.013942287628101431
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "blh",
+    "dd",
+    "ef*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 50.0,
+   "sd_bits": 16,
+   "residual_bits": 53850.77486810283,
+   "sd": 0.15625,
+   "total_bits": 53962.99088943329,
+   "bits_per_reading": 6.009241747152927,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "blh": -0.02734375,
+    "dd": 0.0390625,
+    "ef*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.06001892382853781,
+    "blh": -0.028341449950606726,
+    "dd": 0.038907471564454524,
+    "ef*dd": 0.012380810343880949
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    8,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "sm1*dd"
+   ],
+   "structure_bits": 32.29715809318648,
+   "param_bits": 36.0,
+   "sd_bits": 16,
+   "residual_bits": 53881.49961731147,
+   "sd": 0.15625,
+   "total_bits": 53965.796775404655,
+   "bits_per_reading": 6.009554206615218,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.01953125,
+    "sm1*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05920018311776731,
+    "dd": 0.019199308246289796,
+    "sm1*dd": 0.014762575581470984
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    8,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "dz",
+    "sm1*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 46.0,
+   "sd_bits": 16,
+   "residual_bits": 53863.176772164654,
+   "sd": 0.15625,
+   "total_bits": 53971.39279349511,
+   "bits_per_reading": 6.010177371213264,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.01953125,
+    "dz": 0.0078125,
+    "sm1*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.05962527114437232,
+    "dd": 0.018707684522359283,
+    "dz": 0.008722937977244235,
+    "sm1*dd": 0.014001301680416087
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    8,
+    7,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "lai_lo",
+    "sm2*dd"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 42.0,
+   "sd_bits": 16,
+   "residual_bits": 53868.85593474399,
+   "sd": 0.15625,
+   "total_bits": 53973.07195607445,
+   "bits_per_reading": 6.010364360364638,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.0234375,
+    "lai_lo": 0.015625,
+    "sm2*dd": 0.015625
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.06100812765208443,
+    "dd": 0.021229924637937974,
+    "lai_lo": 0.011207813166036334,
+    "sm2*dd": 0.014729476087017019
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    6,
+    6
+   ]
+  },
+  {
+   "terms": [
+    "dd",
+    "sm1*dd",
+    "blh*sun"
+   ],
+   "structure_bits": 46.21602133046108,
+   "param_bits": 48.0,
+   "sd_bits": 16,
+   "residual_bits": 53862.89025001689,
+   "sd": 0.15625,
+   "total_bits": 53973.10627134735,
+   "bits_per_reading": 6.010368181664516,
+   "n": 8980,
+   "coef": {
+    "c": -0.0625,
+    "dd": 0.0234375,
+    "sm1*dd": 0.01953125,
+    "blh*sun": 0.0078125
+   },
+   "alpha": {},
+   "fit_coef": {
+    "c": -0.0617788741806213,
+    "dd": 0.02345080323974516,
+    "sm1*dd": 0.01957594971605746,
+    "blh*sun": 0.009634103778704014
+   },
+   "fit_alpha": {},
+   "steps": [
+    4,
+    7,
+    8,
+    7
+   ]
+  }
+ ],
+ "coder_check": {
+  "ideal_residual_bits": 53816.38350983027,
+  "coder_ideal_bits": 53816.405076004485,
+  "coded_bits": 53824,
+  "roundtrip_ok": true
+ },
+ "holdout": [
+  {
+   "terms": [
+    "blh",
+    "dd",
+    "sm1*dd"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 5.9936125796100255,
+     "one_correction_bpr": 6.024999994722935
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 5.957510019824541,
+     "one_correction_bpr": 5.983608989059552
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.014489392757858,
+     "one_correction_bpr": 6.03482507311329
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.028675326359748,
+     "one_correction_bpr": 6.014110006443128
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.0040033231134045,
+     "one_correction_bpr": 6.022650201036098
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.007298065037421,
+     "one_correction_bpr": 6.028529678094808
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.2321635784703595,
+     "one_correction_bpr": 5.992921903157713
+    }
+   ],
+   "transfers": false
+  },
+  {
+   "terms": [
+    "blh",
+    "dd",
+    "sm2*dd"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 5.995095879315323,
+     "one_correction_bpr": 6.024999994722935
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 5.961140037790987,
+     "one_correction_bpr": 5.983608989059552
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.016915969708751,
+     "one_correction_bpr": 6.03482507311329
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.0148394158528165,
+     "one_correction_bpr": 6.014110006443128
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.009902346388654,
+     "one_correction_bpr": 6.022650201036098
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.012318666879244,
+     "one_correction_bpr": 6.028529678094808
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.223192568271175,
+     "one_correction_bpr": 5.992921903157713
+    }
+   ],
+   "transfers": false
+  },
+  {
+   "terms": [
+    "dd",
+    "lai_lo",
+    "sm1*dd"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.0232882355267,
+     "one_correction_bpr": 6.024999994722935
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 5.9571441615463145,
+     "one_correction_bpr": 5.983608989059552
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.018153316081486,
+     "one_correction_bpr": 6.03482507311329
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.024159573044752,
+     "one_correction_bpr": 6.014110006443128
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 6.010922487907785,
+     "one_correction_bpr": 6.022650201036098
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.016695213459938,
+     "one_correction_bpr": 6.028529678094808
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.136833777209888,
+     "one_correction_bpr": 5.992921903157713
+    }
+   ],
+   "transfers": false
+  },
+  {
+   "terms": [
+    "dd",
+    "sm1*dd",
+    "sm1*sun"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.003174719963671,
+     "one_correction_bpr": 6.024999994722935
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 5.963387436360053,
+     "one_correction_bpr": 5.983608989059552
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.031842759950881,
+     "one_correction_bpr": 6.03482507311329
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.033073918287768,
+     "one_correction_bpr": 6.014110006443128
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 5.99144667860609,
+     "one_correction_bpr": 6.022650201036098
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.013188021636369,
+     "one_correction_bpr": 6.028529678094808
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.074995978156999,
+     "one_correction_bpr": 5.992921903157713
+    }
+   ],
+   "transfers": false
+  },
+  {
+   "terms": [
+    "dd",
+    "lai_hi",
+    "sm1*dd"
+   ],
+   "folds": [
+    {
+     "fold": "stations fold 0",
+     "formula_bpr": 6.006974452235028,
+     "one_correction_bpr": 6.024999994722935
+    },
+    {
+     "fold": "stations fold 1",
+     "formula_bpr": 5.963457331216532,
+     "one_correction_bpr": 5.983608989059552
+    },
+    {
+     "fold": "stations fold 2",
+     "formula_bpr": 6.028000164229824,
+     "one_correction_bpr": 6.03482507311329
+    },
+    {
+     "fold": "stations fold 3",
+     "formula_bpr": 6.025711849232055,
+     "one_correction_bpr": 6.014110006443128
+    },
+    {
+     "fold": "stations fold 4",
+     "formula_bpr": 5.994914396810185,
+     "one_correction_bpr": 6.022650201036098
+    },
+    {
+     "fold": "leave out east of 95W",
+     "formula_bpr": 6.015951325922777,
+     "one_correction_bpr": 6.028529678094808
+    },
+    {
+     "fold": "leave out west of 95W",
+     "formula_bpr": 6.13599479493325,
+     "one_correction_bpr": 5.992921903157713
+    }
+   ],
+   "transfers": false
+  }
+ ],
+ "label": "era5",
+ "n_days": 8980,
+ "n_stations": 158,
+ "scale": {
+  "sm1": [
+   0.2939279494641879,
+   0.08568883363230592
+  ],
+  "sm2": [
+   0.2879465837575047,
+   0.07842400476172627
+  ],
+  "ef": [
+   0.7205223990611266,
+   0.1444628432793214
+  ],
+  "blh": [
+   1615.690717205226,
+   528.110102637407
+  ],
+  "cloud": [
+   0.5206092312481599,
+   0.2784828328745598
+  ],
+  "wind": [
+   2.7041083823456034,
+   1.1174727174742747
+  ],
+  "dd": [
+   11.76380599941602,
+   4.899788293495752
+  ],
+  "sun": [
+   0.8025158949053661,
+   0.1659789503437129
+  ],
+  "lai_lo": [
+   2.1787054840068776,
+   0.7748802669200409
+  ],
+  "lai_hi": [
+   2.970178141121344,
+   1.4932061012229307
+  ],
+  "cvh": [
+   0.46131106043910663,
+   0.3875057733749787
+  ],
+  "dz": [
+   -9.07398813020413,
+   29.630269482642966
+  ],
+  "sdor": [
+   19.01376500796214,
+   10.377785026740625
+  ],
+  "lat": [
+   38.27048697104677,
+   4.857840833840817
+  ]
+ },
+ "mean_r": -0.06744346337844442,
+ "sd_r": 0.15758977833910282
+}

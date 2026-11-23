@@ -1,0 +1,41 @@
+{
+ "n": 9796,
+ "candidates": 12384,
+ "planted": {
+  "top": [
+   [
+    "sm1"
+   ],
+   [
+    "sm1",
+    "sm2"
+   ],
+   [
+    "sm1",
+    "ef"
+   ],
+   [
+    "sm1",
+    "blh"
+   ],
+   [
+    "sm1",
+    "cloud"
+   ]
+  ],
+  "slope_per_unit_sm1": -0.6105310964668623,
+  "ok": true
+ },
+ "null": {
+  "top": [
+   [],
+   [
+    "sm1"
+   ],
+   [
+    "sm2"
+   ]
+  ],
+  "ok": true
+ }
+}
