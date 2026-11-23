@@ -169,3 +169,23 @@ read with that said beside it. No building point, perimeter or raster has been o
   "Indirect" is population B.
 - Ignition times now come from official records for Camp, Tubbs, Lahaina and Chimney Tops 2 (the last is the time
   the fire was reported). Marshall's is still approximate; no Marshall run until an official time is cited.
+
+**A4 (23 Nov 2026, before any planted run).** The planted checks of section 6, made concrete for the mechanisms
+FireSim has today (commit pinned in the result). Embers and house-to-house spread get the same check when they exist.
+- Truth: FireSim on 12 made-up landscapes (`firesim.synth`, seeds 20-31, never used before), 6 m/s wind, 10 m cells,
+  90 min. Candidates: the same with one mechanism off: (a) slope (slope set to zero), (b) crown fire, (c) canopy
+  sheltering of the wind. Twin: nothing off.
+- Readings: 150 random points per landscape that both runs burn after minute 5. y = ln(truth arrival / candidate
+  arrival) + noise N(0, 0.05), grid 0.01. The noise stands in for timing error in real observations and gives the
+  twin something to code.
+- Vocabulary, each averaged along the straight line from ignition to the point (the fire's time is a sum along its
+  path): `slope_run` = tan(slope) squared times the cosine between upslope and the line (the slope factor's form);
+  `slope_any` = tan squared; `crown_fuel` = share of the line under canopy with base height 3 m or less;
+  `canopy` = share under any canopy; `shelter` = canopy cover times crown ratio / 3 (the sheltering fill);
+  `grass`, `shrub`, `timber` = share in each fuel group; `wind_run` = cosine between wind and the line;
+  `ln_dist` = log distance. Slope terms are one group, canopy terms (`crown_fuel`, `canopy`, `shelter`) are scored
+  separately because telling crown fire from sheltering is part of the test.
+- Pass, per candidate: the winning formula contains the planted mechanism's term (`slope_run` or `slope_any` for
+  (a); `crown_fuel` for (b); `shelter` for (c)), it holds in hold-out both ways (seeds 20-25 against 26-31), and no
+  term of another mechanism's group is in the winner. Twin passes if the winner has no term. A fail is reported as a
+  limit of what the compressor can tell apart from arrival times; it then says which real-fire findings can be read.
