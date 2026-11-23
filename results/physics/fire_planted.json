@@ -1,0 +1,1420 @@
+{
+ "firesim_commit": "5f00fe0577fb4b14939fe96d3aadbb7157208ed9",
+ "settings": {
+  "cell": 10.0,
+  "wind": 6.0,
+  "minutes": 90.0,
+  "points": 150,
+  "noise_sd": 0.05,
+  "seeds": [
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31
+  ]
+ },
+ "slope": {
+  "name": "fire planted: slope off",
+  "n": 1659,
+  "library": [
+   "slope_run",
+   "slope_any",
+   "crown_fuel",
+   "canopy",
+   "shelter",
+   "grass",
+   "shrub",
+   "wind_run",
+   "ln_dist"
+  ],
+  "library_size": 9,
+  "formulas_scored": 81,
+  "winner": {
+   "terms": [
+    "slope_run"
+   ],
+   "structure_bits": 15.378294855911893,
+   "param_bits": 34.0,
+   "residual_bits": 8188.311525099523,
+   "total_bits": 8237.689819955434,
+   "bits_per_reading": 4.965454984903818,
+   "n": 1659,
+   "sd": 0.0703125,
+   "rho": null,
+   "coef": {
+    "level": -0.01031575359206446,
+    "slope_run": -3.8103510058588106
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "slope_run"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 34.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8237.689819955434,
+    "bits_per_reading": 4.965454984903818,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.8103510058588106
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "shrub"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.939564066558669,
+     "shrub": -0.013021251921963128
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "ln_dist"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.7845765826160016,
+     "ln_dist": -0.00559607127830011
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "grass"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.8545260583323158,
+     "grass": 0.006133430822153425
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "shelter"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.8329990281718826,
+     "shelter": 0.11166800838104655
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.831613079252292,
+     "canopy": 0.007836335962041238
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "crown_fuel"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.816610914010095,
+     "crown_fuel": 0.001697127644009857
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "wind_run"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 36.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8246.60868319271,
+    "bits_per_reading": 4.970831032665889,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.8065123927895197,
+     "wind_run": -0.002409185788412258
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 26.0,
+    "residual_bits": 8670.328547738327,
+    "total_bits": 8703.787979356965,
+    "bits_per_reading": 5.246406256393589,
+    "n": 1659,
+    "sd": 0.09375,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "slope_run"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 34.0,
+    "residual_bits": 8188.311525099523,
+    "total_bits": 8237.689819955434,
+    "bits_per_reading": 4.965454984903818,
+    "n": 1659,
+    "sd": 0.0703125,
+    "rho": null,
+    "coef": {
+     "level": -0.01031575359206446,
+     "slope_run": -3.8103510058588106
+    },
+    "alpha": {},
+    "added": "slope_run"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "fit 20-25, test 26-31",
+    "formula_bpr": 4.887115973347979,
+    "one_correction_bpr": 5.32279745374286,
+    "transfers": true
+   },
+   {
+    "fold": "fit 26-31, test 20-25",
+    "formula_bpr": 5.0835617642625675,
+    "one_correction_bpr": 5.616157573044246,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 8188.311525099523,
+   "coded_bits": 8192,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "slope_run": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope) \u00b7 cos(upslope \u2212 path)]",
+    "meaning": "fire runs faster upslope than the model says: slope is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope)]",
+    "meaning": "steep ground is off whatever its direction",
+    "physics": true,
+    "unit": ""
+   },
+   "crown_fuel": {
+    "formula": "b \u00b7 share of path under low canopy",
+    "meaning": "crown fire is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy": {
+    "formula": "b \u00b7 share of path under any canopy",
+    "meaning": "something about forest canopy is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shelter": {
+    "formula": "b \u00b7 mean[cover \u00b7 crown ratio / 3]",
+    "meaning": "the wind under canopy is off (sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "grass": {
+    "formula": "b \u00b7 share of path in grass",
+    "meaning": "grass spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shrub": {
+    "formula": "b \u00b7 share of path in shrub",
+    "meaning": "shrub spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind \u2212 path)",
+    "meaning": "head against flank and back is off (fire shape or wind response)",
+    "physics": true,
+    "unit": ""
+   },
+   "ln_dist": {
+    "formula": "b \u00b7 ln(distance)",
+    "meaning": "the miss grows or shrinks with distance (start-up, acceleration)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.28095127148977106,
+  "sd_before": 0.09375,
+  "sd_after": 0.0703125,
+  "passed": true,
+  "sd_y": 0.09026443940608096,
+  "planted": [
+   "slope_run",
+   "slope_any"
+  ]
+ },
+ "crown": {
+  "name": "fire planted: crown off",
+  "n": 1482,
+  "library": [
+   "slope_run",
+   "slope_any",
+   "crown_fuel",
+   "canopy",
+   "shelter",
+   "grass",
+   "shrub",
+   "wind_run",
+   "ln_dist"
+  ],
+  "library_size": 9,
+  "formulas_scored": 91,
+  "winner": {
+   "terms": [
+    "slope_run",
+    "canopy",
+    "shelter"
+   ],
+   "structure_bits": 32.21602133046108,
+   "param_bits": 64.0,
+   "residual_bits": 8617.550579466937,
+   "total_bits": 8713.766600797398,
+   "bits_per_reading": 5.8797345484462875,
+   "n": 1482,
+   "sd": 0.140625,
+   "rho": null,
+   "coef": {
+    "level": -0.21849403425813682,
+    "slope_run": -1.8536219136480891,
+    "canopy": -7.5139176654087025,
+    "shelter": 80.9742308969102
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 64.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8713.766600797398,
+    "bits_per_reading": 5.8797345484462875,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -1.8536219136480891,
+     "canopy": -7.5139176654087025,
+     "shelter": 80.9742308969102
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter",
+     "grass"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8722.685464034672,
+    "bits_per_reading": 5.885752674787228,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -2.0153534773889508,
+     "canopy": -7.481543514148255,
+     "shelter": 80.72787138743156,
+     "grass": 0.019709527885736787
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter",
+     "shrub"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8722.685464034672,
+    "bits_per_reading": 5.885752674787228,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -2.015353477388957,
+     "canopy": -7.501253042033982,
+     "shelter": 80.72787138743143,
+     "shrub": -0.01970952788573639
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter",
+     "ln_dist"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8722.685464034672,
+    "bits_per_reading": 5.885752674787228,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -1.9304086021675395,
+     "canopy": -7.53638305846302,
+     "shelter": 81.39873665005302,
+     "ln_dist": 0.009836232643741302
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 66.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8722.685464034672,
+    "bits_per_reading": 5.885752674787228,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -1.8131805865494353,
+     "canopy": -7.529881581507097,
+     "shelter": 81.18385755126798,
+     "wind_run": -0.008856917314007088
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "crown_fuel",
+     "canopy",
+     "shelter"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 70.0,
+    "residual_bits": 8616.69575776215,
+    "total_bits": 8725.830642329885,
+    "bits_per_reading": 5.887874927348101,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "slope_run": -1.861505221730459,
+     "crown_fuel": 0.043516949945788794,
+     "canopy": -7.748669554107786,
+     "shelter": 83.3708943433481
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 68.0,
+    "residual_bits": 8657.823443795007,
+    "total_bits": 8748.120601888193,
+    "bits_per_reading": 5.902915385889469,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "canopy": -7.685753812477652,
+     "shelter": 82.90772072666344
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 70.0,
+    "residual_bits": 8657.823443795007,
+    "total_bits": 8760.039465125468,
+    "bits_per_reading": 5.910957803728386,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "canopy": -7.705171536238814,
+     "shelter": 83.17390068999775,
+     "wind_run": -0.014079636492840117
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 30.0,
+    "residual_bits": 10989.087362035825,
+    "total_bits": 11026.546793654463,
+    "bits_per_reading": 7.440314975475346,
+    "n": 1482,
+    "sd": 0.40625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "canopy"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 34.0,
+    "residual_bits": 9104.259450406234,
+    "total_bits": 9153.637745262145,
+    "bits_per_reading": 6.176543687761232,
+    "n": 1482,
+    "sd": 0.171875,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "canopy": -0.9980981079745764
+    },
+    "alpha": {},
+    "added": "canopy"
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 68.0,
+    "residual_bits": 8657.823443795007,
+    "total_bits": 8748.120601888193,
+    "bits_per_reading": 5.902915385889469,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "canopy": -7.685753812477652,
+     "shelter": 82.90772072666344
+    },
+    "alpha": {},
+    "added": "shelter"
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "slope_run"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 64.0,
+    "residual_bits": 8617.550579466937,
+    "total_bits": 8713.766600797398,
+    "bits_per_reading": 5.8797345484462875,
+    "n": 1482,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.21849403425813682,
+     "canopy": -7.5139176654087585,
+     "shelter": 80.9742308969102,
+     "slope_run": -1.853621913647955
+    },
+    "alpha": {},
+    "added": "slope_run"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "fit 20-25, test 26-31",
+    "formula_bpr": 8.784435598573415,
+    "one_correction_bpr": 9.897516169711473,
+    "transfers": true
+   },
+   {
+    "fold": "fit 26-31, test 20-25",
+    "formula_bpr": 5.984604356147582,
+    "one_correction_bpr": 7.393616457723365,
+    "transfers": true
+   }
+  ],
+  "transfers": true,
+  "coder_check": {
+   "ideal_residual_bits": 8617.550579466937,
+   "coded_bits": 8624,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "slope_run": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope) \u00b7 cos(upslope \u2212 path)]",
+    "meaning": "fire runs faster upslope than the model says: slope is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope)]",
+    "meaning": "steep ground is off whatever its direction",
+    "physics": true,
+    "unit": ""
+   },
+   "crown_fuel": {
+    "formula": "b \u00b7 share of path under low canopy",
+    "meaning": "crown fire is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy": {
+    "formula": "b \u00b7 share of path under any canopy",
+    "meaning": "something about forest canopy is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shelter": {
+    "formula": "b \u00b7 mean[cover \u00b7 crown ratio / 3]",
+    "meaning": "the wind under canopy is off (sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "grass": {
+    "formula": "b \u00b7 share of path in grass",
+    "meaning": "grass spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shrub": {
+    "formula": "b \u00b7 share of path in shrub",
+    "meaning": "shrub spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind \u2212 path)",
+    "meaning": "head against flank and back is off (fire shape or wind response)",
+    "physics": true,
+    "unit": ""
+   },
+   "ln_dist": {
+    "formula": "b \u00b7 ln(distance)",
+    "meaning": "the miss grows or shrinks with distance (start-up, acceleration)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 1.5605804270290582,
+  "sd_before": 0.40625,
+  "sd_after": 0.140625,
+  "passed": false,
+  "sd_y": 0.4126731016700735,
+  "planted": [
+   "crown_fuel"
+  ]
+ },
+ "shelter": {
+  "name": "fire planted: shelter off",
+  "n": 1659,
+  "library": [
+   "slope_run",
+   "slope_any",
+   "crown_fuel",
+   "canopy",
+   "shelter",
+   "grass",
+   "shrub",
+   "wind_run",
+   "ln_dist"
+  ],
+  "library_size": 9,
+  "formulas_scored": 100,
+  "winner": {
+   "terms": [
+    "crown_fuel",
+    "canopy",
+    "shelter",
+    "wind_run"
+   ],
+   "structure_bits": 39.134884567735675,
+   "param_bits": 68.0,
+   "residual_bits": 9740.413273076809,
+   "total_bits": 9847.548157644544,
+   "bits_per_reading": 5.935833729743546,
+   "n": 1659,
+   "sd": 0.140625,
+   "rho": null,
+   "coef": {
+    "level": 0.11062046357636994,
+    "crown_fuel": 0.9419015941850533,
+    "canopy": -9.966937970701718,
+    "shelter": 114.4971402713273,
+    "wind_run": 0.1185019781512979
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "crown_fuel",
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 68.0,
+    "residual_bits": 9740.413273076809,
+    "total_bits": 9847.548157644544,
+    "bits_per_reading": 5.935833729743546,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "crown_fuel": 0.9419015941850533,
+     "canopy": -9.966937970701718,
+     "shelter": 114.4971402713273,
+     "wind_run": 0.1185019781512979
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "shrub",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 84.0,
+    "residual_bits": 9780.04541845412,
+    "total_bits": 9903.180303021854,
+    "bits_per_reading": 5.9693672712609125,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "canopy": -4.76690837320481,
+     "shelter": 60.62198019024724,
+     "shrub": -0.0977357145092444,
+     "wind_run": 0.13997196598668596
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "grass",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 86.0,
+    "residual_bits": 9780.827959305338,
+    "total_bits": 9905.962843873072,
+    "bits_per_reading": 5.971044511074788,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "canopy": -4.667570397936996,
+     "shelter": 60.604975391998806,
+     "grass": 0.09802101203381977,
+     "wind_run": 0.14005213979334724
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 68.0,
+    "residual_bits": 9849.55622874081,
+    "total_bits": 9949.772250071272,
+    "bits_per_reading": 5.997451627529398,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "canopy": -4.769513866843036,
+     "shelter": 61.243408216858434,
+     "wind_run": 0.1249958688056758
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run",
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 78.0,
+    "residual_bits": 9834.777180084664,
+    "total_bits": 9951.912064652399,
+    "bits_per_reading": 5.998741449458951,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "slope_run": -1.4325795807841954,
+     "canopy": -4.576762464852439,
+     "shelter": 58.9338820234543,
+     "wind_run": 0.12716321621003124
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_any",
+     "canopy",
+     "shelter",
+     "wind_run"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 70.0,
+    "residual_bits": 9849.55622874081,
+    "total_bits": 9958.691113308545,
+    "bits_per_reading": 6.002827675291468,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "slope_any": 0.12719631695907363,
+     "canopy": -4.76662500366488,
+     "shelter": 61.21404117069389,
+     "wind_run": 0.12438182331907012
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy",
+     "shelter",
+     "wind_run",
+     "ln_dist"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 70.0,
+    "residual_bits": 9849.55622874081,
+    "total_bits": 9958.691113308545,
+    "bits_per_reading": 6.002827675291468,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "canopy": -4.7546445395893615,
+     "shelter": 61.04235494506362,
+     "wind_run": 0.12679915428282632,
+     "ln_dist": -0.0018848836025627523
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "crown_fuel",
+     "canopy",
+     "shelter",
+     "ln_dist"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 84.0,
+    "residual_bits": 9882.508906926194,
+    "total_bits": 10005.643791493929,
+    "bits_per_reading": 6.031129470460476,
+    "n": 1659,
+    "sd": 0.15625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "crown_fuel": 1.0265826498207395,
+     "canopy": -11.09070725590534,
+     "shelter": 127.97327783894657,
+     "ln_dist": 0.054044146692664476
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 30.0,
+    "residual_bits": 10545.075708737024,
+    "total_bits": 10582.535140355661,
+    "bits_per_reading": 6.378863857960013,
+    "n": 1659,
+    "sd": 0.203125,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "wind_run"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 38.0,
+    "residual_bits": 10320.315168876597,
+    "total_bits": 10373.693463732508,
+    "bits_per_reading": 6.252979785251663,
+    "n": 1659,
+    "sd": 0.1875,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "wind_run": 0.14575359599278445
+    },
+    "alpha": {},
+    "added": "wind_run"
+   },
+   {
+    "terms": [
+     "wind_run",
+     "shelter"
+    ],
+    "structure_bits": 22.297158093186486,
+    "param_bits": 44.0,
+    "residual_bits": 10147.885742152117,
+    "total_bits": 10214.182900245303,
+    "bits_per_reading": 6.1568311634992785,
+    "n": 1659,
+    "sd": 0.171875,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "wind_run": 0.1387038378604955,
+     "shelter": 2.335431120472795
+    },
+    "alpha": {},
+    "added": "shelter"
+   },
+   {
+    "terms": [
+     "wind_run",
+     "shelter",
+     "canopy"
+    ],
+    "structure_bits": 32.21602133046108,
+    "param_bits": 68.0,
+    "residual_bits": 9849.55622874081,
+    "total_bits": 9949.772250071272,
+    "bits_per_reading": 5.997451627529398,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "wind_run": 0.1249958688056758,
+     "shelter": 61.2434082168584,
+     "canopy": -4.769513866842949
+    },
+    "alpha": {},
+    "added": "canopy"
+   },
+   {
+    "terms": [
+     "wind_run",
+     "shelter",
+     "canopy",
+     "crown_fuel"
+    ],
+    "structure_bits": 39.134884567735675,
+    "param_bits": 68.0,
+    "residual_bits": 9740.41327307681,
+    "total_bits": 9847.548157644545,
+    "bits_per_reading": 5.935833729743548,
+    "n": 1659,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": 0.11062046357636994,
+     "wind_run": 0.11850197815133152,
+     "shelter": 114.49714027132566,
+     "canopy": -9.966937970701688,
+     "crown_fuel": 0.9419015941852985
+    },
+    "alpha": {},
+    "added": "crown_fuel"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "fit 20-25, test 26-31",
+    "formula_bpr": 6.920175298499404,
+    "one_correction_bpr": 6.254696957303356,
+    "transfers": false
+   },
+   {
+    "fold": "fit 26-31, test 20-25",
+    "formula_bpr": 6.229701963563156,
+    "one_correction_bpr": 6.680583426604448,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "ideal_residual_bits": 9740.413273076809,
+   "coded_bits": 9744,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "slope_run": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope) \u00b7 cos(upslope \u2212 path)]",
+    "meaning": "fire runs faster upslope than the model says: slope is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope)]",
+    "meaning": "steep ground is off whatever its direction",
+    "physics": true,
+    "unit": ""
+   },
+   "crown_fuel": {
+    "formula": "b \u00b7 share of path under low canopy",
+    "meaning": "crown fire is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy": {
+    "formula": "b \u00b7 share of path under any canopy",
+    "meaning": "something about forest canopy is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shelter": {
+    "formula": "b \u00b7 mean[cover \u00b7 crown ratio / 3]",
+    "meaning": "the wind under canopy is off (sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "grass": {
+    "formula": "b \u00b7 share of path in grass",
+    "meaning": "grass spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shrub": {
+    "formula": "b \u00b7 share of path in shrub",
+    "meaning": "shrub spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind \u2212 path)",
+    "meaning": "head against flank and back is off (fire shape or wind response)",
+    "physics": true,
+    "unit": ""
+   },
+   "ln_dist": {
+    "formula": "b \u00b7 ln(distance)",
+    "meaning": "the miss grows or shrinks with distance (start-up, acceleration)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.44303012821646703,
+  "sd_before": 0.203125,
+  "sd_after": 0.140625,
+  "passed": false,
+  "sd_y": 0.19793915703034856,
+  "planted": [
+   "shelter"
+  ]
+ },
+ "twin": {
+  "name": "fire planted: twin off",
+  "n": 1659,
+  "library": [
+   "slope_run",
+   "slope_any",
+   "crown_fuel",
+   "canopy",
+   "shelter",
+   "grass",
+   "shrub",
+   "wind_run",
+   "ln_dist"
+  ],
+  "library_size": 9,
+  "formulas_scored": 82,
+  "winner": {
+   "terms": [],
+   "structure_bits": 7.459431618637297,
+   "param_bits": 20.0,
+   "residual_bits": 7233.977841899048,
+   "total_bits": 7261.437273517686,
+   "bits_per_reading": 4.376996548232481,
+   "n": 1659,
+   "sd": 0.05078125,
+   "rho": null,
+   "coef": {
+    "level": 0.0004525268563241057
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 20.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7261.437273517686,
+    "bits_per_reading": 4.376996548232481,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_run"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "slope_run": -0.1352557326960848
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "shrub"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "shrub": -0.004594490948848878
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "shelter"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "shelter": 0.039778551789238496
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "canopy"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "canopy": 0.0031128243448687357
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "grass"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "grass": 0.002136337703975254
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "crown_fuel"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "crown_fuel": 0.0026093230899553363
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "slope_any"
+    ],
+    "structure_bits": 15.378294855911893,
+    "param_bits": 22.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7271.35613675496,
+    "bits_per_reading": 4.382975368749222,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057,
+     "slope_any": -0.03167160603678921
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.459431618637297,
+    "param_bits": 20.0,
+    "residual_bits": 7233.977841899048,
+    "total_bits": 7261.437273517686,
+    "bits_per_reading": 4.376996548232481,
+    "n": 1659,
+    "sd": 0.05078125,
+    "rho": null,
+    "coef": {
+     "level": 0.0004525268563241057
+    },
+    "alpha": {},
+    "added": "one correction"
+   }
+  ],
+  "holdout": [],
+  "transfers": null,
+  "coder_check": {
+   "ideal_residual_bits": 7233.977841899048,
+   "coded_bits": 7240,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "slope_run": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope) \u00b7 cos(upslope \u2212 path)]",
+    "meaning": "fire runs faster upslope than the model says: slope is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 mean[tan\u00b2(slope)]",
+    "meaning": "steep ground is off whatever its direction",
+    "physics": true,
+    "unit": ""
+   },
+   "crown_fuel": {
+    "formula": "b \u00b7 share of path under low canopy",
+    "meaning": "crown fire is missing or weak",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy": {
+    "formula": "b \u00b7 share of path under any canopy",
+    "meaning": "something about forest canopy is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shelter": {
+    "formula": "b \u00b7 mean[cover \u00b7 crown ratio / 3]",
+    "meaning": "the wind under canopy is off (sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "grass": {
+    "formula": "b \u00b7 share of path in grass",
+    "meaning": "grass spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "shrub": {
+    "formula": "b \u00b7 share of path in shrub",
+    "meaning": "shrub spread is off",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind \u2212 path)",
+    "meaning": "head against flank and back is off (fire shape or wind response)",
+    "physics": true,
+    "unit": ""
+   },
+   "ln_dist": {
+    "formula": "b \u00b7 ln(distance)",
+    "meaning": "the miss grows or shrinks with distance (start-up, acceleration)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.05078125,
+  "sd_after": 0.05078125,
+  "passed": true,
+  "sd_y": 0.04948181216973049,
+  "planted": []
+ }
+}
