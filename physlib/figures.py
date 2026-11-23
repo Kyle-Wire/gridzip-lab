@@ -270,7 +270,11 @@ def fig_scoreboard():
     def add(lab, j, a, ym="y", mm="mu"):
         if j is not None and a is not None: rows.append((lab, j, np.asarray(a[ym], float), np.asarray(a[mm], float)))
     if W: add("Wind · AIJ tunnel · LBM", W["lbm"], Wa["lbm"]); add("Wind · AIJ tunnel · RANS", W["rans"], Wa["rans"])
-    if L1: add("Wind · storm gusts · thunder", L1["thunderstorm"], La["thunderstorm"]); add("Wind · storm gusts · ordinary", L1["ordinary"], La["ordinary"])
+    if L1:
+        add("Wind · storm gusts · thunder", L1["thunderstorm"], La["thunderstorm"]); add("Wind · storm gusts · ordinary", L1["ordinary"], La["ordinary"])
+        if "ordinary_after_f5" in L1:
+            add("Wind · storm gusts · thunder · after F5 (+5 new cities)", L1["thunderstorm_after_f5"], La["thunderstorm_after_f5"])
+            add("Wind · storm gusts · ordinary · after F5 station z0", L1["ordinary_after_f5"], La["ordinary_after_f5"])
     if H: add("Heat · Philadelphia · before fix", H["before_round"], Ha["before_round"]); add("Heat · Philadelphia · after fix", H["after_round"], Ha["after_round"])
     if F:
         add("Flood · Sheffield rig · Cw 0.5 (shipped)", F["F1_before"], Fa["F1_before"]); add("Flood · Sheffield rig · Cw 0.32 (not shipped)", F["F1_after"], Fa["F1_after"])

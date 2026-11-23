@@ -761,5 +761,809 @@
   "sd_before": 0.171875,
   "sd_after": 0.140625
  },
- "after": "pending: WindSim F5 (station z0 from its own gusts) has a protocol and code (WindSim 01d1864) but no result files yet"
+ "thunderstorm_after_f5": {
+  "name": "Layer 1 thunderstorm_after_f5",
+  "n": 1076,
+  "library": [
+   "station_bias",
+   "elevation",
+   "direction",
+   "stability",
+   "season"
+  ],
+  "library_size": 5,
+  "formulas_scored": 30,
+  "winner": {
+   "terms": [
+    "station_bias"
+   ],
+   "structure_bits": 13.422064766172813,
+   "param_bits": 36.0,
+   "residual_bits": 8197.53909106661,
+   "total_bits": 8246.961155832783,
+   "bits_per_reading": 7.664462040736788,
+   "n": 1076,
+   "sd": 0.234375,
+   "rho": null,
+   "coef": {
+    "level": -0.03601444969734813,
+    "station_bias": 0.733200305447756
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "station_bias"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 36.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8246.961155832783,
+    "bits_per_reading": 7.664462040736788,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.733200305447756
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "elevation"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 38.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8254.575865676898,
+    "bits_per_reading": 7.671538908621652,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7226482691173804,
+     "elevation": -0.18367395516110793
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "season"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 40.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8256.575865676898,
+    "bits_per_reading": 7.673397644681131,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.734124879411889,
+     "season": [
+      0.006048713539051297,
+      0.01090924196621895
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "direction"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 40.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8256.575865676898,
+    "bits_per_reading": 7.673397644681131,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7315045400894943,
+     "direction": [
+      0.010422531743843414,
+      -0.005444866826339689
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "stability"
+    ],
+    "structure_bits": 19.03677461028802,
+    "param_bits": 40.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8256.575865676898,
+    "bits_per_reading": 7.673397644681131,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7331707825048774,
+     "stability": [
+      -0.002631947941377016,
+      0.003163158463812783
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "elevation",
+     "direction"
+    ],
+    "structure_bits": 27.651484454403228,
+    "param_bits": 42.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8267.190575521014,
+    "bits_per_reading": 7.683262616655218,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7207614903353757,
+     "elevation": -0.18662214718003647,
+     "direction": [
+      0.010496183608573524,
+      -0.006042501238659035
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "elevation",
+     "season"
+    ],
+    "structure_bits": 27.651484454403228,
+    "param_bits": 42.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8267.190575521014,
+    "bits_per_reading": 7.683262616655218,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7234467957868039,
+     "elevation": -0.18621294991081574,
+     "season": [
+      0.0058267299500791014,
+      0.011352424559250363
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "elevation",
+     "stability"
+    ],
+    "structure_bits": 27.651484454403228,
+    "param_bits": 42.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8267.190575521014,
+    "bits_per_reading": 7.683262616655218,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.7226835077739855,
+     "elevation": -0.18261707708343147,
+     "stability": [
+      -0.00238967897496566,
+      0.002793138317417205
+     ]
+    },
+    "alpha": {}
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 6.807354922057604,
+    "param_bits": 26.0,
+    "residual_bits": 8393.040166153618,
+    "total_bits": 8425.847521075675,
+    "bits_per_reading": 7.830713309549884,
+    "n": 1076,
+    "sd": 0.28125,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "station_bias"
+    ],
+    "structure_bits": 13.422064766172813,
+    "param_bits": 36.0,
+    "residual_bits": 8197.53909106661,
+    "total_bits": 8246.961155832783,
+    "bits_per_reading": 7.664462040736788,
+    "n": 1076,
+    "sd": 0.234375,
+    "rho": null,
+    "coef": {
+     "level": -0.03601444969734813,
+     "station_bias": 0.733200305447756
+    },
+    "alpha": {},
+    "added": "station_bias"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out atlanta",
+    "formula_bpr": 7.884321365818183,
+    "one_correction_bpr": 8.10359834874688,
+    "transfers": true
+   },
+   {
+    "fold": "leave out baltimore",
+    "formula_bpr": 8.092352505676637,
+    "one_correction_bpr": 8.093544348079291,
+    "transfers": true
+   },
+   {
+    "fold": "leave out chicago",
+    "formula_bpr": 7.78717984799979,
+    "one_correction_bpr": 7.911587889253146,
+    "transfers": true
+   },
+   {
+    "fold": "leave out denver",
+    "formula_bpr": 7.644123144798098,
+    "one_correction_bpr": 7.712139201373809,
+    "transfers": true
+   },
+   {
+    "fold": "leave out detroit",
+    "formula_bpr": 7.5721570915411585,
+    "one_correction_bpr": 7.75678419955852,
+    "transfers": true
+   },
+   {
+    "fold": "leave out dfw",
+    "formula_bpr": 7.537795576409303,
+    "one_correction_bpr": 7.741366398068915,
+    "transfers": true
+   },
+   {
+    "fold": "leave out houston",
+    "formula_bpr": 7.487946628099955,
+    "one_correction_bpr": 7.810902003081021,
+    "transfers": true
+   },
+   {
+    "fold": "leave out miami",
+    "formula_bpr": 7.261629374923311,
+    "one_correction_bpr": 7.417405176423024,
+    "transfers": true
+   },
+   {
+    "fold": "leave out minneapolis",
+    "formula_bpr": 7.566205767705043,
+    "one_correction_bpr": 8.04339751336236,
+    "transfers": true
+   },
+   {
+    "fold": "leave out phoenix",
+    "formula_bpr": 8.04884047604337,
+    "one_correction_bpr": 8.022294375639444,
+    "transfers": false
+   },
+   {
+    "fold": "leave out riverside",
+    "formula_bpr": 7.617117922259262,
+    "one_correction_bpr": 7.626244833656317,
+    "transfers": true
+   },
+   {
+    "fold": "leave out san-diego",
+    "formula_bpr": 7.978903448829904,
+    "one_correction_bpr": 7.8820227251831945,
+    "transfers": false
+   },
+   {
+    "fold": "leave out san-francisco",
+    "formula_bpr": 7.348393543951143,
+    "one_correction_bpr": 7.437917330637294,
+    "transfers": true
+   },
+   {
+    "fold": "leave out south-street",
+    "formula_bpr": 7.33031744401638,
+    "one_correction_bpr": 7.662255562046275,
+    "transfers": true
+   },
+   {
+    "fold": "leave out tract-353-02",
+    "formula_bpr": 7.317056967651148,
+    "one_correction_bpr": 7.571538237158076,
+    "transfers": true
+   },
+   {
+    "fold": "leave out washington",
+    "formula_bpr": 7.769086637845035,
+    "one_correction_bpr": 7.936761028346112,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "ideal_residual_bits": 8197.53909106661,
+   "coded_bits": 8200,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "station_bias": {
+    "formula": "\u03b4 \u00b7 (station's mean miss in its other events)",
+    "meaning": "a per-station siting or instrument offset",
+    "physics": true,
+    "unit": ""
+   },
+   "elevation": {
+    "formula": "b \u00b7 \u0394z_station",
+    "meaning": "station height above its surroundings (hill speed-up or mountain sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "direction": {
+    "formula": "a\u00b7sin \u03b8 + b\u00b7cos \u03b8",
+    "meaning": "the miss depends on wind direction (upwind terrain or exposure)",
+    "physics": true,
+    "unit": ""
+   },
+   "stability": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "day/night stability changes gusts the neutral model misses",
+    "physics": true,
+    "unit": ""
+   },
+   "season": {
+    "formula": "a\u00b7sin(2\u03c0m/12) + b\u00b7cos(2\u03c0m/12)",
+    "meaning": "a seasonal miss (storm type, foliage roughness)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.16625126881309615,
+  "sd_before": 0.28125,
+  "sd_after": 0.234375
+ },
+ "ordinary_after_f5": {
+  "name": "Layer 1 ordinary_after_f5",
+  "n": 1326,
+  "library": [
+   "log_law_z0",
+   "displacement",
+   "gust_factor",
+   "station_bias",
+   "elevation",
+   "direction",
+   "stability",
+   "season"
+  ],
+  "library_size": 8,
+  "formulas_scored": 88,
+  "winner": {
+   "terms": [
+    "station_bias"
+   ],
+   "structure_bits": 14.965784284662087,
+   "param_bits": 38.0,
+   "residual_bits": 9020.098111232779,
+   "total_bits": 9073.063895517442,
+   "bits_per_reading": 6.842431293753727,
+   "n": 1326,
+   "sd": 0.140625,
+   "rho": null,
+   "coef": {
+    "level": -0.03781283697535702,
+    "station_bias": 0.8654204855926968
+   },
+   "alpha": {}
+  },
+  "ranked": [
+   {
+    "terms": [
+     "station_bias"
+    ],
+    "structure_bits": 14.965784284662087,
+    "param_bits": 38.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9073.063895517442,
+    "bits_per_reading": 6.842431293753727,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8654204855926968
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "displacement",
+     "station_bias"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 34.0,
+    "residual_bits": 9019.88282253172,
+    "total_bits": 9075.492463006156,
+    "bits_per_reading": 6.844262792613994,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.0020060951899521003,
+     "station_bias": 0.85632872742797
+    },
+    "alpha": {
+     "displacement": 1.2259221325665504
+    }
+   },
+   {
+    "terms": [
+     "gust_factor",
+     "station_bias"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 40.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9081.707751707216,
+    "bits_per_reading": 6.848950038994884,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "gust_factor": -0.13486570673066986,
+     "station_bias": 0.8563991880338113
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "elevation"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 40.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9081.707751707216,
+    "bits_per_reading": 6.848950038994884,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8446379505890765,
+     "elevation": -0.07037978442613987
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "season"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 42.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9083.707751707216,
+    "bits_per_reading": 6.850458334620827,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8661478883244738,
+     "season": [
+      0.013195126389894573,
+      0.008445403596142017
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "stability"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 42.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9083.707751707216,
+    "bits_per_reading": 6.850458334620827,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8655396467969881,
+     "stability": [
+      0.002285936516724111,
+      -0.005357680715670288
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "station_bias",
+     "direction"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 42.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9083.707751707216,
+    "bits_per_reading": 6.850458334620827,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8640291597045187,
+     "direction": [
+      -0.0034209359968608694,
+      -0.003886631778034984
+     ]
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "log_law_z0",
+     "station_bias"
+    ],
+    "structure_bits": 21.609640474436812,
+    "param_bits": 50.0,
+    "residual_bits": 9016.835323499758,
+    "total_bits": 9088.444963974194,
+    "bits_per_reading": 6.854030892891549,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.002005934877836059,
+     "station_bias": 0.8563286859069993
+    },
+    "alpha": {
+     "log_law_z0": 1.1397215636656024
+    }
+   }
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.321928094887362,
+    "param_bits": 26.0,
+    "residual_bits": 9463.36619437522,
+    "total_bits": 9496.688122470106,
+    "bits_per_reading": 7.161906578031754,
+    "n": 1326,
+    "sd": 0.171875,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "station_bias"
+    ],
+    "structure_bits": 14.965784284662087,
+    "param_bits": 38.0,
+    "residual_bits": 9020.098111232779,
+    "total_bits": 9073.063895517442,
+    "bits_per_reading": 6.842431293753727,
+    "n": 1326,
+    "sd": 0.140625,
+    "rho": null,
+    "coef": {
+     "level": -0.03781283697535702,
+     "station_bias": 0.8654204855926968
+    },
+    "alpha": {},
+    "added": "station_bias"
+   }
+  ],
+  "holdout": [
+   {
+    "fold": "leave out atlanta",
+    "formula_bpr": 6.472719569028153,
+    "one_correction_bpr": 7.024021716662801,
+    "transfers": true
+   },
+   {
+    "fold": "leave out baltimore",
+    "formula_bpr": 6.459025334630081,
+    "one_correction_bpr": 6.987877998561695,
+    "transfers": true
+   },
+   {
+    "fold": "leave out chicago",
+    "formula_bpr": 6.546374382714788,
+    "one_correction_bpr": 6.819238853905219,
+    "transfers": true
+   },
+   {
+    "fold": "leave out denver",
+    "formula_bpr": 6.821460510962439,
+    "one_correction_bpr": 6.864338977444469,
+    "transfers": true
+   },
+   {
+    "fold": "leave out detroit",
+    "formula_bpr": 6.431165394950787,
+    "one_correction_bpr": 6.807997082993801,
+    "transfers": true
+   },
+   {
+    "fold": "leave out dfw",
+    "formula_bpr": 6.5208657189640125,
+    "one_correction_bpr": 6.932724647349645,
+    "transfers": true
+   },
+   {
+    "fold": "leave out houston",
+    "formula_bpr": 7.537481046830632,
+    "one_correction_bpr": 7.653763462994497,
+    "transfers": true
+   },
+   {
+    "fold": "leave out los-angeles",
+    "formula_bpr": 7.380718440008409,
+    "one_correction_bpr": 7.62790435438735,
+    "transfers": true
+   },
+   {
+    "fold": "leave out miami",
+    "formula_bpr": 6.700671360571834,
+    "one_correction_bpr": 6.867563747190981,
+    "transfers": true
+   },
+   {
+    "fold": "leave out minneapolis",
+    "formula_bpr": 6.526959225481308,
+    "one_correction_bpr": 7.109541282659376,
+    "transfers": true
+   },
+   {
+    "fold": "leave out phoenix",
+    "formula_bpr": 7.126769570734551,
+    "one_correction_bpr": 7.22745508419735,
+    "transfers": true
+   },
+   {
+    "fold": "leave out riverside",
+    "formula_bpr": 6.897725452825756,
+    "one_correction_bpr": 7.884304714943792,
+    "transfers": true
+   },
+   {
+    "fold": "leave out san-diego",
+    "formula_bpr": 6.852376386823731,
+    "one_correction_bpr": 7.189069775673987,
+    "transfers": true
+   },
+   {
+    "fold": "leave out san-francisco",
+    "formula_bpr": 7.24536653157271,
+    "one_correction_bpr": 7.585102798097411,
+    "transfers": true
+   },
+   {
+    "fold": "leave out south-street",
+    "formula_bpr": 6.5967448939198725,
+    "one_correction_bpr": 7.013152021542166,
+    "transfers": true
+   },
+   {
+    "fold": "leave out tampa",
+    "formula_bpr": 7.719083711211053,
+    "one_correction_bpr": 7.336702356717277,
+    "transfers": false
+   },
+   {
+    "fold": "leave out tract-353-02",
+    "formula_bpr": 6.532848929053634,
+    "one_correction_bpr": 6.9163159142172645,
+    "transfers": true
+   },
+   {
+    "fold": "leave out washington",
+    "formula_bpr": 6.579018140027571,
+    "one_correction_bpr": 7.0206526170377055,
+    "transfers": true
+   }
+  ],
+  "transfers": false,
+  "coder_check": {
+   "ideal_residual_bits": 9020.098111232779,
+   "coded_bits": 9024,
+   "roundtrip_ok": true
+  },
+  "terms_meta": {
+   "log_law_z0": {
+    "formula": "ln[ ln(z / (a\u00b7z0)) / ln(z / z0) ]",
+    "meaning": "the roughness length is wrong by a factor a",
+    "physics": true,
+    "unit": "\u00d7 z0"
+   },
+   "displacement": {
+    "formula": "ln[ ln((z \u2212 d) / z0) / ln(z / z0) ]",
+    "meaning": "a missing zero-plane displacement d",
+    "physics": true,
+    "unit": "m"
+   },
+   "gust_factor": {
+    "formula": "g \u00b7 1 / ln(z / z0)",
+    "meaning": "gusts scale with turbulence intensity I \u2248 1/ln(z/z0) (peak factor g wrong)",
+    "physics": true,
+    "unit": ""
+   },
+   "station_bias": {
+    "formula": "\u03b4 \u00b7 (station's mean miss in its other events)",
+    "meaning": "a per-station siting or instrument offset",
+    "physics": true,
+    "unit": ""
+   },
+   "elevation": {
+    "formula": "b \u00b7 \u0394z_station",
+    "meaning": "station height above its surroundings (hill speed-up or mountain sheltering)",
+    "physics": true,
+    "unit": ""
+   },
+   "direction": {
+    "formula": "a\u00b7sin \u03b8 + b\u00b7cos \u03b8",
+    "meaning": "the miss depends on wind direction (upwind terrain or exposure)",
+    "physics": true,
+    "unit": ""
+   },
+   "stability": {
+    "formula": "a\u00b7sin(2\u03c0h/24) + b\u00b7cos(2\u03c0h/24)",
+    "meaning": "day/night stability changes gusts the neutral model misses",
+    "physics": true,
+    "unit": ""
+   },
+   "season": {
+    "formula": "a\u00b7sin(2\u03c0m/12) + b\u00b7cos(2\u03c0m/12)",
+    "meaning": "a seasonal miss (storm type, foliage roughness)",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "noise_model": "independent",
+  "bits_saved_per_reading": 0.3194752842780275,
+  "sd_before": 0.171875,
+  "sd_after": 0.140625
+ },
+ "after": "F5 (WindSim, adopted for ordinary storms only; results 33af0a7 + e41b6c5): *_after_f5, 14 calibration + 4 new blind places"
 }
