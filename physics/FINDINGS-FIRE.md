@@ -56,3 +56,22 @@ Jaccard is against the NASA FEDS satellite perimeters. The GeoMAC outline stampe
   here as picked, and it is not carried forward: amendment A7 replaces it before any further run.
 - To inspect: straight-edged wedge shapes in the south-west of the gust 0.5 run (spot fires spreading as separate
   patches; the 600 m wind lattice or the solver's band may set the edges).
+- Wedge shapes inspected (FireSim results/camp_2018/camp_M3_24h_hrrr_g05_s1/sw_corner_fuel.png): they are fields
+  bounded by LANDFIRE road lines, one 30 m non-burnable cell wide. Surface spread cannot cross a cell, so each field
+  burns only when an ember lands in it. Neither the wind lattice nor the band makes them. Amendment A8 adds a
+  road-crossing rule to test.
+
+### After the incremental band (24 Nov 2026, FireSim 12f61ec; calibration, uncalibrated priors, gust share 0)
+
+| run | seeds | wall time | km2 at 21 h (mapped 376) | Jaccard at 21 h | bits per building (own rate 0.99) | AUC | A7 score |
+|---|---|---|---|---|---|---|---|
+| camp_M3_24h_hrrr_g0_s1_v2 | 1 | 25 min | 345 | 0.54 | 2.59 | 0.673 | 65.0 |
+| camp_M3_24h_hrrr_g0_ens | 3 | 81 min | seed 0: 345 (whole run 375, 393, 463) | 0.54 (seed 0 only) | 1.80 | 0.735 | 61.3 |
+
+- The band change moved the one-seed result a little (381 to 345 km2 at 21 h, Jaccard 0.52 to 0.54): spot fires
+  are random, and one cell of difference changes every later draw.
+- Three seeds already lower the bits (2.59 to 1.80) and lift the AUC, because house probabilities are no longer
+  0 or 1. Still worse than the fire's own base rate (0.99 bits).
+- The A7 score is nearly all area (59.5 of 61.3). A8 replaces it with two ratios.
+- Still wrong: slow in the first 9 h, too far south, no north-west lobe toward Chico, about 3,250 standing
+  houses near Oroville modelled as lost.

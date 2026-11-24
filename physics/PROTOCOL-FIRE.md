@@ -268,3 +268,31 @@ the mapped area; with one seed the rule only counts houses. It is replaced, and 
 - The fitted values, every setting tried and its score are listed in the findings. A setting is fitted on Camp and
   Tubbs and then checked, unchanged, on Marshall and East Troublesome before any freeze.
 - Shorter or cropped runs may be used to search (stated per result); the reported calibration scores are full runs.
+
+**A8 (24 Nov 2026, after the Camp reruns and 3-seed ensemble in FINDINGS-FIRE.md, before any run that uses a road
+rule or the new fitting score).** What had been seen: the Camp run with gust share 0 and the incremental band
+(one seed: 345 km2 at 21 h, Jaccard 0.54, AUC 0.67, 2.59 bits per building, A7 score 65.0) and its 3-seed ensemble
+(375, 393 and 463 km2; 1.80 bits, AUC 0.735, A7 score 61.3). Two things in them prompt this amendment.
+- Roads. LANDFIRE marks roads as lines of non-burnable cells one 30 m cell wide (codes 91 and 99). FireSim's
+  surface spread cannot cross a non-burnable cell, so a grass field ringed by roads burns only if an ember lands in
+  it (straight-edged patches in the gust 0.5 run; the map `sw_corner_fuel.png`). A two-lane road is far narrower
+  than 30 m, and real grass fires in wind cross such roads. Rule R1, an option that is off unless asked for:
+  - A thin cell is a 30 m cell of code 91 or 99 with burnable cells on both sides along at least one of the four
+    axes through it (north-south, east-west, the two diagonals). Blocks two or more cells thick along all four
+    axes (towns, lakes, rock, farm fields of code 93) are untouched, as are water (98) and snow (92).
+  - A thin cell takes the fuel model of the lower-numbered of the two burnable cells of the first such axis
+    (order as listed). In each hour it burns as that fuel if the flame length that fuel would have there is at
+    least L_cross, and is non-burnable in that hour otherwise. Embers cannot start a fire on a thin cell.
+  - L_cross is one more fitted number under A7, tried at 0 m (roads never stop fire), 1 m and 2 m, against R1
+    off. These values are unsourced priors; no firebreak study has been opened for them.
+  - Sandbox case S14 (FireSim `sandbox/CASES.md`), written before it runs, fixes what R1 must do on a made-up
+    strip. With R1 off every earlier result is bit-identical.
+- Fitting score. In the A7 score the area part was 59.5 against 1.80 for buildings, so buildings hardly count,
+  as A7 said would happen; the size of the imbalance (33 to 1) is now known. From here the fitting score is the
+  sum of two ratios, each 1.0 for a forecast with no skill: bits per building over the bits of this fire's own
+  destroyed share, plus bits per 30 m cell (burned or not at the A7 perimeter) over the bits of the mapped
+  burned share of the box. Lower is better. The A7 score is still printed beside it. This is a fitting score for
+  calibration fires only; section 4 scores and section 5 gates are unchanged.
+- Perimeter overlap is reported for every seed (it was seed 0 only).
+- Tubbs is run with the same setup as Camp (A5, A6 wind W2): ignition from the official record, stated in its
+  config with the source, 24 h window.
