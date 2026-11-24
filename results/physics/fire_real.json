@@ -1,0 +1,2321 @@
+{
+ "protocol": "PROTOCOL-FIRE A14",
+ "tables": {
+  "Camp": {
+   "fire": "Camp 2018",
+   "run": "camp_M3_24h_hrrr_g0_road0_E0_ens3",
+   "firesim_commit": "c6416f5d2a120659dfdf119f72a61a5b7260a272",
+   "hours": 24.0,
+   "t_end_min": 1287.0,
+   "step_m": 300.0,
+   "points": 6391,
+   "blocks": 1202,
+   "ember_L": [
+    100.0,
+    300.0,
+    1000.0,
+    3000.0
+   ],
+   "gap_d": [
+    3.0,
+    5.0,
+    7.5,
+    10.0,
+    15.0,
+    20.0,
+    30.0
+   ],
+   "outlines": [
+    201.0,
+    567.0,
+    567.0,
+    1287.0
+   ],
+   "passes": [],
+   "has_850": true,
+   "has_model_terrain": false
+  },
+  "Tubbs": {
+   "fire": "Tubbs 2017",
+   "run": "tubbs_M3_44h_g0_road0_E0_v2",
+   "firesim_commit": "597677efcc7260c0307cf7078abdc17eea0eb87d",
+   "hours": 44.0,
+   "t_end_min": 2579.0,
+   "step_m": 300.0,
+   "points": 2802,
+   "blocks": 962,
+   "ember_L": [
+    100.0,
+    300.0,
+    1000.0,
+    3000.0
+   ],
+   "gap_d": [
+    3.0,
+    5.0,
+    7.5,
+    10.0,
+    15.0,
+    20.0,
+    30.0
+   ],
+   "outlines": [
+    2115.0,
+    2454.0,
+    2579.0
+   ],
+   "passes": [
+    330.0,
+    910.0,
+    1010.0,
+    1750.0,
+    2430.0
+   ],
+   "has_850": true,
+   "has_model_terrain": false
+  }
+ },
+ "T1": {
+  "n": 4612,
+  "n_by_fire": {
+   "Camp": 3252,
+   "Tubbs": 1360
+  },
+  "level": {
+   "Camp": -0.3693123928062586,
+   "Tubbs": 1.343601350969588
+  },
+  "spread": {
+   "Camp": 1.0501808030803472,
+   "Tubbs": 0.88417732241013
+  },
+  "inputs": [
+   "aloft",
+   "bld100",
+   "calm",
+   "crew",
+   "ember",
+   "lee1",
+   "lee5",
+   "line_canopy",
+   "line_developed",
+   "line_grass",
+   "line_nonburn",
+   "line_shrub",
+   "line_slope_any",
+   "line_slope_run",
+   "line_timber",
+   "lndist",
+   "lnhours",
+   "lnroad",
+   "lnu",
+   "moist",
+   "night",
+   "rh",
+   "run"
+  ],
+  "planted": {
+   "noise_only": {
+    "named": [
+     "fuel_shrub",
+     "slope_any"
+    ],
+    "pass": false
+   },
+   "wind": {
+    "planted": "wind_speed",
+    "named": [
+     "wind_aloft",
+     "wind_run",
+     "calm_share",
+     "fuel_nonburnable"
+    ],
+    "pass": false,
+    "extra_groups": [
+     "aloft",
+     "barrier",
+     "calm",
+     "wind_run"
+    ]
+   },
+   "lee": {
+    "planted": "lee_descent_5km",
+    "named": [
+     "lee_descent_5km",
+     "wind_run",
+     "night_share",
+     "clock",
+     "slope_any"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "clock",
+     "night_share",
+     "slope",
+     "wind_run"
+    ]
+   },
+   "calm": {
+    "planted": "calm_share",
+    "named": [
+     "wind_aloft",
+     "calm_share",
+     "fuel_shrub",
+     "dead_moisture"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "aloft",
+     "fuel",
+     "moisture"
+    ]
+   },
+   "ember": {
+    "planted": "ember",
+    "named": [
+     "wind_speed",
+     "wind_aloft",
+     "calm_share",
+     "ember"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "aloft",
+     "calm",
+     "wind"
+    ]
+   }
+  },
+  "winner": [
+   "wind_run",
+   "clock",
+   "fuel_grass",
+   "canopy_cover",
+   "slope_any"
+  ],
+  "coef": {
+   "level": -5.22715199160359e-17,
+   "wind_run": 0.5871489819360907,
+   "clock": 0.8268134592437513,
+   "fuel_grass": -3.5537572769185584,
+   "canopy_cover": -2.9284934798795184,
+   "slope_any": 5.836142974717396
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 1.0731778324960377,
+  "sd_before": 1.0,
+  "sd_after": 0.40625,
+  "holdout": [
+   {
+    "fold": "fit Tubbs, test Camp",
+    "formula_bpr": 11.533969408078567,
+    "one_correction_bpr": 6.488417261614328,
+    "transfers": false
+   },
+   {
+    "fold": "fit Camp, test Tubbs",
+    "formula_bpr": 6.232954511738874,
+    "one_correction_bpr": 6.229703340066772,
+    "transfers": false
+   }
+  ],
+  "transfers": false,
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.643856189774723,
+    "param_bits": 16.0,
+    "residual_bits": 29406.048458600962,
+    "total_bits": 29430.692314790736,
+    "bits_per_reading": 6.381329643276396,
+    "n": 4612,
+    "sd": 1.0,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "clock"
+    ],
+    "structure_bits": 18.931568569324174,
+    "param_bits": 28.0,
+    "residual_bits": 27755.342097859888,
+    "total_bits": 27802.273666429213,
+    "bits_per_reading": 6.028246675288208,
+    "n": 4612,
+    "sd": 0.8125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "clock": 0.792124401186914
+    },
+    "alpha": {},
+    "added": "clock"
+   },
+   {
+    "terms": [
+     "clock",
+     "slope_any"
+    ],
+    "structure_bits": 28.219280948873624,
+    "param_bits": 48.0,
+    "residual_bits": 26086.80441913446,
+    "total_bits": 26163.023700083333,
+    "bits_per_reading": 5.672815199497687,
+    "n": 4612,
+    "sd": 0.5625,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "clock": 0.7805835642278285,
+     "slope_any": 6.381877640983698
+    },
+    "alpha": {},
+    "added": "slope_any"
+   },
+   {
+    "terms": [
+     "clock",
+     "slope_any",
+     "wind_run"
+    ],
+    "structure_bits": 40.50699332842307,
+    "param_bits": 48.0,
+    "residual_bits": 25017.619457876735,
+    "total_bits": 25106.12645120516,
+    "bits_per_reading": 5.443652743106062,
+    "n": 4612,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "clock": 0.7291523791910759,
+     "slope_any": 5.266140207105342,
+     "wind_run": 0.5890092357584304
+    },
+    "alpha": {},
+    "added": "wind_run"
+   },
+   {
+    "terms": [
+     "clock",
+     "slope_any",
+     "wind_run",
+     "fuel_grass"
+    ],
+    "structure_bits": 49.79470570797252,
+    "param_bits": 64.0,
+    "residual_bits": 24686.32159849936,
+    "total_bits": 24800.11630420733,
+    "bits_per_reading": 5.377301887295605,
+    "n": 4612,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "clock": 0.7313069830562527,
+     "slope_any": 5.5414208651904335,
+     "wind_run": 0.570313288336099,
+     "fuel_grass": -2.0095313600693756
+    },
+    "alpha": {},
+    "added": "fuel_grass"
+   },
+   {
+    "terms": [
+     "clock",
+     "slope_any",
+     "wind_run",
+     "fuel_grass",
+     "canopy_cover"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 72.0,
+    "residual_bits": 24348.942073556762,
+    "total_bits": 24480.024491644283,
+    "bits_per_reading": 5.307897764883843,
+    "n": 4612,
+    "sd": 0.40625,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "clock": 0.8268134592437519,
+     "slope_any": 5.836142974717403,
+     "wind_run": 0.5871489819360897,
+     "fuel_grass": -3.553757276918552,
+     "canopy_cover": -2.9284934798795246
+    },
+    "alpha": {},
+    "added": "canopy_cover"
+   }
+  ],
+  "ranked": [
+   {
+    "terms": [
+     "wind_run",
+     "clock",
+     "fuel_grass",
+     "canopy_cover",
+     "slope_any"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 68.0,
+    "residual_bits": 24354.11373323149,
+    "total_bits": 24481.19615131901,
+    "bits_per_reading": 5.308151810780358,
+    "n": 4612,
+    "sd": 0.40625,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "wind_run": 0.5871489819360907,
+     "clock": 0.8268134592437513,
+     "fuel_grass": -3.5537572769185584,
+     "canopy_cover": -2.9284934798795184,
+     "slope_any": 5.836142974717396
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_run",
+     "night_share",
+     "clock",
+     "fuel_grass",
+     "slope_any"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 96.0,
+    "residual_bits": 24516.11621214103,
+    "total_bits": 24671.19863022855,
+    "bits_per_reading": 5.349349225981906,
+    "n": 4612,
+    "sd": 0.46875,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "wind_run": 0.6493772526172654,
+     "night_share": -0.36135806399149145,
+     "clock": 0.793744562089065,
+     "fuel_grass": -2.2482532377325892,
+     "slope_any": 4.725839573728964
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_run",
+     "clock",
+     "fuel_grass",
+     "slope_any",
+     "building_density"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 82.0,
+    "residual_bits": 24565.572351920833,
+    "total_bits": 24706.654770008354,
+    "bits_per_reading": 5.357037027321846,
+    "n": 4612,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.227151991603589e-17,
+     "wind_run": 0.5788747380161068,
+     "clock": 0.7128550135773133,
+     "fuel_grass": -2.1459245078269715,
+     "slope_any": 5.354163610319072,
+     "building_density": -0.018546685512635355
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_run",
+     "clock",
+     "fuel_grass",
+     "slope_any",
+     "dead_moisture"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 66.0,
+    "residual_bits": 24603.485190062085,
+    "total_bits": 24728.567608149606,
+    "bits_per_reading": 5.361788293180747,
+    "n": 4612,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "wind_run": 0.6241120902455818,
+     "clock": 0.7642513334469822,
+     "fuel_grass": -2.1172556839699923,
+     "slope_any": 5.233449002196548,
+     "dead_moisture": 16.77469220429688
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_run",
+     "clock",
+     "fuel_grass",
+     "slope_any",
+     "humidity"
+    ],
+    "structure_bits": 59.08241808752197,
+    "param_bits": 72.0,
+    "residual_bits": 24620.64439985287,
+    "total_bits": 24751.72681794039,
+    "bits_per_reading": 5.366809804410319,
+    "n": 4612,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -5.22715199160359e-17,
+     "wind_run": 0.6147923787739877,
+     "clock": 0.7528213766041874,
+     "fuel_grass": -2.1204291287468715,
+     "slope_any": 5.354323352978467,
+     "humidity": 0.02713145130545534
+    },
+    "alpha": {}
+   }
+  ],
+  "verdict": [
+   [
+    "wind_run",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "clock",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "fuel_grass",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "canopy_cover",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "slope_any",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "wind_run": 1.0,
+    "clock": 1.0,
+    "slope": 0.8333333333333334,
+    "fuel": 0.7666666666666667,
+    "canopy_cover": 0.5666666666666667,
+    "distance": 0.16666666666666666,
+    "crew": 0.16666666666666666,
+    "moisture": 0.16666666666666666,
+    "aloft": 0.1,
+    "houses": 0.1,
+    "barrier": 0.03333333333333333,
+    "lee": 0.03333333333333333,
+    "wind": 0.03333333333333333,
+    "night_share": 0.03333333333333333
+   },
+   "coef_90": {
+    "wind_run": [
+     0.5128417762304621,
+     0.7192453752916268
+    ],
+    "clock": [
+     0.7408859898239482,
+     0.8925659404843598
+    ],
+    "fuel_grass": [
+     -4.535752463520893,
+     -2.3543243966843854
+    ],
+    "canopy_cover": [
+     -3.9079939840185225,
+     -1.8318671884835964
+    ],
+    "slope_any": [
+     5.040329983785217,
+     6.561767635519763
+    ]
+   }
+  },
+  "lookalikes": {
+   "wind_run": [],
+   "clock": [],
+   "fuel_grass": [],
+   "canopy_cover": [],
+   "slope_any": []
+  },
+  "neighbour": {
+   "gain": 0.6849860283762501,
+   "where": "all inputs",
+   "null_95": -0.10823023758268609,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "null_bits_saved": {
+   "max": 0.06852713981962534,
+   "mean": 0.034569864936557906,
+   "all": [
+    0.04714540239466746,
+    0.032680219105388285,
+    0.054009981126672706,
+    0.03760987421772233,
+    0.04325132173513309,
+    0.022899524857883425,
+    0.014545893739318218,
+    0.02766758039550211,
+    0.017141481978944453,
+    0.01890762847272543,
+    0.016306773353039105,
+    0.06852713981962534,
+    0.030449265211905243,
+    0.012100886870985327,
+    0.03012377056020404,
+    0.05344606482712912,
+    0.017167873706738963,
+    0.06565270713345055,
+    0.04719404428756494
+   ]
+  },
+  "terms_meta": {
+   "wind_speed": {
+    "formula": "\u03b2 \u00b7 ln U\u2081\u2080",
+    "meaning": "spread responds to wind more (\u03b2<0 in T1) or less than the model says, or the wind input is biased where it is strong",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_aloft": {
+    "formula": "\u03b2 \u00b7 ln(U\u2088\u2085\u2080 / U\u2081\u2080)",
+    "meaning": "strong wind aloft that the surface analysis does not bring down to the fire",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_1km": {
+    "formula": "b \u00b7 (z upwind at 1 km \u2212 z)",
+    "meaning": "downslope wind: ground falling along the wind aloft",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_5km": {
+    "formula": "b \u00b7 (z upwind at 5 km \u2212 z)",
+    "meaning": "downslope windstorm on the lee of a ridge",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind, line from ignition)",
+    "meaning": "heading against flanking and backing spread is out of balance",
+    "physics": true,
+    "unit": ""
+   },
+   "calm_share": {
+    "formula": "b \u00b7 share of hours with U\u2081\u2080 < 2 m/s",
+    "meaning": "creep and burnout in calm air (the model keeps a fire alive, or kills it, in light wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "night_share": {
+    "formula": "b \u00b7 share of hours at night",
+    "meaning": "night recovery of moisture and stable air",
+    "physics": true,
+    "unit": ""
+   },
+   "crew_hours": {
+    "formula": "b \u00b7 daylight hours after hour 9",
+    "meaning": "suppression: crews hold lines once they are in place",
+    "physics": true,
+    "unit": ""
+   },
+   "road_distance": {
+    "formula": "b \u00b7 ln(distance to a road line)",
+    "meaning": "roads as lines crews hold or fire fails to cross",
+    "physics": true,
+    "unit": ""
+   },
+   "distance": {
+    "formula": "b \u00b7 ln(distance from ignition)",
+    "meaning": "the miss grows or shrinks with the length of the run",
+    "physics": true,
+    "unit": ""
+   },
+   "clock": {
+    "formula": "b \u00b7 ln(observed hours)",
+    "meaning": "bookkeeping: the residual holds the observed time itself (not physics)",
+    "physics": false,
+    "unit": ""
+   },
+   "fuel_grass": {
+    "formula": "\u03b4 \u00b7 share of grass on the line",
+    "meaning": "grass spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_shrub": {
+    "formula": "\u03b4 \u00b7 share of shrub on the line",
+    "meaning": "shrub spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_timber": {
+    "formula": "\u03b4 \u00b7 share of timber on the line",
+    "meaning": "timber litter and understorey spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_nonburnable": {
+    "formula": "\u03b4 \u00b7 share of non-burnable on the line",
+    "meaning": "barriers stop or pass fire differently than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_developed": {
+    "formula": "\u03b4 \u00b7 share of developed land on the line",
+    "meaning": "fire through built-up land (houses as fuel) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy_cover": {
+    "formula": "b \u00b7 canopy cover on the line",
+    "meaning": "wind sheltering under canopy, or crown fire, is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_run": {
+    "formula": "b \u00b7 tan\u00b2\u03c6 \u00b7 cos(upslope, run)",
+    "meaning": "the slope factor (Rothermel: \u221d tan\u00b2\u03c6) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 tan\u00b2\u03c6",
+    "meaning": "steep ground of any aspect (rolling material, terrain-channelled wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "dead_moisture": {
+    "formula": "b \u00b7 1-h dead fuel moisture",
+    "meaning": "moisture damping is off",
+    "physics": true,
+    "unit": ""
+   },
+   "humidity": {
+    "formula": "b \u00b7 relative humidity",
+    "meaning": "humidity recovery is off",
+    "physics": true,
+    "unit": ""
+   },
+   "ember": {
+    "formula": "b \u00b7 \u03a3 canopy(x upwind) e^(\u2212x/L) / \u03a3 e^(\u2212x/L)",
+    "meaning": "spotting from canopy fuel within L upwind",
+    "physics": true,
+    "unit": "m"
+   },
+   "building_density": {
+    "formula": "b \u00b7 buildings within 100 m",
+    "meaning": "fire among houses moves differently than in wildland fuel",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "each_fire_alone": {
+   "Camp": {
+    "winner": [
+     "wind_speed",
+     "wind_aloft",
+     "crew_hours",
+     "fuel_grass",
+     "canopy_cover"
+    ],
+    "coef": {
+     "level": 2.878146865573292e-17,
+     "wind_speed": 3.7474562867278234,
+     "wind_aloft": 3.450219614542968,
+     "crew_hours": 1.1363132208176616,
+     "fuel_grass": -4.207661655527537,
+     "canopy_cover": -2.658500108603046
+    },
+    "alpha": {},
+    "bits_saved_per_reading": 1.5731027340473478,
+    "sd_before": 1.0,
+    "sd_after": 0.28125
+   },
+   "Tubbs": {
+    "winner": [
+     "wind_aloft",
+     "wind_run",
+     "distance",
+     "clock",
+     "ember"
+    ],
+    "coef": {
+     "level": -0.49421568573935803,
+     "wind_aloft": 0.7551893677460862,
+     "wind_run": 1.739938455263829,
+     "distance": -0.6539173461981669,
+     "clock": 0.8132330048910414,
+     "ember": 0.7264690831167023
+    },
+    "alpha": {
+     "ember": 2486.909065574955
+    },
+    "bits_saved_per_reading": 1.094766322676282,
+    "sd_before": 0.875,
+    "sd_after": 0.34375
+   }
+  },
+  "rules": {
+   "wind_run": {
+    "group": "wind_run",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "clock": {
+    "group": "clock",
+    "physics": false,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "fuel_grass": {
+    "group": "fuel",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.7666666666666667,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "canopy_cover": {
+    "group": "canopy_cover",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.5666666666666667,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "slope_any": {
+    "group": "slope",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.8333333333333334,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   }
+  },
+  "seconds": 463.4
+ },
+ "T2": {
+  "n": 9193,
+  "n_by_fire": {
+   "Camp": 6391,
+   "Tubbs": 2802
+  },
+  "level": {
+   "Camp": 0.030511657017681115,
+   "Tubbs": 0.37044967880085655
+  },
+  "spread": {
+   "Camp": 0.7001631822316189,
+   "Tubbs": 0.614328447087581
+  },
+  "inputs": [
+   "aloft",
+   "bld100",
+   "calm",
+   "crew",
+   "ember",
+   "lee1",
+   "lee5",
+   "line_canopy",
+   "line_developed",
+   "line_grass",
+   "line_nonburn",
+   "line_shrub",
+   "line_slope_any",
+   "line_slope_run",
+   "line_timber",
+   "lndist",
+   "lnroad",
+   "lnu",
+   "moist",
+   "night",
+   "rh",
+   "run"
+  ],
+  "planted": {
+   "noise_only": {
+    "named": [
+     "wind_aloft",
+     "calm_share",
+     "night_share",
+     "fuel_shrub",
+     "ember"
+    ],
+    "pass": false
+   },
+   "wind": {
+    "planted": "wind_speed",
+    "named": [
+     "wind_speed",
+     "lee_descent_5km",
+     "night_share",
+     "fuel_developed",
+     "ember"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "barrier",
+     "ember",
+     "lee",
+     "night_share"
+    ]
+   },
+   "lee": {
+    "planted": "lee_descent_5km",
+    "named": [
+     "lee_descent_5km",
+     "wind_run",
+     "fuel_shrub",
+     "slope_run"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "fuel",
+     "slope",
+     "wind_run"
+    ]
+   },
+   "calm": {
+    "planted": "calm_share",
+    "named": [
+     "wind_speed",
+     "wind_run",
+     "calm_share",
+     "distance",
+     "fuel_timber"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "distance",
+     "fuel",
+     "wind",
+     "wind_run"
+    ]
+   },
+   "ember": {
+    "planted": "ember",
+    "named": [
+     "distance",
+     "slope_any",
+     "ember",
+     "building_density"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "distance",
+     "houses",
+     "slope"
+    ]
+   }
+  },
+  "winner": [
+   "wind_speed",
+   "wind_aloft",
+   "distance",
+   "fuel_shrub",
+   "slope_any"
+  ],
+  "coef": {
+   "level": -1.541056848510787e-16,
+   "wind_speed": 2.6075587266323206,
+   "wind_aloft": 2.5598916616208762,
+   "distance": 0.22996039551029437,
+   "fuel_shrub": -2.0972904567121637,
+   "slope_any": -2.1579757449364214
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.3728227927656178,
+  "sd_before": 0.6875,
+  "sd_after": 0.5,
+  "holdout": [
+   {
+    "fold": "fit Tubbs, test Camp",
+    "formula_bpr": 10.907337862032268,
+    "one_correction_bpr": 3.5592806372233845,
+    "transfers": false
+   },
+   {
+    "fold": "fit Camp, test Tubbs",
+    "formula_bpr": 4.075060544279782,
+    "one_correction_bpr": 3.390486004763337,
+    "transfers": false
+   }
+  ],
+  "transfers": false,
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.39231742277876,
+    "param_bits": 18.0,
+    "residual_bits": 32081.01698966014,
+    "total_bits": 32107.40930708292,
+    "bits_per_reading": 3.492593202119321,
+    "n": 9193,
+    "sd": 0.6875,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "fuel_shrub"
+    ],
+    "structure_bits": 18.176952268336283,
+    "param_bits": 26.0,
+    "residual_bits": 30432.88563634322,
+    "total_bits": 30477.062588611556,
+    "bits_per_reading": 3.31524666470266,
+    "n": 9193,
+    "sd": 0.625,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "fuel_shrub": -3.590149062469666
+    },
+    "alpha": {},
+    "added": "fuel_shrub"
+   },
+   {
+    "terms": [
+     "fuel_shrub",
+     "wind_speed"
+    ],
+    "structure_bits": 26.961587113893806,
+    "param_bits": 40.0,
+    "residual_bits": 29944.046816354057,
+    "total_bits": 30011.00840346795,
+    "bits_per_reading": 3.2645500275718424,
+    "n": 9193,
+    "sd": 0.5625,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "fuel_shrub": -3.882233026000835,
+     "wind_speed": 0.4465257934345904
+    },
+    "alpha": {},
+    "added": "wind_speed"
+   },
+   {
+    "terms": [
+     "fuel_shrub",
+     "wind_speed",
+     "wind_aloft"
+    ],
+    "structure_bits": 38.746221959451326,
+    "param_bits": 56.0,
+    "residual_bits": 28997.154762648035,
+    "total_bits": 29091.900984607488,
+    "bits_per_reading": 3.164570976243608,
+    "n": 9193,
+    "sd": 0.5625,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "fuel_shrub": -1.5376664371399187,
+     "wind_speed": 1.692306259381404,
+     "wind_aloft": 1.8805564511824473
+    },
+    "alpha": {},
+    "added": "wind_aloft"
+   },
+   {
+    "terms": [
+     "fuel_shrub",
+     "wind_speed",
+     "wind_aloft",
+     "slope_any"
+    ],
+    "structure_bits": 47.530856805008845,
+    "param_bits": 56.0,
+    "residual_bits": 28810.28200700959,
+    "total_bits": 28913.8128638146,
+    "bits_per_reading": 3.145198832134733,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "fuel_shrub": -1.4801243854582746,
+     "wind_speed": 2.0377188901954972,
+     "wind_aloft": 2.1557015450759875,
+     "slope_any": -1.3444531981062233
+    },
+    "alpha": {},
+    "added": "slope_any"
+   },
+   {
+    "terms": [
+     "fuel_shrub",
+     "wind_speed",
+     "wind_aloft",
+     "slope_any",
+     "distance"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 64.0,
+    "residual_bits": 28559.733881538028,
+    "total_bits": 28680.049373188594,
+    "bits_per_reading": 3.1197704093537033,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "fuel_shrub": -2.0972904567121633,
+     "wind_speed": 2.607558726632322,
+     "wind_aloft": 2.559891661620874,
+     "slope_any": -2.157975744936416,
+     "distance": 0.2299603955102947
+    },
+    "alpha": {},
+    "added": "distance"
+   }
+  ],
+  "ranked": [
+   {
+    "terms": [
+     "wind_speed",
+     "wind_aloft",
+     "distance",
+     "fuel_shrub",
+     "slope_any"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 64.0,
+    "residual_bits": 28559.733881538028,
+    "total_bits": 28680.049373188594,
+    "bits_per_reading": 3.1197704093537033,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "wind_speed": 2.6075587266323206,
+     "wind_aloft": 2.5598916616208762,
+     "distance": 0.22996039551029437,
+     "fuel_shrub": -2.0972904567121637,
+     "slope_any": -2.1579757449364214
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_speed",
+     "wind_aloft",
+     "wind_run",
+     "fuel_shrub",
+     "building_density"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 70.0,
+    "residual_bits": 28571.583153481017,
+    "total_bits": 28697.898645131583,
+    "bits_per_reading": 3.1217120249245713,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "wind_speed": 1.395020083153328,
+     "wind_aloft": 1.6889440138258982,
+     "wind_run": 0.2745836669334542,
+     "fuel_shrub": -1.5981710444176673,
+     "building_density": -0.015999477099256906
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_speed",
+     "wind_aloft",
+     "wind_run",
+     "fuel_shrub",
+     "slope_any"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 70.0,
+    "residual_bits": 28576.501603918718,
+    "total_bits": 28702.817095569284,
+    "bits_per_reading": 3.122247046183975,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "wind_speed": 1.880567653728631,
+     "wind_aloft": 2.0830299724749053,
+     "wind_run": 0.2405446043556584,
+     "fuel_shrub": -1.4996802423316422,
+     "slope_any": -1.47700397108828
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_speed",
+     "wind_aloft",
+     "night_share",
+     "distance",
+     "fuel_shrub"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 78.0,
+    "residual_bits": 28600.322193790216,
+    "total_bits": 28734.637685440783,
+    "bits_per_reading": 3.1257084396215364,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "wind_speed": 2.3899702444323454,
+     "wind_aloft": 2.3508301153668345,
+     "night_share": 7.887819487044659,
+     "distance": 0.27952885258050836,
+     "fuel_shrub": -1.684657139090567
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_speed",
+     "wind_aloft",
+     "wind_run",
+     "fuel_shrub",
+     "fuel_developed"
+    ],
+    "structure_bits": 56.31549165056637,
+    "param_bits": 70.0,
+    "residual_bits": 28621.700132275684,
+    "total_bits": 28748.01562392625,
+    "bits_per_reading": 3.1271636706109267,
+    "n": 9193,
+    "sd": 0.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -1.541056848510787e-16,
+     "wind_speed": 1.3825337576619787,
+     "wind_aloft": 1.6850904135390254,
+     "wind_run": 0.2214106123318531,
+     "fuel_shrub": -1.5862094842415848,
+     "fuel_developed": -2.3355361693325922
+    },
+    "alpha": {}
+   }
+  ],
+  "verdict": [
+   [
+    "wind_speed",
+    "group-level: can't be told from plain offsets over 138 groups"
+   ],
+   [
+    "wind_aloft",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "distance",
+    "group-level: can't be told from plain offsets over 138 groups"
+   ],
+   [
+    "fuel_shrub",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "slope_any",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "aloft": 1.0,
+    "wind": 1.0,
+    "fuel": 0.7666666666666667,
+    "slope": 0.5333333333333333,
+    "wind_run": 0.43333333333333335,
+    "distance": 0.36666666666666664,
+    "houses": 0.23333333333333334,
+    "canopy_cover": 0.2,
+    "night_share": 0.16666666666666666,
+    "barrier": 0.13333333333333333,
+    "ember": 0.13333333333333333,
+    "lee": 0.03333333333333333
+   },
+   "coef_90": {
+    "wind_speed": [
+     2.2465508064500646,
+     2.90529708008496
+    ],
+    "wind_aloft": [
+     2.1923090996474217,
+     2.8977944315365374
+    ],
+    "distance": [
+     0.13906545896971542,
+     0.28969464096564274
+    ],
+    "fuel_shrub": [
+     -2.9274954521820002,
+     -1.3601539473734099
+    ],
+    "slope_any": [
+     -3.2633786433185055,
+     -1.0345031250745895
+    ]
+   }
+  },
+  "lookalikes": {
+   "wind_speed": [],
+   "wind_aloft": [],
+   "distance": [],
+   "fuel_shrub": [],
+   "slope_any": []
+  },
+  "neighbour": {
+   "gain": 0.7049752590016046,
+   "where": "all inputs",
+   "null_95": -0.11452912267150515,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "null_bits_saved": {
+   "max": 0.056678559373637055,
+   "mean": 0.02832486549084869,
+   "all": [
+    0.037505416810416914,
+    0.038269282013519715,
+    0.00804730213989123,
+    0.04625472012538503,
+    0.056678559373637055,
+    0.012805947124827528,
+    0.017108011654658993,
+    0.029476670449323894,
+    0.04551843272762942,
+    0.05003903840977371,
+    0.012991472083962723,
+    0.02027398448282616,
+    0.016075606620848212,
+    0.028667662346673995,
+    0.02141400820652908,
+    0.02783152008090219,
+    0.02096097475676071,
+    0.015570775695705027,
+    0.032683059222853535
+   ]
+  },
+  "terms_meta": {
+   "wind_speed": {
+    "formula": "\u03b2 \u00b7 ln U\u2081\u2080",
+    "meaning": "spread responds to wind more (\u03b2<0 in T1) or less than the model says, or the wind input is biased where it is strong",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_aloft": {
+    "formula": "\u03b2 \u00b7 ln(U\u2088\u2085\u2080 / U\u2081\u2080)",
+    "meaning": "strong wind aloft that the surface analysis does not bring down to the fire",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_1km": {
+    "formula": "b \u00b7 (z upwind at 1 km \u2212 z)",
+    "meaning": "downslope wind: ground falling along the wind aloft",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_5km": {
+    "formula": "b \u00b7 (z upwind at 5 km \u2212 z)",
+    "meaning": "downslope windstorm on the lee of a ridge",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind, line from ignition)",
+    "meaning": "heading against flanking and backing spread is out of balance",
+    "physics": true,
+    "unit": ""
+   },
+   "calm_share": {
+    "formula": "b \u00b7 share of hours with U\u2081\u2080 < 2 m/s",
+    "meaning": "creep and burnout in calm air (the model keeps a fire alive, or kills it, in light wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "night_share": {
+    "formula": "b \u00b7 share of hours at night",
+    "meaning": "night recovery of moisture and stable air",
+    "physics": true,
+    "unit": ""
+   },
+   "road_distance": {
+    "formula": "b \u00b7 ln(distance to a road line)",
+    "meaning": "roads as lines crews hold or fire fails to cross",
+    "physics": true,
+    "unit": ""
+   },
+   "distance": {
+    "formula": "b \u00b7 ln(distance from ignition)",
+    "meaning": "the miss grows or shrinks with the length of the run",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_grass": {
+    "formula": "\u03b4 \u00b7 share of grass on the line",
+    "meaning": "grass spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_shrub": {
+    "formula": "\u03b4 \u00b7 share of shrub on the line",
+    "meaning": "shrub spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_timber": {
+    "formula": "\u03b4 \u00b7 share of timber on the line",
+    "meaning": "timber litter and understorey spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_nonburnable": {
+    "formula": "\u03b4 \u00b7 share of non-burnable on the line",
+    "meaning": "barriers stop or pass fire differently than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_developed": {
+    "formula": "\u03b4 \u00b7 share of developed land on the line",
+    "meaning": "fire through built-up land (houses as fuel) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy_cover": {
+    "formula": "b \u00b7 canopy cover on the line",
+    "meaning": "wind sheltering under canopy, or crown fire, is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_run": {
+    "formula": "b \u00b7 tan\u00b2\u03c6 \u00b7 cos(upslope, run)",
+    "meaning": "the slope factor (Rothermel: \u221d tan\u00b2\u03c6) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 tan\u00b2\u03c6",
+    "meaning": "steep ground of any aspect (rolling material, terrain-channelled wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "ember": {
+    "formula": "b \u00b7 \u03a3 canopy(x upwind) e^(\u2212x/L) / \u03a3 e^(\u2212x/L)",
+    "meaning": "spotting from canopy fuel within L upwind",
+    "physics": true,
+    "unit": "m"
+   },
+   "building_density": {
+    "formula": "b \u00b7 buildings within 100 m",
+    "meaning": "fire among houses moves differently than in wildland fuel",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "each_fire_alone": {
+   "Camp": {
+    "winner": [
+     "wind_speed",
+     "wind_aloft",
+     "wind_run",
+     "calm_share",
+     "fuel_timber"
+    ],
+    "coef": {
+     "level": -8.220819903667182e-16,
+     "wind_speed": 1.5881682510861925,
+     "wind_aloft": 2.133415404476622,
+     "wind_run": 0.4566849850916577,
+     "calm_share": 1.3109523098979914,
+     "fuel_timber": 0.9857903169461223
+    },
+    "alpha": {},
+    "bits_saved_per_reading": 0.6948257278716192,
+    "sd_before": 0.6875,
+    "sd_after": 0.4375
+   },
+   "Tubbs": {
+    "winner": [
+     "lee_descent_5km",
+     "calm_share",
+     "distance",
+     "ember",
+     "building_density"
+    ],
+    "coef": {
+     "level": 0.4436610410712277,
+     "lee_descent_5km": 0.15157390650698588,
+     "calm_share": -2.7955487021653322,
+     "distance": 0.29255553311967786,
+     "ember": -0.6897560249391985,
+     "building_density": -0.01827248639297446
+    },
+    "alpha": {
+     "ember": 2999.9984643352755
+    },
+    "bits_saved_per_reading": 0.24677058345540237,
+    "sd_before": 0.625,
+    "sd_after": 0.5
+   }
+  },
+  "rules": {
+   "wind_speed": {
+    "group": "wind",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": true,
+    "finding": false
+   },
+   "wind_aloft": {
+    "group": "aloft",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "distance": {
+    "group": "distance",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.36666666666666664,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "fuel_shrub": {
+    "group": "fuel",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.7666666666666667,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "slope_any": {
+    "group": "slope",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.5333333333333333,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   }
+  },
+  "seconds": 911.8
+ },
+ "T3": {
+  "n": 2164,
+  "n_by_fire": {
+   "Camp": 1202,
+   "Tubbs": 962
+  },
+  "level": {
+   "Camp": -0.01652664094737457,
+   "Tubbs": -0.2633030113222984
+  },
+  "spread": {
+   "Camp": 0.398837673928925,
+   "Tubbs": 0.3814369842031421
+  },
+  "inputs": [
+   "aloft",
+   "bld100",
+   "calm",
+   "crew",
+   "ember",
+   "gap",
+   "lee1",
+   "lee5",
+   "line_canopy",
+   "line_developed",
+   "line_grass",
+   "line_nonburn",
+   "line_shrub",
+   "line_slope_any",
+   "line_slope_run",
+   "line_timber",
+   "lndist",
+   "lnroad",
+   "lnu",
+   "mod",
+   "moist",
+   "night",
+   "rh",
+   "run"
+  ],
+  "planted": {
+   "noise_only": {
+    "named": [
+     "fuel_grass"
+    ],
+    "pass": false
+   },
+   "wind": {
+    "planted": "wind_speed",
+    "named": [
+     "wind_speed",
+     "fuel_shrub",
+     "fuel_nonburnable",
+     "slope_any"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "barrier",
+     "fuel",
+     "slope"
+    ]
+   },
+   "lee": {
+    "planted": "lee_descent_5km",
+    "named": [
+     "lee_descent_5km",
+     "night_share",
+     "distance",
+     "fuel_shrub",
+     "slope_any"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "distance",
+     "fuel",
+     "night_share",
+     "slope"
+    ]
+   },
+   "calm": {
+    "planted": "calm_share",
+    "named": [
+     "night_share",
+     "slope_any"
+    ],
+    "pass": false,
+    "extra_groups": [
+     "night_share",
+     "slope"
+    ]
+   },
+   "ember": {
+    "planted": "ember",
+    "named": [
+     "wind_run",
+     "night_share",
+     "fuel_nonburnable",
+     "ember"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "barrier",
+     "night_share",
+     "wind_run"
+    ]
+   },
+   "houses": {
+    "planted": "gap",
+    "named": [
+     "wind_aloft",
+     "gap"
+    ],
+    "pass": true,
+    "extra_groups": [
+     "aloft"
+    ]
+   }
+  },
+  "winner": [
+   "wind_aloft",
+   "night_share",
+   "fuel_timber",
+   "canopy_cover",
+   "contrast"
+  ],
+  "coef": {
+   "level": 6.62598834419628e-18,
+   "wind_aloft": -0.2883963831031271,
+   "night_share": 8.630256700883443,
+   "fuel_timber": 4.700455107484949,
+   "canopy_cover": -6.179095808616866,
+   "contrast": -0.7647234694319407
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.33687489475979415,
+  "sd_before": 0.40625,
+  "sd_after": 0.3125,
+  "holdout": [
+   {
+    "fold": "fit Tubbs, test Camp",
+    "formula_bpr": 4.952678458811709,
+    "one_correction_bpr": 5.054633417952974,
+    "transfers": true
+   },
+   {
+    "fold": "fit Camp, test Tubbs",
+    "formula_bpr": 5.972632333026593,
+    "one_correction_bpr": 4.980617163548821,
+    "transfers": false
+   }
+  ],
+  "transfers": false,
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 8.523561956057012,
+    "param_bits": 18.0,
+    "residual_bits": 10867.926677300293,
+    "total_bits": 10894.45023925635,
+    "bits_per_reading": 5.0344039922626385,
+    "n": 2164,
+    "sd": 0.40625,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "contrast"
+    ],
+    "structure_bits": 18.57068586817104,
+    "param_bits": 24.0,
+    "residual_bits": 10460.499269854357,
+    "total_bits": 10503.069955722529,
+    "bits_per_reading": 4.853544341831113,
+    "n": 2164,
+    "sd": 0.34375,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "contrast": -0.4747499849953186
+    },
+    "alpha": {},
+    "added": "contrast"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fuel_timber"
+    ],
+    "structure_bits": 27.617809780285064,
+    "param_bits": 28.0,
+    "residual_bits": 10349.937915734847,
+    "total_bits": 10405.555725515133,
+    "bits_per_reading": 4.808482313084627,
+    "n": 2164,
+    "sd": 0.34375,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "contrast": -0.5585029922581587,
+     "fuel_timber": 1.050404713390996
+    },
+    "alpha": {},
+    "added": "fuel_timber"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fuel_timber",
+     "canopy_cover"
+    ],
+    "structure_bits": 39.66493369239909,
+    "param_bits": 46.0,
+    "residual_bits": 10166.755365308758,
+    "total_bits": 10252.420299001156,
+    "bits_per_reading": 4.73771732855876,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "contrast": -0.6694729161032168,
+     "fuel_timber": 4.126861334632425,
+     "canopy_cover": -5.075334132096718
+    },
+    "alpha": {},
+    "added": "canopy_cover"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fuel_timber",
+     "canopy_cover",
+     "night_share"
+    ],
+    "structure_bits": 48.71205760451312,
+    "param_bits": 60.0,
+    "residual_bits": 10136.061504120642,
+    "total_bits": 10244.773561725155,
+    "bits_per_reading": 4.7341837161391656,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "contrast": -0.6878476297943946,
+     "fuel_timber": 4.625017826221442,
+     "canopy_cover": -5.962860863558645,
+     "night_share": 2.7874540652260635
+    },
+    "alpha": {},
+    "added": "night_share"
+   },
+   {
+    "terms": [
+     "contrast",
+     "fuel_timber",
+     "canopy_cover",
+     "night_share",
+     "wind_aloft"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 64.0,
+    "residual_bits": 10043.693785479529,
+    "total_bits": 10165.452966996156,
+    "bits_per_reading": 4.697529097502844,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "contrast": -0.7647234694319461,
+     "fuel_timber": 4.700455107484951,
+     "canopy_cover": -6.179095808616854,
+     "night_share": 8.630256700883416,
+     "wind_aloft": -0.2883963831031263
+    },
+    "alpha": {},
+    "added": "wind_aloft"
+   }
+  ],
+  "ranked": [
+   {
+    "terms": [
+     "wind_aloft",
+     "night_share",
+     "fuel_timber",
+     "canopy_cover",
+     "contrast"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 64.0,
+    "residual_bits": 10043.693785479529,
+    "total_bits": 10165.452966996156,
+    "bits_per_reading": 4.697529097502844,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "wind_aloft": -0.2883963831031271,
+     "night_share": 8.630256700883443,
+     "fuel_timber": 4.700455107484949,
+     "canopy_cover": -6.179095808616866,
+     "contrast": -0.7647234694319407
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_speed",
+     "night_share",
+     "fuel_timber",
+     "canopy_cover",
+     "contrast"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 64.0,
+    "residual_bits": 10063.294214444993,
+    "total_bits": 10185.05339596162,
+    "bits_per_reading": 4.706586597024779,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "wind_speed": 0.2282268513716795,
+     "night_share": 7.214351155595224,
+     "fuel_timber": 4.666335607502271,
+     "canopy_cover": -6.181971160254919,
+     "contrast": -0.7685668757809033
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "wind_run",
+     "night_share",
+     "fuel_timber",
+     "canopy_cover",
+     "contrast"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 64.0,
+    "residual_bits": 10086.495547182181,
+    "total_bits": 10208.254728698808,
+    "bits_per_reading": 4.717308100138082,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "wind_run": 0.18465934737178438,
+     "night_share": 3.695473399762801,
+     "fuel_timber": 4.045220198938546,
+     "canopy_cover": -5.36246378040403,
+     "contrast": -0.749101087311381
+    },
+    "alpha": {}
+   },
+   {
+    "terms": [
+     "night_share",
+     "fuel_timber",
+     "canopy_cover",
+     "ember",
+     "contrast"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 92.0,
+    "residual_bits": 10061.162161152783,
+    "total_bits": 10210.92134266941,
+    "bits_per_reading": 4.718540361677176,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": -0.14235999338843788,
+     "night_share": 5.602440900282613,
+     "fuel_timber": 4.542217681862277,
+     "canopy_cover": -6.40614514708692,
+     "ember": 0.2865447484226724,
+     "contrast": -0.7343258337809419
+    },
+    "alpha": {
+     "ember": 586.6468625459304
+    }
+   },
+   {
+    "terms": [
+     "road_distance",
+     "fuel_timber",
+     "canopy_cover",
+     "slope_run",
+     "contrast"
+    ],
+    "structure_bits": 57.759181516627145,
+    "param_bits": 64.0,
+    "residual_bits": 10091.37196200836,
+    "total_bits": 10213.131143524986,
+    "bits_per_reading": 4.71956152658271,
+    "n": 2164,
+    "sd": 0.3125,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 6.62598834419628e-18,
+     "road_distance": -0.05354257277389478,
+     "fuel_timber": 4.073236756970969,
+     "canopy_cover": -5.05138460105557,
+     "slope_run": 7.364531073892114,
+     "contrast": -0.6707901704434674
+    },
+    "alpha": {}
+   }
+  ],
+  "verdict": [
+   [
+    "wind_aloft",
+    "group-level: can't be told from plain offsets over 115 groups"
+   ],
+   [
+    "night_share",
+    "group-level: can't be told from plain offsets over 115 groups"
+   ],
+   [
+    "fuel_timber",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "canopy_cover",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "contrast",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "contrast": 1.0,
+    "fuel": 1.0,
+    "canopy_cover": 0.7333333333333333,
+    "night_share": 0.5,
+    "aloft": 0.4666666666666667,
+    "wind_run": 0.26666666666666666,
+    "ember": 0.26666666666666666,
+    "houses": 0.2,
+    "crew": 0.16666666666666666,
+    "calm": 0.16666666666666666,
+    "lee": 0.13333333333333333,
+    "barrier": 0.06666666666666667,
+    "wind": 0.03333333333333333
+   },
+   "coef_90": {
+    "wind_aloft": [
+     -0.3612328162420373,
+     -0.21785472448273122
+    ],
+    "night_share": [
+     5.404296215018018,
+     10.698828972865035
+    ],
+    "fuel_timber": [
+     3.4911705699337805,
+     5.950150116223112
+    ],
+    "canopy_cover": [
+     -8.029201416138248,
+     -4.522782312934299
+    ],
+    "contrast": [
+     -0.8407979196358663,
+     -0.6516375956205704
+    ]
+   }
+  },
+  "lookalikes": {
+   "wind_aloft": [],
+   "night_share": [],
+   "fuel_timber": [],
+   "canopy_cover": [],
+   "contrast": []
+  },
+  "neighbour": {
+   "gain": 0.540655969756292,
+   "where": "all inputs",
+   "null_95": -0.08833386977529001,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "null_bits_saved": {
+   "max": 0.07482136374769964,
+   "mean": 0.022599622618756084,
+   "all": [
+    0.009466298667006693,
+    0.005732864776395766,
+    0.06376914881147615,
+    0.04100321126257556,
+    0.04835467944907958,
+    0.07482136374769964,
+    0.033012310696369424,
+    0.013959792053615803,
+    0.006086298746522147,
+    0.0,
+    0.031161430677070584,
+    0.015376691615613182,
+    0.00975296341555404,
+    0.00025324163677300604,
+    0.020541757360516416,
+    0.011519371877712627,
+    0.003692624283536981,
+    0.016896870997885435,
+    0.023991909680962518
+   ]
+  },
+  "terms_meta": {
+   "wind_speed": {
+    "formula": "\u03b2 \u00b7 ln U\u2081\u2080",
+    "meaning": "spread responds to wind more (\u03b2<0 in T1) or less than the model says, or the wind input is biased where it is strong",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_aloft": {
+    "formula": "\u03b2 \u00b7 ln(U\u2088\u2085\u2080 / U\u2081\u2080)",
+    "meaning": "strong wind aloft that the surface analysis does not bring down to the fire",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_1km": {
+    "formula": "b \u00b7 (z upwind at 1 km \u2212 z)",
+    "meaning": "downslope wind: ground falling along the wind aloft",
+    "physics": true,
+    "unit": ""
+   },
+   "lee_descent_5km": {
+    "formula": "b \u00b7 (z upwind at 5 km \u2212 z)",
+    "meaning": "downslope windstorm on the lee of a ridge",
+    "physics": true,
+    "unit": ""
+   },
+   "wind_run": {
+    "formula": "b \u00b7 cos(wind, line from ignition)",
+    "meaning": "heading against flanking and backing spread is out of balance",
+    "physics": true,
+    "unit": ""
+   },
+   "calm_share": {
+    "formula": "b \u00b7 share of hours with U\u2081\u2080 < 2 m/s",
+    "meaning": "creep and burnout in calm air (the model keeps a fire alive, or kills it, in light wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "night_share": {
+    "formula": "b \u00b7 share of hours at night",
+    "meaning": "night recovery of moisture and stable air",
+    "physics": true,
+    "unit": ""
+   },
+   "road_distance": {
+    "formula": "b \u00b7 ln(distance to a road line)",
+    "meaning": "roads as lines crews hold or fire fails to cross",
+    "physics": true,
+    "unit": ""
+   },
+   "distance": {
+    "formula": "b \u00b7 ln(distance from ignition)",
+    "meaning": "the miss grows or shrinks with the length of the run",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_grass": {
+    "formula": "\u03b4 \u00b7 share of grass on the line",
+    "meaning": "grass spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_shrub": {
+    "formula": "\u03b4 \u00b7 share of shrub on the line",
+    "meaning": "shrub spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_timber": {
+    "formula": "\u03b4 \u00b7 share of timber on the line",
+    "meaning": "timber litter and understorey spread rate is off",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_nonburnable": {
+    "formula": "\u03b4 \u00b7 share of non-burnable on the line",
+    "meaning": "barriers stop or pass fire differently than modelled",
+    "physics": true,
+    "unit": ""
+   },
+   "fuel_developed": {
+    "formula": "\u03b4 \u00b7 share of developed land on the line",
+    "meaning": "fire through built-up land (houses as fuel) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "canopy_cover": {
+    "formula": "b \u00b7 canopy cover on the line",
+    "meaning": "wind sheltering under canopy, or crown fire, is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_run": {
+    "formula": "b \u00b7 tan\u00b2\u03c6 \u00b7 cos(upslope, run)",
+    "meaning": "the slope factor (Rothermel: \u221d tan\u00b2\u03c6) is off",
+    "physics": true,
+    "unit": ""
+   },
+   "slope_any": {
+    "formula": "b \u00b7 tan\u00b2\u03c6",
+    "meaning": "steep ground of any aspect (rolling material, terrain-channelled wind)",
+    "physics": true,
+    "unit": ""
+   },
+   "ember": {
+    "formula": "b \u00b7 \u03a3 canopy(x upwind) e^(\u2212x/L) / \u03a3 e^(\u2212x/L)",
+    "meaning": "spotting from canopy fuel within L upwind",
+    "physics": true,
+    "unit": "m"
+   },
+   "building_density": {
+    "formula": "b \u00b7 buildings within 100 m",
+    "meaning": "fire among houses moves differently than in wildland fuel",
+    "physics": true,
+    "unit": ""
+   },
+   "gap": {
+    "formula": "b \u00b7 share of houses with a neighbour within d",
+    "meaning": "house-to-house spread across gaps of d",
+    "physics": true,
+    "unit": "m"
+   },
+   "contrast": {
+    "formula": "\u03b2 \u00b7 (modelled destroyed share \u2212 \u00bd)",
+    "meaning": "the model over-states (\u03b2<0) or under-states its own range of losses",
+    "physics": true,
+    "unit": ""
+   }
+  },
+  "each_fire_alone": {
+   "Camp": {
+    "winner": [
+     "distance",
+     "fuel_grass",
+     "canopy_cover",
+     "building_density",
+     "contrast"
+    ],
+    "coef": {
+     "level": -5.222991033466464e-17,
+     "distance": -0.46935120643327566,
+     "fuel_grass": -3.7558987365360883,
+     "canopy_cover": -2.9693666919040296,
+     "building_density": 0.010231228514109823,
+     "contrast": -0.8765101831532872
+    },
+    "alpha": {},
+    "bits_saved_per_reading": 0.48582887363999205,
+    "sd_before": 0.25,
+    "sd_after": 0.28125
+   },
+   "Tubbs": {
+    "winner": [
+     "wind_run",
+     "fuel_grass",
+     "slope_any",
+     "contrast"
+    ],
+    "coef": {
+     "level": 1.1502647834071227e-16,
+     "wind_run": 0.26079818708416386,
+     "fuel_grass": -1.2949486218100865,
+     "slope_any": 4.439015405791899,
+     "contrast": -0.63187816463649
+    },
+    "alpha": {},
+    "bits_saved_per_reading": 0.3348831500871192,
+    "sd_before": 0.375,
+    "sd_after": 0.28125
+   }
+  },
+  "rules": {
+   "wind_aloft": {
+    "group": "aloft",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.4666666666666667,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "night_share": {
+    "group": "night_share",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.5,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "fuel_timber": {
+    "group": "fuel",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "canopy_cover": {
+    "group": "canopy_cover",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 0.7333333333333333,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   },
+   "contrast": {
+    "group": "contrast",
+    "physics": true,
+    "transfers_both_ways": false,
+    "bootstrap_share": 1.0,
+    "beats_every_null": true,
+    "planted_check": null,
+    "finding": false
+   }
+  },
+  "seconds": 286.1
+ }
+}

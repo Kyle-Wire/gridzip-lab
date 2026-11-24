@@ -119,9 +119,18 @@ def one(fires, which):
         out["skipped"] = "fewer than 40 readings"; return out
     out["planted"] = planted(ctx, y, blk, g)
     folds = [(f"fit {names[1 - i]}, test {names[i]}", np.where(fid != i)[0], np.where(fid == i)[0]) for i in range(len(names))] if len(names) == 2 else []
-    res = Q.analyse(T.FIRE, ctx, y, g, grammar=False, folds=folds, groups=blk, bootstrap_B=30, null_N=0, name=which, blocks=None)
+    res = Q.analyse(T.FIRE, ctx, y, g, grammar=False, folds=folds, groups=blk, bootstrap_B=30, null_N=0, name=which, blocks=None,
+                    neighbour=False)
     nb = block_null(res, y, blk, g)
     gd = res["guards"]
+    # neighbour test over all inputs at once (the library routine builds n x n tables for every pair of inputs,
+    # which does not fit in memory at several thousand points)
+    from scipy.spatial import cKDTree
+    from physlib import grammar as G
+    prims = G.primitives(ctx, len(y), ())
+    X = np.column_stack([np.argsort(np.argsort(v)) / (len(v) - 1) for v in prims.values()])
+    idx = cKDTree(X).query(X, k=9)[1][:, 1:]
+    gd["neighbour"] = Q.neighbour_test(prims, y - res["_mu"], nb=[("all inputs", idx)])
     out.update(winner=res["winner"]["terms"], coef=res["winner"]["coef"], alpha=res["winner"]["alpha"],
                bits_saved_per_reading=res["bits_saved_per_reading"], sd_before=res["sd_before"], sd_after=res["sd_after"],
                holdout=res["holdout"], transfers=res["transfers"], ladder=res["ladder"], ranked=res["ranked"][:5],

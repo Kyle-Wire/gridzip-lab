@@ -197,3 +197,44 @@ fire's box plus 0.75 degrees, hour by hour over the run window, HRRR analysis at
   30 degrees at windy stations and 50 to 170 at calm ones.
 - Tubbs OVYC1 reported 0.0 m/s every hour and is left out; Camp ORRC1 has no wind readings.
 
+### A14: the compressor on the Camp and Tubbs errors (24 Nov 2026; calibration fires; E0 runs, seed 0)
+
+`python physics/fire_real.py Camp=<table> Tubbs=<table>`, result `results/physics/fire_real.json`; tables from
+FireSim `results/error_tables/` (13502ca). 26 fire formulas in `physlib/terms.py` (list `FIRE`); 23 had inputs on
+both fires (no weather-model terrain height in either table; house terms only in T3).
+
+| table | readings (Camp, Tubbs) | each fire's level | spread before, after the winning formula | winning formula on the two fires pooled | bits saved per reading (largest of 19 shuffled nulls) | transfers both ways |
+|---|---|---|---|---|---|---|
+| T1 arrival, ln(observed / modelled) | 3,252, 1,360 | Camp -0.37, Tubbs +1.34 | 1.00, 0.41 | wind along the run, clock (bookkeeping), grass share, canopy cover, slope | 1.07 (0.07) | no |
+| T2 reach (+1 model only, -1 record only) | 6,391, 2,802 | Camp +0.03, Tubbs +0.37 | 0.69, 0.50 | ln wind, wind aloft over surface, distance, shrub share, slope | 0.37 (0.06) | no |
+| T3 houses, observed minus modelled share | 1,202, 962 blocks | Camp -0.02, Tubbs -0.26 | 0.41, 0.31 | contrast, timber share, canopy cover, night share, wind aloft | 0.34 (0.08) | one way only |
+
+- **No finding under A14's rules.** No pooled formula transfers both ways: fitted on one fire, it codes the
+  other worse than a plain offset (T1 and T2), or helps in one direction only (T3). And the noise-only twin failed
+  on all three tables: on shuffled errors that keep their 3 km structure, the search still names two to five terms.
+  So with two fires and errors this smooth in space, a named term is not yet evidence. The planted wind term was
+  not recovered on T1 and the planted calm term not on T3; lee descent, embers and house gaps were recovered
+  wherever they were planted.
+- Levels (plain facts, not search results): on Camp the record shows fire at a point at 0.69 times the modelled
+  time on average (the model is late, as the outlines said). On Tubbs the observed clock reads 3.8 times the
+  modelled time, but that clock is an upper bound read on outlines from hour 35 on, so it overstates; Tubbs'
+  overrun is the cleaner number: +0.37 on T2, and modelled house losses 26 points of share above the record.
+- Leads, each from one fire or one table, driving nothing by themselves:
+  1. Houses, both fires separately: `contrast` wins with a coefficient of -0.9 (Camp) and -0.6 (Tubbs), picked in
+     30 of 30 bootstrap resamples. The model's block losses are too all-or-nothing: blocks it calls lost are lost
+     less often, blocks it calls safe are lost more often. Part of this is the ensemble itself (2 or 3 seeds give
+     shares of 0, 1/3, 2/3, 1). First step: at least 8 seeds, as A7 already asks, then see what contrast is left.
+  2. Camp alone, arrival and reach: ln wind and wind-aloft-over-surface enter with nearly equal coefficients
+     (3.7 and 3.5 in T1; 1.6 and 2.1 in T2), which together is a term in the 850 hPa wind: Camp's timing error
+     follows the wind aloft, not the surface wind the model burned on. Spread on Camp falls from 1.00 to 0.28.
+     This agrees with the transects and with A13 (surface analysis a quarter slow where the wind was strong). It
+     does not hold on Tubbs.
+  3. Tubbs alone, reach: overrun goes with calm hours (coefficient -2.8 on the calm share with the sign of fewer
+     misses, more overrun in the long quiet tail) and lee ground; consistent with growth after the wind dropped,
+     where the record has suppression and the model has none.
+- Structure left after the winning formulas is large on all three tables (a point's leftover error is 54 to 70 %
+  predictable from its neighbours in input space): the errors are smooth patches, not point noise.
+- What this changes: the compressor cannot separate causes on two fires. The next calibration fires (Marshall,
+  East Troublesome) matter more for it than more terms. Until then the levels and the two-fire tests of each
+  change stay the deciding evidence.
+
