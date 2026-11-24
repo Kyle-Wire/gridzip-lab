@@ -218,7 +218,7 @@ def prev_of(idx, step):
 def analyse(c, r, idx, step, null_N=0, bootstrap_B=0, folds=(), seed=0, grammar=True, name=""):
     prev = prev_of(idx, step)
     excl = tuple(k for k in c if k not in GRAMMAR_INPUTS)
-    weeks = (idx // (24 * 7)).astype(int)
+    weeks = (idx // (24 * 7)).astype(int); weeks = [np.flatnonzero(weeks == w) for w in np.unique(weeks)]
     return Q.analyse(LOAD, c, r, G, grammar=grammar, robust=False, prev=prev, folds=folds, bootstrap_B=bootstrap_B, null_N=null_N,
                      neighbour=False, name=name, exclude=excl, blocks=weeks, seed=seed, boot_by_group=False)
 
