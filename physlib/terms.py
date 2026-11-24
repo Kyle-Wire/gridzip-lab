@@ -237,3 +237,54 @@ HEAT_V2 = [
 
 WIND_FULL = WIND + CONVECTIVE + TROPICAL
 DOMAINS.update({"wind_full": WIND_FULL, "heat_full": HEAT + HEAT_V2})
+
+# ============================================================================================================ fire
+# PROTOCOL-FIRE amendment A14. Inputs come from FireSim scripts/error_table.py. Residuals: T1 ln(observed / modelled
+# arrival time); T2 +1 model-only burned, -1 record-only, 0 both; T3 observed - modelled destroyed share per block.
+# Sources opened: Rothermel 1972 (INT-115: the wind factor is C·U^B, so a speed bias or a wrong exponent is a slope on
+# ln U); Scott and Burgan 2005 (RMRS-GTR-153, fuel model groups); Albini 1979 (INT-56, spotting distance grows with
+# wind and with the height of the burning canopy). The lee, calm, night and crew terms are plain indicators with no
+# fitted physics inside them; their meaning lines say what a win would point at.
+def _knots(c, key, kkey):
+    v = np.asarray(c[key], float); kn = np.log(np.asarray(c[kkey], float))
+    def f(a):
+        x = np.clip(np.log(a), kn[0], kn[-1]); j = int(np.clip(np.searchsorted(kn, x) - 1, 0, len(kn) - 2))
+        w = (x - kn[j]) / (kn[j + 1] - kn[j]); return (1 - w) * v[:, j] + w * v[:, j + 1]
+    return f
+
+
+FIRE = [
+    Term("wind_speed", "fire", "β · ln U₁₀", "spread responds to wind more (β<0 in T1) or less than the model says, or the wind input is biased where it is strong",
+         ("lnu",), lambda c: c["lnu"], group="wind"),
+    Term("wind_aloft", "fire", "β · ln(U₈₅₀ / U₁₀)", "strong wind aloft that the surface analysis does not bring down to the fire",
+         ("aloft",), lambda c: c["aloft"], group="aloft"),
+    Term("lee_descent_1km", "fire", "b · (z upwind at 1 km − z)", "downslope wind: ground falling along the wind aloft", ("lee1",), lambda c: c["lee1"], group="lee"),
+    Term("lee_descent_5km", "fire", "b · (z upwind at 5 km − z)", "downslope windstorm on the lee of a ridge", ("lee5",), lambda c: c["lee5"], group="lee"),
+    Term("terrain_unresolved", "fire", "b · (z − z of the weather model)", "terrain the weather model's grid smooths away (ridge tops and canyon floors)",
+         ("dz_model",), lambda c: c["dz_model"]),
+    Term("wind_run", "fire", "b · cos(wind, line from ignition)", "heading against flanking and backing spread is out of balance", ("run",), lambda c: c["run"]),
+    Term("calm_share", "fire", "b · share of hours with U₁₀ < 2 m/s", "creep and burnout in calm air (the model keeps a fire alive, or kills it, in light wind)",
+         ("calm",), lambda c: c["calm"], group="calm"),
+    Term("night_share", "fire", "b · share of hours at night", "night recovery of moisture and stable air", ("night",), lambda c: c["night"]),
+    Term("crew_hours", "fire", "b · daylight hours after hour 9", "suppression: crews hold lines once they are in place", ("crew",), lambda c: c["crew"], group="crew"),
+    Term("road_distance", "fire", "b · ln(distance to a road line)", "roads as lines crews hold or fire fails to cross", ("lnroad",), lambda c: c["lnroad"], group="crew"),
+    Term("distance", "fire", "b · ln(distance from ignition)", "the miss grows or shrinks with the length of the run", ("lndist",), lambda c: c["lndist"]),
+    Term("clock", "fire", "b · ln(observed hours)", "bookkeeping: the residual holds the observed time itself (not physics)", ("lnhours",), lambda c: c["lnhours"], physics=False),
+    Term("fuel_grass", "fire", "δ · share of grass on the line", "grass spread rate is off", ("line_grass",), lambda c: c["line_grass"], group="fuel"),
+    Term("fuel_shrub", "fire", "δ · share of shrub on the line", "shrub spread rate is off", ("line_shrub",), lambda c: c["line_shrub"], group="fuel"),
+    Term("fuel_timber", "fire", "δ · share of timber on the line", "timber litter and understorey spread rate is off", ("line_timber",), lambda c: c["line_timber"], group="fuel"),
+    Term("fuel_nonburnable", "fire", "δ · share of non-burnable on the line", "barriers stop or pass fire differently than modelled", ("line_nonburn",), lambda c: c["line_nonburn"], group="barrier"),
+    Term("fuel_developed", "fire", "δ · share of developed land on the line", "fire through built-up land (houses as fuel) is off", ("line_developed",), lambda c: c["line_developed"], group="barrier"),
+    Term("canopy_cover", "fire", "b · canopy cover on the line", "wind sheltering under canopy, or crown fire, is off", ("line_canopy",), lambda c: c["line_canopy"]),
+    Term("slope_run", "fire", "b · tan²φ · cos(upslope, run)", "the slope factor (Rothermel: ∝ tan²φ) is off", ("line_slope_run",), lambda c: c["line_slope_run"], group="slope"),
+    Term("slope_any", "fire", "b · tan²φ", "steep ground of any aspect (rolling material, terrain-channelled wind)", ("line_slope_any",), lambda c: c["line_slope_any"], group="slope"),
+    Term("dead_moisture", "fire", "b · 1-h dead fuel moisture", "moisture damping is off", ("moist",), lambda c: c["moist"], group="moisture"),
+    Term("humidity", "fire", "b · relative humidity", "humidity recovery is off", ("rh",), lambda c: c["rh"], group="moisture"),
+    Term("ember", "fire", "b · Σ canopy(x upwind) e^(−x/L) / Σ e^(−x/L)", "spotting from canopy fuel within L upwind",
+         ("ember", "ember_L"), lambda c: _knots(c, "ember", "ember_L"), family=(100.0, 3000.0, True), group="ember", unit="m"),
+    Term("building_density", "fire", "b · buildings within 100 m", "fire among houses moves differently than in wildland fuel", ("bld100",), lambda c: c["bld100"], group="houses"),
+    Term("gap", "fire", "b · share of houses with a neighbour within d", "house-to-house spread across gaps of d",
+         ("gap", "gap_d"), lambda c: _knots(c, "gap", "gap_d"), family=(3.0, 30.0, True), group="houses", unit="m"),
+    Term("contrast", "fire", "β · (modelled destroyed share − ½)", "the model over-states (β<0) or under-states its own range of losses", ("mod",), lambda c: c["mod"] - 0.5),
+]
+DOMAINS["fire"] = FIRE

@@ -454,4 +454,15 @@ Section 6 is carried out now on the two calibration fires that have runs, with t
 - Stated limits: the observed clock is coarse (two to four outlines or passes per day), so T1 cannot see errors
   shorter than the gap between passes; T2 treats the record as complete, though outlines can include unburned
   islands and passes miss cool or hidden fire; two fires give one transfer test in each direction and no more.
+- A14 note (24 Nov 2026, same day, after the code ran on a made-up fire only, before any real table exists). How
+  the code carries out the rules above, where the text left room: hourly inputs are averaged over the hours before
+  the observed arrival in T1, and over the whole window to the last outline in T2 and T3, because a point that only
+  the model burned has no observed time. In T1 the term ln(observed hours) holds the observed time that the error
+  itself is built from, so it is entered as bookkeeping and can never be a finding; T2 and T3 use ln(distance from
+  the ignition) for the same question. Each fire's mean error is taken out before the search and reported as that
+  fire's level (the per-fire offset). The search runs with the engine's standard limit of 5 terms, not 4, grammar
+  off. Noise for the planted checks and the null is the real error with its 3 km block means dealt to other blocks
+  and the remainders shuffled inside each block; a planted term is given half the real error's spread. Camp's
+  house labels are the USGS building-loss points, as in every Camp run. HRRR relative humidity is not used; the
+  humidity and moisture inputs are the station values the model itself read.
 
