@@ -61,3 +61,19 @@ published day-ahead accuracy).
 
 Pass = A, A-null, B, C1, C2. Results in `results/gridload/`, written up in `physics/FINDINGS-8.md` with every
 failure reported. If part A fails, part C still runs, and the write-up says the diagnosis is not trustworthy.
+
+## Amendment A1 (24 Nov 2026, 07:05 UTC, after parts A, B and C were read)
+**Seen:** all of parts A, B and C (`results/gridload/A_planted.json`, `B_explore.json`, `C_sealed.json`). Part C
+first crashed before printing any score (expert design had NaN lags at hours `rows()` didn't check; fixed by adding
+T_lag1, T_lag2 and RH to the finite-input check). Part B first crashed in the null search (blocks format). Neither
+crash showed an outcome. 2017 (January to April) has not been read by anything.
+
+**Why:** part C shows the compressor fixes a weak model. The real question for a utility is whether it finds
+anything a *strong* model misses. So: audit the expert model (M2) and gradient boosting (M3).
+- **D. Audit.** M2 and M3 fitted on 2004-2010; their log errors on 2011-12 go to the compressor (same library, grammar,
+  AR(1) code; TOTAL with a 9-shuffle null). The formula must transfer to 2013 as in part B.
+- **E. Does the audit help.** M2+ = M2 plus the terms D named as extra regression columns; M3+ = M3 with those terms'
+  columns as extra inputs. Fitted on 2004-2013. Scored on 2014-2016 (spent by part C, so labelled post hoc) and on
+  **January to April 2017, never read (the fresh test)**.
+- **Rule E (fresh test, TOTAL):** M3+ beats M3 on Jan-Apr 2017 MAPE, and M2+ beats M2. Reported for every zone.
+  A null audit (nothing named) counts as "nothing to add", and is reported as such, not as a failure of the engine.

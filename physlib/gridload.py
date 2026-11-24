@@ -111,7 +111,7 @@ def derive(z):
 def rows(d, years, step=1, need=("y",)):
     """Indices in the year range with every needed input finite, every step-th hour of the clock."""
     yr = d["year"]; m = (yr >= years[0]) & (yr <= years[1])
-    for k in need + ("T", "Td", "T_lag3", "Tavg24", "Tavg48", "Tmax_prev", "heatrun", "sun"):
+    for k in need + ("T", "Td", "RH", "T_lag1", "T_lag2", "T_lag3", "Tavg24", "Tavg48", "Tmax_prev", "heatrun", "sun"):
         m &= np.isfinite(d[k])
     idx = np.flatnonzero(m)
     return idx[(idx % step) == 0] if step > 1 else idx
