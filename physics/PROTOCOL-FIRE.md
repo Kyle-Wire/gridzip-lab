@@ -466,3 +466,30 @@ Section 6 is carried out now on the two calibration fires that have runs, with t
   house labels are the USGS building-loss points, as in every Camp run. HRRR relative humidity is not used; the
   humidity and moisture inputs are the station values the model itself read.
 
+**A15 (24 Nov 2026, before A13's station tables are read and before any WindSim run for a fire).** Kyle, same day:
+"if we can incorporate windsim into it at all, that'd be pretty cool". What had been seen: the Camp transects
+(the 10 m analysis wind is 0.5 to 5 m/s over Paradise while the 850 hPa wind holds 10 to 19 m/s), and the WindSim
+thread's notes on what its terrain solver needs at this size. No WindSim run on fire terrain exists.
+- What is built: wind option W3 for FireSim, `--wind windsim`. WindSim's steady RANS solver is run on terrain alone
+  (LANDFIRE elevation, roughness from the fuel and canopy layers, no buildings) over a Camp sub-domain in UTM 10N
+  that holds the ignition, Concow, Paradise and the canyon mouths: longitude -121.70 to -121.38, latitude 39.68 to
+  39.88. Cells about 150 m, first cell 15 to 25 m tall, inflow from 30, 45 and 60 degrees (the range of the 850 hPa
+  wind in the first ten hours). CPU only, each run capped at 2 hours.
+- How the wind is made: each run gives a speed-up map S (10 m speed over the run's own 80 m speed averaged on the
+  upwind third of the domain) and a turning map. For fire hour h the reference is the HRRR 80 m wind averaged over
+  the same upwind third; the 10 m wind at a cell is S times the reference speed, turned by the turning map, with S
+  and turning interpolated between the three bearings. Hours whose reference bearing is outside 15 to 75 degrees,
+  and cells outside the sub-domain, keep the HRRR 10 m wind. Nothing is fitted.
+- Scored on stations before any fire run reads it, with A13's station set inside the sub-domain and hours with an
+  observed speed of 3 m/s or more: RMSE of speed, median ratio and mean direction error, for W3 and for the plain
+  HRRR 10 m wind, pooled and split into windward and lee stations. A station is lee if the ground 5 km upwind
+  (along that hour's reference bearing) is more than 100 m higher than the station.
+- Rule: W3 goes into a Camp fire test only if its pooled speed RMSE is at least 10 % lower than HRRR's and it is
+  not more than 10 % worse in either class. With fewer than 4 stations in the sub-domain the check is reported as
+  too thin to decide, and W3 is not used. A Camp fire test with W3, if earned, is E0 priors against the same run on
+  HRRR wind, 3 seeds, read on the A8 score; Tubbs needs its own domain and the same station rule before W3 counts
+  for anything.
+- Predicted before running: W3 beats HRRR at ridge and windward stations and fails in the lee, because a neutral
+  steady solver has no stable layer and so no downslope windstorm or gap jet. If so, that failure is the finding,
+  and the next step is a stability term, not a tuned speed-up.
+
