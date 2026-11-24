@@ -1,0 +1,1814 @@
+{
+ "summary": {
+  "A1 cold pool": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "cold_pool": 20
+   }
+  },
+  "A2 cold pool + pressure jump": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "cold_pool + pressure_jump": 20
+   }
+  },
+  "A3 MO stability": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "mo_stability": 20
+   }
+  },
+  "A4 downdraft + station offset": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "station_bias + downdraft": 20
+   }
+  },
+  "A5 decay after landfall": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "land_decay": 20
+   }
+  },
+  "A6 motion asymmetry": {
+   "named": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "motion_asymmetry": 20
+   }
+  }
+ },
+ "runs": [
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 0,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9704536386634278,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 1,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9935181217257338,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 2,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9706998604115022,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 3,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.997973687633048,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 4,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9966139399746646,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 5,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9746063103606135,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 6,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9685533867989188,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 7,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9951983332099125,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 8,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.999982389984936,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 9,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9864742201860347,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 10,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9802612153161882,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 11,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9949907076218528,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 12,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9883930985656862,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 13,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9572714327817227,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 14,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9996645330596842,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 15,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.998173333103641,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 16,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9999815607178673,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 17,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9925922994330664,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 18,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9990048349213831,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A1 cold pool",
+   "seed": 19,
+   "found": [
+    "cold_pool"
+   ],
+   "named": true,
+   "r2": 0.9998590662613932,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 0,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9899613200154556,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 1,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9863067460505817,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 2,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9904298790375524,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 3,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9958101556713823,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 4,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9923863497891694,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 5,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.991285015847596,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 6,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.968833021102761,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 7,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9947419848593231,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 8,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9722001291259827,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 9,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9743019178210569,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 10,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9945211922784917,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 11,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9950870186283417,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 12,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9873137894636993,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 13,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9867534375478908,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 14,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9973325069142753,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 15,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9965281240003786,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 16,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9839642633641169,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 17,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9928020941239545,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 18,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9965679119501226,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A2 cold pool + pressure jump",
+   "seed": 19,
+   "found": [
+    "cold_pool",
+    "pressure_jump"
+   ],
+   "named": true,
+   "r2": 0.9878110155768651,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 0,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9989073487919353,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 1,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9999132151494375,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 2,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9912841992305366,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 3,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9908694057212124,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 4,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.99875630338977,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 5,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.999322510745037,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 6,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9995551709526197,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 7,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9874866566498937,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 8,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9988751054507347,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 9,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9999668183953728,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 10,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9986230522861095,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 11,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9981560066437737,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 12,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9987250204929105,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 13,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9958365761746113,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 14,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.998211313204349,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 15,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9961920440222954,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 16,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9993446771493338,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 17,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.993815564575404,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 18,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9993531746501444,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A3 MO stability",
+   "seed": 19,
+   "found": [
+    "mo_stability"
+   ],
+   "named": true,
+   "r2": 0.9978284657591981,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 0,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9687792178478131,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 1,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9997963595424729,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 2,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.987674324668951,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 3,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9806749120409746,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 4,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9792790743963048,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 5,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.991812691713341,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 6,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9918616567460881,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 7,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9718949891071943,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 8,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9628315370532001,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 9,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9865096795375216,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 10,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9852956291995156,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 11,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9818434565348972,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 12,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9460596923915614,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 13,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9628144790548692,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 14,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9476934030462095,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 15,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9923652809439438,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 16,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9928472333958992,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 17,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9992253086869255,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 18,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9919886456951268,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A4 downdraft + station offset",
+   "seed": 19,
+   "found": [
+    "station_bias",
+    "downdraft"
+   ],
+   "named": true,
+   "r2": 0.9860771376973355,
+   "false": [],
+   "alpha": {},
+   "library_size": 18,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 0,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9933994922029381,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10083035768829537
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 1,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9893527354618251,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10655670925611792
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 2,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9940684003686192,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10850556021702863
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 3,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9871372269775722,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09386852650658448
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 4,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9895031600132792,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09999102582711641
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 5,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9938142607859936,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10837110135647335
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 6,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9915092821692651,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.08903775121122688
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 7,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9943988061672305,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10853475525677514
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 8,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9838038630147773,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.07843157273703327
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 9,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9869896334885515,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.08285757826620962
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 10,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9863585724473837,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09035305151816744
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 11,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9937812760993414,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10203215638780916
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 12,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9933162405612336,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.08106103792339554
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 13,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9867304043713161,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09073339016119482
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 14,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9885104988874809,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.08821540426259358
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 15,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9922046783639543,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09403658368980697
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 16,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9940503542343146,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10883175169614562
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 17,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9843314275982447,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.06646048784258615
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 18,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9944542475562368,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.10948083512371448
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A5 decay after landfall",
+   "seed": 19,
+   "found": [
+    "land_decay"
+   ],
+   "named": true,
+   "r2": 0.9945651881684039,
+   "false": [],
+   "alpha": {
+    "land_decay": 0.09807916518740162
+   },
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 0,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9549316377979072,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 1,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9847712485359229,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 2,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9963297974046319,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 3,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9953374023509766,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 4,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9814638779768863,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 5,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9943581120788411,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 6,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9641749305711097,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 7,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9983143078297928,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 8,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9998876703923956,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 9,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.954142710836822,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 10,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9924692349262809,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 11,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9941559263913002,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 12,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9859965284044903,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 13,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9799711436562248,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 14,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9985268069358556,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 15,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9640473413959827,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 16,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9987810527534231,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 17,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9887866209273819,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 18,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9937295001908735,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  },
+  {
+   "suite": "A",
+   "law": "A6 motion asymmetry",
+   "seed": 19,
+   "found": [
+    "motion_asymmetry"
+   ],
+   "named": true,
+   "r2": 0.9635252369135069,
+   "false": [],
+   "alpha": {},
+   "library_size": 11,
+   "code": "gauss"
+  }
+ ]
+}

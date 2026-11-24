@@ -1,0 +1,2919 @@
+{
+ "summary": {
+  "flood: datum offset 3 mm": {
+   "named": 0.6,
+   "protocol4": 0.6,
+   "pass": true,
+   "found": {
+    "datum": 12,
+    "weir_exponent": 6,
+    "datum + approach_froude": 1,
+    "datum + manning_slope": 1
+   },
+   "library_size": 12
+  },
+  "flood: splash-over on steep grades": {
+   "named": 0.8,
+   "protocol4": 0.8,
+   "pass": true,
+   "found": {
+    "grade + splash_over": 15,
+    "splash_over": 4,
+    "manning_slope + splash_over": 1
+   },
+   "library_size": 12
+  },
+  "flood: weir drowns to orifice": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "orifice_transition": 20
+   },
+   "library_size": 12
+  },
+  "ground: seasonal + consolidation": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "seasonal + consolidation": 20
+   },
+   "library_size": 8
+  },
+  "ground: sinkhole onset 2022": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "onset": 20
+   },
+   "library_size": 8
+  },
+  "ground: two reference jumps": {
+   "named": 0.9,
+   "protocol4": 0.9,
+   "pass": true,
+   "found": {
+    "jump_a + jump_b": 18,
+    "linear + jump_b": 2
+   },
+   "library_size": 8
+  },
+  "heat: calm nights + station siting": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "night_decoupling + station_offsets": 20
+   },
+   "library_size": 17
+  },
+  "heat: sunlight 1 h late": {
+   "named": 1.0,
+   "protocol4": 0.9,
+   "pass": true,
+   "found": {
+    "radiation_lag": 19,
+    "radiation": 1
+   },
+   "library_size": 17
+  },
+  "heat: swing too large + runs late": {
+   "named": 1.0,
+   "protocol4": 0.95,
+   "pass": true,
+   "found": {
+    "amplitude + timing_shift": 20
+   },
+   "library_size": 17
+  },
+  "wind: contrast + entrance decay": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "contrast + fetch_decay": 20
+   },
+   "library_size": 35
+  },
+  "wind: roughness length x3": {
+   "named": 1.0,
+   "protocol4": 1.0,
+   "pass": true,
+   "found": {
+    "gust_factor": 20
+   },
+   "library_size": 35
+  },
+  "wind: station siting + direction": {
+   "named": 1.0,
+   "protocol4": 0.15,
+   "pass": true,
+   "found": {
+    "station_bias + direction": 20
+   },
+   "library_size": 35
+  }
+ },
+ "runs": [
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 0,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 1,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 2,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 3,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 4,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 5,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 6,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 7,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 8,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 9,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 10,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 11,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 12,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 13,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 14,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 15,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 16,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 17,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 18,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: contrast + entrance decay",
+   "seed": 19,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 0,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 1,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 2,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 3,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 4,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 5,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 6,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 7,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 8,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 9,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 10,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 11,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 12,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 13,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 14,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 15,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 16,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 17,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 18,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: roughness length x3",
+   "seed": 19,
+   "found": [
+    "gust_factor"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 0,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 1,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 2,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 3,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 4,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 5,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 6,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 7,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 8,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 9,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 10,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 11,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 12,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 13,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 14,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 15,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 16,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 17,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 18,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "wind: station siting + direction",
+   "seed": 19,
+   "found": [
+    "station_bias",
+    "direction"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 35
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 0,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 1,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 2,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 3,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 4,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 5,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 6,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 7,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 8,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 9,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 10,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 11,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 12,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 13,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 14,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 15,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 16,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 17,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 18,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: swing too large + runs late",
+   "seed": 19,
+   "found": [
+    "amplitude",
+    "timing_shift"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 0,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 1,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 2,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 3,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 4,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 5,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 6,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 7,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 8,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 9,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 10,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 11,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 12,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 13,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 14,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 15,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 16,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 17,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 18,
+   "found": [
+    "radiation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: sunlight 1 h late",
+   "seed": 19,
+   "found": [
+    "radiation_lag"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 0,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 1,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 2,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 3,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 4,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 5,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 6,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 7,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 8,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 9,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 10,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 11,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 12,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 13,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 14,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 15,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 16,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 17,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 18,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "heat: calm nights + station siting",
+   "seed": 19,
+   "found": [
+    "night_decoupling",
+    "station_offsets"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 17
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 0,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 1,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 2,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 3,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 4,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 5,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 6,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 7,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 8,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 9,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 10,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 11,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 12,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 13,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 14,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 15,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 16,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 17,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 18,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: weir drowns to orifice",
+   "seed": 19,
+   "found": [
+    "orifice_transition"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 0,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 1,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 2,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 3,
+   "found": [
+    "splash_over"
+   ],
+   "named": false,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 4,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 5,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 6,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 7,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 8,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 9,
+   "found": [
+    "splash_over"
+   ],
+   "named": false,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 10,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 11,
+   "found": [
+    "manning_slope",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 12,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 13,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 14,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 15,
+   "found": [
+    "splash_over"
+   ],
+   "named": false,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 16,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 17,
+   "found": [
+    "splash_over"
+   ],
+   "named": false,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 18,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: splash-over on steep grades",
+   "seed": 19,
+   "found": [
+    "grade",
+    "splash_over"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 0,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 1,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 2,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 3,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 4,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 5,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 6,
+   "found": [
+    "datum",
+    "approach_froude"
+   ],
+   "named": false,
+   "false": [
+    "approach_froude"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 7,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 8,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 9,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 10,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 11,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 12,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 13,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 14,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 15,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 16,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 17,
+   "found": [
+    "datum"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 18,
+   "found": [
+    "datum",
+    "manning_slope"
+   ],
+   "named": false,
+   "false": [
+    "manning_slope"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "flood: datum offset 3 mm",
+   "seed": 19,
+   "found": [
+    "weir_exponent"
+   ],
+   "named": false,
+   "false": [
+    "weir_exponent"
+   ],
+   "library_size": 12
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 0,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 1,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 2,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 3,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 4,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 5,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 6,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 7,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 8,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 9,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 10,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 11,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 12,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 13,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 14,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 15,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 16,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 17,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 18,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: sinkhole onset 2022",
+   "seed": 19,
+   "found": [
+    "onset"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 0,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 1,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 2,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 3,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 4,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 5,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 6,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 7,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 8,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 9,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 10,
+   "found": [
+    "linear",
+    "jump_b"
+   ],
+   "named": false,
+   "false": [
+    "linear"
+   ],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 11,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 12,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 13,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 14,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 15,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 16,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 17,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 18,
+   "found": [
+    "linear",
+    "jump_b"
+   ],
+   "named": false,
+   "false": [
+    "linear"
+   ],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: two reference jumps",
+   "seed": 19,
+   "found": [
+    "jump_a",
+    "jump_b"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 0,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 1,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 2,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 3,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 4,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 5,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 6,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 7,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 8,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 9,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 10,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 11,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 12,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 13,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 14,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 15,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 16,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 17,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 18,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  },
+  {
+   "suite": "Areg",
+   "law": "ground: seasonal + consolidation",
+   "seed": 19,
+   "found": [
+    "seasonal",
+    "consolidation"
+   ],
+   "named": true,
+   "false": [],
+   "library_size": 8
+  }
+ ]
+}

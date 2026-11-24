@@ -1,0 +1,368 @@
+{
+ "thunderstorm": {
+  "winner": [
+   "station_bias"
+  ],
+  "coef": {
+   "level": -0.03189739486916884,
+   "station_bias": 0.7382076824799352
+  },
+  "alpha": {},
+  "code": "mix0.05",
+  "bits_saved_per_reading": 0.175892586968188,
+  "sd_before": 0.21875,
+  "sd_after": 0.1875,
+  "transfers": false,
+  "holdout": [
+   {
+    "fold": "leave out atlanta",
+    "formula_bpr": 7.8999415799025,
+    "one_correction_bpr": 8.12301559451614,
+    "transfers": true
+   },
+   {
+    "fold": "leave out chicago",
+    "formula_bpr": 7.797675374390247,
+    "one_correction_bpr": 7.9169504756287905,
+    "transfers": true
+   },
+   {
+    "fold": "leave out denver",
+    "formula_bpr": 7.647473833701324,
+    "one_correction_bpr": 7.707408312624358,
+    "transfers": true
+   },
+   {
+    "fold": "leave out detroit",
+    "formula_bpr": 7.569498744264157,
+    "one_correction_bpr": 7.752600196831947,
+    "transfers": true
+   },
+   {
+    "fold": "leave out dfw",
+    "formula_bpr": 7.532758138436326,
+    "one_correction_bpr": 7.7389135104318925,
+    "transfers": true
+   },
+   {
+    "fold": "leave out houston",
+    "formula_bpr": 7.48054765611636,
+    "one_correction_bpr": 7.812462352042192,
+    "transfers": true
+   },
+   {
+    "fold": "leave out miami",
+    "formula_bpr": 7.2426806799546055,
+    "one_correction_bpr": 7.396987473479582,
+    "transfers": true
+   },
+   {
+    "fold": "leave out phoenix",
+    "formula_bpr": 8.080232390008572,
+    "one_correction_bpr": 8.03962652366394,
+    "transfers": false
+   },
+   {
+    "fold": "leave out riverside",
+    "formula_bpr": 7.619453260527313,
+    "one_correction_bpr": 7.616851742425086,
+    "transfers": false
+   },
+   {
+    "fold": "leave out san-francisco",
+    "formula_bpr": 7.334315061379162,
+    "one_correction_bpr": 7.417322755998904,
+    "transfers": true
+   },
+   {
+    "fold": "leave out south-street",
+    "formula_bpr": 7.314064826972999,
+    "one_correction_bpr": 7.652737427370076,
+    "transfers": true
+   },
+   {
+    "fold": "leave out tract-353-02",
+    "formula_bpr": 7.300297586824681,
+    "one_correction_bpr": 7.557594468955319,
+    "transfers": true
+   },
+   {
+    "fold": "leave out washington",
+    "formula_bpr": 7.7814408712500605,
+    "one_correction_bpr": 7.949481977054376,
+    "transfers": true
+   }
+  ],
+  "library_size": 5,
+  "grammar_size": 227,
+  "verdict": [
+   [
+    "station_bias",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "guards": {
+   "lookalikes": {
+    "station_bias": []
+   },
+   "inclusion": {
+    "station_bias": 1.000000000000002
+   },
+   "map_formula": [
+    "station_bias"
+   ],
+   "map_weight": 0.9998176378957263,
+   "inclusion_by_input": {
+    "stn_loo": 1.000000000000002
+   },
+   "group_confound": {
+    "station_bias": {
+     "within_group_share": 0.0407,
+     "offsets_extra_bits": 340.74,
+     "group_level_saved_bits": 280.07,
+     "group_level_cost_bits": 9.16,
+     "flag": false,
+     "n_groups": 104
+    }
+   },
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "station_bias": 1.0
+    },
+    "coef_90": {
+     "station_bias": [
+      0.6750937159408713,
+      0.7936112699184374
+     ]
+    }
+   },
+   "neighbour": {
+    "gain": -0.09208505623810703,
+    "where": "dz \u00d7 dirn",
+    "null_95": -0.06438977479607325,
+    "p": 0.3,
+    "structure_left": false
+   },
+   "sd_after": 0.1875
+  },
+  "n": 903,
+  "null_bits_saved": {
+   "max": 0.0,
+   "mean": 0.0,
+   "all": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": 0.05
+  },
+  "findings4_winner": [
+   "station_bias"
+  ]
+ },
+ "ordinary": {
+  "winner": [
+   "station_bias"
+  ],
+  "coef": {
+   "level": -0.02177749518844691,
+   "station_bias": 0.8641839037643995
+  },
+  "alpha": {},
+  "code": "mix0.05",
+  "bits_saved_per_reading": 0.330013958793022,
+  "sd_before": 0.15625,
+  "sd_after": 0.109375,
+  "transfers": true,
+  "holdout": [
+   {
+    "fold": "leave out atlanta",
+    "formula_bpr": 6.480592676824015,
+    "one_correction_bpr": 7.024044460797139,
+    "transfers": true
+   },
+   {
+    "fold": "leave out chicago",
+    "formula_bpr": 6.551263280352239,
+    "one_correction_bpr": 6.827537131929305,
+    "transfers": true
+   },
+   {
+    "fold": "leave out denver",
+    "formula_bpr": 6.827583212141388,
+    "one_correction_bpr": 6.865720768097424,
+    "transfers": true
+   },
+   {
+    "fold": "leave out detroit",
+    "formula_bpr": 6.438296523585872,
+    "one_correction_bpr": 6.814697460584394,
+    "transfers": true
+   },
+   {
+    "fold": "leave out dfw",
+    "formula_bpr": 6.529783298393005,
+    "one_correction_bpr": 6.940106262767115,
+    "transfers": true
+   },
+   {
+    "fold": "leave out houston",
+    "formula_bpr": 7.553942328530891,
+    "one_correction_bpr": 7.667637311065629,
+    "transfers": true
+   },
+   {
+    "fold": "leave out los-angeles",
+    "formula_bpr": 7.393594584542793,
+    "one_correction_bpr": 7.603950014986678,
+    "transfers": true
+   },
+   {
+    "fold": "leave out miami",
+    "formula_bpr": 6.7156632852742195,
+    "one_correction_bpr": 6.881932858962663,
+    "transfers": true
+   },
+   {
+    "fold": "leave out phoenix",
+    "formula_bpr": 7.136677736140564,
+    "one_correction_bpr": 7.23878393145427,
+    "transfers": true
+   },
+   {
+    "fold": "leave out riverside",
+    "formula_bpr": 6.897240034664036,
+    "one_correction_bpr": 7.882063335006067,
+    "transfers": true
+   },
+   {
+    "fold": "leave out san-francisco",
+    "formula_bpr": 7.2297653779123845,
+    "one_correction_bpr": 7.60520740494787,
+    "transfers": true
+   },
+   {
+    "fold": "leave out south-street",
+    "formula_bpr": 6.599922852974972,
+    "one_correction_bpr": 7.007546983472981,
+    "transfers": true
+   },
+   {
+    "fold": "leave out tract-353-02",
+    "formula_bpr": 6.538933027837217,
+    "one_correction_bpr": 6.915418333445156,
+    "transfers": true
+   },
+   {
+    "fold": "leave out washington",
+    "formula_bpr": 6.593563590968273,
+    "one_correction_bpr": 7.034621995388381,
+    "transfers": true
+   }
+  ],
+  "library_size": 5,
+  "grammar_size": 216,
+  "verdict": [
+   [
+    "station_bias",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "guards": {
+   "lookalikes": {
+    "station_bias": []
+   },
+   "inclusion": {
+    "station_bias": 0.9999999999999994
+   },
+   "map_formula": [
+    "station_bias"
+   ],
+   "map_weight": 0.9725053020224692,
+   "inclusion_by_input": {
+    "stn_loo": 0.9999999999999994,
+    "dz": 0.02749276098777028,
+    "month": 0.02715854209455084
+   },
+   "group_confound": {
+    "station_bias": {
+     "within_group_share": 0.0183,
+     "offsets_extra_bits": 467.14,
+     "group_level_saved_bits": 6079.19,
+     "group_level_cost_bits": 9.25,
+     "flag": false,
+     "n_groups": 118
+    }
+   },
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "station_bias": 1.0,
+     "g:max(0, month\u22123) \u00b7 dz": 0.1,
+     "g:dz\u00b2 \u00b7 month\u00b2": 0.06666666666666667
+    },
+    "coef_90": {
+     "station_bias": [
+      0.8304022314357358,
+      0.8929397321024509
+     ]
+    }
+   },
+   "neighbour": {
+    "gain": -0.10150813659293045,
+    "where": "dz \u00d7 month",
+    "null_95": -0.07053276239421827,
+    "p": 0.47,
+    "structure_left": false
+   },
+   "sd_after": 0.109375
+  },
+  "n": 1085,
+  "null_bits_saved": {
+   "max": 0.0,
+   "mean": 0.0,
+   "all": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": 0.05
+  },
+  "findings4_winner": [
+   "station_bias"
+  ]
+ }
+}

@@ -1,0 +1,405 @@
+{
+ "summary": {
+  "group confounding": {
+   "attr_named_runs": 0,
+   "flagged_when_named": 1.0,
+   "unflagged_false_share": 0.0,
+   "pass": true,
+   "found": {
+    "station_offsets": 19,
+    "(nothing)": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "suite": "C3",
+   "seed": 0,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 302.05,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 1,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 304.76,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 2,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 303.79,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 3,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 300.4,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 4,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 297.62,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 5,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 297.71,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 6,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 301.3,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 7,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 294.27,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 8,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 299.08,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 9,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 300.6,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 10,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 301.65,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 11,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 303.14,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 12,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 299.41,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 13,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 298.35,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 14,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 300.84,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 15,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 297.0,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 16,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 301.99,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 17,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 298.05,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 18,
+   "found": [
+    "station_offsets"
+   ],
+   "group_confound": {
+    "station_offsets": {
+     "within_group_share": 0.0,
+     "offsets_extra_bits": 0.0,
+     "group_level_saved_bits": 308.1,
+     "group_level_cost_bits": 8.82,
+     "flag": true,
+     "n_groups": 6
+    }
+   },
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  },
+  {
+   "suite": "C3",
+   "seed": 19,
+   "found": [],
+   "group_confound": {},
+   "attr_named": false,
+   "attr_flagged": false,
+   "unflagged_false": []
+  }
+ ]
+}

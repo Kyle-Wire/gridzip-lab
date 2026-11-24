@@ -1,0 +1,744 @@
+{
+ "summary": {
+  "a law named, no structure left": {
+   "flagged": 0.0,
+   "pass": true
+  },
+  "b form outside grammar": {
+   "flagged": 1.0,
+   "pass": true,
+   "where": {
+    "lp \u00d7 fetch": 20
+   },
+   "found": {
+    "(nothing)": 20
+   }
+  },
+  "c noise: sd within 10 %": {
+   "share": 1.0,
+   "pass": true
+  }
+ },
+ "runs": [
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6000,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.97,
+   "where": "cross \u00d7 kq",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6001,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.11,
+   "where": "z \u00d7 z0",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6002,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.77,
+   "where": "lp \u00d7 fetch",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6003,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.46,
+   "where": "z \u00d7 kq",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6004,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.47,
+   "where": "kq \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6005,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.48,
+   "where": "lp \u00d7 month",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6006,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.5,
+   "where": "z0 \u00d7 along",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6007,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.67,
+   "where": "stn_loo \u00d7 dz",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6008,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.7,
+   "where": "lp \u00d7 month",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6009,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.75,
+   "where": "cross \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6010,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.15,
+   "where": "all inputs",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6011,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.67,
+   "where": "lp \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6012,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.64,
+   "where": "lp \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6013,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.26,
+   "where": "cross \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6014,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 1.0,
+   "where": "along \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6015,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.09,
+   "where": "fetch \u00d7 corner",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6016,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.3,
+   "where": "z \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6017,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.27,
+   "where": "corner \u00d7 dirn",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6018,
+   "found": [
+    "contrast",
+    "g:ln fetch"
+   ],
+   "p": 0.23,
+   "where": "kq \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "a",
+   "seed": 6019,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "p": 0.44,
+   "where": "z \u00d7 dz",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7000,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7001,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7002,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7003,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7004,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7005,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7006,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7007,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7008,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7009,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7010,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7011,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7012,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7013,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7014,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7015,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7016,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7017,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.21875,
+   "sd_ratio": 1.4583333333333335
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7018,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "b",
+   "seed": 7019,
+   "found": [],
+   "p": 0.01,
+   "where": "lp \u00d7 fetch",
+   "structure_left": true,
+   "sd_after": 0.203125,
+   "sd_ratio": 1.3541666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8000,
+   "found": [],
+   "p": 0.41,
+   "where": "along \u00d7 kq",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8001,
+   "found": [],
+   "p": 0.45,
+   "where": "fetch \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8002,
+   "found": [],
+   "p": 0.61,
+   "where": "corner \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8003,
+   "found": [],
+   "p": 0.27,
+   "where": "fetch \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8004,
+   "found": [],
+   "p": 0.65,
+   "where": "z0 \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8005,
+   "found": [],
+   "p": 0.8,
+   "where": "lp \u00d7 corner",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8006,
+   "found": [],
+   "p": 0.98,
+   "where": "kq \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8007,
+   "found": [],
+   "p": 0.21,
+   "where": "cross \u00d7 dirn",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8008,
+   "found": [],
+   "p": 0.82,
+   "where": "z \u00d7 fetch",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8009,
+   "found": [],
+   "p": 0.2,
+   "where": "z \u00d7 cross",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8010,
+   "found": [],
+   "p": 0.91,
+   "where": "kq \u00d7 stn_loo",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8011,
+   "found": [],
+   "p": 0.36,
+   "where": "z0 \u00d7 cross",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8012,
+   "found": [],
+   "p": 0.28,
+   "where": "corner \u00d7 month",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8013,
+   "found": [],
+   "p": 0.47,
+   "where": "fetch \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8014,
+   "found": [],
+   "p": 0.12,
+   "where": "cross \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8015,
+   "found": [],
+   "p": 0.32,
+   "where": "hc \u00d7 dirn",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8016,
+   "found": [],
+   "p": 0.06,
+   "where": "dz \u00d7 hour",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8017,
+   "found": [],
+   "p": 0.6,
+   "where": "z0 \u00d7 month",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8018,
+   "found": [],
+   "p": 0.31,
+   "where": "z \u00d7 along",
+   "structure_left": false,
+   "sd_after": 0.140625,
+   "sd_ratio": 0.9375
+  },
+  {
+   "suite": "C5",
+   "kind": "c",
+   "seed": 8019,
+   "found": [],
+   "p": 0.93,
+   "where": "lp \u00d7 z",
+   "structure_left": false,
+   "sd_after": 0.15625,
+   "sd_ratio": 1.0416666666666667
+  }
+ ]
+}
