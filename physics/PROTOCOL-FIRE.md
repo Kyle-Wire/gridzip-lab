@@ -255,3 +255,16 @@ east) with valley stations (from the north-north-west), uses 10-minute or 2-minu
 - **Blind fires.** W2 is weather, allowed by section 2 (hindcast, stated). HRRR starts in 2014 (v1) and is used at
   whatever version the archive holds for the date; a fire with no HRRR hour falls back to W1 and says so.
 - A terrain-following wind at finer scale than 3 km (WindSim, candidate M4's part) is not in W2.
+
+**A7 (24 Nov 2026, after the six Camp runs in FINDINGS-FIRE.md, before any further real-fire run).** What had been
+seen: those six runs. A6's rule for the gust share picked 0.5 on bits per building while that run burned 2.5 times
+the mapped area; with one seed the rule only counts houses. It is replaced, and the pick is not used.
+- Calibrated numbers (gust share, and the ember and house numbers in FireSim `PRIORS`) are fitted together on the
+  calibration fires only, with ensembles of at least 8 seeds so that building probabilities are not 0 or 1.
+- Fitting score, lower is better: bits per building (population B) plus bits for the burned area, the latter being
+  the cost of coding each 30 m cell inside the box as burned or not at the latest satellite or incident perimeter
+  inside the window, under the ensemble's burn share for that cell (clipped as buildings are), divided by the number
+  of buildings so that the two parts are on one scale. A run that burns the whole map pays for it.
+- The fitted values, every setting tried and its score are listed in the findings. A setting is fitted on Camp and
+  Tubbs and then checked, unchanged, on Marshall and East Troublesome before any freeze.
+- Shorter or cropped runs may be used to search (stated per result); the reported calibration scores are full runs.
