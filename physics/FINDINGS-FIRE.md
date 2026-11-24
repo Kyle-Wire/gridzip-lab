@@ -172,3 +172,28 @@ Area ratio below 1 means the burned-area forecast beats the mapped burned share 
 - Standing with no fitted numbers (priors, road rule on, E0): Camp A8 2.81, AUC 0.753; Tubbs A8 4.08, AUC 0.753.
   Both worse than the no-skill 2.0. Nothing passes.
 
+### A13: the HRRR wind against every station around each fire (24 Nov 2026; weather only, no fire outcome read)
+
+FireSim `scripts/wind_check.py`, tables in FireSim `results/wind_check/` (commit 13502ca). Stations inside each
+fire's box plus 0.75 degrees, hour by hour over the run window, HRRR analysis at the nearest lattice point.
+
+| fire | stations | all: median HRRR / station speed | windy stations (observed mean 5 m/s or more) | their median speed ratio | their median gust ratio | ratio against height above HRRR terrain |
+|---|---|---|---|---|---|---|
+| Camp, 24 h | 46 (11 airport, 35 RAWS) | 1.46 | 13 | 0.79 | 0.93 | r = -0.03 |
+| Tubbs, 44 h | 38 (12 airport, 26 RAWS; one dead anemometer left out) | 0.92 | 7 | 0.75 | 0.86 | r = -0.12 |
+
+- Speed, by A13's rule: the windy-station median is under 0.85 on both fires, so the surface wind is multiplied
+  by 1 / mean(0.79, 0.75) = 1.30 in fire runs from here on. HRRR's 10 m wind is about a quarter too slow where the
+  wind was really strong: Jarbo Gap 9.8 m/s observed against 7.5, Saddleback 11.2 against 5.9, Pike County
+  8.2 against 4.7, Chalk 5.8 against 1.5.
+- Gusts, by the rule: 0.93 and 0.86 are inside 0.85 to 1.15 on both fires, so the HRRR gust is taken as sound and
+  the gust share stays a number to fit (A7).
+- Terrain, by the rule: no link between the miss and station height above the model's terrain, so no height
+  correction is designed.
+- What the rule does not capture, reported as seen: at sheltered stations HRRR is far too fast (Camp: 20 stations
+  with a ratio above 2, all with observed means under 3.5 m/s), so one multiplier makes those worse. The analysis
+  wind is too smooth: too slow on exposed ridges and gaps, too fast in sheltered canyons and forest. That is a
+  terrain-and-roughness pattern, which is what the WindSim terrain run (A15) is for. Direction errors are 10 to
+  30 degrees at windy stations and 50 to 170 at calm ones.
+- Tubbs OVYC1 reported 0.0 m/s every hour and is left out; Camp ORRC1 has no wind readings.
+
