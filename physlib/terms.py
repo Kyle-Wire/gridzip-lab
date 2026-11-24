@@ -267,3 +267,33 @@ HEAT_V2 = [
 
 WIND_FULL = WIND + CONVECTIVE + TROPICAL
 DOMAINS.update({"wind_full": WIND_FULL, "heat_full": HEAT + HEAT_V2})
+
+# ============================================================================================================ nwp
+# Errors of a learned (or any gridded) weather model, r = (forecast − analysis) / spread for one variable at one point
+# and lead. Inputs are known at the start or fixed: lat, land (0-1), height_km, sun (cos zenith at valid time),
+# msl_anom (hPa, from the zonal mean), msl_curv (hPa per cell², discrete Laplacian), spin850 (1e-5 s⁻¹),
+# wind850 (m/s), q850 (g/kg), tend (the variable's last 6 h change). Added 24 Nov 2026 for WindSim Part F.
+OMEGA = 7.2921e-5
+NWP = [
+    Term("diffusion", "nwp", "κ · ∇²x₀", "the model smooths highs and lows like extra diffusion (κ>0 fills lows, flattens highs)",
+         ("msl_curv",), lambda c: c["msl_curv"], group="smoothing"),
+    Term("vortex_spin_down", "nwp", "b · ζ₈₅₀ · max(0, U₈₅₀ − U₀)", "strong, windy vortices (storms) are spun down",
+         ("spin850", "wind850"), lambda c: (lambda u0: c["spin850"] * np.maximum(c["wind850"] - u0, 0.0)),
+         family=(0.0, 15.0, False), group="vortex", unit="m/s"),
+    Term("vortex_abs", "nwp", "b · |ζ₈₅₀|", "errors grow with spin of either sign (cyclones and anticyclones)", ("spin850",),
+         lambda c: np.abs(c["spin850"]), group="vortex"),
+    Term("coriolis", "nwp", "b · f,  f = 2Ω sin φ", "wind-pressure balance is off by latitude", ("lat",),
+         lambda c: 2 * OMEGA * np.sin(np.radians(c["lat"])) * 1e4, group="latitude"),
+    Term("polar", "nwp", "b · max(0, |φ| − 60°)", "the lat-lon grid converges near the poles", ("lat",),
+         lambda c: np.maximum(np.abs(c["lat"]) - 60.0, 0.0), group="latitude"),
+    Term("terrain_reduction", "nwp", "b · [land] · z_s · p′", "sea-level pressure reduced over high ground is off", ("land", "height_km", "msl_anom"),
+         lambda c: c["land"] * c["height_km"] * c["msl_anom"], group="land"),
+    Term("land_anomaly", "nwp", "b · [land] · p′", "highs and lows behave differently over land", ("land", "msl_anom"),
+         lambda c: c["land"] * c["msl_anom"], group="land"),
+    Term("extrapolation", "nwp", "b · Δx₋₆ₕ", "the model carries the last change on too far (b>0) or too little (b<0)", ("tend",),
+         lambda c: c["tend"]),
+    Term("diurnal", "nwp", "b · cos Z⁺", "daytime heating is out of phase or too strong", ("sun",), lambda c: c["sun"]),
+    Term("latent_heating", "nwp", "b · q₈₅₀ · max(ζ₈₅₀ · sign φ, 0)", "moist cyclones deepen from latent heat the model lacks",
+         ("q850", "spin850", "lat"), lambda c: c["q850"] * np.maximum(c["spin850"] * np.sign(c["lat"] + 1e-9), 0.0)),
+]
+DOMAINS.update({"nwp": NWP})
