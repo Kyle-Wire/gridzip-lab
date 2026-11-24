@@ -499,4 +499,15 @@ thread's notes on what its terrain solver needs at this size. No WindSim run on 
   reference bearing up to 15 degrees outside 30 to 60 uses the nearest run with the hour's own bearing. W3 ignores
   the gust share. Code: WindSim `d72ebc3` (terrain-only cases, `projects/camp_fire_terrain.yml`), FireSim
   `firesim/windsim.py` and `run_fire.py --windsim`.
+- A15 note 2 (24 Nov 2026, after the WindSim thread's review of the code, still before any terrain run). Changes
+  at WindSim `c31a54b`: terrain and roughness are fetched over the square that holds the turned domain, and the
+  domain's edges follow a plane from the inlet side's median ground level to the outlet side's, instead of one
+  level all round, so a wind off high ground does not meet a made-up ramp. Stated limits added: the inflow is a
+  neutral log law with no Coriolis turning and no capping inversion (the inversion is what makes a downslope jet);
+  roughness in forest is up to 2 m with no displacement height, so the model's 10 m wind there is near canopy top
+  while RAWS masts stand in clearings. The rule is read on the 10 m wind as modelled; a second table, reported
+  beside it and deciding nothing, brings the model's 80 m wind down to 10 m over a clearing roughness of 0.1 m with
+  the log law. The 10 m speed along the line from the inlet to Paradise is drawn for each run so that an edge
+  artefact would show. checkMesh's worst non-orthogonality is reported; above 70 the run is repeated with two
+  non-orthogonal correctors before it is read.
 
