@@ -492,4 +492,11 @@ thread's notes on what its terrain solver needs at this size. No WindSim run on 
 - Predicted before running: W3 beats HRRR at ridge and windward stations and fails in the lee, because a neutral
   steady solver has no stable layer and so no downslope windstorm or gap jet. If so, that failure is the finding,
   and the next step is a stability term, not a tuned speed-up.
+- A15 note (24 Nov 2026, same day, code written and tested on made-up runs only; no WindSim terrain run exists).
+  Cells are 200 m, not 150 m, with a 20 m cell on the ground, so that one bearing fits the 2-hour cap on 8 cores
+  (about 2 million cells); the domain is a 52 km square turned with the wind, flattened over its outer 4 km. The
+  HRRR reference for an hour is taken over the upwind third of the middle (45 degree) run for every bearing. A
+  reference bearing up to 15 degrees outside 30 to 60 uses the nearest run with the hour's own bearing. W3 ignores
+  the gust share. Code: WindSim `d72ebc3` (terrain-only cases, `projects/camp_fire_terrain.yml`), FireSim
+  `firesim/windsim.py` and `run_fire.py --windsim`.
 
