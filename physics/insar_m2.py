@@ -64,26 +64,7 @@ def ctx_for(D, rows):
     return c
 
 
-def _t(name, formula, meaning, key, group=None):
-    return Term(name, "ground_m2", formula, meaning, (key,), (lambda k: lambda c: _c(c[k]))(key), group=group)
-
-
-TERMS = [
-    _t("coherence", "b · temporal coherence", "noisier (low-coherence) cells carry a rate bias", "coherence", "quality"),
-    _t("ps_share", "b · PS share of the cell", "distributed scatterers (phase-linked) and PS disagree in rate", "ps_share"),
-    _t("amp_disp", "b · amplitude dispersion", "unstable scatterers carry a rate bias", "amp_disp"),
-    _t("outside_comp", "b · share of ifgrams outside snaphu's component", "unwrapping islands", "outside_comp", "unwrap"),
-    _t("closure_amb", "b · ln(1 + closure triplets with a non-zero ambiguity)", "unwrapping errors (closure)", "closure_amb", "unwrap"),
-    _t("jumps", "b · number of >λ/4 date-to-date jumps", "cycle slips left in the series", "jumps", "unwrap"),
-    _t("height", "b · DEM height", "stratified troposphere or DEM error left in the rate", "height"),
-    _t("incidence", "b · incidence angle", "a look-geometry term (range ramp)", "incidence"),
-    _t("ref_dist", "b · distance to the reference cell", "error grows away from the reference", "ref_dist"),
-    Term("ramp", "ground_m2", "b1 · east + b2 · north", "a long-wavelength tilt (orbit, ionosphere, troposphere)", ("east", "north"),
-         lambda c: np.column_stack([_c(c["east"]), _c(c["north"])]), group="ramp"),
-    Term("ramp2", "ground_m2", "quadratic in east, north", "a long-wavelength bowl (troposphere, ionosphere)", ("east", "north"),
-         lambda c: np.column_stack([_c(c["east"]), _c(c["north"]), _c(c["east"] ** 2), _c(c["north"] ** 2), _c(c["east"] * c["north"])]), group="ramp"),
-    _t("annual_amp", "b · annual amplitude", "seasonal ground (soil moisture) leaks into the rate", "annual_amp"),
-]
+from physlib.insar import INSAR_RATE as TERMS  # the library lives in physlib/insar.py
 
 
 def folds_for(c):
