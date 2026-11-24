@@ -39,3 +39,17 @@ Settings for lpaq1g are environment variables: `GFLAGS` (bit field of graft cont
 - Report negative results (BWT on coordinates, dead ends in `HANDOFF.md`) as results. Compare on held-out slices before claiming a gain from a tuned setting.
 - **Licences.** `lpaq1g/` and `cmix-graft/` are GPL derivatives. Everything else, including `codelen/`, is written fresh: never copy lpaq1, cmix or other GPL code into it. A Hutter Prize submission must run CPU-only within 10 GB RAM; GPUs are for research only.
 - `data/docs_*.txt` (experiment 3's specialist set) is private and must not be committed.
+
+## Directive: model issues go through the compressor first (Kyle, 24 Nov 2026)
+
+Kyle's words: "when we run into issues, we should always try to update compressor to include formulas for the
+specific domain, and then run it against the model."
+
+For every SPARC model (flood, heat, ground, wind, fire) and every agent: when a model run shows a problem, the first
+step is to add that domain's formulas to the term library (`physlib/terms.py`, one `Term` each with its formula,
+plain meaning and source), then run the search against the model's errors (`physlib.guards.analyse`), before tuning
+a model setting by hand. The usual rules hold: protocol or amendment in `physics/` before the run, a planted check
+that the new terms can be found, hold-out across places, and the finding (nulls included) written to
+`physics/FINDINGS*.md` next to the run it explains. A term that pays is a lead for the model's own protocol, not a
+fitted correction.
+

@@ -402,3 +402,56 @@ Tubbs).
     both fires, at least 8 stations each), a height correction is designed under a new amendment; otherwise not.
 - Stations are few and sit where stations sit (airports, ridges). The check can show a bias; it cannot show the
   wind in a place with no station, such as Paradise. That limit stays stated.
+
+**A14 (24 Nov 2026, after A12's results, before any error table of a real fire is built or read).** Kyle's
+directive of this date: "when we run into issues, we should always try to update compressor to include formulas for
+the specific domain, and then run it against the model." What had been seen: the result files of the runs listed in
+the findings (areas, overlaps, building bits, detection shares), the Camp wind transects, and that four
+wind-dependent changes each helped one fire and hurt the other. No per-point error table of a real fire exists yet.
+Section 6 is carried out now on the two calibration fires that have runs, with these additions.
+- Model runs read: the priors with the road rule on and embers on the 20-ft wind (E0), seed 0, Camp 24 h and
+  Tubbs 44 h. Tables come from FireSim `scripts/error_table.py`; the search from `physics/fire_real.py` here.
+- Three error tables per fire, on a 300 m lattice of the 30 m grid (water left out):
+  - T1 arrival: points that both the record and the model show burned. Observed arrival = the time of the first
+    outline or satellite pass (a detection within 190 m) that shows the point burned, so it is an upper bound read
+    on a coarse clock. y = ln(observed / modelled arrival), modelled time floored at 10 min. Grid 0.05.
+  - T2 reach: points that the record or the model shows burned by the last outline inside the run. y = +1 where
+    only the model burned (overrun), -1 where only the record did (missed), 0 where both. Grid 0.25.
+  - T3 houses: 300 m blocks with at least 5 scored buildings. y = observed minus modelled destroyed share. Grid
+    0.05. Blocks carry no coordinates, addresses or parcel facts.
+- Fire formulas added to the term library (`physlib/terms.py`, list `FIRE`), each read at the point over the hours
+  before it burned, or along the straight line from the ignition:
+  - wind: ln of the 10 m speed (Rothermel's wind factor is a power of speed, so a wrong exponent or a speed bias
+    shows as a slope on ln U); ln(850 hPa speed / 10 m speed) (strong wind aloft that the surface analysis does not
+    bring down); lee descent, the fall of the ground along the 850 hPa wind over 1 km and over 5 km (downslope
+    windstorm); ground height above the weather model's own terrain; the share of the ignition-to-point line that
+    runs with the wind.
+  - calm creep and burnout: the share of hours with wind under 2 m/s; the share of hours at night; ln hours since
+    ignition; hours of daylight after the first 9 h (when crews work); distance to the nearest road line.
+  - fuel and terrain along the line: shares of grass, shrub, timber, non-burnable and developed cells; canopy
+    cover; slope along the run (tan squared times cos) and slope of any aspect.
+  - moisture: dead 1-h fuel moisture and relative humidity over the hours before the point burned.
+  - embers: `ember(L)`, canopy fuel upwind within L weighted exp(-x/L), L from 100 m to 3 km.
+  - houses (T3 only): buildings within 100 m; `gap(d)`, the share of buildings whose nearest neighbour is closer
+    than d, d from 3 to 30 m; the block's modelled share itself (contrast: the model over- or under-states its own
+    range); the modelled share lit by embers, flame and neighbours.
+  - a per-fire offset in every table.
+- Reading rules, fixed now. The search is `physlib.guards.analyse` with up to 4 terms. Points 300 m apart are not
+  independent, so resampling and shuffles go by 3 km blocks. A term is a finding only if all four hold: it is in
+  the winning formula on the two fires pooled; it transfers both ways (fitted on Camp it shortens the code on
+  Tubbs, and the reverse); the block bootstrap (30 resamples) picks its group at least half the time; and the
+  shuffled-null search (19 shuffles) never saves as many bits. A term that wins on one fire only is reported as
+  that fire's lead and drives nothing.
+- Planted check on the real tables, before the real answers are read: for each of five terms (ln wind, lee
+  descent, calm share, ember(L), gap(d)) a made-up error equal to that term times a known coefficient plus
+  shuffled noise of the real error's spread is searched; the term's group must be named, and a noise-only twin must
+  name nothing. This tests whether these columns can be told apart on these fires; it is weaker than A4, which
+  switched a mechanism off inside the model. A term group that fails its planted check is not read on the real
+  errors.
+- What a finding may do: name the next change to FireSim or to its wind input, which then needs its own amendment
+  and the usual Camp and Tubbs test. No coefficient fitted by the search goes into FireSim. Both fires are
+  calibration fires, so nothing here is a validation result.
+- Stated limits: the observed clock is coarse (two to four outlines or passes per day), so T1 cannot see errors
+  shorter than the gap between passes; T2 treats the record as complete, though outlines can include unburned
+  islands and passes miss cool or hidden fire; two fires give one transfer test in each direction and no more.
+
