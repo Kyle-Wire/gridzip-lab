@@ -87,3 +87,25 @@ discovery name any of the ~0.5 bit per point of neighbour structure FINDINGS-4 l
 (`results/physics/layer1.json`) with the group guard. The WindSim protocol 6 thunderstorm table (903 gusts,
 spent) through the new search, post hoc. Each is reported next to its FINDINGS-4 (or FINDINGS-6) result; agreement
 and disagreement both go in FINDINGS-7. No gate, rule or seed count above changes after any result is seen.
+
+## Amendment A1 (24 Nov 2026, after development smoke runs on seeds 90000 and up, before any protocol seed is run)
+Seen: smoke runs of C2 and C3 (4 seeds each, seeds ≥ 90000), and while debugging the search, one run each of the
+B6 law on seeds 0 and 9000-9004 (development; seed 0 is also a B6 protocol seed, so B6 seed 0 is reported as seen).
+Changes, each from a failure of the code or of a test's premise, none from a protocol result:
+1. *Search:* approx bits undercount parameters, so with thousands of grammar terms the exact finalists were all
+   5-term formulas and a shorter true formula was never scored exactly. With the grammar on, the best 3 formulas of
+   each size also go to exact scoring. A non-finite score is now +∞ (it scrambled the beam's sort).
+2. *Grammar:* a grammar shape that the library already has (|r| > 0.995 with a plain library term or with a family
+   member anywhere on its grid) is dropped, so a family's free parameter isn't undercut by the grammar's fixed
+   constant. Grammar columns are scaled to unit sd.
+3. *Inclusion is also reported per input* (a grammar shape of x counts for x, as a library term reading x does):
+   shapes of one input were splitting its mass. C2's "A's inclusion" means A's input's inclusion.
+4. *C2's twin correlation was wrong for its purpose.* At n = 360 and signal-to-noise 1, r = 0.97 twins cost about
+   n/2 · log2(1 + 1 − r²) ≈ 15 bits to swap, so the data can tell them apart and the guard rightly says so. The rule
+   now uses r = 0.998 (expected swap cost under 1 bit), with the same pass rule; r = 0.97 is reported, no rule.
+5. *C3's group guard as written misses a one-parameter station-level term that beats five offsets on parameter
+   count.* A group-level term is now also flagged when it doesn't pay on the group means (k means of the remainder
+   without it, coded with and without it: k/2 · log2 of the SSE ratio against naming plus one parameter). "The
+   attribute is named" includes any grammar shape of it.
+6. The neighbour test (C5) takes the best of the full input space and of every pair of inputs, the same maximum in
+   each shuffle, so a pattern in two inputs among twenty isn't washed out.
