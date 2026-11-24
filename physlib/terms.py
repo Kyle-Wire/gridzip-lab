@@ -136,6 +136,36 @@ def flood_terms(ctx):
     return out
 
 
+# ------------------------------------------------------------------------------------------- flood at real marks
+# Protocol 11 (flood wall check). Residual r = model minus mark (m) at USGS high-water marks, rule D's error. Context
+# comes from the run and its inputs only (CHI tools/gate2/walls_terms.py), never from other marks.
+FLOOD_WALL = [
+    Term("volume_scale", "flood", "b · h", "the miss grows with the model's depth: too much or too little water (rain "
+         "total, losses) or a roughness that scales every depth", ("h_model",), lambda c: c["h_model"]),
+    Term("depth_power", "flood", "b · ln(h + 0.1)", "shallow and deep water are off by different factors (a depth-"
+         "dependent roughness or infiltration error)", ("h_model",), lambda c: np.log(c["h_model"] + 0.1)),
+    Term("floodplain_height", "flood", "b · HAND", "the miss grows with height above the local low: the channel carries "
+         "too little (missing bathymetry under lidar water) or too much", ("hand",), lambda c: c["hand"], group="valley"),
+    Term("channel_distance", "flood", "b · ln(1 + d_ch / 10 m)", "the miss changes away from the main flow path "
+         "(overbank exchange, floodplain storage)", ("d_channel",), lambda c: np.log1p(c["d_channel"] / 10.0), group="valley"),
+    Term("edge_loss", "flood", "b · exp(−d_edge / L)", "water leaves or piles up at the model's edge within L of it "
+         "(boundary condition, box too small)", ("d_edge",), lambda c: (lambda L: np.exp(-c["d_edge"] / L)),
+         family=(30.0, 600.0, True), unit="m"),
+    Term("blockage", "flood", "b · building share within 30 m", "dense buildings raise or lower water more than the "
+         "model's walls do (conveyance, storage lost)", ("bld_frac",), lambda c: c["bld_frac"]),
+    Term("ground_slope", "flood", "b · S", "the miss tracks ground slope (steep, fast flow: friction or timing)",
+         ("slope",), lambda c: c["slope"]),
+    Term("velocity_head_wall", "flood", "b · V² / 2g", "marks on upstream faces record run-up the model's level omits",
+         ("V",), lambda c: c["V"] ** 2 / (2 * G0)),
+    Term("datum_kind", "flood", "b · [height-above-ground mark]", "marks read as height above ground and marks with a "
+         "NAVD88 level disagree: a datum or ground-reading error", ("kind_hag",), lambda c: c["kind_hag"]),
+    Term("on_building", "flood", "b · [mark on a building]", "marks on walls differ from open-ground marks (wall "
+         "treatment, local run-up or shelter)", ("at_building",), lambda c: c["at_building"]),
+    Term("town_offset", "flood", "per-town offset", "a whole town is off by one amount (its rain product or inflow)",
+         ("site_onehot",), lambda c: c["site_onehot"], group="offset", physics=False),
+]
+
+
 # ============================================================================================================ ground
 def _span(c): t = np.asarray(c["t"]); return float(t.min()), float(t.max())
 
@@ -178,7 +208,7 @@ GROUND_RATE = [
     Term("distance", "ground", "b · distance to the house", "a smooth gradient across the area", ("dist",), lambda c: c["dist"]),
 ]
 
-DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "ground": GROUND, "ground_rate": GROUND_RATE}
+DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "ground": GROUND, "ground_rate": GROUND_RATE}
 
 
 # ============================================================================================================ v2 (PROTOCOL-7)
