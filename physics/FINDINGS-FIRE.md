@@ -190,7 +190,7 @@ fire's box plus 0.75 degrees, hour by hour over the run window, HRRR analysis at
   the gust share stays a number to fit (A7).
 - Terrain, by the rule: no link between the miss and station height above the model's terrain, so no height
   correction is designed.
-- What the rule does not capture, reported as seen: at sheltered stations HRRR is far too fast (Camp: 20 stations
+- What the rule does not capture, reported as seen: at sheltered stations HRRR is far too fast (Camp: 16 stations
   with a ratio above 2, all with observed means under 3.5 m/s), so one multiplier makes those worse. The analysis
   wind is too smooth: too slow on exposed ridges and gaps, too fast in sheltered canyons and forest. That is a
   terrain-and-roughness pattern, which is what the WindSim terrain run (A15) is for. Direction errors are 10 to
