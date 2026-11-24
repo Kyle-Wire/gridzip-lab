@@ -1,0 +1,1117 @@
+{
+ "TOTAL": {
+  "winner": [
+   "recency_cool",
+   "g:max(0, T\u221236.6) \u00b7 doy",
+   "g:max(0, Td\u221241.9) \u00b7 sun",
+   "g:e^(\u2212sun/0.258) \u00b7 Td",
+   "g:[hour>18] \u00b7 Td"
+  ],
+  "coef": {
+   "level": 0.0024369122478305086,
+   "recency_cool": 0.0023643581214654874,
+   "g:max(0, T\u221236.6) \u00b7 doy": -0.0184394984750871,
+   "g:max(0, Td\u221241.9) \u00b7 sun": 0.0165883120952333,
+   "g:e^(\u2212sun/0.258) \u00b7 Td": 0.020081958425372304,
+   "g:[hour>18] \u00b7 Td": -0.004645584050820179
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.0764796158052059,
+  "sd_before": 0.0146484375,
+  "sd_after": 0.013671875,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "recency_cool",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, T\u221236.6) \u00b7 doy",
+    "named, but can't rule out g:T\u00b2 \u00b7 \u221adoy (+-76.0 bits), g:T\u00b2 \u00b7 ln doy (+-64.4 bits), g:T\u00b2 \u00b7 doy (+-39.5 bits)"
+   ],
+   [
+    "g:max(0, Td\u221241.9) \u00b7 sun",
+    "named, but can't rule out g:Td\u00b2 \u00b7 sun (+-57.8 bits), g:max(0, Tavg24\u221237) \u00b7 sun (+-38.4 bits), g:max(0, Td\u221225.2) \u00b7 sun (+-34.2 bits)"
+   ],
+   [
+    "g:e^(\u2212sun/0.258) \u00b7 Td",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:[hour>18] \u00b7 Td",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "g:e^(\u2212sun/0.258) \u00b7 Td": 0.9999999999999999,
+   "recency": 0.9999999999999999,
+   "g:max(0, Td\u221241.9) \u00b7 sun": 0.9999999999999999,
+   "g:max(0, T\u221236.6) \u00b7 doy": 0.9999999999999999,
+   "g:max(0, T\u221265.6) \u00b7 doy": 0.9999851669668384
+  },
+  "lookalikes": {
+   "recency_cool": [],
+   "g:max(0, T\u221236.6) \u00b7 doy": [
+    {
+     "term": "g:T\u00b2 \u00b7 \u221adoy",
+     "r": 0.979,
+     "extra_bits": -75.98,
+     "grammar": true
+    },
+    {
+     "term": "g:T\u00b2 \u00b7 ln doy",
+     "r": 0.956,
+     "extra_bits": -64.44,
+     "grammar": true
+    },
+    {
+     "term": "g:T\u00b2 \u00b7 doy",
+     "r": 0.972,
+     "extra_bits": -39.5,
+     "grammar": true
+    },
+    {
+     "term": "g:T\u00b2 \u00b7 ln trend",
+     "r": 0.928,
+     "extra_bits": -14.34,
+     "grammar": true
+    },
+    {
+     "term": "g:T\u00b2 \u00b7 \u221atrend",
+     "r": 0.928,
+     "extra_bits": -14.19,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Td\u221241.9) \u00b7 sun": [
+    {
+     "term": "g:Td\u00b2 \u00b7 sun",
+     "r": 0.96,
+     "extra_bits": -57.81,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Tavg24\u221237) \u00b7 sun",
+     "r": 0.915,
+     "extra_bits": -38.35,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Td\u221225.2) \u00b7 sun",
+     "r": 0.96,
+     "extra_bits": -34.19,
+     "grammar": true
+    }
+   ],
+   "g:e^(\u2212sun/0.258) \u00b7 Td": [],
+   "g:[hour>18] \u00b7 Td": []
+  },
+  "null_bits_saved": {
+   "max": 0.015819853238523356,
+   "mean": 0.01476357754638271,
+   "all": [
+    0.015819853238523356,
+    0.015357155774572542,
+    0.014374656853482833,
+    0.014062248577314956,
+    0.014847099345795032,
+    0.014780348918379687,
+    0.014265187206064994,
+    0.013969243644487837,
+    0.01539640435882316
+   ],
+   "p": 0.1
+  },
+  "bootstrap": {
+   "B": 10,
+   "selected": {
+    "g:e^(\u2212doy/275) \u00b7 Td": 0.8,
+    "solar": 0.6,
+    "shape": 0.5,
+    "g:\u221asun \u00b7 trend\u00b2": 0.5,
+    "lag": 0.5,
+    "humidity": 0.3,
+    "g:max(0, Td\u221256.5) \u00b7 sun": 0.3,
+    "g:e^(\u2212sun/0.258) \u00b7 Td": 0.2,
+    "g:max(0, Td\u221241.9) \u00b7 sun": 0.2,
+    "recency": 0.2,
+    "g:max(0, T\u221265.6)": 0.1,
+    "g:max(0, T\u221236.6) \u00b7 doy": 0.1,
+    "g:\u221asun \u00b7 doy": 0.1,
+    "g:max(0, Tmax_prev\u221259.5) \u00b7 Td": 0.1,
+    "g:max(0, hour\u221212) \u00b7 sun": 0.1,
+    "g:T\u00b2 \u00b7 \u221adoy": 0.1,
+    "g:\u221asun \u00b7 trend": 0.1,
+    "g:\u221asun \u00b7 \u221adoy": 0.1,
+    "g:max(0, Tavg24\u221266.6) \u00b7 trend": 0.1
+   },
+   "coef_90": {
+    "recency_cool": [
+     0.0021786176937067833,
+     0.00256558860587874
+    ],
+    "g:max(0, T\u221236.6) \u00b7 doy": [
+     -0.019124534492250628,
+     -0.017855525674134228
+    ],
+    "g:max(0, Td\u221241.9) \u00b7 sun": [
+     0.01599744043162411,
+     0.01757881958492646
+    ],
+    "g:e^(\u2212sun/0.258) \u00b7 Td": [
+     0.01964464602506463,
+     0.021234182903987854
+    ],
+    "g:[hour>18] \u00b7 Td": [
+     -0.005368561554432938,
+     -0.004528556810753476
+    ]
+   }
+  },
+  "transfer_2013": {
+   "formula_bpr": 4.850428704275722,
+   "one_correction_bpr": 4.899089265494443,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 3.2890469101304123,
+  "sec": 839.9
+ },
+ "ME": {
+  "winner": [
+   "recency_cool",
+   "humid_cool",
+   "btm_solar",
+   "g:\u221asun \u00b7 doy",
+   "g:max(0, Td\u221256) \u00b7 sun"
+  ],
+  "coef": {
+   "level": -0.0037766376900760924,
+   "recency_cool": 0.0012663732518076614,
+   "humid_cool": -0.005170982552170138,
+   "btm_solar": 0.010582239713990855,
+   "g:\u221asun \u00b7 doy": -0.01462364534168383,
+   "g:max(0, Td\u221256) \u00b7 sun": 0.009626435371102908
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.0806936823391684,
+  "sd_before": 0.017578125,
+  "sd_after": 0.015625,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "recency_cool",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "humid_cool",
+    "named, but can't rule out g:max(0, T\u221263) \u00b7 Td (+-250.4 bits), g:max(0, T\u221263) \u00b7 Tavg24 (+-221.1 bits), g:max(0, T\u221263) \u00b7 Tmax_prev (+-216.3 bits)"
+   ],
+   [
+    "btm_solar",
+    "named, but can't rule out g:sun\u00b2 \u00b7 trend\u00b2 (+-171.9 bits), g:sun (+-51.8 bits), g:sun \u00b7 ln trend (+-45.2 bits)"
+   ],
+   [
+    "g:\u221asun \u00b7 doy",
+    "named, but can't rule out g:\u221asun \u00b7 ln doy (+-197.4 bits), g:\u221asun \u00b7 \u221adoy (+-149.3 bits)"
+   ],
+   [
+    "g:max(0, Td\u221256) \u00b7 sun",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "humidity": 1.0,
+   "solar": 1.0,
+   "recency": 1.0,
+   "g:\u221asun \u00b7 doy": 1.0,
+   "g:max(0, Td\u221256) \u00b7 sun": 1.0
+  },
+  "lookalikes": {
+   "recency_cool": [],
+   "humid_cool": [
+    {
+     "term": "g:max(0, T\u221263) \u00b7 Td",
+     "r": 0.928,
+     "extra_bits": -250.43,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221263) \u00b7 Tavg24",
+     "r": 0.92,
+     "extra_bits": -221.07,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221263) \u00b7 Tmax_prev",
+     "r": 0.914,
+     "extra_bits": -216.28,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221263)",
+     "r": 0.908,
+     "extra_bits": -197.46,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221263) \u00b7 trend",
+     "r": 0.906,
+     "extra_bits": -194.47,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221263) \u00b7 doy",
+     "r": 0.895,
+     "extra_bits": -190.42,
+     "grammar": true
+    }
+   ],
+   "btm_solar": [
+    {
+     "term": "g:sun\u00b2 \u00b7 trend\u00b2",
+     "r": 0.925,
+     "extra_bits": -171.92,
+     "grammar": true
+    },
+    {
+     "term": "g:sun",
+     "r": 0.921,
+     "extra_bits": -51.76,
+     "grammar": true
+    },
+    {
+     "term": "g:sun \u00b7 ln trend",
+     "r": 0.935,
+     "extra_bits": -45.18,
+     "grammar": true
+    },
+    {
+     "term": "g:sun \u00b7 \u221atrend",
+     "r": 0.935,
+     "extra_bits": -45.15,
+     "grammar": true
+    },
+    {
+     "term": "g:sun \u00b7 trend",
+     "r": 0.948,
+     "extra_bits": -43.35,
+     "grammar": true
+    },
+    {
+     "term": "g:sun \u00b7 trend\u00b2",
+     "r": 0.969,
+     "extra_bits": -37.37,
+     "grammar": true
+    }
+   ],
+   "g:\u221asun \u00b7 doy": [
+    {
+     "term": "g:\u221asun \u00b7 ln doy",
+     "r": 0.915,
+     "extra_bits": -197.39,
+     "grammar": true
+    },
+    {
+     "term": "g:\u221asun \u00b7 \u221adoy",
+     "r": 0.972,
+     "extra_bits": -149.28,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Td\u221256) \u00b7 sun": []
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.105679632753384,
+   "one_correction_bpr": 5.152196375151293,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 3.712669110152944,
+  "sec": 141.9
+ },
+ "NH": {
+  "winner": [
+   "lag_gap",
+   "humid_cool",
+   "btm_solar",
+   "g:max(0, Tavg24\u221265.2) \u00b7 Td",
+   "g:e^(\u2212sun/0.258) \u00b7 Tmax_prev"
+  ],
+  "coef": {
+   "level": 0.0143474798622835,
+   "lag_gap": 0.0005516734797388354,
+   "humid_cool": -0.005628186005117412,
+   "btm_solar": 0.008283707900605291,
+   "g:max(0, Tavg24\u221265.2) \u00b7 Td": 0.014764147372942231,
+   "g:e^(\u2212sun/0.258) \u00b7 Tmax_prev": 0.007233068024071106
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.07617238495664846,
+  "sd_before": 0.01953125,
+  "sd_after": 0.017578125,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "lag_gap",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "humid_cool",
+    "named, but can't rule out g:max(0, T\u221264) \u00b7 doy (+-389.0 bits), g:max(0, T\u221264) \u00b7 Tavg24 (+-351.7 bits), g:max(0, T\u221264) (+-348.0 bits)"
+   ],
+   [
+    "btm_solar",
+    "named, but can't rule out g:sun\u00b2 \u00b7 trend\u00b2 (+-50.5 bits)"
+   ],
+   [
+    "g:max(0, Tavg24\u221265.2) \u00b7 Td",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:e^(\u2212sun/0.258) \u00b7 Tmax_prev",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "lag": 1.0,
+   "humidity": 1.0,
+   "solar": 1.0,
+   "g:max(0, Tavg24\u221265.2) \u00b7 Td": 0.999999999702408,
+   "g:e^(\u2212sun/0.258) \u00b7 Tmax_prev": 0.9999999507299184
+  },
+  "lookalikes": {
+   "lag_gap": [],
+   "humid_cool": [
+    {
+     "term": "g:max(0, T\u221264) \u00b7 doy",
+     "r": 0.937,
+     "extra_bits": -388.98,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264) \u00b7 Tavg24",
+     "r": 0.95,
+     "extra_bits": -351.69,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264)",
+     "r": 0.941,
+     "extra_bits": -348.01,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264) \u00b7 Tmax_prev",
+     "r": 0.947,
+     "extra_bits": -347.48,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264) \u00b7 Td",
+     "r": 0.965,
+     "extra_bits": -345.95,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264) \u00b7 trend",
+     "r": 0.938,
+     "extra_bits": -340.62,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221264) \u00b7 hour",
+     "r": 0.912,
+     "extra_bits": -147.41,
+     "grammar": true
+    }
+   ],
+   "btm_solar": [
+    {
+     "term": "g:sun\u00b2 \u00b7 trend\u00b2",
+     "r": 0.925,
+     "extra_bits": -50.48,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Tavg24\u221265.2) \u00b7 Td": [],
+   "g:e^(\u2212sun/0.258) \u00b7 Tmax_prev": []
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.24444809828874,
+   "one_correction_bpr": 5.271011996996556,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 3.8256741910428618,
+  "sec": 147.8
+ },
+ "VT": {
+  "winner": [
+   "recency_cool",
+   "g:\u221asun \u00b7 doy",
+   "g:max(0, T\u221250) \u00b7 trend",
+   "g:max(0, Td\u221240) \u00b7 Tavg24",
+   "g:[hour>18] \u00b7 Tavg24"
+  ],
+  "coef": {
+   "level": -0.005675718250627344,
+   "recency_cool": 0.0014238144886018743,
+   "g:\u221asun \u00b7 doy": -0.010819673943611307,
+   "g:max(0, T\u221250) \u00b7 trend": -0.020997681767975156,
+   "g:max(0, Td\u221240) \u00b7 Tavg24": 0.019547372920050023,
+   "g:[hour>18] \u00b7 Tavg24": -0.0030988761409844784
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.15039781532174423,
+  "sd_before": 0.015625,
+  "sd_after": 0.013671875,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "recency_cool",
+    "named, but can't rule out g:max(0, Tavg24\u221266.3) \u00b7 trend (+1.7 bits), g:max(0, Tavg24\u221266.3) \u00b7 doy (+2.9 bits)"
+   ],
+   [
+    "g:\u221asun \u00b7 doy",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, T\u221250) \u00b7 trend",
+    "named, but can't rule out g:max(0, T\u221250) \u00b7 Tavg24 (+-121.0 bits), g:max(0, T\u221250) \u00b7 Tmax_prev (+-117.5 bits), g:max(0, T\u221250) \u00b7 Td (+-104.6 bits)"
+   ],
+   [
+    "g:max(0, Td\u221240) \u00b7 Tavg24",
+    "named, but can't rule out g:Td\u00b2 \u00b7 Tavg24\u00b2 (+-23.9 bits), g:max(0, Td\u221240) (+-23.9 bits), g:max(0, Td\u221240) \u00b7 trend (+-15.1 bits)"
+   ],
+   [
+    "g:[hour>18] \u00b7 Tavg24",
+    "named, but can't rule out g:[hour>18] \u00b7 Td (+-3.6 bits), g:[hour>18] \u00b7 T (+2.0 bits)"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "g:\u221asun \u00b7 doy": 1.0000000000000004,
+   "g:max(0, Td\u221240) \u00b7 Tavg24": 1.0000000000000004,
+   "g:max(0, T\u221250) \u00b7 doy": 0.999999681713428,
+   "g:[hour>18] \u00b7 Td": 0.9970391811449372,
+   "g:max(0, doy\u221292) \u00b7 hour": 0.8876283606863541,
+   "g:[doy>183] \u00b7 hour": 0.1094098409273451
+  },
+  "lookalikes": {
+   "recency_cool": [
+    {
+     "term": "g:max(0, Tavg24\u221266.3) \u00b7 trend",
+     "r": 0.992,
+     "extra_bits": 1.72,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Tavg24\u221266.3) \u00b7 doy",
+     "r": 0.986,
+     "extra_bits": 2.89,
+     "grammar": true
+    }
+   ],
+   "g:\u221asun \u00b7 doy": [],
+   "g:max(0, T\u221250) \u00b7 trend": [
+    {
+     "term": "g:max(0, T\u221250) \u00b7 Tavg24",
+     "r": 0.991,
+     "extra_bits": -121.05,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221250) \u00b7 Tmax_prev",
+     "r": 0.991,
+     "extra_bits": -117.53,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221250) \u00b7 Td",
+     "r": 0.983,
+     "extra_bits": -104.57,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Td\u221240) \u00b7 Tavg24": [
+    {
+     "term": "g:Td\u00b2 \u00b7 Tavg24\u00b2",
+     "r": 0.983,
+     "extra_bits": -23.95,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Td\u221240)",
+     "r": 0.993,
+     "extra_bits": -23.91,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Td\u221240) \u00b7 trend",
+     "r": 0.991,
+     "extra_bits": -15.1,
+     "grammar": true
+    }
+   ],
+   "g:[hour>18] \u00b7 Tavg24": [
+    {
+     "term": "g:[hour>18] \u00b7 Td",
+     "r": 0.982,
+     "extra_bits": -3.64,
+     "grammar": true
+    },
+    {
+     "term": "g:[hour>18] \u00b7 T",
+     "r": 0.993,
+     "extra_bits": 2.0,
+     "grammar": true
+    }
+   ]
+  },
+  "transfer_2013": {
+   "formula_bpr": 4.986749907550752,
+   "one_correction_bpr": 5.130907487382267,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 3.3941815579914616,
+  "sec": 138.1
+ },
+ "CT": {
+  "winner": [
+   "g:max(0, T\u221267)",
+   "g:Td\u00b2 \u00b7 sun",
+   "g:\u221asun \u00b7 doy\u00b2",
+   "g:max(0, Tavg24\u221268.2) \u00b7 trend",
+   "g:e^(\u2212hour/6) \u00b7 sun"
+  ],
+  "coef": {
+   "level": 0.011444864572700598,
+   "g:max(0, T\u221267)": -0.025994476506443084,
+   "g:Td\u00b2 \u00b7 sun": 0.026514011791065002,
+   "g:\u221asun \u00b7 doy\u00b2": -0.010131024046434199,
+   "g:max(0, Tavg24\u221268.2) \u00b7 trend": 0.026121773200613124,
+   "g:e^(\u2212hour/6) \u00b7 sun": -0.01712484383366904
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.1601931182330789,
+  "sd_before": 0.021484375,
+  "sd_after": 0.01953125,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "g:max(0, T\u221267)",
+    "named, but can't rule out g:max(0, T\u221267) \u00b7 doy (+-29.1 bits)"
+   ],
+   [
+    "g:Td\u00b2 \u00b7 sun",
+    "named, but can't rule out g:Tavg24\u00b2 \u00b7 sun (+-104.7 bits), g:Td \u00b7 sun (+-89.4 bits), g:max(0, Tavg24\u221237.8) \u00b7 sun (+-21.0 bits)"
+   ],
+   [
+    "g:\u221asun \u00b7 doy\u00b2",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, Tavg24\u221268.2) \u00b7 trend",
+    "named, but can't rule out g:max(0, Tavg24\u221268.2) (+-2.5 bits), g:max(0, Tavg24\u221268.2) \u00b7 doy (+2.9 bits)"
+   ],
+   [
+    "g:e^(\u2212hour/6) \u00b7 sun",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "g:max(0, Tavg24\u221268.2) \u00b7 trend": 1.0,
+   "g:\u221asun \u00b7 doy\u00b2": 1.0,
+   "g:max(0, T\u221267)": 1.0,
+   "g:Td\u00b2 \u00b7 sun": 1.0,
+   "g:e^(\u2212hour/6) \u00b7 sun": 1.0
+  },
+  "lookalikes": {
+   "g:max(0, T\u221267)": [
+    {
+     "term": "g:max(0, T\u221267) \u00b7 doy",
+     "r": 0.984,
+     "extra_bits": -29.11,
+     "grammar": true
+    }
+   ],
+   "g:Td\u00b2 \u00b7 sun": [
+    {
+     "term": "g:Tavg24\u00b2 \u00b7 sun",
+     "r": 0.961,
+     "extra_bits": -104.7,
+     "grammar": true
+    },
+    {
+     "term": "g:Td \u00b7 sun",
+     "r": 0.979,
+     "extra_bits": -89.38,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Tavg24\u221237.8) \u00b7 sun",
+     "r": 0.96,
+     "extra_bits": -20.99,
+     "grammar": true
+    }
+   ],
+   "g:\u221asun \u00b7 doy\u00b2": [],
+   "g:max(0, Tavg24\u221268.2) \u00b7 trend": [
+    {
+     "term": "g:max(0, Tavg24\u221268.2)",
+     "r": 0.998,
+     "extra_bits": -2.47,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Tavg24\u221268.2) \u00b7 doy",
+     "r": 0.99,
+     "extra_bits": 2.89,
+     "grammar": true
+    }
+   ],
+   "g:e^(\u2212hour/6) \u00b7 sun": []
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.3617520947156425,
+   "one_correction_bpr": 5.435849848267189,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 4.452658279232537,
+  "sec": 135.9
+ },
+ "RI": {
+  "winner": [
+   "recency_cool",
+   "trend_curve",
+   "g:\u221asun \u00b7 doy",
+   "g:max(0, T\u221267) \u00b7 doy",
+   "g:max(0, Td\u221244) \u00b7 sun"
+  ],
+  "coef": {
+   "level": 0.007426866832900436,
+   "recency_cool": 0.005220884869197395,
+   "trend_curve": 0.0006789568274742896,
+   "g:\u221asun \u00b7 doy": -0.015144526171006787,
+   "g:max(0, T\u221267) \u00b7 doy": -0.016660013395270366,
+   "g:max(0, Td\u221244) \u00b7 sun": 0.01777126647598549
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.14633739767001686,
+  "sd_before": 0.01953125,
+  "sd_after": 0.017578125,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "recency_cool",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "trend_curve",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:\u221asun \u00b7 doy",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, T\u221267) \u00b7 doy",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, Td\u221244) \u00b7 sun",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "g:max(0, Td\u221244) \u00b7 sun": 1.0,
+   "g:max(0, Tavg24\u221254) \u00b7 Td": 0.9937396276804195,
+   "solar": 0.9937396276804195,
+   "g:\u221asun \u00b7 \u221adoy": 0.9937396276804195,
+   "g:max(0, T\u221254) \u00b7 doy": 0.9937396276804195
+  },
+  "lookalikes": {
+   "recency_cool": [],
+   "trend_curve": [],
+   "g:\u221asun \u00b7 doy": [],
+   "g:max(0, T\u221267) \u00b7 doy": [],
+   "g:max(0, Td\u221244) \u00b7 sun": []
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.284122203790787,
+   "one_correction_bpr": 5.364793715622418,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 4.017733261340556,
+  "sec": 154.2
+ },
+ "SEMASS": {
+  "winner": [
+   "humid_cool",
+   "btm_solar",
+   "g:\u221asun \u00b7 \u221adoy",
+   "g:max(0, Td\u221244) \u00b7 sun",
+   "g:max(0, Tavg24\u221254) \u00b7 Td"
+  ],
+  "coef": {
+   "level": 0.017082534358905294,
+   "humid_cool": -0.006033551344950264,
+   "btm_solar": 0.011873574074913261,
+   "g:\u221asun \u00b7 \u221adoy": -0.023145426560697784,
+   "g:max(0, Td\u221244) \u00b7 sun": 0.01703400401996024,
+   "g:max(0, Tavg24\u221254) \u00b7 Td": 0.020196114167309643
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.1250795015180861,
+  "sd_before": 0.021484375,
+  "sd_after": 0.01953125,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "humid_cool",
+    "named, but can't rule out g:max(0, T\u221254) \u00b7 Td (+-1058.3 bits), g:max(0, T\u221267) \u00b7 Td (+-846.5 bits), g:max(0, T\u221267) \u00b7 doy (+-792.7 bits)"
+   ],
+   [
+    "btm_solar",
+    "named, but can't rule out g:sun \u00b7 trend\u00b2 (+-6.4 bits)"
+   ],
+   [
+    "g:\u221asun \u00b7 \u221adoy",
+    "named, but can't rule out g:\u221asun \u00b7 ln doy (+-0.9 bits)"
+   ],
+   [
+    "g:max(0, Td\u221244) \u00b7 sun",
+    "named, but can't rule out g:Td\u00b2 \u00b7 sun (+-31.0 bits), g:Td \u00b7 sun (+-8.4 bits), g:max(0, Td\u221227) \u00b7 sun (+-1.4 bits)"
+   ],
+   [
+    "g:max(0, Tavg24\u221254) \u00b7 Td",
+    "named, but can't rule out recency_cool (+-18.9 bits), g:max(0, Tavg24\u221254) \u00b7 trend (+0.5 bits), g:max(0, Tavg24\u221254) \u00b7 Tmax_prev (+2.3 bits)"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "humidity": 1.0,
+   "g:max(0, Tavg24\u221254) \u00b7 Td": 1.0,
+   "solar": 1.0,
+   "g:\u221asun \u00b7 \u221adoy": 1.0,
+   "g:max(0, Td\u221244) \u00b7 sun": 1.0
+  },
+  "lookalikes": {
+   "humid_cool": [
+    {
+     "term": "g:max(0, T\u221254) \u00b7 Td",
+     "r": 0.853,
+     "extra_bits": -1058.34,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Td",
+     "r": 0.981,
+     "extra_bits": -846.47,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 doy",
+     "r": 0.957,
+     "extra_bits": -792.72,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267)",
+     "r": 0.962,
+     "extra_bits": -736.91,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Tavg24",
+     "r": 0.964,
+     "extra_bits": -736.24,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Tmax_prev",
+     "r": 0.962,
+     "extra_bits": -734.07,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 trend",
+     "r": 0.961,
+     "extra_bits": -121.19,
+     "grammar": true
+    }
+   ],
+   "btm_solar": [
+    {
+     "term": "g:sun \u00b7 trend\u00b2",
+     "r": 0.969,
+     "extra_bits": -6.44,
+     "grammar": true
+    }
+   ],
+   "g:\u221asun \u00b7 \u221adoy": [
+    {
+     "term": "g:\u221asun \u00b7 ln doy",
+     "r": 0.983,
+     "extra_bits": -0.95,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Td\u221244) \u00b7 sun": [
+    {
+     "term": "g:Td\u00b2 \u00b7 sun",
+     "r": 0.951,
+     "extra_bits": -31.02,
+     "grammar": true
+    },
+    {
+     "term": "g:Td \u00b7 sun",
+     "r": 0.875,
+     "extra_bits": -8.39,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Td\u221227) \u00b7 sun",
+     "r": 0.953,
+     "extra_bits": -1.38,
+     "grammar": true
+    }
+   ],
+   "g:max(0, Tavg24\u221254) \u00b7 Td": [
+    {
+     "term": "recency_cool",
+     "r": 0.932,
+     "extra_bits": -18.87,
+     "grammar": false
+    },
+    {
+     "term": "g:max(0, Tavg24\u221254) \u00b7 trend",
+     "r": 0.988,
+     "extra_bits": 0.46,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, Tavg24\u221254) \u00b7 Tmax_prev",
+     "r": 0.99,
+     "extra_bits": 2.31,
+     "grammar": true
+    }
+   ]
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.449470653928668,
+   "one_correction_bpr": 5.440104051776926,
+   "transfers": false
+  },
+  "vanilla_mape_2011_13": 4.307290612311499,
+  "sec": 139.8
+ },
+ "WCMASS": {
+  "winner": [
+   "g:Td\u00b2 \u00b7 sun",
+   "g:\u221asun \u00b7 \u221adoy",
+   "g:max(0, T\u221265) \u00b7 Tavg24",
+   "g:max(0, Tavg24\u221265.8) \u00b7 Td",
+   "g:max(0, hour\u221212) \u00b7 sun"
+  ],
+  "coef": {
+   "level": 0.004760633051522011,
+   "g:Td\u00b2 \u00b7 sun": 0.019245084990529748,
+   "g:\u221asun \u00b7 \u221adoy": -0.022830613207232404,
+   "g:max(0, T\u221265) \u00b7 Tavg24": -0.016539204193686232,
+   "g:max(0, Tavg24\u221265.8) \u00b7 Td": 0.01905804854256692,
+   "g:max(0, hour\u221212) \u00b7 sun": 0.005535987856076946
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.18947938725627012,
+  "sd_before": 0.017578125,
+  "sd_after": 0.015625,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "g:Td\u00b2 \u00b7 sun",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:\u221asun \u00b7 \u221adoy",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, T\u221265) \u00b7 Tavg24",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, Tavg24\u221265.8) \u00b7 Td",
+    "named, but can't rule out recency_cool (+-37.4 bits), g:max(0, Tavg24\u221265.8) \u00b7 Tmax_prev (+-15.5 bits)"
+   ],
+   [
+    "g:max(0, hour\u221212) \u00b7 sun",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "g:max(0, Tavg24\u221265.8) \u00b7 Td": 1.0,
+   "g:\u221asun \u00b7 \u221adoy": 1.0,
+   "g:Td\u00b2 \u00b7 sun": 1.0,
+   "g:max(0, hour\u221212) \u00b7 sun": 1.0,
+   "g:max(0, T\u221265) \u00b7 Tavg24": 0.9788809528746086,
+   "g:max(0, T\u221265) \u00b7 Tmax_prev": 0.021097144615711754
+  },
+  "lookalikes": {
+   "g:Td\u00b2 \u00b7 sun": [],
+   "g:\u221asun \u00b7 \u221adoy": [],
+   "g:max(0, T\u221265) \u00b7 Tavg24": [],
+   "g:max(0, Tavg24\u221265.8) \u00b7 Td": [
+    {
+     "term": "recency_cool",
+     "r": 0.991,
+     "extra_bits": -37.37,
+     "grammar": false
+    },
+    {
+     "term": "g:max(0, Tavg24\u221265.8) \u00b7 Tmax_prev",
+     "r": 0.994,
+     "extra_bits": -15.48,
+     "grammar": true
+    }
+   ],
+   "g:max(0, hour\u221212) \u00b7 sun": []
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.076885047783366,
+   "one_correction_bpr": 5.158610782192244,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 3.6996015867956893,
+  "sec": 144.2
+ },
+ "NEMASSBOST": {
+  "winner": [
+   "humid_cool",
+   "lighting",
+   "g:max(0, T\u221240) \u00b7 doy",
+   "g:max(0, Td\u221243) \u00b7 Tavg24",
+   "g:max(0, Tmax_prev\u221261) \u00b7 sun"
+  ],
+  "coef": {
+   "level": -0.01800977182224551,
+   "humid_cool": -0.004075838806843419,
+   "lighting": 0.010486962674376587,
+   "g:max(0, T\u221240) \u00b7 doy": -0.02417125698217208,
+   "g:max(0, Td\u221243) \u00b7 Tavg24": 0.03456987504994898,
+   "g:max(0, Tmax_prev\u221261) \u00b7 sun": 0.008651869152886302
+  },
+  "alpha": {},
+  "bits_saved_per_reading": 0.199382919724167,
+  "sd_before": 0.017578125,
+  "sd_after": 0.0146484375,
+  "transfers": null,
+  "holdout": [],
+  "verdict": [
+   [
+    "humid_cool",
+    "named, but can't rule out g:max(0, T\u221267) \u00b7 doy (+-184.8 bits), g:max(0, T\u221267) (+-177.4 bits), g:max(0, T\u221267) \u00b7 Td (+-162.4 bits)"
+   ],
+   [
+    "lighting",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, T\u221240) \u00b7 doy",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, Td\u221243) \u00b7 Tavg24",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, Tmax_prev\u221261) \u00b7 sun",
+    "named, but can't rule out g:max(0, Tavg24\u221254.3) \u00b7 sun (+-27.5 bits)"
+   ]
+  ],
+  "n": 17536,
+  "inclusion": {
+   "light": 0.9999999999999999,
+   "g:max(0, Td\u221243) \u00b7 Tavg24": 0.9999999999999999,
+   "humidity": 0.9999999997713452,
+   "g:max(0, T\u221240) \u00b7 doy": 0.9999999997713452,
+   "g:max(0, Tmax_prev\u221261) \u00b7 sun": 0.9999999974412028
+  },
+  "lookalikes": {
+   "humid_cool": [
+    {
+     "term": "g:max(0, T\u221267) \u00b7 doy",
+     "r": 0.954,
+     "extra_bits": -184.76,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267)",
+     "r": 0.96,
+     "extra_bits": -177.44,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Td",
+     "r": 0.98,
+     "extra_bits": -162.42,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 trend",
+     "r": 0.958,
+     "extra_bits": -160.65,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Tmax_prev",
+     "r": 0.958,
+     "extra_bits": -142.36,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221267) \u00b7 Tavg24",
+     "r": 0.96,
+     "extra_bits": -134.77,
+     "grammar": true
+    },
+    {
+     "term": "g:max(0, T\u221254) \u00b7 Td",
+     "r": 0.853,
+     "extra_bits": -100.2,
+     "grammar": true
+    }
+   ],
+   "lighting": [],
+   "g:max(0, T\u221240) \u00b7 doy": [],
+   "g:max(0, Td\u221243) \u00b7 Tavg24": [],
+   "g:max(0, Tmax_prev\u221261) \u00b7 sun": [
+    {
+     "term": "g:max(0, Tavg24\u221254.3) \u00b7 sun",
+     "r": 0.975,
+     "extra_bits": -27.5,
+     "grammar": true
+    }
+   ]
+  },
+  "transfer_2013": {
+   "formula_bpr": 5.032211941204002,
+   "one_correction_bpr": 5.050255629691308,
+   "transfers": true
+  },
+  "vanilla_mape_2011_13": 4.063653452146616,
+  "sec": 111.3
+ }
+}

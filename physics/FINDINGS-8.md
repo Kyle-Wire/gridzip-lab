@@ -1,82 +1,51 @@
-# Findings 8: can the LBM's own near-ground flow name its lateral Case C pattern? (24 Nov 2026)
+# Findings 8: the physics compressor on electric grid load (ISO New England, 24 Nov 2026)
 
-Protocol: `PROTOCOL-8.md` (a174b06, written before the field was read). Script: `physics/lateral_fields.py`, results
-`results/physics/lateral_fields.json`, figures `physics/figures8.py`. Data: WindSim F3 step 5 (Case C 1D, D/32, walls off,
-z0 0.0003, L 0.5 D, Cs 0.12, run on THE-COW 24 Nov, 3.6 h): `results/physics/f3s5_fields.npz` and the run's 120 points.
+Protocol: `PROTOCOL-8.md` (pushed at 5f2a5b5 before any demand was fitted; amendment A1 after parts A to C were read).
+Code `physlib/gridload.py`, figures `physlib/figures8.py` -> `physics/figures/gridload/`, results `results/gridload/`.
+Data: GEFCom2017 ISO-NE hourly demand, dry bulb, dew point, holidays (8 zones + total), not committed.
 
-## The answer in one line
-No. The lateral pattern comes back in this run, and the model's vertical flow at 5 cm adds to it. But no flow word
-replaces distance from the centreline, and none of them touches the ×1.29 level. Inside the array the model's lowest
-10 cm carries only about two thirds of the upstream air, with net flow upward at 10 cm. So the excess is not extra air
-fed down into the lower layer.
+**Verdict: pass (A, A-null, B, C1, C2, E on the total).** The engine is trustworthy on load data and fixes a
+standard model by itself. It does not beat an expert or machine learning on its own. As an auditor of strong
+models it helps the system total on fresh months, but region by region the help is mixed.
 
-## Synthetic check (passed)
-- No planted term: no field term named in 10 of 10 (rule: 9 of 10).
-- Power, the smallest effect named in 8 of 10: 0.06 sd (ln) for `side_flux` and 0.08 for `street_flux`. "Doesn't pay"
-  below means smaller than about 6 to 8 % across the points.
+## A. Planted laws on real weather
+| Planted | Named (rule 8/10) | Extra terms |
+| --- | --- | --- |
+| P1 recency, P2 humid heat, P3 holiday, P4 rooftop solar, P5 three at once, P6 grammar-only shape | 10/10 each | 0 |
+| Pure AR(1) noise (rule 19/20 silent) | 20/20 silent | 0 |
 
-## Readings
-![points](figures/lateral_01_points.png)
+## B. What Hong's vanilla benchmark misses (errors 2011-12, about 17,500 hours per series)
+Every series named five terms, all transferring to 2013 except SE Mass. Total: recency (T̄24 hinge) plus humidity
+x sun, temperature x season and evening humidity shapes; 0.076 bits per hour saved against 0.016 at most in 9
+shuffled-data searches (p = 0.1, the floor for 9 shuffles); residual sd 0.0146 -> 0.0137. Bootstrap: individual
+shapes are unstable (the top one is chosen in 80 % of resamples, recency in 20 %), so read the inputs (yesterday's
+heat, dew point, sun, season), not the exact formula. Named across the 9 series: recency or lag in 9, humidity (dew point) in 9,
+sun or daylight in 9, holidays in 0.
 
-| | Run A: FINDINGS-7 inputs | Run B: + flow terms |
-|---|---|---|
-| Formula | level + step on the model's own speed-up | same + vertical flow at 5 cm × lateral |
-| Error sd (ln), from 0.125 | 0.102 | **0.078** (tunnel repeat noise ≈ 0.05) |
-| Inclusion of lateral | 0.81 | 0.98 |
-| Quadrant folds that transfer | 4 of 4 (and upstream → downstream) | 4 of 4 (and upstream → downstream) |
-| Null search p | 0.05 | 0.05 |
-| Structure left (neighbour test) | fetch × lateral, p 0.01 | vertical flow × street flux, p 0.01 |
+## C. Head-to-head on sealed 2014-2016 (MAPE %, all hours / top 1 % hours)
+| Series | M0 vanilla | M1 vanilla + found | M2 expert | M3 boosted trees |
+| --- | --- | --- | --- | --- |
+| TOTAL | 3.88 / 4.25 | 3.28 / 2.39 | 3.07 / 2.21 | 3.18 / 2.16 |
+C1: M1 < M0 in TOTAL and 8 of 8 zones (ME and CT by under 0.05). C2: M1 closes 74 % of the expert gain on TOTAL
+(5 added columns against the expert's 372). Per zone the share ranges from 1 % (CT) to 92 % (VT). Boosted trees beat
+M1 in 8 of 9 series (not SE Mass.). Full table in `results/gridload/C_sealed.json`.
 
-- **Q1, does the lateral pattern recur? Yes**, by the protocol's rule (inclusion 0.81 ≥ 0.8, 4 of 4 folds). It is
-  weak on resampling, though: only 47 % of bootstrap winners use lateral in run A.
-- **Q2, does a flow term name it? No.**
-  - The vertical flow at 5 cm (`downwash`, w / U_app, positive upward) enters with inclusion 0.99 and transfers on all
-    folds, but lateral stays at 0.98. By the protocol, that is "adds to", not "names".
-  - The bootstrap share was counted per input, the way protocol 7 A1 counts inclusion: 67 % of resamples use the
-    vertical flow in some shape. That choice was made after seeing the per-term share, which is spread over several
-    look-alike shapes with a top share of 17 %. Under the strict per-term reading, no flow term pays at all. Either way,
-    the answer to Q2 is no.
-  - The form isn't pinned. `downwash · lateral` can't be told from `max(0, downwash − 0.01) · lateral` or
-    `downwash · √lateral` (within 2 to 3 bits). Its sign: away from the centreline, where the model's air rises, the
-    model reads less high.
-- **Flow turning, reversed flow, outward flow, air through the street:** none paid. On their own, local turbulence
-  (13 bits) and flow turning (8 bits) save something, but the step on speed-up takes their place.
+## D/E (A1). Auditing the strong models; fresh test January to April 2017
+Expert errors still carry named structure: total 0.095 bits/hour (null max 0.016) with recency, 3-hour lag, dew
+point and rooftop solar. Boosted-tree errors carry almost none on the total (0.001 bits/hour, below the shuffled
+maximum 0.069, so this is a null audit); zones save 0.003 to 0.028.
+| Fresh Jan-Apr 2017, MAPE % | M2 | M2 + audit | M3 | M3 + audit |
+| --- | --- | --- | --- | --- |
+| TOTAL | 4.02 | 3.70 | 5.87 | 5.48 |
+| Better in (of 9 series) | | 3 | | 7 |
+Rule E on the total passes. The expert's additions hurt in 6 zones, worst SE Mass. (+2.2 points), whose audit had
+failed the 2013 transfer; the one boosted-tree audit that failed transfer (Boston) is also one of its two losses.
+Post hoc on spent 2014-16: M2 + audit better in 4 of 9, M3 + audit in 8 of 9. No control was run for "any extra
+features help boosted trees", so part of M3's gain may not be specific to these terms. The fresh window is 2,876
+hours of winter and spring only.
 
-![terms and ledger](figures/lateral_02_terms_ledger.png)
-
-- **Level ledger (described, not gated):** this is the air flowing through the whole section below 10 cm, divided by
-  the same flow upstream.
-
-  | x (m) | Q / Q₀ | where |
-  |---|---|---|
-  | −0.6 | 0.91 | upstream |
-  | −0.4 | 0.81 | |
-  | −0.2 | 0.65 | |
-  | 0 | 0.69 | |
-  | +0.2 | 0.60 | |
-  | +0.4 | 0.67 | |
-  | +0.6 | 0.68 | behind |
-
-  The plan-mean vertical flow at 10 cm over the array is +3.8 % of the approach speed, upward. In the model, air
-  leaves the lower half of the canopy; none comes down into it. The tunnel's flux isn't known, so this says how the
-  model's flow is arranged, not that the tunnel's differs.
-
-## What this means for the next fix
-- Every point-level word tried so far now accounts for about 0.05 of scatter in ln. The ×1.29 is a level, and the
-  near-ground flow doesn't explain it. With FINDINGS-5 (≥ 74 % made inside the array) and D1 (flow above the array
-  10–13 % fast), the open suspect is what happens at and above roof height. That is how the model's shear layer over
-  the blocks sets the speed the streets see. This field stops at 10 cm, half the block height.
-- **Next run:** the same F3 setting with `--keep-fields 0.45`, so the field reaches above the tall centre block.
-  Then a ledger of momentum flux at roof height (u'w' cannot be read without covariances; `write_fields` would need
-  uw, vw and uv sums added, which is a WindSim change under its own protocol).
-- The domain-blockage test (FINDINGS-5 second suspect, ≤ 22 %) stays open and is cheap to add to the same run:
-  widen the section so blockage falls under 2 %.
-
-## Limits
-- One run, one layout, 120 points; the folds are spatial, and the mirror fold makes the quadrants share field
-  values pairwise.
-- `ti_local` is the isotropic form, because covariances aren't stored.
-- The flow terms come from the same model whose error they explain.
-- The street flux for cross streets uses the outward v flux. That is a reading of "air through the street" made while
-  writing the script, before any value was read.
-- Nothing here changes WindSim's score; a fix goes through WindSim's protocol and a held-out case.
+## Disclosures
+- Two crashes before any outcome was printed (null-search block format; NaN lags in the expert design) and one in E
+  (a grammar term 1/trend is infinite at the start of the fit years; such terms are dropped, NH lost one term).
+- Hindcast with actual weather; not comparable with operators' day-ahead accuracy. Data end in April 2017, before
+  data-centre growth and most rooftop solar. The expert model is mine, from memory of the literature.

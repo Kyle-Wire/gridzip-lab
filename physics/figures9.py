@@ -1,4 +1,4 @@
-"""Figures for protocol 8 (physics/FINDINGS-8.md): python physics/figures8.py"""
+"""Figures for protocol 9 (physics/FINDINGS-9.md): python physics/figures9.py"""
 import json
 from pathlib import Path
 import numpy as np

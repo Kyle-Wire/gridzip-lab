@@ -1,65 +1,79 @@
-# Protocol 8: name the LBM's lateral pattern on AIJ Case C from the model's own near-ground flow (written 24 Nov 2026, before the field was read)
+# Protocol 8: the physics compressor on electric grid load (written 24 Nov 2026, before any demand value is fitted)
 
-**Why.** FINDINGS-7 (D) found that the LBM's Case C error depends on distance from the centreline (`lateral`),
-interacting with distance into the array, with inclusion odds ≈ 1. The shape was unstable, and the library has no
-physics word for it. FINDINGS-5 left an unnamed point pattern that repeats from run to run (r 0.91). Protocol 1 and
-FINDINGS-5 named the missing words: flow direction, recirculation, local turbulence. WindSim's F3 step 5 run
-(`docs/validation.md`, "F3 step 5") wrote the model's mean field below 0.1 m. This protocol turns that field into
-terms and asks whether one of them takes the place of `lateral`.
+Ask (Kyle, 24 Nov, via the coordinator): could the compressor work for grid loads, and could it beat what grid
+operators already have? Research only; nothing here goes on the website. Runs in the cloud container, not on THE-COW.
 
-**Seen before this was written:**
-- the run's headline numbers: hit rate 42.5 %, p50 1.296, r 0.937, overall level 1.289;
-- the probe-check verdict (probe factor 16 % of the level, height slope 8 %, "ruled out");
-- the file name and size of `fields_1D.npz`.
+**Question.** A load forecaster's errors are not noise: they follow weather, calendar and behaviour the model leaves
+out. Can physlib v2 (PROTOCOL-7 engine, unchanged) look at a standard load model's errors, name what is missing in
+plain physics, stay quiet when nothing is, and does adding what it names actually improve the forecast on years it
+never saw, against an expert's hand-built model and a machine-learning baseline?
 
-No value of the field, and no per-point model value of this run, has been read.
+**Data.** GEFCom2017 "defined data" track: ISO New England hourly demand (MW), dry-bulb and dew-point temperature (°F)
+and a holiday flag for 8 load zones (ME, NH, VT, CT, RI, SEMASS, WCMASS, NEMASSBOST) and the system total, March 2003
+to April 2017. Source: ISO-NE's public SMD hourly files, as packaged in `camroach87/gefcom2017data`
+(`data/gefcom.rda`, fetched 24 Nov 2026 by `python -m physlib.gridload fetch`). Not committed.
 
-**Data.**
-- WindSim F3 step 5: Case C 1D, D/32, walls off, z0 0.0003, L 0.5 D, Cs 0.12.
-- `fields_1D.npz` holds the mean u, v, w, their squares and the mean |u| per cell below 0.1 m, plus the solid mask, dx and origin.
-- The run's 120 points (model) and the AIJ measurements, with the mirror fold applied as WindSim scores them.
-- Target: y = ln(model / measured) per point, on grid 0.01, as in FINDINGS-4 and FINDINGS-7.
+**Seen before this was written:** the file's column names and its first five rows (CT, 1 March 2003, hours 0 to 4;
+demand 3,157 to 3,386 MW). One timing run of the engine on pure Gaussian noise with the 2011-12 TOTAL weather inputs
+(n = 17,536 hours, 15 s; no demand used). Nothing else. From memory (papers not opened for this work), the
+load-forecasting literature reports that Hong's "vanilla" benchmark misses recency (lagged and moving-average
+temperature), humidity and holidays; that is my prior, written here so a rediscovery can't be dressed up as a surprise.
 
-**Field terms, computed at each point by trilinear interpolation at z = 0.02 m (fixed now):**
-- `turn`: |sin θ|, where θ is the angle between the local mean horizontal vector and the approach direction (+x).
-- `reverse`: 1 if the local mean u < 0 (recirculation at the point), else 0.
-- `ti_local`: sqrt((u'² + v'² + w'²) / 3) / |mean horizontal velocity|, with the variances taken from the stored squares.
-- `downwash`: mean w at z = 0.05 m over U_app (negative means air coming down into the street).
-- `side_flux`: mean v · sign(y) at the point over U_app (positive means flow pushed outward, away from the centreline).
-- `street_flux`: the run's speed-up through the point's street cross-section. This is the streamwise flux below
-  0.1 m, integrated across that street (between the facing block faces, at the point's x for along-wind streets and at
-  its y for cross streets). It is divided by the same street's open-ground flux upstream of the array (x < −2 D).
-  It is the continuity (blockage) word.
+## Code (`physlib/gridload.py`)
+- **Vanilla benchmark (M0):** Hong's GEFCom2012 multiple-regression benchmark, OLS on MW:
+  Trend + Month + Weekday×Hour + T + T² + T³ + T×Month + T²×Month + T³×Month + T×Hour + T²×Hour + T³×Hour.
+- **Load term library (14 terms):** recency (max(0, T̄24 − 65 °F); max(0, 50 °F − T̄24); yesterday's max over 80 °F),
+  3-hour thermal lag, heat-wave day count, humidity (max(0, T − 70)·RH; dew point over 60 °F), holiday, day next to a
+  holiday, lighting after sunset (06-22 h), behind-the-meter solar (sun × years after 2010), weekend weather
+  sensitivity, curved trend, and a shape-only daily harmonic. Grammar (PROTOCOL-7) on eight raw inputs: T, T_d, T̄24,
+  yesterday's max, hour, day of year, trend, sun.
+- **Residual:** r = ln(measured / vanilla) per hour, coded AR(1) (hours are serially correlated); grid 0.002.
+  Every hour is read (step 1).
 
-These join FINDINGS-7's Case C inputs: `lp`, `fetch`, `x_pos`, `lateral`, `hc`, `corner`, `along`, `cross`.
+## A. Planted laws on real weather (synthetic outcome)
+Inputs: TOTAL 2011-12 weather and calendar. Outcome: a planted law plus AR(1) noise (sd 0.03, ρ 0.9 per hour). Signal
+sd = 0.5 × noise sd, split evenly over the planted terms. P1 recency (max(0, T̄24 − 65)); P2 humidity
+(max(0, T − 70)·RH); P3 holiday dip; P4 behind-the-meter solar; P5 P1 + P2 + P3 together; P6 a shape the library
+lacks, max(0, Tmax_yesterday − median) × hour (grammar must find it). 10 seeds each; N: pure AR(1) noise, 20 seeds.
+- **Rule A:** each of P1-P6 is named (a winning term of the planted term's group; for P6 any grammar term) in ≥ 8 of
+  10 seeds.
+- **Rule A-null:** on pure noise it names nothing in ≥ 19 of 20 seeds.
 
-**Search and readings, fixed now:**
-- `physlib.guards.analyse(T.WIND + field terms, ctx, y, Grid(0.01, −4, 4), grammar=True, bootstrap_B=30, null_N=19)`.
-- Folds: leave one quadrant out (4, split on the sign of x and y after the fold), plus upstream half → downstream half.
-- Run twice: (A) FINDINGS-7 inputs only; (B) with the field terms added.
-- **Q1, does the lateral pattern recur in this run?** Yes if `lateral` (alone or in any grammar shape) has inclusion
-  ≥ 0.8 in A and transfers on at least 3 of the 4 quadrant folds.
-- **Q2, does a field term name it?** Yes if, in B, a field term has inclusion ≥ 0.8, is picked in ≥ 60 % of bootstrap
-  resamples and transfers on ≥ 3 of 4 quadrant folds, and `lateral`'s inclusion falls below 0.5. If a field term
-  pays but `lateral` stays, it is reported as "adds to" and does not name the pattern.
-- **Level ledger (described, not gated):** Q(x) is the streamwise flux below 0.1 m across the whole section, over
-  the upstream Q₀, together with the plan-mean w at z = 0.1 m over the array. Q above 1 inside the array means air
-  drawn down from above the half-height, which is D1's roof-height-mixing lead. Report Q at the array's front, middle
-  and back.
-- Each field term's single-term saving and coefficient sign are reported. Expected signs: `reverse`, `ti_local` and
-  `turn` negative (the scalar probe and a thin wake read low where the model's flow is weak and turning) or
-  unknown; `street_flux` and `downwash` (−w) positive.
+## B. What does the vanilla benchmark miss? (exploration, real demand)
+Vanilla fitted on 2004-2010; its errors on 2011-12 go to the compressor (every zone; TOTAL also gets a 9-shuffle
+null and a 10-resample bootstrap). The winning formula is fitted on 2011-12 and must code 2013 shorter than a single
+correction does.
+- **Rule B:** on TOTAL the formula is not empty and transfers to 2013.
+- Reading (not a gate): in how many of the 9 series does it name recency, humidity or holiday; anything else it names.
 
-**Synthetic check first** uses the real covariates with noise sd taken from run A's residual, 10 seeds each:
-- (a) no planted term: no field term named in 9 of 10;
-- (b) planted `side_flux` at 0.02 to 0.10 sd;
-- (c) planted `street_flux` at 0.02 to 0.10 sd.
+## C. Head-to-head on sealed years 2014-2016 (read once, after B is pushed)
+Every model is fitted on 2004-2013 and scored on every hour of 2014-2016 with the actual weather (an ex-post
+hindcast, as in GEFCom; operators forecast with forecast weather, so these errors are not comparable with an ISO's
+published day-ahead accuracy).
+- M0 vanilla. M1 vanilla + the terms part B named for that series (as extra regression columns, nothing else
+  changed). M2 my expert model, fixed now: vanilla + the T, T², T³-by-hour blocks for T̄24 and for 1, 2 and 3-hour
+  lags + RH, RH·T, RH·T² by month + holiday and day-next-to-holiday by hour. M3 gradient boosting
+  (scikit-learn HistGradientBoosting on log MW, 18 inputs, 800 trees, rate 0.05, 63 leaves, seed 0, no tuning).
+- Metric: MAPE over all hours; also over the top 1 % of hours (the peaks utilities plan for), and per year.
+- **Rule C1:** M1 beats M0 on TOTAL and on at least 6 of the 8 zones.
+- **Rule C2:** on TOTAL, M1 closes at least half of the gap M2 opens (gain M1 ≥ 0.5 × gain M2).
+- Reading: where M1 and M2 stand against M3. No rule: the compressor is a diagnostic, not a forecaster.
 
-Power is the smallest sd named in 8 of 10, as in protocol 5 A1.
+Pass = A, A-null, B, C1, C2. Results in `results/gridload/`, written up in `physics/FINDINGS-8.md` with every
+failure reported. If part A fails, part C still runs, and the write-up says the diagnosis is not trustworthy.
 
-**Limits, stated now.**
-- One run, one layout (1D), 120 points, so the folds are spatial, not across layouts.
-- The covariances u'v' and so on are not stored, so `ti_local` is the isotropic form.
-- Field terms come from the same model whose error is explained, so a field term that names the pattern says where
-  the model's flow differs, not that the tunnel's flow is different.
-- Nothing here changes WindSim's scoring. Any fix goes through WindSim's own protocol and a held-out case.
+## Amendment A1 (24 Nov 2026, 07:05 UTC, after parts A, B and C were read)
+**Seen:** all of parts A, B and C (`results/gridload/A_planted.json`, `B_explore.json`, `C_sealed.json`). Part C
+first crashed before printing any score (expert design had NaN lags at hours `rows()` didn't check; fixed by adding
+T_lag1, T_lag2 and RH to the finite-input check). Part B first crashed in the null search (blocks format). Neither
+crash showed an outcome. 2017 (January to April) has not been read by anything.
+
+**Why:** part C shows the compressor fixes a weak model. The real question for a utility is whether it finds
+anything a *strong* model misses. So: audit the expert model (M2) and gradient boosting (M3).
+- **D. Audit.** M2 and M3 fitted on 2004-2010; their log errors on 2011-12 go to the compressor (same library, grammar,
+  AR(1) code; TOTAL with a 9-shuffle null). The formula must transfer to 2013 as in part B.
+- **E. Does the audit help.** M2+ = M2 plus the terms D named as extra regression columns; M3+ = M3 with those terms'
+  columns as extra inputs. Fitted on 2004-2013. Scored on 2014-2016 (spent by part C, so labelled post hoc) and on
+  **January to April 2017, never read (the fresh test)**.
+- **Rule E (fresh test, TOTAL):** M3+ beats M3 on Jan-Apr 2017 MAPE, and M2+ beats M2. Reported for every zone.
+  A null audit (nothing named) counts as "nothing to add", and is reported as such, not as a failure of the engine.

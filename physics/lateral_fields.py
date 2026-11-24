@@ -1,4 +1,4 @@
-"""Protocol 8: do terms from the LBM's own near-ground flow name its lateral Case C pattern?
+"""Protocol 9: do terms from the LBM's own near-ground flow name its lateral Case C pattern?
 
 python physics/lateral_fields.py [--synthetic-only] [--seeds 10]
 Reads results/physics/f3s5_fields.npz and f3s5_points.csv (WindSim F3 step 5, Case C 1D, D/32, L 0.5 D).
@@ -136,7 +136,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--synthetic-only", action="store_true"); ap.add_argument("--seeds", type=int, default=10)
     a = ap.parse_args()
     ctx, r, x, y, ledger = ctx_build(); fo = folds(x, y); n = len(r)
-    out = {"protocol": "physics/PROTOCOL-8.md", "n": n, "level_ln_mean": float(r.mean()), "level_factor": float(math.exp(r.mean())),
+    out = {"protocol": "physics/PROTOCOL-9.md", "n": n, "level_ln_mean": float(r.mean()), "level_factor": float(math.exp(r.mean())),
            "ledger": ledger, "field_term_summary": {k: {"mean": float(ctx[k].mean()), "sd": float(ctx[k].std()),
                                                       "min": float(ctx[k].min()), "max": float(ctx[k].max())} for k in FIELD_NAMES}}
     print("ledger", json.dumps(ledger), flush=True)
