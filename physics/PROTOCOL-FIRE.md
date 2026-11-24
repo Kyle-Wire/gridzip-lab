@@ -337,3 +337,29 @@ wind). Timber litter under canopy spreads at about 1 m/min there. So in the mode
 - First look, Camp 10 h, 2 seeds, gust share 0, road rule on at L_cross 0: E0 (already run), E80, E850, each at
   ember median 150 m. Ranked on the area ratio at the satellite outline at 9.45 h as in A9 stage 1.
 - A stated risk: this is a second fix found by looking at Camp. If it helps Camp and not Tubbs it is dropped.
+
+**A11 (24 Nov 2026, after Camp stage 2 and the Tubbs cross-check of A10, before any run of the option below).**
+What had been seen (FINDINGS-FIRE.md): Camp 24 h, 3 seeds, embers on the 850 hPa wind: overlap at 21.45 h 0.51 to
+0.61, cells beat no skill, 1.64 bits per building, AUC 0.736, A8 score 2.57. Tubbs 44 h, 2 seeds: with embers on
+the 20-ft wind 1.9 times the mapped area, overlap 0.44, AUC 0.753, A8 4.08; with embers on the 850 hPa wind
+worse on every score (overlap 0.32 to 0.39, AUC 0.657, A8 6.47), the extra fire going north-east behind the
+ignition over the later, calm hours.
+- By A10's own rule, E850 as tested is dropped: it helps Camp and hurts Tubbs. E80 is dropped too (little gain).
+- A narrower hypothesis, written before any test: how high an ember rides depends on how hard the fire under it
+  burns. A weak fire's embers stay in the surface wind; only an intense fire lofts them into the flow aloft. In
+  E850 every ember, even from a creeping fire in the calm second day of Tubbs, was carried by the 850 hPa wind.
+  Option EP: the ember's wind is the vector blend (1 - w) x 20-ft wind + w x 850 hPa wind, with
+  w = min(1, I / I_loft)^(2/3), I the fireline intensity of the cell (or house) that throws it. The 2/3 power is
+  the usual scaling of plume rise with heat release, taken as a form only; I_loft is an unsourced prior, tried at
+  10 and 30 MW/m.
+- Test, same as A10 and decided the same way: Camp 24 h 3 seeds and Tubbs 44 h 2 seeds, against E0 on each. EP
+  is kept only if it does not make Tubbs worse than E0 on the A8 score (beyond seed spread) and still improves
+  Camp. Otherwise embers stay on the 20-ft wind and the miss on Camp is carried as a stated limit until the wind
+  comes from WindSim (candidate M4).
+- Stated risk: this is the third wind fix found on these two fires. It is the last one tried before the freeze.
+- Tubbs overrun, noted not fixed: with E0 the model burns 1.9 times the mapped area by 43 h and 2.2 times the
+  houses. Most of the mapped fire burned in the first night; the model keeps spreading for 30 more hours with no
+  suppression, which it does not model (section 7). Tubbs is therefore also scored on the first night: the
+  share of satellite fire detections (VIIRS 375 m, clipped to the final Tubbs outline plus 500 m so that the
+  other fires of that night are left out) at the 10:15Z pass on 9 Oct (5.5 h) that fall on cells the model has
+  burned by then, and the modelled area at that time. Reported beside the outlines, not part of the A8 score.

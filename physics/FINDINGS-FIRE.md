@@ -117,3 +117,21 @@ Area ratio below 1 means the burned-area forecast beats the mapped burned share 
   about 2.5 times worse than the fire's own rate at 10 h (the record is not timed; A9).
 - One fire, and the idea came from looking at it. A10's check stands: it must also help Tubbs or it is dropped.
 
+### Camp stage 2 and the Tubbs cross-check of wind aloft (24 Nov 2026; gust share 0, road rule on, ember median 150 m; calibration)
+
+| run (FireSim results/) | seeds | burned km2 | mapped km2 | overlap at last outline | area ratio | bits per building (own rate) | AUC | A8 score |
+|---|---|---|---|---|---|---|---|---|
+| camp_2018/..._g0_ens (road off, E0, earlier) | 3 | 375, 393, 463 | 376 | 0.54 (seed 0) | | 1.80 (0.99) | 0.735 | |
+| camp_2018/..._road0_E850_ens3 | 3 | 525, 569, 568 (490 at 21.45 h, seed 0) | 376 | 0.61, 0.51, 0.57 | 0.92 | 1.64 (0.99) | 0.736 | 2.57 |
+| tubbs_2017/tubbs_M3_44h_g0_road0_E0 | 2 | 238, 237 | 125 | 0.44, 0.44 | 1.50 | 1.62 (0.63) | 0.753 | 4.08 |
+| tubbs_2017/tubbs_M3_44h_g0_road0_E850 | 2 | 268, 338 | 125 | 0.39, 0.32 | 1.91 | 2.87 (0.63) | 0.657 | 6.47 |
+
+- Camp: embers on the 850 hPa wind hold up over 24 h and 3 seeds. Best Camp result so far, still short of no
+  skill on buildings (1.64 against 0.99 bits) and overburning by 21 h (490 against 376 km2).
+- Tubbs: the same change makes every score worse. By A10's rule E850 is dropped.
+- Tubbs overruns with either wind (1.9 times the area, 2.2 times the houses with E0): the model reaches the
+  south-west tip of the outline within about 11 h and then keeps spreading for 30 h with no suppression.
+- House-to-house spread is 44 to 51 % of modelled house losses on Tubbs, about 32 % on Camp.
+- First Tubbs runs were first tests of the whole chain on a second fire: the fire runs the right way (south-west
+  to Santa Rosa's north edge) with nothing tuned to Tubbs.
+
