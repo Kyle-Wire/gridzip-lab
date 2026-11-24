@@ -46,6 +46,7 @@ class Term:
     group: Optional[str] = None   # terms in one group say the same thing; at most one per formula
     physics: bool = True          # False for shape-only terms (harmonics with no physics name)
     unit: str = ""                # unit of the family parameter
+    cost_bits: Optional[float] = None  # v2: a grammar term's own description length (None = a library term)
 
 
 @dataclass
@@ -67,9 +68,15 @@ def _as2d(v):
     v = np.asarray(v, np.float64); return v[:, None] if v.ndim == 1 else v
 
 
+def _sigkey(sig):
+    v = np.round(sig, 6); nz = np.flatnonzero(np.abs(v) > 1e-6)
+    if len(nz) and v[nz[0]] < 0: v = -v
+    return (v + 0.0).tobytes()
+
+
 def assemble(terms: Sequence[Term], ctx: dict, n: int) -> list[Built]:
     """Build every term whose inputs are in ctx; drop terms that are constant or duplicate an earlier one."""
-    out, seen = [], []
+    out, seen, keys = [], [], set()
     for t in terms:
         if any(k not in ctx or ctx[k] is None for k in t.needs): continue
         try:
@@ -89,11 +96,41 @@ def assemble(terms: Sequence[Term], ctx: dict, n: int) -> list[Built]:
                 if not keep.any(): continue
                 cols = cols[:, keep]
                 sig = np.round(cols[:, 0] / (np.linalg.norm(cols[:, 0]) + 1e-300), 9)
-                if any(np.allclose(sig, s) or np.allclose(sig, -s) for s in seen): continue
-                seen.append(sig); out.append(Built(t, cols=cols))
+                key = _sigkey(sig)
+                if t.cost_bits is not None:        # v2 grammar term: hashed duplicate check (thousands of them)
+                    if key in keys: continue
+                elif any(np.allclose(sig, s) or np.allclose(sig, -s) for s in seen): continue
+                seen.append(sig) if t.cost_bits is None else None; keys.add(key); out.append(Built(t, cols=cols))
         except (ValueError, FloatingPointError, ZeroDivisionError, IndexError, TypeError):
             continue
-    return out
+    return _drop_library_shapes(out)
+
+
+def _unit(M_):
+    M_ = M_ - M_.mean(0); return M_ / (np.linalg.norm(M_, axis=0) + 1e-300)
+
+
+def _drop_library_shapes(out, r_max=0.995):
+    """v2: a grammar term whose column the library already has (|r| > r_max against a plain library term, or against a
+    family member anywhere on its grid) is dropped: the library names that shape, and the family's free parameter
+    already covers the grammar's fixed constant. Grammar columns are scaled to unit sd (the decoder can redo it)."""
+    gi = [i for i, b in enumerate(out) if b.term.cost_bits is not None]
+    if not gi: return out
+    lib = []
+    for b in out:
+        if b.term.cost_bits is not None: continue
+        if b.fn is not None:
+            for a in b.grid:
+                v = b.fn(a)
+                if np.all(np.isfinite(v)): lib.append(v)
+        else: lib.append(b.cols)
+    for i in gi:
+        c = out[i].cols; out[i].cols = c / (c.std(0) + 1e-300)
+    if not lib: return out
+    Lm = _unit(np.hstack(lib)); Gm = _unit(np.hstack([out[i].cols for i in gi]))
+    r = np.abs(Gm.T @ Lm).max(1)
+    drop = {gi[k] for k in np.flatnonzero(r > r_max)}
+    return [b for i, b in enumerate(out) if i not in drop]
 
 
 # --------------------------------------------------------------------------------------------------- fitting
@@ -157,8 +194,23 @@ def vocab_size(library_size): return library_size + 2       # terms + intercept 
 def n_tokens(built): return 1 + 2 * len(built)               # c, then '+ term' per term
 
 
+def _lib(library_size):
+    """library_size is an int (library only) or (library terms, grammar on) -- v2."""
+    return (library_size, False) if isinstance(library_size, (int, np.integer)) else (int(library_size[0]), bool(library_size[1]))
+
+
 def structure_bits(built, library_size):
-    return M.delta_bits(n_tokens(built) + 1) + n_tokens(built) * math.log2(vocab_size(library_size))
+    """c, then '+ term' per term. A library term costs log2(vocab); with the grammar on, one more bit says library or
+    grammar, and a grammar term costs that bit plus its own expression length. With the grammar off this is the
+    PROTOCOL-4 formula exactly."""
+    L, flag = _lib(library_size); lv = math.log2(vocab_size(L))
+    names = sum(lv + (1.0 if flag else 0.0) if b.term.cost_bits is None else 1.0 + b.term.cost_bits for b in built)
+    return M.delta_bits(n_tokens(built) + 1) + (1 + len(built)) * lv + names
+
+
+def library_info(built):
+    """(number of library terms, grammar on) for a built pool."""
+    return (sum(1 for b in built if b.term.cost_bits is None), any(b.term.cost_bits is not None for b in built))
 
 
 def n_params(built): return 1 + sum(b.k for b in built) + sum(1 for b in built if b.fn is not None)
@@ -186,18 +238,48 @@ def serial_bits(yr, mu, pr, g, rho=None, sd=None):
     return bits_gaussian(yr, pred, sdv, g), rho, sd
 
 
-def approx_bits(built, y, g, library_size, rows=None, prev=None):
+MIX_W, MIX_K = (0.05, 0.10, 0.20), 4.0
+
+
+def bits_mix(y, mu, sd, w, g, k=MIX_K):
+    """v2 heavy-tail code: (1 - w) N(mu, sd) + w N(mu, k sd), on codelen's bins and escape."""
+    from codelen.lawsearch import _ndtr
+    y = np.asarray(y, np.float64); mu = np.broadcast_to(np.asarray(mu, np.float64), y.shape)
+    r = np.rint(y / g.res) * g.res; out = 0.0
+    for wt, s in ((1 - w, sd), (w, k * sd)):
+        a, b = (r - g.res / 2 - mu) / s, (r + g.res / 2 - mu) / s
+        out = out + wt * np.where(a > 0, _ndtr(-a) - _ndtr(-b), _ndtr(b) - _ndtr(a))
+    return -np.log2((1 - g.eps) * out + g.eps * g.res / (g.hi - g.lo))
+
+
+def robust_sd(e): return 1.4826 * float(np.median(np.abs(e - np.median(e))))
+
+
+def resid_bits(yr, mu, sd_rms, g, robust, sd_rob=None):
+    """Residual bits under the shortest of: Gaussian, or (robust) the two-scale mixtures; 2 bits name the choice.
+    Returns (bits, choice, sd used)."""
+    best = (float(bits_gaussian(yr, mu, sd_rms, g).sum()), "gauss", sd_rms)
+    if not robust: return best
+    sdr = max(sd_rob if sd_rob is not None else robust_sd(yr - mu), g.res / 2)
+    for w in MIX_W:
+        b = float(bits_mix(yr, mu, sdr, w, g).sum())
+        if b < best[0]: best = (b, f"mix{w:g}", sdr)
+    return best[0] + 2.0, best[1], best[2]
+
+
+def approx_bits(built, y, g, library_size, rows=None, prev=None, robust=False):
     """Search score: exact structure and residual bits at the least-squares fit, ~0.5 log2(n) + 2 bits per parameter."""
     rows = np.arange(len(y)) if rows is None else np.asarray(rows)
     th, al, X, off = fit(built, y, rows, refine=False)
     mu = X @ th + off; yr = y[rows]
     sd = max(float(np.sqrt(np.mean((yr - mu) ** 2))), g.res / 2)
     n = len(rows); pb = (n_params(built) + 1 + (prev is not None)) * (0.5 * math.log2(max(n, 2)) + 2)
-    if prev is not None: return structure_bits(built, library_size) + pb + float(serial_bits(yr, mu, _prev_in(prev, rows), g)[0].sum())
-    return structure_bits(built, library_size) + pb + float(bits_gaussian(yr, mu, sd, g).sum())
+    if prev is not None: v = structure_bits(built, library_size) + pb + float(serial_bits(yr, mu, _prev_in(prev, rows), g)[0].sum())
+    else: v = structure_bits(built, library_size) + pb + resid_bits(yr, mu, sd, g, robust)[0]
+    return v if math.isfinite(v) else math.inf     # v2: a non-finite score must not scramble the beam's sort
 
 
-def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17), prev=None):
+def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17), prev=None, robust=False):
     """Total code length of the formula, every parameter rounded at its best step. Returns a result dict."""
     rows = np.arange(len(y)) if rows is None else np.asarray(rows)
     th, al, X, off = fit(built, y, rows)
@@ -227,9 +309,21 @@ def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17), prev
         else:
             rho = None; sd0 = float(np.sqrt(np.mean((yr - mu) ** 2)))
         p_sd = max(0, -math.floor(math.log2(max(sd0, g.res)))) + 3
-        sdb, sdr = M.param_bits(sd0, p_sd); sdr = max(sdr, g.res / 2)
-        rb = float((serial_bits(yr, mu, pr, g, rho=rho, sd=sdr)[0] if pr is not None else bits_gaussian(yr, mu, sdr, g)).sum())
-        return sum(pb) + sdb + rb, dict(param_bits=float(sum(pb) + sdb), residual_bits=rb, sd=sdr, mu=mu, rounded=list(rv), alphas=a, rho=rho)
+        sdb, sdr = M.param_bits(sd0, p_sd); sdr = max(sdr, g.res / 2); code = "gauss"
+        if pr is not None: rb = float(serial_bits(yr, mu, pr, g, rho=rho, sd=sdr)[0].sum())
+        else:
+            rb = float(bits_gaussian(yr, mu, sdr, g).sum())
+            if robust:   # v2: the mixture's core sd is sent at the same step as the Gaussian sd
+                _, sdm = M.param_bits(max(robust_sd(yr - mu), g.res / 2), p_sd); sdm = max(sdm, g.res / 2)
+                rb2, code2, _ = resid_bits(yr, mu, sdr, g, True, sd_rob=sdm)
+                rg = rb + 2.0
+                if rb2 < rg: rb, code, sdr = rb2, code2, sdm
+                else: rb = rg
+        return sum(pb) + sdb + rb, dict(param_bits=float(sum(pb) + sdb), residual_bits=rb, sd=sdr, mu=mu, rounded=list(rv), alphas=a, rho=rho, code=code)
+    if not all(np.isfinite(v) for v in vals):
+        return {"terms": [b.name for b in built], "total_bits": math.inf, "bits_per_reading": math.inf, "structure_bits": math.inf,
+                "param_bits": math.inf, "residual_bits": math.inf, "n": len(rows), "sd": math.inf, "coef": {}, "alpha": {}, "code": "gauss",
+                "_mu": np.zeros(len(rows)), "_steps": []}
     steps = [8] * len(vals); best, info = total(steps)
     for _ in range(3):
         changed = False
@@ -245,7 +339,7 @@ def exact_bits(built, y, g, library_size, rows=None, p_range=range(-3, 17), prev
         kk = b.k; coef[b.name] = [float(v) for v in th[k:k + kk]] if kk > 1 else float(th[k]); k += kk
     return {"terms": [b.name for b in built], "structure_bits": sb, "param_bits": info["param_bits"],
             "residual_bits": info["residual_bits"], "total_bits": sb + best, "bits_per_reading": (sb + best) / n,
-            "n": n, "sd": info["sd"], "rho": info.get("rho"), "coef": coef, "alpha": {built[j].name: float(al[j]) for j in fam},
+            "n": n, "sd": info["sd"], "rho": info.get("rho"), "code": info.get("code", "gauss"), "coef": coef, "alpha": {built[j].name: float(al[j]) for j in fam},
             "_mu": info["mu"], "_steps": steps}
 
 
@@ -261,23 +355,38 @@ def _ok(state, built):
     return len(grp) == len(set(grp))
 
 
-def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_size=None, rows=None, prev=None):
+def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_size=None, rows=None, prev=None,
+           robust=False, prescreen=30, memo_out=None):
     """Beam search over sparse formulas by approx bits; finalists (plus 'no term') re-scored exactly.
 
     Then backward elimination on the exact winner (drop a term while that shortens the code).
+    v2: grammar terms (cost_bits set) are prescreened per beam state: only the `prescreen` whose columns correlate
+    best with that state's remainder are scored (library terms are always scored). memo_out, if a dict, receives
+    every scored formula's approx bits (for the posterior odds in guards).
     Returns (winner, ranked exact results, number of formulas scored).
     """
-    L = library_size or len(built)
+    L = library_size if library_size is not None else library_info(built)
+    rows = np.arange(len(y)) if rows is None else np.asarray(rows)
     memo = {}
+    gi = [i for i, b in enumerate(built) if b.term.cost_bits is not None and b.fn is None]
+    li = [i for i in range(len(built)) if i not in set(gi)]
+    if gi:
+        Z = np.column_stack([built[i].cols[rows, 0] for i in gi]); Z = Z - Z.mean(0); Z /= np.linalg.norm(Z, axis=0) + 1e-300
 
     def A(state):
-        if state not in memo: memo[state] = approx_bits([built[i] for i in state], y, g, L, rows, prev)
+        if state not in memo: memo[state] = approx_bits([built[i] for i in state], y, g, L, rows, prev, robust=robust)
         return memo[state]
+
+    def pool(state):
+        if not gi: return range(len(built))
+        bb = [built[i] for i in state]; th, al, X, off = fit(bb, y, rows, refine=False); e = y[rows] - X @ th - off
+        sc_ = np.abs(Z.T @ (e - e.mean())); top = np.argsort(-sc_)[:prescreen]
+        return li + [gi[k] for k in top]
     frontier = [()]; A(())
     for _ in range(max_terms):
         cand = set()
         for s in frontier:
-            for i in range(len(built)):
+            for i in pool(s):
                 if i in s: continue
                 t = tuple(sorted(s + (i,)))
                 if _ok(t, built): cand.add(t)
@@ -285,26 +394,33 @@ def search(built: list[Built], y, g, max_terms=5, beam=6, finalists=10, library_
         scored = sorted(cand, key=A)
         frontier = scored[:beam]
     ranked = sorted(memo, key=memo.get)[:finalists]
+    if gi:   # v2: approx bits undercount parameters, so bigger formulas crowd the finalists; keep the best 3 of each size
+        for k in range(1, max_terms + 1):
+            for s_ in sorted((s_ for s_ in memo if len(s_) == k), key=memo.get)[:3]:
+                if s_ not in ranked: ranked.append(s_)
     if () not in ranked: ranked.append(())
-    ex = {s: exact_bits([built[i] for i in s], y, g, L, rows, prev=prev) for s in ranked}
+    EX = lambda s: exact_bits([built[i] for i in s], y, g, L, rows, prev=prev, robust=robust)
+    ex = {s: EX(s) for s in ranked}
     best = min(ex, key=lambda s: ex[s]["total_bits"])
     improved = True
     while improved and best:
         improved = False
         for i in best:
             s = tuple(j for j in best if j != i)
-            if s not in ex: ex[s] = exact_bits([built[j] for j in s], y, g, L, rows, prev=prev)
+            if s not in ex: ex[s] = EX(s)
             if ex[s]["total_bits"] < ex[best]["total_bits"] - 1e-9: best, improved = s, True; break
+    if memo_out is not None: memo_out.update(memo); memo_out["_exact"] = {s: r["total_bits"] for s, r in ex.items()}; memo_out["_best"] = best
     out = sorted(ex.values(), key=lambda r: r["total_bits"])
     return ex[best], out, len(memo)
 
 
-def ladder(built, winner_terms, y, g, library_size, prev=None):
+def ladder(built, winner_terms, y, g, library_size, prev=None, robust=False):
     """Add the winner's terms one at a time, each step the one that saves most: the bits waterfall."""
-    by = {b.name: b for b in built}; left = list(winner_terms); cur = []; steps = [exact_bits([], y, g, library_size, prev=prev)]
+    by = {b.name: b for b in built}; left = list(winner_terms); cur = []
+    steps = [exact_bits([], y, g, library_size, prev=prev, robust=robust)]
     steps[0]["added"] = "one correction"
     while left:
-        trial = [(exact_bits([by[t] for t in cur + [n]], y, g, library_size, prev=prev), n) for n in left]
+        trial = [(exact_bits([by[t] for t in cur + [n]], y, g, library_size, prev=prev, robust=robust), n) for n in left]
         r, nme = min(trial, key=lambda z: z[0]["total_bits"]); cur.append(nme); left.remove(nme); r["added"] = nme; steps.append(r)
     return steps
 
@@ -325,20 +441,23 @@ def holdout(built, terms, y, g, train, test, library_size, prev=None):
     return {"formula_bpr": out[0], "one_correction_bpr": out[1], "transfers": out[0] < out[1]}
 
 
-def run_case(terms: Sequence[Term], ctx: dict, y, g, folds=(), max_terms=5, beam=6, name="", prev=None):
+def run_case(terms: Sequence[Term], ctx: dict, y, g, folds=(), max_terms=5, beam=6, name="", prev=None, robust=False,
+             memo_out=None):
     """prev (A1): index of each reading's predecessor in its own sequence (-1 for the first), to code the residuals as
     AR(1); None codes them as independent."""
     """The whole case: assemble, search, ladder, hold-out folds, coder check. Arrays prefixed _ are not serialised."""
     y = np.asarray(y, np.float64); n = len(y)
-    built = assemble(terms, ctx, n)
-    win, ranked, nscored = search(built, y, g, max_terms=max_terms, beam=beam, prev=prev)
-    lad = ladder(built, win["terms"], y, g, len(built), prev=prev)
-    ho = [dict(fold=f, **holdout(built, win["terms"], y, g, tr, te, len(built), prev=prev)) for f, tr, te in folds] if win["terms"] else []
+    built = assemble(terms, ctx, n); L = library_info(built)
+    win, ranked, nscored = search(built, y, g, max_terms=max_terms, beam=beam, prev=prev, robust=robust, memo_out=memo_out)
+    lad = ladder(built, win["terms"], y, g, L, prev=prev, robust=robust)
+    ho = [dict(fold=f, **holdout(built, win["terms"], y, g, tr, te, L, prev=prev)) for f, tr, te in folds] if win["terms"] else []
     meta = {b.name: {"formula": b.term.formula, "meaning": b.term.meaning, "physics": b.term.physics, "unit": b.term.unit} for b in built}
-    return {"name": name, "n": n, "library": [b.name for b in built], "library_size": len(built), "formulas_scored": nscored,
+    return {"name": name, "n": n, "library": [b.name for b in built if b.term.cost_bits is None], "library_size": L[0],
+            "grammar_size": sum(1 for b in built if b.term.cost_bits is not None), "formulas_scored": nscored,
             "winner": strip(win), "ranked": [strip(r) for r in ranked[:8]], "ladder": [strip(r) for r in lad],
             "holdout": ho, "transfers": all(h["transfers"] for h in ho) if ho else None,
-            "coder_check": verify(win, y, g) if prev is None else {"note": "AR(1) code: ideal bits only"}, "terms_meta": meta,
+            "coder_check": (verify(win, y, g) if win.get("code", "gauss") == "gauss" else {"note": "mixture code: ideal bits only"})
+            if prev is None else {"note": "AR(1) code: ideal bits only"}, "terms_meta": {b.name: meta[b.name] for b in built if b.term.cost_bits is None or b.name in win["terms"]},
             "noise_model": "AR(1)" if prev is not None else "independent",
             "bits_saved_per_reading": lad[0]["bits_per_reading"] - win["bits_per_reading"],
             "sd_before": lad[0]["sd"], "sd_after": win["sd"],

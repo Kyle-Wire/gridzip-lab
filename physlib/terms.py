@@ -179,3 +179,61 @@ GROUND_RATE = [
 ]
 
 DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "ground": GROUND, "ground_rate": GROUND_RATE}
+
+
+# ============================================================================================================ v2 (PROTOCOL-7)
+# Convective and stability terms for storm gusts, r = ln(measured gust / model gust). Standard forms written from
+# memory (density-current speed, Bernoulli pressure-jump speed, downdraft speed from DCAPE, Businger-Dyer psi_m);
+# the source papers were not opened, so every constant is a free coefficient.
+G_H = G0 * 1000.0        # g times a nominal 1 km cold-pool depth; the depth's error goes into the coefficient
+RHO = 1.2
+
+
+def psi_m(zl):
+    """Businger-Dyer stability correction for momentum: unstable (z/L < 0) and stable (z/L >= 0, -5 z/L)."""
+    zl = np.asarray(zl, np.float64); x = np.power(np.maximum(1 - 16 * np.minimum(zl, 0), 1e-12), 0.25)
+    un = 2 * np.log((1 + x) / 2) + np.log((1 + x ** 2) / 2) - 2 * np.arctan(x) + np.pi / 2
+    return np.where(zl < 0, un, -5 * np.minimum(zl, 2.0))
+
+
+CONVECTIVE = [
+    Term("cold_pool", "wind", "b · √(g·h·ΔT⁺/T) / U_model", "the storm's cold pool pushes the gust beyond the model (density current)",
+         ("dT", "Tk", "u_model"), lambda c: np.sqrt(G_H * np.maximum(c["dT"], 0) / c["Tk"]) / c["u_model"], group="outflow"),
+    Term("pressure_jump", "wind", "b · √(2Δp⁺/ρ) / U_model", "a mesohigh pressure jump drives the outflow", ("dp", "u_model"),
+         lambda c: np.sqrt(2 * np.maximum(c["dp"], 0) / RHO) / c["u_model"], group="mesohigh"),
+    Term("downdraft", "wind", "b · √(2·DCAPE) / U_model", "downdraft strength (downdraft CAPE) adds to the gust", ("dcape", "u_model"),
+         lambda c: np.sqrt(2 * np.maximum(c["dcape"], 0)) / c["u_model"], group="downdraft"),
+    Term("instability", "wind", "b · √(2·CAPE) / U_model", "updraft instability (CAPE) organises stronger storms", ("cape", "u_model"),
+         lambda c: np.sqrt(2 * np.maximum(c["cape"], 0)) / c["u_model"], group="instability"),
+    Term("lapse_rate", "wind", "b · Γ₀₋₃ₖₘ", "steep low-level lapse rates mix momentum down", ("lapse",), lambda c: c["lapse"]),
+    Term("dry_aloft", "wind", "b · (T − T_d)₇₀₀", "dry air aloft evaporates rain and drives the downdraft", ("dd700",), lambda c: c["dd700"]),
+    Term("rain_loading", "wind", "b · ln(1 + rain rate)", "precipitation drag loads the downdraft", ("rain_mmh",), lambda c: np.log1p(c["rain_mmh"])),
+    Term("mo_stability", "wind", "b · ψ_m(z/L) / ln(z/z0)", "surface-layer stability (Monin-Obukhov) changes the profile", ("zL", "z", "z0"),
+         lambda c: psi_m(c["zL"]) / np.log(c["z"] / c["z0"]), group="stability"),
+    Term("richardson", "wind", "b · Ri_b", "bulk stability (Richardson number) damps or frees the gust", ("ri_b",), lambda c: c["ri_b"], group="stability"),
+    Term("storm_motion", "wind", "b · U_storm / U_model", "the storm's own motion adds to the outflow", ("u_storm", "u_model"),
+         lambda c: c["u_storm"] / c["u_model"]),
+    Term("convective_velocity", "wind", "b · w* / U_model", "boundary-layer convection (Deardorff w*) drives the gusts", ("w_star", "u_model"),
+         lambda c: c["w_star"] / c["u_model"]),
+]
+
+# Tropical cyclone terms, r = ln(measured / model wind). Kaplan-DeMaria-style decay after landfall, written from memory.
+TROPICAL = [
+    Term("land_decay", "wind", "b · e^(−α·t_land)", "the storm weakens after landfall at a rate α the model has wrong", ("t_land",),
+         lambda c: (lambda a: np.exp(-a * np.maximum(c["t_land"], 0.0))), family=(0.01, 0.5, True), group="decay", unit="1/h"),
+    Term("radial_shape", "wind", "b · ln(r / R_max) for r > R_max", "the wind falls off with radius faster or slower than modelled",
+         ("r_rmax",), lambda c: np.log(np.maximum(c["r_rmax"], 1.0)), group="radial"),
+    Term("inner_core", "wind", "δ · [r < R_max]", "inside the eyewall radius the model is off", ("r_rmax",), lambda c: (c["r_rmax"] < 1).astype(float)),
+    Term("motion_asymmetry", "wind", "b · cos(θ − θ_motion) · U_storm / U_model", "the right-front quadrant is stronger (storm motion)",
+         ("theta_rel", "u_storm", "u_model"), lambda c: np.cos(np.radians(c["theta_rel"])) * c["u_storm"] / c["u_model"]),
+    Term("sea_land", "wind", "b · f_land upwind", "friction over land upwind cuts the wind more than modelled", ("land_frac",), lambda c: c["land_frac"]),
+]
+
+HEAT_V2 = [
+    Term("mixed_layer", "heat", "a · sin(e)⁺ / z_i", "a shallow daytime mixed layer heats more", ("sun", "zi"), lambda c: c["sun"] / c["zi"]),
+    Term("advection", "heat", "a · U·∂T/∂x", "warm or cold air carried in by the wind", ("adv",), lambda c: c["adv"]),
+    Term("soil_moisture", "heat", "a · sin(e)⁺ · (θ − θ̄)", "wet soil evaporates and cools the day", ("sun", "swc"), lambda c: c["sun"] * _c(c["swc"])),
+]
+
+WIND_FULL = WIND + CONVECTIVE + TROPICAL
+DOMAINS.update({"wind_full": WIND_FULL, "heat_full": HEAT + HEAT_V2})

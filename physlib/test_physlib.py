@@ -35,6 +35,27 @@ def test_env_farmland():
     out = V.one(("Irrigated farmland (heat)", "control", 0)); assert not out["flagged"]
 
 
+def test_v7_grammar_finds_product():
+    from physlib import grammar as G, terms as T
+    rng = np.random.default_rng(90123); ctx = S.wind_ctx(rng); n = len(ctx["lp"])
+    y = 0.1 + 0.3 * (ctx["hc"] * ctx["lp"] - (ctx["hc"] * ctx["lp"]).mean()) + rng.normal(0, 0.15, n)
+    r = E.run_case(list(T.WIND) + G.candidates(ctx, n), ctx, y, E.Grid(0.01, -4, 4), robust=True)
+    assert any("hc" in t and "lp" in t for t in r["winner"]["terms"]), r["winner"]["terms"]
+
+
+def test_v7_grammar_noise_silent():
+    from physlib import grammar as G
+    terms, ctx, y, g, _ = S.case("wind", None, 91000)
+    r = E.run_case(list(terms) + G.candidates(ctx, len(y)), ctx, y, E.Grid(*g), robust=True)
+    assert r["winner"]["terms"] == [], r["winner"]["terms"]
+
+
+def test_v7_structure_bits_unchanged_without_grammar():
+    terms, ctx, y, g, _ = S.case("wind", None, 1)
+    b = E.assemble(terms, ctx, len(y)); import math
+    assert abs(E.structure_bits(b[:2], len(b)) - (E.M.delta_bits(6) + 5 * math.log2(len(b) + 2))) < 1e-9
+
+
 if __name__ == "__main__":
     for k, f in list(globals().items()):
         if k.startswith("test_"): f(); print("ok", k)

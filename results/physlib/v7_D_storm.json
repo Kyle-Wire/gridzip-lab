@@ -1,0 +1,274 @@
+{
+ "storm": {
+  "winner": [
+   "station_bias",
+   "pressure_jump",
+   "g:ln u_model"
+  ],
+  "coef": {
+   "level": -0.030888109891498546,
+   "station_bias": 0.6749209810688617,
+   "pressure_jump": 0.12113437884531293,
+   "g:ln u_model": -0.049771846756830454
+  },
+  "alpha": {},
+  "code": "mix0.05",
+  "bits_saved_per_reading": 0.19145847303547203,
+  "sd_before": 0.21875,
+  "sd_after": 0.1875,
+  "transfers": false,
+  "holdout": [
+   {
+    "fold": "calibration -> blind",
+    "formula_bpr": 7.716638750483403,
+    "one_correction_bpr": 7.754633066537531,
+    "transfers": true
+   },
+   {
+    "fold": "leave out atlanta",
+    "formula_bpr": 7.7454572707611185,
+    "one_correction_bpr": 8.122668363476713,
+    "transfers": true
+   },
+   {
+    "fold": "leave out chicago",
+    "formula_bpr": 7.710392862730356,
+    "one_correction_bpr": 7.929014435047705,
+    "transfers": true
+   },
+   {
+    "fold": "leave out denver",
+    "formula_bpr": 7.735732013320976,
+    "one_correction_bpr": 7.71565131276465,
+    "transfers": false
+   },
+   {
+    "fold": "leave out detroit",
+    "formula_bpr": 7.474051738477981,
+    "one_correction_bpr": 7.762324564494158,
+    "transfers": true
+   },
+   {
+    "fold": "leave out dfw",
+    "formula_bpr": 7.467364228796946,
+    "one_correction_bpr": 7.739259718043638,
+    "transfers": true
+   },
+   {
+    "fold": "leave out houston",
+    "formula_bpr": 7.390893947018287,
+    "one_correction_bpr": 7.82138178116747,
+    "transfers": true
+   },
+   {
+    "fold": "leave out miami",
+    "formula_bpr": 7.1751749598441386,
+    "one_correction_bpr": 7.398141545925214,
+    "transfers": true
+   },
+   {
+    "fold": "leave out phoenix",
+    "formula_bpr": 7.935321181782198,
+    "one_correction_bpr": 8.038924907991017,
+    "transfers": true
+   },
+   {
+    "fold": "leave out riverside",
+    "formula_bpr": 7.818746111133623,
+    "one_correction_bpr": 7.601159150295967,
+    "transfers": false
+   },
+   {
+    "fold": "leave out san-francisco",
+    "formula_bpr": 7.368030197957986,
+    "one_correction_bpr": 7.4180626607504525,
+    "transfers": true
+   },
+   {
+    "fold": "leave out south-street",
+    "formula_bpr": 7.23103595289985,
+    "one_correction_bpr": 7.652650294005379,
+    "transfers": true
+   },
+   {
+    "fold": "leave out tract-353-02",
+    "formula_bpr": 7.243900172751379,
+    "one_correction_bpr": 7.55789379857481,
+    "transfers": true
+   },
+   {
+    "fold": "leave out washington",
+    "formula_bpr": 7.733779569318334,
+    "one_correction_bpr": 7.949301128667882,
+    "transfers": true
+   }
+  ],
+  "library_size": 7,
+  "grammar_size": 1315,
+  "verdict": [
+   [
+    "station_bias",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "pressure_jump",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:ln u_model",
+    "named, but can't rule out g:\u221au_model (+0.1 bits), g:u_model (+0.6 bits), g:e^(\u2212u_model/19) (+1.5 bits)"
+   ]
+  ],
+  "guards": {
+   "lookalikes": {
+    "station_bias": [],
+    "pressure_jump": [],
+    "g:ln u_model": [
+     {
+      "term": "g:\u221au_model",
+      "r": 0.997,
+      "extra_bits": 0.12,
+      "grammar": true
+     },
+     {
+      "term": "g:u_model",
+      "r": 0.989,
+      "extra_bits": 0.64,
+      "grammar": true
+     },
+     {
+      "term": "g:e^(\u2212u_model/19)",
+      "r": 1.0,
+      "extra_bits": 1.47,
+      "grammar": true
+     },
+     {
+      "term": "g:e^(\u2212u_model/21.3)",
+      "r": 1.0,
+      "extra_bits": 1.47,
+      "grammar": true
+     },
+     {
+      "term": "g:e^(\u2212u_model/23.5)",
+      "r": 1.0,
+      "extra_bits": 1.47,
+      "grammar": true
+     },
+     {
+      "term": "g:e^(\u2212u_model/19) \u00b7 Tk",
+      "r": 0.99,
+      "extra_bits": 3.21,
+      "grammar": true
+     }
+    ]
+   },
+   "inclusion": {
+    "station_bias": 1.0000000000000009,
+    "mesohigh": 0.8060684190121634,
+    "g:ln u_model": 0.3719467230574278,
+    "g:\u221au_model": 0.24385333360163147,
+    "g:u_model": 0.2153406037931057,
+    "outflow": 0.061823896369401374,
+    "g:e^(\u2212u_model/19) \u00b7 Tk": 0.04969957504940392,
+    "g:e^(\u2212u_model/21.3) \u00b7 Tk": 0.04902617009335217,
+    "g:e^(\u2212u_model/23.5) \u00b7 Tk": 0.04299047878341891,
+    "g:[dp>140] \u00b7 dT": 0.023406721519568414,
+    "g:[dT>5.5] \u00b7 dp": 0.01114548424774642,
+    "g:dp": 0.010124993047949601
+   },
+   "map_formula": [
+    "station_bias",
+    "pressure_jump",
+    "g:ln u_model"
+   ],
+   "map_weight": 0.30735645943621415,
+   "inclusion_by_input": {
+    "stn_loo": 1.0000000000000009,
+    "u_model": 0.9999999964285425,
+    "dp": 0.8630196137457592,
+    "Tk": 0.21524122031181323,
+    "dT": 0.10119328104783601
+   },
+   "group_confound": {
+    "station_bias": {
+     "within_group_share": 0.0452,
+     "offsets_extra_bits": 323.44,
+     "group_level_saved_bits": 169.81,
+     "group_level_cost_bits": 9.52,
+     "flag": false,
+     "n_groups": 104
+    }
+   },
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "station_bias": 1.0,
+     "outflow": 0.36666666666666664,
+     "mesohigh": 0.3333333333333333,
+     "g:1/u_model": 0.2,
+     "g:u_model": 0.16666666666666666,
+     "g:Tk\u00b2 \u00b7 1/u_model": 0.1,
+     "g:ln u_model": 0.06666666666666667,
+     "g:Tk\u00b2 \u00b7 ln u_model": 0.03333333333333333,
+     "g:e^(\u2212u_model/23.5) \u00b7 Tk": 0.03333333333333333,
+     "g:\u221au_model": 0.03333333333333333,
+     "g:dT\u00b2": 0.03333333333333333,
+     "g:e^(\u2212u_model/21.3)": 0.03333333333333333,
+     "g:[u_model>19]": 0.03333333333333333
+    },
+    "coef_90": {
+     "station_bias": [
+      0.5975971260777558,
+      0.7379896159833772
+     ],
+     "pressure_jump": [
+      0.0931235328301446,
+      0.16096250487421412
+     ],
+     "g:ln u_model": [
+      -0.05827851505490156,
+      -0.042620763014077946
+     ]
+    }
+   },
+   "neighbour": {
+    "gain": -0.052842795748068605,
+    "where": "all inputs",
+    "null_95": -0.05569191771352631,
+    "p": 0.06,
+    "structure_left": false
+   },
+   "sd_after": 0.1875
+  },
+  "n": 897,
+  "null_bits_saved": {
+   "max": 0.0,
+   "mean": 0.0,
+   "all": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": 0.05
+  },
+  "findings4_winner": "FINDINGS-6: station offsets only (cold_pool +0.52 per sqrt(dT/T), below MDE)",
+  "n_pairs": 897,
+  "source": "storm_terms.json"
+ }
+}

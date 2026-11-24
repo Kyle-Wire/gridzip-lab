@@ -121,3 +121,27 @@ def prev_of(domain, n):
     blocks = 3 if domain == "heat" else 1; m = n // blocks; p = np.arange(n) - 1
     p[np.arange(0, n, m)] = -1
     return p
+
+
+# ---------------------------------------------------------------------------------------------- v2 (PROTOCOL-7)
+def conv_ctx(rng, n=400, stations=8):
+    """Synthetic thunderstorm gust rows with physically linked inputs: the pressure jump and rain rise with the
+    temperature drop, DCAPE with dry air aloft, the stability with the hour."""
+    stn = rng.integers(0, stations, n); site = rng.normal(0, 0.12, stations)
+    dT = rng.gamma(2.0, 2.0, n); Tk = rng.normal(300, 4, n)
+    dp = 100 * np.maximum(0.0, 0.25 * dT + rng.normal(0, 0.8, n))
+    dd700 = rng.gamma(2.0, 4.0, n); dcape = np.exp(rng.normal(6.2, 0.4, n) + 0.03 * dd700)
+    hour = rng.uniform(0, 24, n); zL = np.clip(-0.4 * np.cos(2 * np.pi * (hour - 15) / 24) + rng.normal(0, 0.25, n), -2, 1)
+    return {"dT": dT, "Tk": Tk, "dp": dp, "dcape": dcape, "cape": np.exp(rng.normal(7.0, 0.7, n)), "lapse": rng.normal(7.0, 1.0, n),
+            "dd700": dd700, "rain_mmh": np.exp(rng.normal(1.5, 1.0, n) + 0.1 * dT), "u_model": rng.uniform(12, 30, n),
+            "zL": zL, "z": np.full(n, 10.0), "z0": np.exp(rng.uniform(np.log(0.01), np.log(0.5), n)), "ri_b": rng.normal(0, 0.3, n),
+            "u_storm": rng.uniform(3, 20, n), "w_star": rng.uniform(0.5, 3.0, n), "hour": hour, "month": rng.integers(4, 10, n).astype(float),
+            "dirn": rng.uniform(0, 360, n), "station": stn, "stn_loo": site[stn] + rng.normal(0, 0.03, n)}
+
+
+def trop_ctx(rng, n=400):
+    """Synthetic landfall rows: hours since landfall (negative offshore), radius over R_max, azimuth from the motion."""
+    return {"t_land": rng.uniform(-12, 48, n), "r_rmax": np.exp(rng.uniform(np.log(0.3), np.log(8.0), n)),
+            "theta_rel": rng.uniform(0, 360, n), "u_storm": rng.uniform(2, 12, n), "u_model": rng.uniform(15, 60, n),
+            "land_frac": np.clip(rng.beta(1.2, 1.2, n), 0, 1), "z": np.full(n, 10.0), "z0": np.exp(rng.uniform(np.log(0.0002), np.log(0.5), n)),
+            "hour": rng.uniform(0, 24, n), "dirn": rng.uniform(0, 360, n)}

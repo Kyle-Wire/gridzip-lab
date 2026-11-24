@@ -1,0 +1,1402 @@
+{
+ "summary": {
+  "B1 hc\u00b7lp": {
+   "shape_found": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "g:lp \u00b7 hc": 17,
+    "g:lp \u00b7 \u221ahc": 3
+   }
+  },
+  "B2 corner\u00b7decay(fetch)": {
+   "shape_found": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "g:e^(\u2212fetch/5.66) \u00b7 corner": 2,
+    "g:e^(\u2212fetch/6.14) \u00b7 corner": 2,
+    "g:e^(\u2212fetch/5.61) \u00b7 corner": 1,
+    "g:e^(\u2212fetch/5.87) \u00b7 corner": 1,
+    "g:e^(\u2212fetch/8.44) \u00b7 corner": 1,
+    "g:e^(\u2212fetch/5.69) \u00b7 corner": 1,
+    "g:e^(\u2212fetch/5.78) \u00b7 corner": 1,
+    "g:e^(\u2212fetch/5.39) \u00b7 corner": 1
+   }
+  },
+  "B3 Td\u00b7cloud (heat)": {
+   "shape_found": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "g:cloud \u00b7 Td": 13,
+    "g:cloud": 5,
+    "g:cloud \u00b7 Td\u00b2": 1,
+    "g:max(0, cloud\u22120.237) \u00b7 Td": 1
+   }
+  },
+  "B4 hinge(z)": {
+   "shape_found": 1.0,
+   "explained": 1.0,
+   "pass": true,
+   "found": {
+    "g:max(0, z\u221216.8)": 3,
+    "g:max(0, z\u221217.1)": 2,
+    "g:max(0, z\u221216.9)": 2,
+    "g:max(0, z\u221217.4)": 2,
+    "g:max(0, z\u221217.6)": 2,
+    "g:max(0, z\u221217.8)": 2,
+    "g:max(0, z\u221217.5)": 1,
+    "g:max(0, z\u221217.3)": 1
+   }
+  },
+  "B5 off-grid decay": {
+   "explained_0.8": 1.0,
+   "pass": true,
+   "found": {
+    "g:e^(\u2212fetch/2.86)": 3,
+    "g:e^(\u2212fetch/2.89)": 2,
+    "g:e^(\u2212fetch/2.57)": 1,
+    "g:e^(\u2212fetch/2.61)": 1,
+    "g:e^(\u2212fetch/3.01)": 1,
+    "g:e^(\u2212fetch/2.88)": 1,
+    "g:e^(\u2212fetch/3.3)": 1,
+    "g:e^(\u2212fetch/3.69)": 1
+   }
+  },
+  "B6 control": {
+   "named": 0.9,
+   "pass": true,
+   "found": {
+    "contrast + fetch_decay": 18,
+    "contrast + g:ln fetch": 2
+   }
+  }
+ },
+ "runs": [
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 0,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2051
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 1,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999997,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 2,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 3,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2092
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 4,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 5,
+   "found": [
+    "g:lp \u00b7 \u221ahc"
+   ],
+   "best_r": 0.9880998506061313,
+   "r2": 0.9523886398991075,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 6,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 7,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 8,
+   "found": [
+    "g:lp \u00b7 \u221ahc"
+   ],
+   "best_r": 0.9882074967119836,
+   "r2": 0.9736961737055208,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 9,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 10,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 11,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 12,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999997,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 13,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 14,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 15,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 16,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 17,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.998263888888889,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 18,
+   "found": [
+    "g:lp \u00b7 \u221ahc"
+   ],
+   "best_r": 0.9886393802080178,
+   "r2": 0.9745959309889256,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B1 hc\u00b7lp",
+   "seed": 19,
+   "found": [
+    "g:lp \u00b7 hc"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 0,
+   "found": [
+    "g:e^(\u2212fetch/5.61) \u00b7 corner"
+   ],
+   "best_r": 0.9999999999999997,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2051
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 1,
+   "found": [
+    "g:e^(\u2212fetch/5.87) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 2,
+   "found": [
+    "g:e^(\u2212fetch/8.44) \u00b7 corner"
+   ],
+   "best_r": 0.9928157050684002,
+   "r2": 0.9832966077813892,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 3,
+   "found": [
+    "g:e^(\u2212fetch/5.69) \u00b7 corner"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2092
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 4,
+   "found": [
+    "g:e^(\u2212fetch/5.78) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 5,
+   "found": [
+    "g:e^(\u2212fetch/5.66) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 6,
+   "found": [
+    "g:e^(\u2212fetch/6.14) \u00b7 corner"
+   ],
+   "best_r": 0.9999999999999996,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 7,
+   "found": [
+    "g:e^(\u2212fetch/5.39) \u00b7 corner"
+   ],
+   "best_r": 1.0,
+   "r2": 0.998263888888889,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 8,
+   "found": [
+    "g:e^(\u2212fetch/6.14) \u00b7 corner"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 9,
+   "found": [
+    "g:e^(\u2212fetch/8.77) \u00b7 corner"
+   ],
+   "best_r": 0.9925231116963739,
+   "r2": 0.9826870382563347,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 10,
+   "found": [
+    "g:e^(\u2212fetch/6.04) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 11,
+   "found": [
+    "g:e^(\u2212fetch/6.09) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 12,
+   "found": [
+    "g:e^(\u2212fetch/6.16) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000007,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 13,
+   "found": [
+    "g:e^(\u2212fetch/5.47) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 14,
+   "found": [
+    "g:e^(\u2212fetch/6.41) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 15,
+   "found": [
+    "g:e^(\u2212fetch/6.31) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000007,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 16,
+   "found": [
+    "g:e^(\u2212fetch/9.04) \u00b7 corner"
+   ],
+   "best_r": 0.9904529446828356,
+   "r2": 0.9783741903114638,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 17,
+   "found": [
+    "g:e^(\u2212fetch/5.66) \u00b7 corner"
+   ],
+   "best_r": 1.0,
+   "r2": 0.998263888888889,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 18,
+   "found": [
+    "g:e^(\u2212fetch/6.46) \u00b7 corner"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B2 corner\u00b7decay(fetch)",
+   "seed": 19,
+   "found": [
+    "g:e^(\u2212fetch/6.11) \u00b7 corner"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 0,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9375,
+   "grammar_size": 1640
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 1,
+   "found": [
+    "g:cloud"
+   ],
+   "best_r": 0.9801939038571904,
+   "r2": 0.9589573197322323,
+   "grammar_size": 1688
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 2,
+   "found": [
+    "g:cloud"
+   ],
+   "best_r": 0.9775583627689454,
+   "r2": 0.9540156801917727,
+   "grammar_size": 1691
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 3,
+   "found": [
+    "g:cloud \u00b7 Td\u00b2"
+   ],
+   "best_r": 0.9848715492282105,
+   "r2": 0.9677279048028954,
+   "grammar_size": 1686
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 4,
+   "found": [
+    "g:cloud"
+   ],
+   "best_r": 0.979684728146064,
+   "r2": 0.9580026152738705,
+   "grammar_size": 1648
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 5,
+   "found": [
+    "g:max(0, cloud\u22120.237) \u00b7 Td"
+   ],
+   "best_r": 0.9838948819960746,
+   "r2": 0.9658966537426397,
+   "grammar_size": 1684
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 6,
+   "found": [
+    "g:cloud"
+   ],
+   "best_r": 0.9798132872700088,
+   "r2": 0.9470525034031438,
+   "grammar_size": 1651
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 7,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0,
+   "r2": 0.99609375,
+   "grammar_size": 1685
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 8,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0,
+   "r2": 0.99609375,
+   "grammar_size": 1687
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 9,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.99609375,
+   "grammar_size": 1686
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 10,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.99609375,
+   "grammar_size": 1685
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 11,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0,
+   "r2": 0.99609375,
+   "grammar_size": 1646
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 12,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9912109375,
+   "grammar_size": 1645
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 13,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.9375,
+   "grammar_size": 1648
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 14,
+   "found": [
+    "g:cloud"
+   ],
+   "best_r": 0.9824231621766684,
+   "r2": 0.9631371790812531,
+   "grammar_size": 1686
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 15,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.99609375,
+   "grammar_size": 1685
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 16,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.99609375,
+   "grammar_size": 1682
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 17,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9375000000000001,
+   "grammar_size": 1686
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 18,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.99609375,
+   "grammar_size": 1647
+  },
+  {
+   "suite": "B",
+   "law": "B3 Td\u00b7cloud (heat)",
+   "seed": 19,
+   "found": [
+    "g:cloud \u00b7 Td"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.99609375,
+   "grammar_size": 1683
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 0,
+   "found": [
+    "g:max(0, z\u221217.1)"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2051
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 1,
+   "found": [
+    "g:max(0, z\u221217.5)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 2,
+   "found": [
+    "g:max(0, z\u221216.9)"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 3,
+   "found": [
+    "g:max(0, z\u221217.3)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2092
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 4,
+   "found": [
+    "g:max(0, z\u221217.4)"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 5,
+   "found": [
+    "g:max(0, z\u221217.6)"
+   ],
+   "best_r": 0.9999999999999996,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 6,
+   "found": [
+    "g:max(0, z\u221216.8)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 7,
+   "found": [
+    "g:max(0, z\u221215.9)"
+   ],
+   "best_r": 0.9999999999999997,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 8,
+   "found": [
+    "g:max(0, z\u221216.9)"
+   ],
+   "best_r": 0.9999999999999999,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 9,
+   "found": [
+    "g:max(0, z\u221217.1)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 10,
+   "found": [
+    "g:max(0, z\u221216.1)"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 11,
+   "found": [
+    "g:max(0, z\u221215.8)"
+   ],
+   "best_r": 0.9999999999999998,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 12,
+   "found": [
+    "g:max(0, z\u221217)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 13,
+   "found": [
+    "g:max(0, z\u221217.2)"
+   ],
+   "best_r": 1.0000000000000004,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 14,
+   "found": [
+    "g:max(0, z\u221216.8)"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 15,
+   "found": [
+    "g:max(0, z\u221217.8)"
+   ],
+   "best_r": 0.9999999999999996,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 16,
+   "found": [
+    "g:max(0, z\u221217.8)"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.9722222222222222,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 17,
+   "found": [
+    "g:max(0, z\u221217.6)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 18,
+   "found": [
+    "g:max(0, z\u221216.8)"
+   ],
+   "best_r": 1.0000000000000002,
+   "r2": 0.998263888888889,
+   "grammar_size": 2134
+  },
+  {
+   "suite": "B",
+   "law": "B4 hinge(z)",
+   "seed": 19,
+   "found": [
+    "g:max(0, z\u221217.4)"
+   ],
+   "best_r": 1.0,
+   "r2": 0.9982638888888888,
+   "grammar_size": 2177
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 0,
+   "found": [
+    "g:e^(\u2212fetch/2.86)"
+   ],
+   "best_r": 0.9994900866757817,
+   "r2": 0.997201569463434,
+   "grammar_size": 2055
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 1,
+   "found": [
+    "g:e^(\u2212fetch/2.86)"
+   ],
+   "best_r": 0.9994985427587623,
+   "r2": 0.9713864601534924,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 2,
+   "found": [
+    "g:e^(\u2212fetch/2.57)"
+   ],
+   "best_r": 0.9976276679024371,
+   "r2": 0.993321530352299,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 3,
+   "found": [
+    "g:e^(\u2212fetch/2.61)"
+   ],
+   "best_r": 0.9979003206006877,
+   "r2": 0.9938895568069883,
+   "grammar_size": 2096
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 4,
+   "found": [
+    "g:e^(\u2212fetch/3.01)"
+   ],
+   "best_r": 0.9999459968728749,
+   "r2": 0.9981513823740447,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 5,
+   "found": [
+    "g:e^(\u2212fetch/2.88)"
+   ],
+   "best_r": 0.9995980418814298,
+   "r2": 0.9715522920246051,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 6,
+   "found": [
+    "g:e^(\u2212fetch/3.3)"
+   ],
+   "best_r": 0.9997394977713376,
+   "r2": 0.9717880518411187,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 7,
+   "found": [
+    "g:e^(\u2212fetch/2.86)"
+   ],
+   "best_r": 0.999477914095613,
+   "r2": 0.9971762099214158,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 8,
+   "found": [
+    "g:e^(\u2212fetch/3.69)"
+   ],
+   "best_r": 0.9980071990348192,
+   "r2": 0.9941122202114285,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 9,
+   "found": [
+    "g:e^(\u2212fetch/3.29)"
+   ],
+   "best_r": 0.9997639176628423,
+   "r2": 0.9718287516602924,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 10,
+   "found": [
+    "g:e^(\u2212fetch/2.89)"
+   ],
+   "best_r": 0.9996390996125869,
+   "r2": 0.997512013081778,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 11,
+   "found": [
+    "g:e^(\u2212fetch/3.36)"
+   ],
+   "best_r": 0.9995355486761395,
+   "r2": 0.9714481366824549,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 12,
+   "found": [
+    "g:ln fetch"
+   ],
+   "best_r": 0.9850567353362522,
+   "r2": 0.9473167811159757,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 13,
+   "found": [
+    "g:e^(\u2212fetch/2.74)"
+   ],
+   "best_r": 0.998925727066002,
+   "r2": 0.9960258202763927,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 14,
+   "found": [
+    "g:e^(\u2212fetch/3.26)"
+   ],
+   "best_r": 0.9998262081587022,
+   "r2": 0.9719325691533925,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 15,
+   "found": [
+    "g:e^(\u2212fetch/3.02)"
+   ],
+   "best_r": 0.9999499037002529,
+   "r2": 0.9373747592506319,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 16,
+   "found": [
+    "g:e^(\u2212fetch/3.2)"
+   ],
+   "best_r": 0.9999242638121582,
+   "r2": 0.9981061051642186,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 17,
+   "found": [
+    "g:e^(\u2212fetch/5.66)"
+   ],
+   "best_r": 0.983330877506223,
+   "r2": 0.9635365503601866,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 18,
+   "found": [
+    "g:e^(\u2212fetch/2.89)"
+   ],
+   "best_r": 0.9996847097875852,
+   "r2": 0.9716967385348638,
+   "grammar_size": 2138
+  },
+  {
+   "suite": "B",
+   "law": "B5 off-grid decay",
+   "seed": 19,
+   "found": [
+    "g:e^(\u2212fetch/3.17)"
+   ],
+   "best_r": 0.9999666858983438,
+   "r2": 0.9721666987194617,
+   "grammar_size": 2181
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 0,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 1,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 2,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 3,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 4,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 5,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 6,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 7,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 8,
+   "found": [
+    "contrast",
+    "g:ln fetch"
+   ],
+   "named": false,
+   "false": [
+    "g:ln fetch"
+   ]
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 9,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 10,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 11,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 12,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 13,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 14,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 15,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 16,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 17,
+   "found": [
+    "contrast",
+    "g:ln fetch"
+   ],
+   "named": false,
+   "false": [
+    "g:ln fetch"
+   ]
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 18,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  },
+  {
+   "suite": "B",
+   "law": "B6 control",
+   "seed": 19,
+   "found": [
+    "contrast",
+    "fetch_decay"
+   ],
+   "named": true,
+   "false": []
+  }
+ ]
+}
