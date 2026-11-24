@@ -16,7 +16,7 @@ def blocks(ax):
     for cx in (-0.4, 0.0, 0.4):
         for cy in (-0.4, 0.0, 0.4):
             tall = cx == 0 and cy == 0
-            ax.add_patch(Rectangle((cx - 0.1, cy - 0.1), 0.2, 0.2, color="#52606d" if tall else "#cbd2d9", zorder=0))
+            ax.add_patch(Rectangle((cx - 0.1, cy - 0.1), 0.2, 0.2, color="#cbd2d9", zorder=0))
     ax.set_xlim(-0.55, 0.55); ax.set_ylim(-0.55, 0.55); ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([])
     ax.annotate("wind", xy=(-0.33, 0.52), xytext=(-0.53, 0.52), arrowprops=dict(arrowstyle="->", color=INK), va="center", color=INK)
 
@@ -34,7 +34,7 @@ for ax, (v, t) in zip(axs, panels):
 cb = fig.colorbar(sc, cax=fig.add_axes([0.875, 0.15, 0.012, 0.6])); cb.set_ticks(np.log([0.75, 0.87, 1, 1.15, 1.33]) - 0)
 cb.set_ticklabels(["model 25 % low", "13 % low", "on the level", "15 % high", "33 % high"])
 fig.suptitle(f"AIJ Case C 1D, LBM D/32: every point reads about ×{d['level_factor']:.2f} high; what's left after that, point by point "
-             "\n(dark block = the tall centre block; red = model faster than the tunnel; tunnel repeat noise ≈ 0.05)", x=0.01, ha="left", fontsize=11, color=INK)
+             "\n(grey = the nine blocks, all D tall in layout 1D; red = model faster than the tunnel; tunnel repeat noise ≈ 0.05)", x=0.01, ha="left", fontsize=11, color=INK)
 fig.savefig(F / "lateral_01_points.png", dpi=160, bbox_inches="tight")
 
 # 2: which flow words pay, and the level ledger
@@ -42,7 +42,7 @@ fig, axs = plt.subplots(1, 2, figsize=(12, 4.3), gridspec_kw={"width_ratios": [1
 ax = axs[0]; bi = d["bootstrap_by_input"]["B"]
 lab = {"lp": "model's own speed-up", "lateral": "distance from centreline", "downwash": "vertical flow at 5 cm",
        "ti_local": "local turbulence", "fetch": "distance into array", "side_flux": "outward flow", "street_flux": "air through the street",
-       "turn": "flow turning", "reverse": "reversed flow", "x_pos": "x position", "corner": "near tall corner", "cross": "cross street"}
+       "turn": "flow turning", "reverse": "reversed flow", "x_pos": "x position", "corner": "near the centre block's corners", "cross": "cross street"}
 field = {"downwash", "ti_local", "side_flux", "street_flux", "turn", "reverse"}
 keys = [k for k in lab if k in bi or k in field]; keys = sorted(keys, key=lambda k: -bi.get(k, 0))
 ax.barh(range(len(keys)), [bi.get(k, 0) for k in keys], color=[WARN if k in field else MUTE for k in keys], height=0.6)
