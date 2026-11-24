@@ -153,3 +153,22 @@ Area ratio below 1 means the burned-area forecast beats the mapped burned share 
   the overrun. The share measures misses only: it cannot show overrun.
 - Tubbs houses, E0: 11,619 modelled destroyed against 5,185 recorded.
 
+### A12: house-to-house spread scaled by wind (rule H1) (24 Nov 2026; embers on 20-ft wind, road rule on; calibration)
+
+| run | seeds | burned km2 | overlap at last outline | houses modelled / recorded | bits per building (own rate) | AUC | A8 score |
+|---|---|---|---|---|---|---|---|
+| tubbs, H1 off | 2 | 238, 237 | 0.44, 0.44 | 11,619 / 5,185 | 1.62 (0.63) | 0.753 | 4.08 |
+| tubbs, H1 on | 2 | 260, 242 | 0.40, 0.43 | 7,105 / 5,185 | 1.23 | 0.731 | 3.43 |
+| camp, H1 off | 3 | 479, 513, 508 | 0.51, 0.51, 0.48 | 14,172 / 16,493 | 1.63 (0.99) | 0.753 | 2.81 |
+| camp, H1 on | 3 | 461, 483, 512 | 0.50, 0.47, 0.47 | 12,002 / 16,493 | 2.03 | 0.709 | 3.27 |
+
+- As predicted in A12: Tubbs improves (A8 4.08 to 3.43, modelled losses 2.2 to 1.4 times the record), Camp
+  worsens (2.81 to 3.27, AUC 0.753 to 0.709), because the HRRR wind over Paradise is weak while the town burned.
+  By A12's rule H1 is not kept.
+- Five changes tested on 24 Nov. Kept: none yet as a fitted choice; the road rule is carried as an option
+  (small gain in early spread). Dropped by their own rules: E80, E850, EP, H1. Each wind-dependent change helped
+  one fire and hurt the other. The common cause is the wind input (HRRR 3 km surface wind over Paradise), not
+  the rules themselves; they may be retested once the wind is better, under a new amendment.
+- Standing with no fitted numbers (priors, road rule on, E0): Camp A8 2.81, AUC 0.753; Tubbs A8 4.08, AUC 0.753.
+  Both worse than the no-skill 2.0. Nothing passes.
+
