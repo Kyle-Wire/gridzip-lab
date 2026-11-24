@@ -66,13 +66,14 @@ fed down into the lower layer.
   near-ground flow doesn't explain it. With FINDINGS-5 (≥ 74 % made inside the array) and D1 (flow above the array
   10–13 % fast), the open suspect is what happens at and above roof height. That is how the model's shear layer over
   the blocks sets the speed the streets see. This field stops at 10 cm, half the block height.
-- **Next run:** the same F3 setting with `--keep-fields 0.45`, so the field reaches above the tall centre block.
+- **Next run:** WindSim F3 step 6 (its protocol is in `docs/validation.md`). R0 keeps the fields to 0.45 m, which is 2.25 block heights (in layout 1D every block is D tall), and R1 runs in a wider, taller section.
   Then a ledger of momentum flux at roof height (u'w' cannot be read without covariances; `write_fields` would need
   uw, vw and uv sums added, which is a WindSim change under its own protocol).
 - The domain-blockage test (FINDINGS-5 second suspect, ≤ 22 %) stays open and is cheap to add to the same run:
   widen the section so blockage falls under 2 %.
 
 ## Limits
+- In layout 1D all nine blocks are D tall, so the `hc` input is constant and drops out. The first version of the figure labelled the centre block "tall", which was wrong.
 - One run, one layout, 120 points; the folds are spatial, and the mirror fold makes the quadrants share field
   values pairwise.
 - `ti_local` is the isotropic form, because covariances aren't stored.

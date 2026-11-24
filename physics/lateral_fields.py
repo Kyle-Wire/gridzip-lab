@@ -93,7 +93,7 @@ def ctx_build():
     street = lambda v: 0.1 < round(abs(v), 3) < 0.3
     sx = np.array([street(v) for v in x]); sy = np.array([street(v) for v in y])
     dxb = np.maximum(np.abs(x) - 0.1, 0); dyb = np.maximum(np.abs(y) - 0.1, 0)
-    hc = np.ones(n)                                     # 1D layout: every point has the 1 D-taller centre block
+    hc = np.ones(n)                                     # 1D layout: centre block D tall like the rest (hc constant, drops out)
     ctx.update({"lp": np.log(p["vs_pred"] / U_APP), "fetch": (x + 0.5) / D, "along": (sy & ~sx).astype(float),
                 "cross": (sx & ~sy).astype(float), "hc": hc, "corner": (np.hypot(dxb, dyb) <= 0.1 + 1e-9).astype(float),
                 "lateral": np.abs(y) / D, "x_pos": x / D})
