@@ -93,3 +93,27 @@ Jaccard is against the NASA FEDS satellite perimeters. The GeoMAC outline stampe
 - L_cross 0, 1 and 2 m are indistinguishable at one seed (seeds alone moved the area from 375 to 463 km2).
 - Every A8 score is above 2.0: no skill yet against the fire's own rates. This is with uncalibrated priors.
 
+### Search stage 1 and wind aloft for embers (24 Nov 2026; Camp, first 10 h, 2 seeds, road rule on unless said; calibration)
+
+Scored at the satellite outline at 9.45 h (331 km2 mapped; incident outline 285 km2). A8 score 2.0 = no skill.
+Area ratio below 1 means the burned-area forecast beats the mapped burned share of the box.
+
+| setting (FireSim results/camp_2018/search1/) | km2 at 10 h (two seeds) | Jaccard at 9.45 h | area ratio | AUC | A8 score |
+|---|---|---|---|---|---|
+| g0_off_d150 (road rule off) | 159, 159 | 0.31, 0.30 | 1.28 | 0.577 | 4.79 |
+| g0_road_d150 | 216, 219 | 0.30, 0.29 | 1.43 | 0.581 | 4.87 |
+| g0_road_d400 (ember median 400 m) | 403, 420 | 0.35, 0.34 | 1.61 | 0.607 | 4.60 |
+| g025_road_d150 (gust share 0.25) | 421, 394 | 0.33, 0.33 | 1.63 | 0.632 | 4.44 |
+| g0_road_d150_E80 (embers on 80 m wind) | 308, 326 | 0.35, 0.37 | 1.40 | 0.609 | 4.49 |
+| g0_road_d150_E850 (embers on 850 hPa wind) | 254, 289 | 0.49, 0.46 | 0.90 | 0.675 | 3.41 |
+
+- Stage 1 as planned did not fit its time cap (2 of 12 settings); the rest above were run after a fix that made
+  runs 3.3 times faster with identical output (the fields were being rebuilt on every ember lookup).
+- More embers, further throws or more gust all burn more area but in the wrong place: overlap stays near 0.3.
+- Transects of the model's inputs (no outcome data) showed the HRRR 10 m wind dying over Paradise and reversing
+  west of it, while the 850 hPa wind holds 10 to 19 m/s toward Paradise and Chico. The 80 m wind follows the surface.
+- With embers on the 850 hPa wind (A10, written before the run) the overlap at 9.45 h rises to 0.46 to 0.49 with
+  less area burned, and the burned-area forecast beats its no-skill rate for the first time. Buildings are still
+  about 2.5 times worse than the fire's own rate at 10 h (the record is not timed; A9).
+- One fire, and the idea came from looking at it. A10's check stands: it must also help Tubbs or it is dropped.
+
