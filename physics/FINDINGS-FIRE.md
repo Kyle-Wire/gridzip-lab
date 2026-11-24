@@ -135,3 +135,21 @@ Area ratio below 1 means the burned-area forecast beats the mapped burned share 
 - First Tubbs runs were first tests of the whole chain on a second fire: the fire runs the right way (south-west
   to Santa Rosa's north edge) with nothing tuned to Tubbs.
 
+### A11: embers lofted by intense fire (option EP), and the Tubbs first night (24 Nov 2026; calibration)
+
+| run | seeds | burned km2 | overlap at last outline | area ratio | bits per building (own rate) | AUC | A8 score |
+|---|---|---|---|---|---|---|---|
+| tubbs E0 (rerun, identical) | 2 | 238, 237 | 0.44, 0.44 | 1.50 | 1.62 (0.63) | 0.753 | 4.08 |
+| tubbs EP, I_loft 10 MW/m | 2 | 276, 319 | 0.39, 0.34 | 1.91 | 2.97 | 0.635 | 6.63 |
+| tubbs EP, I_loft 30 MW/m | 2 | 390, 260 | 0.27, 0.40 | 1.93 | 2.95 | 0.643 | 6.61 |
+| camp EP, I_loft 10 MW/m | 3 | 442, 480, 497 | 0.57, 0.50, 0.58 | 0.94 | 1.58 (0.99) | 0.752 | 2.53 |
+
+- EP fails A11's rule: it makes Tubbs much worse than E0 at both I_loft values. It is dropped, with E850 and E80.
+  Embers stay on the 20-ft wind. Camp's missed run west of Paradise is carried as a stated limit of the HRRR
+  surface wind until wind comes from WindSim (candidate M4). Camp EP at 30 MW/m was not run (nothing to decide).
+- Tubbs first night, E0, seed 0: 96 % of 594 satellite detections at 5.5 h lie on or within 190 m of modelled
+  fire, with 128 km2 modelled burned at that time; 87 to 100 % at the four later passes. The mapped area at 43 h
+  is 125 km2. So the model's first night covers the detections, and its 110 km2 of later growth (to 234 km2) is
+  the overrun. The share measures misses only: it cannot show overrun.
+- Tubbs houses, E0: 11,619 modelled destroyed against 5,185 recorded.
+
