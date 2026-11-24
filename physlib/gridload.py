@@ -155,9 +155,9 @@ GBM_FEATS = ("hour", "dow", "month", "doy", "trend", "holiday", "hol_adj", "T", 
              "Tavg24", "Tavg48", "Tmax_prev", "heatrun", "sun")
 
 
-def gbm(d, tr, te, seed=0):
+def gbm(d, tr, te, seed=0, extra=None):
     from sklearn.ensemble import HistGradientBoostingRegressor
-    F = lambda i: np.column_stack([d[k][i] for k in GBM_FEATS])
+    F = lambda i: np.column_stack([d[k][i] for k in GBM_FEATS] + ([extra(i)] if extra else []))
     m = HistGradientBoostingRegressor(max_iter=800, learning_rate=0.05, max_leaf_nodes=63, l2_regularization=1.0,
                                       early_stopping=False, random_state=seed)
     m.fit(F(tr), np.log(d["y"][tr])); return np.exp(m.predict(F(te)))
@@ -370,7 +370,54 @@ def sealed(zones=ZONES):
     return out
 
 
+# --------------------------------------------------------------------------------- A1 parts D and E: audit strong models
+FRESH = (2017, 2017)
+
+
+def audit(zones=ZONES, null_N=9):
+    out = {}
+    for zn in zones:
+        d = zone(zn); tr = rows(d, TRAIN); ex = rows(d, (EXPLORE[0], CHECK[1])); y = d["y"]
+        preds = {"M2_expert": expert_X(d, ex) @ ols(expert_X(d, tr), y[tr]), "M3_gbm": gbm(d, tr, ex)}
+        o = {}
+        for m, pred in preds.items():
+            r = np.log(y[ex] / pred); c = ctx_of(d, ex)
+            sel = np.flatnonzero(d["year"][ex] <= EXPLORE[1]); cc = {k: v[sel] for k, v in c.items()}
+            t0 = time.time()
+            a = analyse(cc, r[sel], ex[sel], STEP, null_N=null_N if zn == "TOTAL" else 0, name=f"ISO-NE {zn} {m} residuals 2011-12")
+            s = summary(a)
+            from . import grammar as GR
+            built = E.assemble(list(LOAD) + GR.candidates(c, len(ex), exclude=tuple(k for k in c if k not in GRAMMAR_INPUTS)), c, len(ex))
+            names = [b.name for b in built]; ok = [t for t in s["winner"] if t in names]
+            fo = (np.flatnonzero(d["year"][ex] <= EXPLORE[1]), np.flatnonzero(d["year"][ex] == CHECK[0]))
+            s["transfer_2013"] = E.holdout(built, ok, r, G, fo[0], fo[1], E.library_info(built), prev=prev_of(ex, STEP)) if ok else None
+            s["mape_2011_13"] = mape(y[ex], pred); s["sec"] = round(time.time() - t0, 1); o[m] = s
+            print(zn, m, s["winner"], round(s["bits_saved_per_reading"], 3), s["transfer_2013"], s.get("null_bits_saved", {}).get("max"), f"{s['sec']}s", flush=True)
+        out[zn] = o; _dump("D_audit", out)
+    return out
+
+
+def fresh(zones=ZONES):
+    D = json.loads((OUT / "D_audit.json").read_text()); out = {}
+    for zn in zones:
+        d = zone(zn); tr = rows(d, FIT_ALL); y = d["y"]; o = {}
+        ok = lambda w: [t for t in w if np.all(np.isfinite(found_X(d, tr, [t])))]   # A1 note: a term that is not finite over
+        w2 = ok(D[zn]["M2_expert"]["winner"]); w3 = ok(D[zn]["M3_gbm"]["winner"])  # the fit years (1/trend at 2004) is dropped
+        for lab, yrs in (("2014_2016_post_hoc", SEALED), ("jan_apr_2017_fresh", FRESH)):
+            te = rows(d, yrs)
+            p2 = expert_X(d, te) @ ols(expert_X(d, tr), y[tr])
+            X2 = lambda i: np.column_stack([expert_X(d, i), found_X(d, i, w2)])
+            p2p = X2(te) @ ols(X2(tr), y[tr]) if w2 else p2
+            p3 = gbm(d, tr, te)
+            p3p = gbm(d, tr, te, extra=(lambda i: found_X(d, i, w3))) if w3 else p3
+            o[lab] = {"n_hours": len(te), "M2": mape(y[te], p2), "M2_plus": mape(y[te], p2p), "M3": mape(y[te], p3), "M3_plus": mape(y[te], p3p)}
+        o["terms_M2"] = w2; o["terms_M3"] = w3; out[zn] = o
+        print(zn, {k: {kk: round(vv, 3) for kk, vv in v.items()} for k, v in o.items() if isinstance(v, dict)}, flush=True)
+        _dump("E_fresh", out)
+    return out
+
+
 if __name__ == "__main__":
     import warnings; warnings.filterwarnings("ignore")
     cmd = sys.argv[1] if len(sys.argv) > 1 else "timing"
-    {"fetch": lambda: print(fetch()), "timing": timing, "planted": planted, "explore": explore, "sealed": sealed}[cmd]()
+    {"fetch": lambda: print(fetch()), "timing": timing, "planted": planted, "explore": explore, "sealed": sealed, "audit": audit, "fresh": fresh}[cmd]()
