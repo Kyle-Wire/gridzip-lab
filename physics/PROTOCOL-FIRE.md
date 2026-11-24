@@ -363,3 +363,22 @@ ignition over the later, calm hours.
   share of satellite fire detections (VIIRS 375 m, clipped to the final Tubbs outline plus 500 m so that the
   other fires of that night are left out) at the 10:15Z pass on 9 Oct (5.5 h) that fall on cells the model has
   burned by then, and the modelled area at that time. Reported beside the outlines, not part of the A8 score.
+
+**A12 (24 Nov 2026, after A11's results and a table of modelled house ignition times, before any run of the rule
+below).** What had been seen: Tubbs E0, 2 seeds: 11,619 houses modelled destroyed against 5,185 recorded. By
+modelled ignition time, 94 % of the recorded-destroyed houses the model lights are lit in the first 9 h, while the
+20-ft wind where the houses burned is 8 to 12 m/s; after hour 8 that wind is 1 to 3 m/s for the rest of the run,
+and in that calm the model lights 4,646 houses that stood against 231 that burned. (It also lights about 6,200
+houses that stood during the first 9 h; this amendment does not address those.) Camp: 58 % of modelled losses
+fall at 12 to 24 h, when the model's wind over Paradise is 7 to 9 m/s; in hours 3 to 10 it is 0.5 to 5 m/s there.
+- Reasoning, written before any test: in FireSim a burning house lights its neighbours and throws brands at a
+  rate that does not depend on wind. Fire spreading house to house through a town is a wind-driven event; in
+  calm air separation distances and crews hold it. Rule H1, off by default: the neighbour strength k_s and the
+  number of brands a burning house throws are both multiplied by min(1, U / U_ref)^2, U the 20-ft wind at the
+  burning house at its ignition time. U_ref = 10 m/s. Both numbers are unsourced priors; one setting is tried.
+- Test: Tubbs 44 h 2 seeds and Camp 24 h 3 seeds, embers on the 20-ft wind, road rule on, gust share 0, against
+  the same without H1 (for Camp that pairing is run fresh, since the earlier E0 ensemble had the road rule off).
+  H1 is kept if the A8 score on Tubbs improves by more than the seed spread and Camp's does not worsen by more
+  than its seed spread. Predicted before running: Tubbs improves; Camp may worsen, because the HRRR wind over
+  Paradise is weak in the hours when the town burned.
+- This does not model suppression. The limit in section 7 stands.
