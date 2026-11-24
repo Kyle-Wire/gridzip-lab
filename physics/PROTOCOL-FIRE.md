@@ -382,3 +382,23 @@ fall at 12 to 24 h, when the model's wind over Paradise is 7 to 9 m/s; in hours 
   than its seed spread. Predicted before running: Tubbs improves; Camp may worsen, because the HRRR wind over
   Paradise is weak in the hours when the town burned.
 - This does not model suppression. The limit in section 7 stands.
+
+**A13 (24 Nov 2026, after A12's result, before any station table is read).** What had been seen: four wind-dependent
+changes (E80, E850, EP, H1) each helped one calibration fire and hurt the other. The modelled wind over Paradise
+is 0.5 to 5 m/s in the hours the town burned. The only station comparisons seen so far are the five or six
+stations in each fire's config, as 24 h means (HRRR over station speed 0.80 to 1.94 on Camp, 0.64 to 2.13 on
+Tubbs).
+- Wind is now checked against stations alone, with no fire outcome in the loop. For each calibration fire's
+  window, every ASOS and RAWS station inside the fire box plus 0.75 degrees is compared hour by hour with the
+  HRRR analysis at the nearest lattice point: 10 m speed and direction, surface gust against the station's peak
+  gust, and the 80 m and 850 hPa speeds for reference (FireSim `scripts/wind_check.py`).
+- Rules fixed before the tables are read, the same for every fire:
+  - Speed scale. If at stations whose observed mean is 5 m/s or more the median HRRR-to-station speed ratio is
+    below 0.85 on both Camp and Tubbs, the surface wind is multiplied by 1 / (the mean of the two medians) in all
+    fire runs. If it is 0.85 to 1.15 on both, no scale. Anything else: no scale, and the disagreement is reported.
+  - Gusts. If the median HRRR-to-station gust ratio at those stations is 0.85 to 1.15 on both fires, the HRRR
+    gust is taken as sound and the gust share stays a fitted number (A7); otherwise the gust share is fixed at 0.
+  - Terrain. If the speed ratio falls with station height above the HRRR terrain (correlation below -0.5 on
+    both fires, at least 8 stations each), a height correction is designed under a new amendment; otherwise not.
+- Stations are few and sit where stations sit (airports, ridges). The check can show a bias; it cannot show the
+  wind in a place with no station, such as Paradise. That limit stays stated.
