@@ -296,3 +296,22 @@ rule or the new fitting score).** What had been seen: the Camp run with gust sha
 - Perimeter overlap is reported for every seed (it was seed 0 only).
 - Tubbs is run with the same setup as Camp (A5, A6 wind W2): ignition from the official record, stated in its
   config with the source, 24 h window.
+
+**A9 (24 Nov 2026, after the three Camp road-rule runs, before any search run or Tubbs run).** What had been seen:
+Camp, one seed each, gust share 0, R1 at L_cross 0, 1 and 2 m (FINDINGS-FIRE.md): 479 to 485 km2 burned against
+345 to 463 with R1 off, area at 9.45 h up from 153 to about 208 km2 (mapped 285 to 331), overlap at 21 h 0.48 to
+0.51 against 0.54, AUC 0.69 to 0.71. The three L_cross values differ by less than seeds do. Also seen: the Tubbs
+data folder has no mapped outline before 35 h after ignition and no satellite outline set.
+- R1 is not decided by those runs. L_cross 1 and 2 m are dropped (no measurable difference from 0); the search
+  carries R1 off and R1 with L_cross 0.
+- Search stage 1, Camp only, cheap runs to find where to look: 10 h window, 10 m cells, 2 seeds per setting,
+  ranked on the area ratio of A8 at the satellite outline at 9.45 h alone (the building record is not timed, so
+  buildings cannot be scored at 10 h; their numbers are printed, not ranked). Settings: gust share 0, 0.25, 0.5;
+  ember median throw 150 m (prior) and 400 m; R1 off and on. Twelve settings. Runs that do not fit the time cap
+  are listed as not run.
+- Stage 2: the best three stage-1 settings run 24 h with 3 seeds and are ranked on the A8 score. Stage 3 is A7's
+  fit proper (8 or more seeds, Camp and Tubbs). Every setting tried is listed with its score.
+- Tubbs: 44 h window so that the first three incident outlines (35.25, 40.9 and 43.0 h) fall inside; the A7
+  outline is the last of these. The satellite fire detections (VIIRS 375 m points) in the first 24 h are shown
+  on the map as a check of the first night and are not scored. An outline's edit time is not a fire time; only
+  the progression file's times are used.

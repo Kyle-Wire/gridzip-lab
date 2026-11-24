@@ -75,3 +75,21 @@ Jaccard is against the NASA FEDS satellite perimeters. The GeoMAC outline stampe
 - The A7 score is nearly all area (59.5 of 61.3). A8 replaces it with two ratios.
 - Still wrong: slow in the first 9 h, too far south, no north-west lobe toward Chico, about 3,250 standing
   houses near Oroville modelled as lost.
+
+### Road rule R1 on Camp (24 Nov 2026, FireSim 25b1403, one seed each, gust share 0; calibration)
+
+63,237 thin road cells in the Camp box. Mapped area: 285 (incident) and 331 (satellite) km2 at 9.45 h, 376 at 21.45 h.
+
+| run | L_cross | km2 at 3.35 h | km2 at 9.45 h | km2 at 21.45 h | Jaccard at 21.45 h | bits per building | AUC | A8 score (2.0 = no skill) |
+|---|---|---|---|---|---|---|---|---|
+| ..._g0_s1_v2 | rule off | | 153 | 345 | 0.54 | 2.59 | 0.673 | |
+| ..._road0_s1 | 0 m | 56 | 208 | 442 | 0.51 | 2.29 | 0.705 | 3.55 |
+| ..._road1_s1 | 1 m | 67 | 206 | 453 | 0.49 | 2.42 | 0.690 | 3.74 |
+| ..._road2_s1 | 2 m | 74 | 210 | 444 | 0.48 | 2.46 | 0.687 | 3.82 |
+
+- Roads were part of the slow start but not most of it: area at 9.45 h rises from 153 to about 208 km2, still
+  well short of the mapped 285 to 331.
+- The rule adds overrun in the south by 21 h (about 445 against 376 km2 mapped), so overlap falls a little.
+- L_cross 0, 1 and 2 m are indistinguishable at one seed (seeds alone moved the area from 375 to 463 km2).
+- Every A8 score is above 2.0: no skill yet against the fire's own rates. This is with uncalibrated priors.
+
