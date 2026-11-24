@@ -1,0 +1,417 @@
+{
+ "lbm": {
+  "winner": [
+   "g:lp \u00b7 \u221afetch",
+   "g:ln fetch \u00b7 x_pos\u00b2",
+   "g:[hc>1] \u00b7 corner",
+   "g:e^(\u2212lateral/1.25) \u00b7 x_pos",
+   "g:max(0, lateral\u22121) \u00b7 x_pos"
+  ],
+  "coef": {
+   "level": -0.1647125232735502,
+   "g:lp \u00b7 \u221afetch": -0.28403506018523356,
+   "g:ln fetch \u00b7 x_pos\u00b2": 0.13620272753882,
+   "g:[hc>1] \u00b7 corner": 0.06965705334566952,
+   "g:e^(\u2212lateral/1.25) \u00b7 x_pos": -0.21513997919944403,
+   "g:max(0, lateral\u22121) \u00b7 x_pos": -0.0510525795953725
+  },
+  "alpha": {},
+  "code": "mix0.1",
+  "bits_saved_per_reading": 1.1388434967598737,
+  "sd_before": 0.34375,
+  "sd_after": 0.09375,
+  "transfers": true,
+  "holdout": [
+   {
+    "fold": "leave out 0D",
+    "formula_bpr": 6.485182098404675,
+    "one_correction_bpr": 7.133410233937269,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 1D",
+    "formula_bpr": 5.745834794438679,
+    "one_correction_bpr": 7.776015327885549,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2D",
+    "formula_bpr": 5.563009002312412,
+    "one_correction_bpr": 6.933116807346336,
+    "transfers": true
+   }
+  ],
+  "library_size": 9,
+  "grammar_size": 312,
+  "verdict": [
+   [
+    "g:lp \u00b7 \u221afetch",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:ln fetch \u00b7 x_pos\u00b2",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:[hc>1] \u00b7 corner",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:e^(\u2212lateral/1.25) \u00b7 x_pos",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, lateral\u22121) \u00b7 x_pos",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "guards": {
+   "lookalikes": {
+    "g:lp \u00b7 \u221afetch": [],
+    "g:ln fetch \u00b7 x_pos\u00b2": [],
+    "g:[hc>1] \u00b7 corner": [],
+    "g:e^(\u2212lateral/1.25) \u00b7 x_pos": [],
+    "g:max(0, lateral\u22121) \u00b7 x_pos": []
+   },
+   "inclusion": {
+    "g:lp \u00b7 \u221afetch": 0.9999999999998901,
+    "g:e^(\u2212lateral/1.25) \u00b7 x_pos": 0.9999999999998901,
+    "g:[hc>1] \u00b7 corner": 0.9952337016569277,
+    "g:ln fetch \u00b7 x_pos\u00b2": 0.9913008193463496,
+    "g:max(0, lateral\u22121) \u00b7 x_pos": 0.9501272515009613,
+    "g:max(0, lateral\u22120.75) \u00b7 x_pos": 0.03117960806074452
+   },
+   "map_formula": [
+    "g:lp \u00b7 \u221afetch",
+    "g:ln fetch \u00b7 x_pos\u00b2",
+    "g:[hc>1] \u00b7 corner",
+    "g:e^(\u2212lateral/1.25) \u00b7 x_pos",
+    "g:max(0, lateral\u22121) \u00b7 x_pos"
+   ],
+   "map_weight": 0.9414217919540974,
+   "inclusion_by_input": {
+    "fetch": 1.0000000000000007,
+    "lp": 1.0000000000000007,
+    "x_pos": 1.0000000000000007,
+    "hc": 0.9999999999999999,
+    "lateral": 0.9999999999998906,
+    "corner": 0.9999999999998894
+   },
+   "group_confound": {},
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "g:[hc>1] \u00b7 corner": 0.8666666666666667,
+     "fetch": 0.7333333333333333,
+     "g:ln fetch \u00b7 x_pos\u00b2": 0.7,
+     "contrast": 0.5,
+     "g:lp \u00b7 \u221afetch": 0.5,
+     "g:e^(\u2212lateral/1.25) \u00b7 x_pos": 0.26666666666666666,
+     "g:e^(\u2212lateral/0.75) \u00b7 fetch": 0.23333333333333334,
+     "g:max(0, lateral\u22121) \u00b7 x_pos": 0.2,
+     "g:fetch \u00b7 x_pos\u00b2": 0.16666666666666666,
+     "g:\u221alateral \u00b7 x_pos\u00b2": 0.13333333333333333,
+     "g:lp \u00b7 hc": 0.13333333333333333,
+     "g:[fetch>2.5] \u00b7 cross": 0.06666666666666667,
+     "g:e^(\u2212lateral/1) \u00b7 fetch": 0.06666666666666667,
+     "g:max(0, lateral\u22120.75) \u00b7 x_pos": 0.03333333333333333,
+     "g:[lateral>0.75] \u00b7 along": 0.03333333333333333,
+     "g:e^(\u2212lateral/1.25) \u00b7 fetch": 0.03333333333333333,
+     "g:fetch\u00b2 \u00b7 \u221alateral": 0.03333333333333333,
+     "g:lp \u00b7 x_pos\u00b2": 0.03333333333333333,
+     "g:[fetch>1.5] \u00b7 lp": 0.03333333333333333,
+     "g:hc\u00b2 \u00b7 corner": 0.03333333333333333,
+     "g:1/fetch \u00b7 \u221alateral": 0.03333333333333333,
+     "g:cross \u00b7 x_pos": 0.03333333333333333,
+     "g:[lp>-0.581] \u00b7 along": 0.03333333333333333
+    },
+    "coef_90": {
+     "g:lp \u00b7 \u221afetch": [
+      -0.29556261398302663,
+      -0.2611689007035689
+     ],
+     "g:ln fetch \u00b7 x_pos\u00b2": [
+      0.1212349381967848,
+      0.14997330226683572
+     ],
+     "g:[hc>1] \u00b7 corner": [
+      0.05978581025907301,
+      0.08067188893150072
+     ],
+     "g:e^(\u2212lateral/1.25) \u00b7 x_pos": [
+      -0.2407829351225238,
+      -0.18271647715762646
+     ],
+     "g:max(0, lateral\u22121) \u00b7 x_pos": [
+      -0.060481839625562056,
+      -0.04315634691201099
+     ]
+    }
+   },
+   "neighbour": {
+    "gain": 0.48341249532138963,
+    "where": "hc \u00d7 lateral",
+    "null_95": -0.03343652702149829,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "sd_after": 0.09375
+  },
+  "n": 360,
+  "null_bits_saved": {
+   "max": 0.0,
+   "mean": 0.0,
+   "all": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": 0.05
+  },
+  "findings4_winner": [
+   "contrast",
+   "fetch_decay",
+   "height_ratio",
+   "fetch_decay_along"
+  ]
+ },
+ "rans": {
+  "winner": [
+   "contrast",
+   "g:max(0, lp\u2212-0.947)",
+   "g:x_pos\u00b2",
+   "g:[lp>-0.494] \u00b7 cross",
+   "g:e^(\u2212lateral/1.25) \u00b7 cross"
+  ],
+  "coef": {
+   "level": 0.5661678761000044,
+   "contrast": -1.0143119155502702,
+   "g:max(0, lp\u2212-0.947)": 0.1926068005858397,
+   "g:x_pos\u00b2": 0.04267309185121125,
+   "g:[lp>-0.494] \u00b7 cross": 0.057878438998867895,
+   "g:e^(\u2212lateral/1.25) \u00b7 cross": -0.13952027789481036
+  },
+  "alpha": {},
+  "code": "mix0.1",
+  "bits_saved_per_reading": 1.720807145413029,
+  "sd_before": 0.375,
+  "sd_after": 0.09375,
+  "transfers": false,
+  "holdout": [
+   {
+    "fold": "leave out 0D",
+    "formula_bpr": 5.976084099741112,
+    "one_correction_bpr": 7.868054492730676,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 1D",
+    "formula_bpr": 5.660049676405558,
+    "one_correction_bpr": 8.237330266062255,
+    "transfers": true
+   },
+   {
+    "fold": "leave out 2D",
+    "formula_bpr": 8.154047277956625,
+    "one_correction_bpr": 7.685311424091716,
+    "transfers": false
+   }
+  ],
+  "library_size": 9,
+  "grammar_size": 312,
+  "verdict": [
+   [
+    "contrast",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, lp\u2212-0.947)",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:x_pos\u00b2",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:[lp>-0.494] \u00b7 cross",
+    "named, but can't rule out g:max(0, lp\u2212-0.947) \u00b7 cross (+0.4 bits), g:max(0, lp\u2212-0.494) \u00b7 cross (+0.9 bits)"
+   ],
+   [
+    "g:e^(\u2212lateral/1.25) \u00b7 cross",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "guards": {
+   "lookalikes": {
+    "contrast": [],
+    "g:max(0, lp\u2212-0.947)": [],
+    "g:x_pos\u00b2": [],
+    "g:[lp>-0.494] \u00b7 cross": [
+     {
+      "term": "g:max(0, lp\u2212-0.947) \u00b7 cross",
+      "r": 0.949,
+      "extra_bits": 0.37,
+      "grammar": true
+     },
+     {
+      "term": "g:max(0, lp\u2212-0.494) \u00b7 cross",
+      "r": 0.932,
+      "extra_bits": 0.91,
+      "grammar": true
+     }
+    ],
+    "g:e^(\u2212lateral/1.25) \u00b7 cross": []
+   },
+   "inclusion": {
+    "contrast": 1.0,
+    "g:max(0, lp\u2212-0.947)": 1.0,
+    "g:e^(\u2212lateral/1.25) \u00b7 cross": 0.9966218451316787,
+    "g:x_pos\u00b2": 0.9924331255844409,
+    "g:[lp>-0.494] \u00b7 cross": 0.5136435823402227,
+    "g:max(0, lp\u2212-0.947) \u00b7 cross": 0.2630010134651796,
+    "g:max(0, lp\u2212-0.494) \u00b7 cross": 0.22219820210142183
+   },
+   "map_formula": [
+    "contrast",
+    "g:max(0, lp\u2212-0.947)",
+    "g:x_pos\u00b2",
+    "g:[lp>-0.494] \u00b7 cross",
+    "g:e^(\u2212lateral/1.25) \u00b7 cross"
+   ],
+   "map_weight": 0.5099430232189984,
+   "inclusion_by_input": {
+    "lp": 1.0,
+    "cross": 1.0,
+    "lateral": 0.9999999928544904,
+    "x_pos": 0.9999992685769734
+   },
+   "group_confound": {},
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "contrast": 0.6333333333333333,
+     "g:lp\u00b2": 0.5,
+     "g:e^(\u2212lateral/1.25) \u00b7 cross": 0.4,
+     "g:max(0, lp\u2212-0.947)": 0.3333333333333333,
+     "g:[lp>-0.494] \u00b7 cross": 0.26666666666666666,
+     "g:x_pos\u00b2": 0.23333333333333334,
+     "g:\u221alateral \u00b7 x_pos\u00b2": 0.2,
+     "g:lp\u00b2 \u00b7 x_pos\u00b2": 0.16666666666666666,
+     "g:lp \u00b7 x_pos\u00b2": 0.13333333333333333,
+     "g:max(0, lp\u2212-0.947) \u00b7 cross": 0.13333333333333333,
+     "g:lp \u00b7 \u221alateral": 0.1,
+     "g:[hc>1] \u00b7 cross": 0.1,
+     "g:\u221afetch \u00b7 cross": 0.1,
+     "g:cross \u00b7 hc\u00b2": 0.1,
+     "g:1/fetch \u00b7 x_pos\u00b2": 0.1,
+     "g:max(0, lp\u2212-1.35) \u00b7 fetch": 0.1,
+     "g:fetch \u00b7 cross": 0.1,
+     "canyon_cross": 0.1,
+     "fetch": 0.06666666666666667,
+     "g:e^(\u2212lateral/0.75) \u00b7 cross": 0.06666666666666667,
+     "g:e^(\u2212lateral/1) \u00b7 cross": 0.06666666666666667,
+     "g:[fetch>2.5] \u00b7 cross": 0.06666666666666667,
+     "g:max(0, lp\u2212-1.35) \u00b7 lateral": 0.06666666666666667,
+     "g:lp\u00b2 \u00b7 \u221afetch": 0.06666666666666667,
+     "g:lp\u00b2 \u00b7 \u221alateral": 0.06666666666666667,
+     "g:max(0, lateral\u22120.75) \u00b7 fetch": 0.03333333333333333,
+     "g:fetch\u00b2 \u00b7 cross": 0.03333333333333333,
+     "g:e^(\u2212fetch/2.5) \u00b7 lp": 0.03333333333333333,
+     "g:ln fetch \u00b7 lateral": 0.03333333333333333,
+     "g:corner \u00b7 x_pos\u00b2": 0.03333333333333333,
+     "g:lp\u00b2 \u00b7 1/fetch": 0.03333333333333333,
+     "g:max(0, lp\u2212-0.947) \u00b7 x_pos": 0.03333333333333333,
+     "g:\u221afetch \u00b7 x_pos\u00b2": 0.03333333333333333,
+     "g:cross \u00b7 x_pos\u00b2": 0.03333333333333333,
+     "g:e^(\u2212lateral/1)": 0.03333333333333333,
+     "g:max(0, lateral\u22121) \u00b7 x_pos": 0.03333333333333333,
+     "g:[lp>-0.947] \u00b7 lateral": 0.03333333333333333,
+     "g:e^(\u2212fetch/3.5) \u00b7 lp": 0.03333333333333333,
+     "g:ln fetch \u00b7 cross": 0.03333333333333333,
+     "g:e^(\u2212lateral/0.75)": 0.03333333333333333,
+     "g:lateral \u00b7 x_pos\u00b2": 0.03333333333333333,
+     "g:max(0, lp\u2212-0.494)": 0.03333333333333333
+    },
+    "coef_90": {
+     "contrast": [
+      -1.0458646209087752,
+      -0.9675868874700831
+     ],
+     "g:max(0, lp\u2212-0.947)": [
+      0.1627614204643979,
+      0.2148259941403896
+     ],
+     "g:x_pos\u00b2": [
+      0.035115734826780265,
+      0.051878873456201936
+     ],
+     "g:[lp>-0.494] \u00b7 cross": [
+      0.04947165667401859,
+      0.07494251660439856
+     ],
+     "g:e^(\u2212lateral/1.25) \u00b7 cross": [
+      -0.15711112508871,
+      -0.1272390204976645
+     ]
+    }
+   },
+   "neighbour": {
+    "gain": 0.2608144822584364,
+    "where": "hc \u00d7 lateral",
+    "null_95": -0.024896314383012035,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "sd_after": 0.09375
+  },
+  "n": 360,
+  "null_bits_saved": {
+   "max": 0.0,
+   "mean": 0.0,
+   "all": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "p": 0.05
+  },
+  "findings4_winner": [
+   "contrast",
+   "fetch_decay",
+   "canyon_cross",
+   "contrast_along"
+  ]
+ }
+}
