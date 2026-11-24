@@ -1,0 +1,94 @@
+{
+  "model": "lbm-les",
+  "windsim_commit": "70eda001945ca4ecd416c2cad03040df9702f2c8",
+  "case": "AIJ C",
+  "wind_direction_deg": 0.0,
+  "config": {
+    "cells_per_d": 32,
+    "u_lattice_max": 0.07,
+    "cs": 0.12,
+    "spinup_flowthroughs": 2.0,
+    "average_flowthroughs": 8.0,
+    "turbulence_length_d": 0.5,
+    "absorb_top_m": 0.1,
+    "absorb_outlet_m": 0.3,
+    "absorb_strength": 0.2,
+    "sponge_cells": 20,
+    "z0_method": "logfit",
+    "z0_m": 0.0003,
+    "walls": false,
+    "fold_symmetric": true,
+    "backend": "cuda",
+    "seed": 0,
+    "keep_fields_m": 0.1
+  },
+  "configurations": {
+    "1D": {
+      "points": 120,
+      "hit_rate": 0.425,
+      "fac2": 1.0,
+      "mean_bias": 0.13232004979612863,
+      "r": 0.9373283415344026,
+      "vdi": {
+        "points": 120,
+        "hit_rate_vdi": 0.425,
+        "hit_rate_strict": 0.425,
+        "high_speed": {
+          "points": 27,
+          "hit_rate_vdi": 0.25925925925925924
+        },
+        "low_speed": {
+          "points": 93,
+          "hit_rate_vdi": 0.4731182795698925
+        }
+      },
+      "averaging_change_rel_p95": 0.05030731862184476,
+      "wall_seconds": 12955.2,
+      "lattice": {
+        "dx_m": 0.00625,
+        "dt_s": 6.82984130669657e-05,
+        "shape": [
+          448,
+          288,
+          192
+        ],
+        "cells": 24772608,
+        "scale": 0.010927746090714511,
+        "u_ref": 3.654,
+        "u_ref_lattice": 0.03992998421547082,
+        "origin": [
+          -1.0,
+          -0.9,
+          0.0
+        ],
+        "z0_m": 0.0003,
+        "z0_method": "fixed",
+        "reynolds_d": 48720.0,
+        "inflow_fit_max_rel_err": 0.05019371706088194
+      }
+    }
+  },
+  "overall": {
+    "points": 120,
+    "hit_rate": 0.425,
+    "fac2": 1.0,
+    "mean_bias": 0.13232004979612863,
+    "r": 0.9373283415344026,
+    "vdi": {
+      "points": 120,
+      "hit_rate_vdi": 0.425,
+      "hit_rate_strict": 0.425,
+      "high_speed": {
+        "points": 27,
+        "hit_rate_vdi": 0.25925925925925924
+      },
+      "low_speed": {
+        "points": 93,
+        "hit_rate_vdi": 0.4731182795698925
+      }
+    }
+  },
+  "gate": "hit rate >= 66% overall and for each configuration",
+  "passed": false,
+  "attribution": "AIJ benchmark Case C: Nonomura, Kobayashi, Tominaga & Mochida (2003), JAWE 95:83-84, doi:10.14887/jaweam.2003.0.41.0; data via Zenodo doi:10.5281/zenodo.15401791 (CC BY 4.0)"
+}
