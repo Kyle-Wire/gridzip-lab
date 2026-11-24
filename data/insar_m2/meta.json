@@ -1,0 +1,22 @@
+{
+ "points": 200000,
+ "within_2km": 46714,
+ "valid_cells": 475284,
+ "dates": 127,
+ "first": "20211001",
+ "last": "20251103",
+ "ifgrams_used": 375,
+ "grid": [
+  674,
+  720
+ ],
+ "stations": {
+  "OK02": 77,
+  "OK03": 81,
+  "OK04": 80,
+  "OK05": 78,
+  "OK06": 80,
+  "OK07": 78
+ },
+ "ps_fraction_vs_coherence_r": 0.06641069618645679
+}
