@@ -315,3 +315,25 @@ data folder has no mapped outline before 35 h after ignition and no satellite ou
   outline is the last of these. The satellite fire detections (VIIRS 375 m points) in the first 24 h are shown
   on the map as a check of the first night and are not scored. An outline's edit time is not a fire time; only
   the progression file's times are used.
+
+**A10 (24 Nov 2026, after search stage 1 and the Camp transects, before any run with wind aloft).** What had been
+seen: stage 1 fitted only two settings in its time cap (FINDINGS-FIRE.md): at 10 h the road rule lifts burned area
+from 159 to 217 km2 but the area ratio gets worse (1.28 to 1.43), because the added area is in the wrong place.
+The modelled fire heads south-west in a wide blob; the mapped fire ran west in a long narrow run through Paradise
+to the edge of Chico. Tables of the model's own inputs along the line from the ignition through Paradise toward
+Chico (no outcome data) show why: the HRRR 10 m wind at the ignition blows about 38 degrees to the left of that
+line; over Paradise it falls to 1 to 3 m/s by hour 4; west of Paradise it blows back toward the fire (the valley
+wind). Timber litter under canopy spreads at about 1 m/min there. So in the model nothing carries fire west.
+- Reasoning written before any test: lofted embers ride the wind at plume height, not the 20-ft wind. In a
+  downslope windstorm the flow aloft keeps its direction and speed over ground where the surface wind is weak or
+  reversed. Ember transport (throw distance and direction) may therefore use wind aloft; surface spread keeps the
+  20-ft wind of A6.
+- Options, all from the same HRRR analysis file (no new source): E0 embers on the 20-ft wind (as now); E80 on the
+  wind at 80 m above ground; E850 on the 850 hPa wind. The winds aloft enter as they are (no gust share, no
+  height adjustment). This is one more choice fitted under A7/A9, on Camp and Tubbs, and it must hold unchanged on
+  Marshall and East Troublesome before a freeze.
+- The throw-distance law is unchanged (distance scales with wind speed), so a faster wind aloft also throws
+  further; the ember median distance is fitted together with this choice, starting from the prior 150 m.
+- First look, Camp 10 h, 2 seeds, gust share 0, road rule on at L_cross 0: E0 (already run), E80, E850, each at
+  ember median 150 m. Ranked on the area ratio at the satellite outline at 9.45 h as in A9 stage 1.
+- A stated risk: this is a second fix found by looking at Camp. If it helps Camp and not Tubbs it is dropped.
