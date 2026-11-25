@@ -69,3 +69,45 @@ already counts temporally correlated noise.
 
 NaN means no value. Not included: a stated sigma per date, and the per-point ministack index. The ministack index
 depends on the date only, so it is in the per-date fields.
+
+## The weather correction, the reference and the components (added 25 Nov 2026)
+`export_m2_tropo.py` reads the V2 project folder without changing it. It ran in 13 s of CPU. Every array below is
+in the same point order as `v2_pawnee_points.npz`, over its 127 dates. Values in 0.1 mm are int16 (divide by 10
+for mm). Line of sight, positive toward the satellite. `v2_tropo_components_meta.json` holds the counts.
+
+**`v2_tropo.npz`, the HRRR correction (a):**
+- `hrrr_correction_0p1mm` (points x dates): what MintPy's HRRR step took off, `timeseries.h5` minus
+  `timeseries_HRRR.h5`. It is on the same reference cell and date (20211130) as the series, so it is about 0 at
+  the reference.
+  - RMS over the dates: median 6.2 mm per point.
+  - Its own rate: 5th to 95th percentile -0.55 to +0.37 mm/yr. So by itself the correction puts in or takes out
+    well under 1 mm/yr.
+- `hrrr_delay_point_0p1mm` (points x dates): the weather model's own LOS delay, unreferenced (`inputs/HRRR.h5`).
+- `hrrr_delay_reference_mm` (dates): that delay at the reference cell.
+
+**`v2_series_before_hrrr.npz` (b):** `series_0p1mm`, from `timeseries.h5`, before the weather correction and
+before the DEM-error correction. The points table's series is `timeseries_HRRR_demErr.h5`, so the DEM-error
+term is the difference between the two that is left after the HRRR correction is taken off.
+
+**The reference cell (c):**
+- It stayed the same. Radar y, x = 545, 535 (36.4951, -96.8055) in every time-series file, with reference date
+  20211130 (`reference_pin.json`).
+- The reference is inside a snaphu component in all 375 interferograms.
+- `v2_components.npz` holds the reference cell's unwrapped phase per interferogram:
+  - `reference_unwrap_phase_rad`: from the dataset that was inverted, `unwrapPhase_bridging_phaseClosure`;
+  - `reference_unwrap_phase_raw_rad`: from `unwrapPhase`.
+- There is no per-date reference phase, because MintPy's series is zero at the reference by construction. The
+  per-interferogram values above are the per-date record, and `hrrr_delay_reference_mm` is the reference's
+  weather.
+
+**The snaphu components (d), `v2_components.npz`:**
+- `ifgram_dates` (375 x 2) and `ifgram_used`: all 375 interferograms were used.
+- `apart_from_reference_bits`: per point and interferogram, packed bits (`np.unpackbits(.., axis=1)[:, :375]`).
+  A bit is 1 where the point and the reference are not in the same component, or either is outside every
+  component.
+- `outside_component_bits`: the same layout; 1 where the point's label is 0.
+- `n_ifgrams_apart` (per point): median 3 of 375.
+- `per_date_ifgrams_apart` (points x dates, uint8): of the interferograms that use that date, how many have the
+  point apart from the reference. `per_date_ifgrams_used` (dates) counts those interferograms.
+- `components_per_ifgram`: the number of components in each interferogram. `reference_label`: the reference's
+  own label in each.
