@@ -16,15 +16,29 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from physlib import engine as E, guards as Q, terms as T            # noqa: E402
 
+CONST = ("ember_L", "gap_d", "slow_v")
+SLOW_V = (0.5, 1.0, 2.0, 5.0, 10.0)
+A18 = "--a18" in sys.argv                                           # amendment A18: slow_edge on T2o only
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
-         "late": ("late", None)}
+         "late": ("late", None), "slow": ("slow", 2.0)}
 GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
 def load(path):
     d = np.load(path, allow_pickle=False); meta = json.loads(str(d["meta"]))
     return {k: d[k] for k in d.files if k != "meta"}, meta
+
+
+def ros(d, te, step_m=300.0):
+    """A18: the model's spread rate (m/min) at each lattice point: the step over the largest arrival-time difference to
+    a 4-neighbour the fire reached earlier. Infinite where there is no such neighbour (a start, or a spot fire)."""
+    R = d["t12_row"] // 10; C = d["t12_col"] // 10; t = np.where(d["t12_t_mod"] <= te, d["t12_t_mod"], np.inf)
+    G = np.full((R.max() + 3, C.max() + 3), np.inf); G[R + 1, C + 1] = t
+    dt = np.zeros(len(t))
+    for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        nb = G[R + 1 + dr, C + 1 + dc]; x = np.where(np.isfinite(nb) & (nb < t), t - nb, 0.0); dt = np.maximum(dt, np.where(np.isfinite(x), x, 0.0))
+    return np.where(dt > 0, step_m / np.maximum(dt, 1e-9), np.inf)
 
 
 def table(d, meta, which):
@@ -59,6 +73,8 @@ def table(d, meta, which):
     if which in ("T2", "T2o") and A16:
         c.update(flank=np.sqrt(np.maximum(0.0, 1.0 - c["run"] ** 2)), back=(c["run"] < 0).astype(float))
     if which == "T2o": c.update(late=d["t12_t_mod"][rows] / te, edge_age=(te - d["t12_t_mod"][rows]) / 60.0)
+    if which == "T2o" and A18:
+        r_ = ros(d, te)[rows]; c.update(slow=np.stack([(r_ < v).astype(float) for v in SLOW_V], 1), slow_v=np.array(SLOW_V))
     if which == "T3": c.update(gap=g("gap"), gap_d=np.array(meta["gap_d"]), mod=g("mod"))
     return c, y[rows], blk[rows]
 
@@ -67,7 +83,7 @@ def pool(fires, which):
     """Stack the fires: only inputs every fire has; each fire's mean error removed and returned as its level."""
     parts = [table(d, m, which) for d, m in fires.values()]
     keys = set.intersection(*[{k for k, v in c.items() if v is not None} for c, _, _ in parts])
-    ctx = {k: (parts[0][0][k] if k in ("ember_L", "gap_d") else np.concatenate([c[k] for c, _, _ in parts])) for k in sorted(keys)}
+    ctx = {k: (parts[0][0][k] if k in CONST else np.concatenate([c[k] for c, _, _ in parts])) for k in sorted(keys)}
     fid = np.concatenate([np.full(len(y), i) for i, (_, y, _) in enumerate(parts)])
     y = np.concatenate([y for _, y, _ in parts]); blk = np.concatenate([b + 10 ** 7 * i for i, (_, _, b) in enumerate(parts)])
     level = {n: float(y[fid == i].mean()) for i, n in enumerate(fires)}; spread = {n: float(y[fid == i].std()) for i, n in enumerate(fires)}
@@ -94,7 +110,7 @@ def planted(ctx, y, blk, g, seed=0):
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
     names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
-             "late": "late_arrival"}
+             "late": "late_arrival", "slow": "slow_edge"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}
@@ -122,7 +138,7 @@ def block_null(res, y, blk, g, N=19, seed=1):
 def one(fires, which):
     g = GRIDS[which]; ctx, y, fid, blk, level, spread = pool(fires, which); names = list(fires); t = time.time()
     out = {"n": int(len(y)), "n_by_fire": {n: int((fid == i).sum()) for i, n in enumerate(names)}, "level": level, "spread": spread,
-           "inputs": sorted(k for k in ctx if k not in ("ember_L", "gap_d"))}
+           "inputs": sorted(k for k in ctx if k not in CONST)}
     if len(y) < 40:
         out["skipped"] = "fewer than 40 readings"; return out
     out["planted"] = planted(ctx, y, blk, g)
@@ -148,7 +164,7 @@ def one(fires, which):
     for i, n in enumerate(names):                                # each fire alone: a lead for that fire, drives nothing
         ii = np.where(fid == i)[0]
         if len(ii) >= 40:
-            c1 = {k: (v if k in ("ember_L", "gap_d") else v[ii]) for k, v in ctx.items()}
+            c1 = {k: (v if k in CONST else v[ii]) for k, v in ctx.items()}
             r1 = E.run_case(T.FIRE, c1, y[ii], g, robust=True, name=f"{which} {n}")
             per[n] = {"winner": r1["winner"]["terms"], "coef": r1["winner"]["coef"], "alpha": r1["winner"]["alpha"],
                       "bits_saved_per_reading": r1["bits_saved_per_reading"], "sd_before": r1["sd_before"], "sd_after": r1["sd_after"]}
@@ -174,8 +190,8 @@ def main():
     args = [a for a in sys.argv[1:] if "=" in a and not a.startswith("--")]
     outp = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else ROOT / "results" / "physics" / "fire_real.json"
     fires = {a.split("=", 1)[0]: load(a.split("=", 1)[1]) for a in args}
-    res = {"protocol": "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
-    for which in (("T2", "T2o") if A16 else ("T1", "T2", "T3")):
+    res = {"protocol": "PROTOCOL-FIRE A18" if A18 else "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
+    for which in (("T2o",) if A18 else ("T2", "T2o") if A16 else ("T1", "T2", "T3")):
         res[which] = one(fires, which)
     outp.parent.mkdir(parents=True, exist_ok=True)
     outp.write_text(json.dumps(res, indent=1, default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))

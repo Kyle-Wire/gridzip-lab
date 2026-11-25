@@ -299,4 +299,10 @@ FIRE += [
     Term("burn_duration", "fire", "b · hours from model arrival to the end of the window", "how long the modelled edge has been burning; the opposite sign to late arrival",
          ("edge_age",), lambda c: c["edge_age"], group="late"),
 ]
+# PROTOCOL-FIRE amendment A18: a stopping term that needs no crew record. slow[:, j] is 1 where the model's own spread
+# rate at the point (from its arrival times on the 300 m lattice) is under slow_v[j] m/min. Table T2o only.
+FIRE += [
+    Term("slow_edge", "fire", "b · [model spread rate < v]", "a slowly moving edge goes out or is held; the model lets it creep on",
+         ("slow", "slow_v"), lambda c: _knots(c, "slow", "slow_v"), family=(0.5, 10.0, True), group="slow", unit="m/min"),
+]
 DOMAINS["fire"] = FIRE
