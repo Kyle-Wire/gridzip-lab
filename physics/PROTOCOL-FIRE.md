@@ -728,3 +728,23 @@ calibrated search has not been read.
 - Predicted: H2(1.22) trims Tubbs and Marshall but not enough (ratio at the end still above 1.4); H2(2.44)
   brings Marshall under 1.5 and Tubbs under 1.5, does little on Camp, and makes East Troublesome slightly worse.
   `held_edge(2.44)` is named on T2o with a positive sign.
+
+### A23 (25 Nov 2026, 6:00 PM ET): why the timber fire does not run, as a term first
+
+Seen: East Troublesome's area table (model 0.29 of mapped at 12 h), its flame lengths at arrival (median 0.71 m:
+the model has a surface fire creeping under the canopy), and A21's surviving leads (timber on the line goes with
+misses). Not seen: any crown-fire quantity at the missed points.
+- Idea, from the model's own crown rule (Van Wagner's initiation intensity as in Scott and Reinhardt 2001,
+  RMRS-RP-29 eq. 11, already in `firesim/crown.py`): the surface intensity needed to light the canopy rises
+  steeply with foliar moisture, which the model fixes at 100 %. Beetle-killed lodgepole holds dead needles at a
+  small fraction of that. At 10 % the threshold is about a ninth of its value at 100 %.
+- New table columns (all four fires, every lattice point, so missed points have them too): `fli_max`, the
+  largest head-fire surface intensity the model gives the point in any hour of the window (kW/m), and the
+  canopy base height and bulk density there.
+- Term family `dry_crown(m)`: 1 where there is canopy and `fli_max` exceeds the initiation intensity at foliar
+  moisture m, for m = 10, 30, 60, 100 %. On T2 at A21's thinning, four fires, leave one out; planted check first.
+- Predicted: named on T2 with a negative sign (ground that would crown with dry foliage is ground the model
+  missed), best at 30 % or under, carried by East Troublesome, and so not transferring. If named, the lead is a
+  dead-canopy map (the Forest Service's public insect and disease survey) feeding foliar moisture, proposed
+  under its own amendment. If not named, the miss is not a crown-initiation threshold and the next terms are the
+  wind aloft over the fire and spotting distance.
