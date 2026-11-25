@@ -597,3 +597,48 @@ Tubbs's modelled fire at 5.5 h lies inside the final outline.
 - Predicted before computing the cut: both events end 8 to 12 hours after ignition; before it the x1.30 wind is
   the better of the two on Camp, and after it the modelled fires roughly double while the mapped ones grow under
   a fifth.
+
+### A18 (25 Nov 2026, 9:20 AM ET): containment, fires that ran unheld, and a stopping term that needs no crew record
+
+Kyle, 25 Nov: "I think the fire should have the containment times ... containment times aren't going to be
+included in the model though either. So are there wildfires that weren't contained that we can try to replicate?"
+
+What the record says (pages opened today; news figures, to be replaced by the daily incident status reports once
+their licence is confirmed, which the dataset's page did not show):
+- Camp: "five percent contained" at 70,000 acres in a report updated 9 Nov 2018 2:28 PM EST, about 29 hours
+  after ignition (PBS NewsHour), and still 5 percent at 90,000 acres that evening (ABC30). No containment figure
+  falls inside the 24-hour window.
+- Tubbs: 0 % on 9 and 10 October, 10 % on 11 October (Wikipedia's table, whose prose differs by a day in places).
+  The 44-hour window ends on 10 October: 0 % throughout.
+- So inside the windows already scored, both fires were officially uncontained. Containment percent cannot be
+  the stopping rule for them: the mapped fires slowed with no line around them. Crews defending houses and
+  holding flanks are not in that figure.
+
+Fires that ran unheld, both already calibration fires in section 1, are the pure-physics test:
+- Marshall, 30 Dec 2021: "two reported initial ignition points, occurring at 18:08 and 19:00 UTC" (Juliano et
+  al. 2023, Geophysical Research Letters); "wind gusts over 50 m/s made it impossible to get the flames under
+  control", gusts "finally weakening to less than 25 m/s by 1930 LT" and "the real break" a cold front "around
+  0100 LT 31 December"; "burned through 24 km2" (Benjamin et al. 2023, Weather and Forecasting). These published
+  ignition times lift A5's hold on Marshall runs. Window: 18:08 UTC 30 Dec to 08:00 UTC 31 Dec (14 hours),
+  scored on area at every mapped time and at the end; houses are not scored (no licence stated for the damage
+  record, section 1 note).
+- East Troublesome, the run of 21 to 22 October 2020: "growing from 30,000 acres to 170,000 acres in about 24
+  hours" (NASA Earth Observatory); "you couldn't have stopped it" (Grand Lake fire marshal, CPR News); snow on 25
+  October slowed it. The run starts from the last outline mapped before the wind (the model is lit over that
+  whole outline, a new start mode) and is scored at each outline to the first one after the wind eases by A17's
+  rule.
+- Both use E0 priors, HRRR wind as analysed and with A13's x1.30, 3 seeds, and are read on A17's free-burning
+  score and on what happens after the wind eases. Predicted: with x1.30 the area ratio during the run is between
+  0.5 and 1.5 on both; after the wind eases the model keeps growing on Marshall (no snow, no crews in it) by more
+  than a quarter.
+
+The stopping term (compressor first, on the Camp and Tubbs tables in hand, before any model change):
+- Input `ros`: the model's own spread rate where it reached a point, from the arrival times on the 300 m lattice
+  (300 m over the largest arrival-time difference to a lattice neighbour the fire came from, in m/min).
+- Term family `slow_edge(v)`: 1 where `ros` is under v, for v = 0.5, 1, 2, 5, 10 m/min, on table T2o. Meaning: a
+  slowly moving edge goes out on its own or is held by whoever is there, and the model lets it creep on for
+  hours. It needs no crew record, so it could be a rule in a forecast. Planted check first; A14's rules for a
+  finding stand. Run: `fire_real.py --a16 --a18`, T2o only.
+- Predicted: named on both fires with a positive sign (slow modelled edges are the overrun), best near 1 to 2
+  m/min, and it takes over from `burn_duration`. If it transfers both ways it becomes a stopping rule proposal
+  (an edge slower than v for N hours goes out), tested unchanged on Marshall and East Troublesome.
