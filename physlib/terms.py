@@ -182,6 +182,27 @@ FLOOD_WALL_BLD = [
 ]
 
 
+# ------------------------------------------------------------------------------------------- depth (protocol 12)
+# Planted FloodSim depth cases (FloodSim benchmarks/physics/depth). Target y = ln(h_model / h_true).
+FLOOD_DEPTH = [
+    Term("raster_width", "flood", "−0.6 · ln(Wm / W)", "the channel the model sees is wider or narrower than the real one "
+         "(cells snap to the footprint); depth ∝ width^−0.6 at a given flow", ("Wm", "W"),
+         lambda c: -0.6 * np.log(c["Wm"] / c["W"]), fixed=True),
+    Term("wall_friction", "flood", "b · ln(1 + 2h/W)", "walls drag on the flow and the 2D model has bed friction only "
+         "(expected b ≈ −0.4)", ("h", "W"), lambda c: np.log1p(2 * c["h"] / c["W"])),
+    Term("cells_across", "flood", "b · dx / Wm", "too few cells across the channel to carry the flow", ("Wm", "dx"),
+         lambda c: c["dx"] / c["Wm"]),
+    Term("edge_drawdown", "flood", "b · exp(−x_e / (λ·Lb))", "a free edge drains the river within λ backwater lengths",
+         ("x_e", "Lb"), lambda c: (lambda lam: np.exp(-c["x_e"] / (lam * c["Lb"]))), family=(0.05, 2.0, True)),
+    Term("froude", "flood", "b · Fr", "the miss grows with flow speed", ("Fr",), lambda c: c["Fr"]),
+    Term("sheet_scale", "flood", "b · ln x", "sheet-flow depth grows along the slope with the wrong power", ("x",),
+         lambda c: np.log(c["x"])),
+    Term("slope_term", "flood", "b · ln S", "the miss tracks slope", ("S",), lambda c: np.log(c["S"])),
+    Term("cell_size", "flood", "b · ln dx", "the miss tracks cell size", ("dx",), lambda c: np.log(c["dx"])),
+    Term("roughness", "flood", "b · ln n", "the miss tracks roughness", ("n",), lambda c: np.log(c["n"])),
+]
+
+
 # ============================================================================================================ ground
 def _span(c): t = np.asarray(c["t"]); return float(t.min()), float(t.max())
 
@@ -224,7 +245,7 @@ GROUND_RATE = [
     Term("distance", "ground", "b · distance to the house", "a smooth gradient across the area", ("dist",), lambda c: c["dist"]),
 ]
 
-DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "flood_wall_bld": FLOOD_WALL_BLD, "ground": GROUND, "ground_rate": GROUND_RATE}
+DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "flood_wall_bld": FLOOD_WALL_BLD, "flood_depth": FLOOD_DEPTH, "ground": GROUND, "ground_rate": GROUND_RATE}
 
 
 # ============================================================================================================ v2 (PROTOCOL-7)

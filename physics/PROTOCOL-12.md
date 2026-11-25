@@ -70,3 +70,17 @@ if it is rule-based and improves the tuning towns.
 
 **Limits.** Steady, prismatic, uniform roughness. Wall friction as Manning on R = A/P is the textbook form; real walls
 vary. The compressor's result is a lead, never a pass.
+
+**A1 (25 Nov 2026, after the first 13 family C cases, before the rest).** *Seen:* with a free outfall at the east end, W 2.5 m
+and S 0.003 gave 2.03 m against a 2D ideal of 2.24 m at the model's own width. The backwater length there (h/S, ~750 m) is
+far longer than the 160 m reach, so the free edge was drawing the measured section down. That is family B's question.
+Family C now holds its east edge at the model-width normal depth (`cases.mjs`, `--free-edge` keeps the old run). Nothing
+else in C changes. The 13 free-edge cases are kept as a log (`results/physics/flood_depth_C_free_partial.log`).
+
+**A2 (25 Nov 2026, after the full C search; a reading of the result, not a rule change).** Under the rule as written
+the C instrument check **fails**. The search named `raster_width` (coefficient 1.00 on the fixed −0.6·ln(Wm/W)), but
+for wall drag it picked the grammar form 1/W·√h plus two small terms, not `wall_friction`. The physics is confirmed. On
+the true wall depth, ln(1 + 2h_true/W) takes −0.399 (residual sd 0.001), the textbook 2/5. But `wall_friction` is
+built on the model's depth (the only depth a field audit has), and in narrow deep channels that is half the true depth,
+which bends the relation. A term defined from the model's depth by inverting the Manning relation is a new term and
+would need its own planted check before use. Until then, C's wall-drag lead is read from the planted cases directly.
