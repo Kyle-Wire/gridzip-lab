@@ -92,3 +92,24 @@ are unchanged.
 
 The 6,000-point run was killed for memory (the grammar's product terms on 15 GB) before it printed anything.
 Part A and the synthetic check now use 3,000 points per sample. Nothing else changes.
+
+## A3, part D: the method 1 control (24 Nov 2026 evening, written before any m1 value was computed here)
+
+**Seen by then:** `data/insar_m1/README.md` (71b575a), including its untested first look: m1 rate 5–95 % −19.8 to
++29.7 mm/yr, median coherence 0.57, station series 11–17 mm RMS off GNSS. No m1 map, pair or station rate has
+been computed. Confounds stated now: m1 had no weather correction (m2 had HRRR), and m1's rate is re-fitted after
+CHI's reference-jump handling (A11, A17, A19).
+
+**Readings, fixed now (same windows for both: dates in both tables):**
+- **D1, the corner.** Using the same regions as before, NW (east < −4 km, north > 4 km) against the rest (east > −2 km, north < 4 km), take the
+  median rate of each and difference them. "Ground or common physics" if m1's NW − rest ≤ −2 mm/yr; "our
+  processing" if |m1 NW − rest| < 1 mm/yr; otherwise "unclear". Also the correlation of the two methods' 1 km
+  tile maps.
+- **D2, stations.** Rate of each station's 200 m radar series minus its GNSS LOS, relative to OK03, both methods,
+  on the shared dates. The reading is the share of the 15 pairs within 2 mm/yr.
+- **D3, error bars.** Stated sigma (median) against the rate spread between cells 0.2 to 0.4 km apart.
+- **D4, lag structure.** RMS change at lags of 1, 10, 40 and 120 dates, with each date's median removed.
+- **D5, compressor.** `physlib.insar.INSAR_RATE` on m1's rates, for the terms its table supports (coherence,
+  incidence, ramp, ramp2, annual_amp, jumps), 3,000 points, B = 10 and N = 9, as in part A. Plus a cross-method
+  term `m2_tile`: method 2's 1 km tile median at each m1 cell. If it is named, the two methods share the
+  structure.
