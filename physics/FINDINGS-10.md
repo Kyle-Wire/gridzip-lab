@@ -43,3 +43,25 @@ Method 2's misses on stable ground are (1) error bars about 3× too narrow, from
 Masking by quality would not fix it. Next: the method 1 (OPERA DISP-S1) control on the same box and dates, with
 the GNSS tie off, running on THE-COW. If method 1 shows the same patch, the cause is the ground (farmland), not the
 processing.
+
+## Part D, the method 1 control (A3; data/insar_m1 at 71b575a; `python -m physics.insar_m1`)
+126 shared dates. Method 1 = OPERA DISP-S1, GNSS tie off, **no weather correction**; method 2 had HRRR.
+- **Method 1 is far noisier here.** Rate spread (robust sd) is 11.4 against 2.8 mm/yr. Cells 0.2 to 0.4 km apart
+  differ by 8.0 against 2.3. The typical change at 120 dates apart is 46 against 14 mm. Station pairs within
+  2 mm/yr: 3 of 15 against 4 of 15. Stated sigma medians are 1.41 and 0.66.
+- **D1, the corner:** by the fixed rule the verdict is "ground or common physics" (m1 NW − rest −7.4 mm/yr). But
+  method 1 carries a box-wide ramp and a patchwork of ±10 mm/yr tiles, and the two methods' tile maps correlate
+  only r = 0.20. The compressor's cross-method term `m2_tile` was not named (bootstrap 0.3). So method 1 does not
+  clearly reproduce method 2's corner; the rule's verdict is driven by method 1's own large-scale error.
+- **D5, compressor on method 1:** sd 14.5 → 9.75 (inputs east/north, annual amplitude, coherence). The winner is
+  `ramp` plus seasonal-amplitude and coherence shapes. Only one of them clears 60 % of resamples
+  (annual_amp > 6.3 · coherence, 0.7), and the null search's p is 0.1. Neighbour test: structure left in east × north.
+  Read: a long-wavelength (troposphere-like) ramp plus seasonal-ground leakage, which a weather correction and a
+  GNSS tie would target.
+
+## Reading after part D
+At this rural site our own processing (method 2) beats the product the reports use (method 1, untied and
+without weather correction) on every reading. V2's failure is not evidence that method 2 is worse than method 1.
+Pawnee is a hard site for both. Method 1 passes our CHI checks with a GNSS tie and reference-jump handling at
+urban places. So method 2's fair test is the same: CHI's checks, method 2's error bars widened for correlated
+noise (as in insar_pipeline PR #21 for PS), at a fresh place, written first.

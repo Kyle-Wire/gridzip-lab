@@ -1,0 +1,532 @@
+{
+ "shared_dates": 126,
+ "D1": {
+  "m1_nw_rest": [
+   -4.338804420437735,
+   3.0172108299920053,
+   -7.35601525042974
+  ],
+  "m2_nw_rest": [
+   -3.6714069062327868,
+   -0.5066563816735903,
+   -3.1647505245591967
+  ],
+  "verdict": "ground or common physics",
+  "tile_corr": 0.2000389291837298,
+  "tiles": 458,
+  "m1_tile_rsd": 5.4945684525128655,
+  "m2_tile_rsd": 1.387374213794741
+ },
+ "D2": {
+  "m1": {
+   "OK02": {
+    "radar": 3.1037972236207634,
+    "gnss": 8.766561177885922,
+    "n": 107
+   },
+   "OK03": {
+    "radar": 8.819846949750776,
+    "gnss": 9.38686160667973,
+    "n": 122
+   },
+   "OK04": {
+    "radar": -0.1213712732352483,
+    "gnss": 9.393718253760671,
+    "n": 118
+   },
+   "OK05": {
+    "radar": -1.1354394940765569,
+    "gnss": 6.0407374047879365,
+    "n": 50
+   },
+   "OK06": {
+    "radar": -2.3168998864529713,
+    "gnss": 9.231718292558385,
+    "n": 121
+   },
+   "OK07": {
+    "radar": -4.155497676173189,
+    "gnss": 5.809362521868287,
+    "n": 107
+   }
+  },
+  "m2": {
+   "OK02": {
+    "radar": -7.759631491141828,
+    "gnss": 8.951151847103777,
+    "n": 126
+   },
+   "OK03": {
+    "radar": -0.6637927128934196,
+    "gnss": 9.383796885060574,
+    "n": 126
+   },
+   "OK04": {
+    "radar": -1.935981695921566,
+    "gnss": 9.458202638791315,
+    "n": 126
+   },
+   "OK05": {
+    "radar": -0.6384948539593345,
+    "gnss": 5.95715877626718,
+    "n": 57
+   },
+   "OK06": {
+    "radar": -1.081365165356645,
+    "gnss": 9.272671719884151,
+    "n": 124
+   },
+   "OK07": {
+    "radar": -0.014698861551692623,
+    "gnss": 6.015972483114808,
+    "n": 126
+   }
+  },
+  "m1_pairs_ok": [
+   3,
+   15
+  ],
+  "m2_pairs_ok": [
+   4,
+   15
+  ],
+  "m1_pairs": [
+   [
+    "OK02",
+    "OK03",
+    -5.1
+   ],
+   [
+    "OK02",
+    "OK04",
+    3.85
+   ],
+   [
+    "OK02",
+    "OK05",
+    1.51
+   ],
+   [
+    "OK02",
+    "OK06",
+    5.89
+   ],
+   [
+    "OK02",
+    "OK07",
+    4.3
+   ],
+   [
+    "OK03",
+    "OK04",
+    8.95
+   ],
+   [
+    "OK03",
+    "OK05",
+    6.61
+   ],
+   [
+    "OK03",
+    "OK06",
+    10.98
+   ],
+   [
+    "OK03",
+    "OK07",
+    9.4
+   ],
+   [
+    "OK04",
+    "OK05",
+    -2.34
+   ],
+   [
+    "OK04",
+    "OK06",
+    2.03
+   ],
+   [
+    "OK04",
+    "OK07",
+    0.45
+   ],
+   [
+    "OK05",
+    "OK06",
+    4.37
+   ],
+   [
+    "OK05",
+    "OK07",
+    2.79
+   ],
+   [
+    "OK06",
+    "OK07",
+    -1.58
+   ]
+  ],
+  "m2_pairs": [
+   [
+    "OK02",
+    "OK03",
+    -6.66
+   ],
+   [
+    "OK02",
+    "OK04",
+    -5.32
+   ],
+   [
+    "OK02",
+    "OK05",
+    -10.12
+   ],
+   [
+    "OK02",
+    "OK06",
+    -6.36
+   ],
+   [
+    "OK02",
+    "OK07",
+    -10.68
+   ],
+   [
+    "OK03",
+    "OK04",
+    1.35
+   ],
+   [
+    "OK03",
+    "OK05",
+    -3.45
+   ],
+   [
+    "OK03",
+    "OK06",
+    0.31
+   ],
+   [
+    "OK03",
+    "OK07",
+    -4.02
+   ],
+   [
+    "OK04",
+    "OK05",
+    -4.8
+   ],
+   [
+    "OK04",
+    "OK06",
+    -1.04
+   ],
+   [
+    "OK04",
+    "OK07",
+    -5.36
+   ],
+   [
+    "OK05",
+    "OK06",
+    3.76
+   ],
+   [
+    "OK05",
+    "OK07",
+    -0.56
+   ],
+   [
+    "OK06",
+    "OK07",
+    -4.32
+   ]
+  ]
+ },
+ "D3": {
+  "m1_sigma_median": 1.4139454364776611,
+  "m1_spread_0p2_0p4": 8.03970978937875,
+  "m2_sigma_median": 0.6649748682975769,
+  "m2_spread_0p2_0p4": 2.3109617651326233,
+  "m1_rate_rsd": 11.398968986618268,
+  "m2_rate_rsd": 2.840679419742469
+ },
+ "D4": {
+  "m1": {
+   "1": 7.520849083095145,
+   "10": 12.750683435008616,
+   "40": 29.130526435372683,
+   "120": 46.245808335134285
+  },
+  "m2": {
+   "1": 8.009500904188556,
+   "10": 9.560710554145473,
+   "40": 11.26404835020912,
+   "120": 14.291337017990704
+  }
+ },
+ "D5": {
+  "winner": [
+   "ramp",
+   "g:[annual_amp>6.33]",
+   "g:[coherence>0.567] \u00b7 annual_amp",
+   "g:max(0, east\u22124.85) \u00b7 north"
+  ],
+  "sd_before": 14.5,
+  "sd_after": 9.75,
+  "bits_saved_per_reading": 0.08699006960106814,
+  "transfers": true,
+  "holdout": [
+   {
+    "fold": "west -> east",
+    "formula_bpr": 10.21459869132945,
+    "one_correction_bpr": 10.377285673929121,
+    "transfers": true
+   },
+   {
+    "fold": "east -> west",
+    "formula_bpr": 10.091987096050634,
+    "one_correction_bpr": 10.20294270115858,
+    "transfers": true
+   },
+   {
+    "fold": "south -> north",
+    "formula_bpr": 10.204477415668466,
+    "one_correction_bpr": 10.303244242665892,
+    "transfers": true
+   },
+   {
+    "fold": "north -> south",
+    "formula_bpr": 10.118271977877427,
+    "one_correction_bpr": 10.191911967261468,
+    "transfers": true
+   }
+  ],
+  "inclusion": {
+   "ramp": 0.999482954279816,
+   "g:[annual_amp>6.33] \u00b7 coherence": 0.704996990226989,
+   "g:[coherence>0.567] \u00b7 annual_amp": 0.6369264905187563,
+   "g:[annual_amp>6.33] \u00b7 m2_tile": 0.35566285409420895,
+   "g:[annual_amp>6.33]": 0.2232263734790467,
+   "unwrap": 0.18650496406310035,
+   "g:max(0, incidence\u221242.1) \u00b7 east": 0.08829594198049755,
+   "g:max(0, east\u22124.85) \u00b7 north": 0.08166463317133683,
+   "g:[annual_amp>6.33] \u00b7 incidence": 0.07177662335121934,
+   "g:max(0, incidence\u221242.1)": 0.048192841725902956,
+   "g:annual_amp \u00b7 jumps": 0.03200232233648808,
+   "g:[incidence>42.1] \u00b7 north": 0.014511272557876266,
+   "g:max(0, jumps\u221217) \u00b7 north": 0.013492158662069091
+  },
+  "bootstrap": {
+   "B": 10,
+   "selected": {
+    "g:[annual_amp>6.33] \u00b7 coherence": 0.7,
+    "ramp": 0.6,
+    "g:east\u00b2 \u00b7 annual_amp\u00b2": 0.4,
+    "g:[m2_tile>-2] \u00b7 annual_amp": 0.3,
+    "g:[annual_amp>6.33] \u00b7 east": 0.2,
+    "annual_amp": 0.2,
+    "g:max(0, east\u22124.85) \u00b7 north": 0.2,
+    "g:[annual_amp>4.16] \u00b7 jumps": 0.2,
+    "g:east \u00b7 north\u00b2": 0.2,
+    "g:max(0, annual_amp\u22124.16) \u00b7 coherence": 0.2,
+    "incidence": 0.1,
+    "g:max(0, east\u2212-6.14) \u00b7 north": 0.1,
+    "g:[coherence>0.567] \u00b7 annual_amp": 0.1,
+    "g:[north>0.603] \u00b7 east": 0.1,
+    "g:1/coherence \u00b7 annual_amp\u00b2": 0.1,
+    "g:max(0, north\u22125.59) \u00b7 jumps": 0.1,
+    "g:[annual_amp>6.33]": 0.1,
+    "g:[annual_amp>2.67]": 0.1,
+    "g:max(0, jumps\u221217) \u00b7 annual_amp": 0.1,
+    "g:max(0, incidence\u221242.1) \u00b7 annual_amp": 0.1,
+    "g:max(0, annual_amp\u22126.33) \u00b7 m2_tile": 0.1,
+    "g:[north>5.59] \u00b7 east": 0.1,
+    "g:[incidence>41.7] \u00b7 north": 0.1,
+    "g:[annual_amp>6.33] \u00b7 m2_tile": 0.1,
+    "g:[north>5.59]": 0.1
+   },
+   "coef_90": {
+    "ramp": [
+     0.29055580665959696,
+     0.5898905204745596
+    ],
+    "g:[annual_amp>6.33]": [
+     1.3664892256184584,
+     2.6060840060420496
+    ],
+    "g:[coherence>0.567] \u00b7 annual_amp": [
+     0.7259751897253727,
+     1.6980285920274356
+    ],
+    "g:max(0, east\u22124.85) \u00b7 north": [
+     -1.5592141988144317,
+     -0.23395123656062936
+    ]
+   }
+  },
+  "null": {
+   "max": 0.03628245609843483,
+   "mean": 0.034548735766309555,
+   "p": 0.1
+  },
+  "neighbour": {
+   "gain": 0.10079412816693623,
+   "where": "east \u00d7 north",
+   "null_95": -0.05319446252079483,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": [
+   [
+    "ramp",
+    "group-level: can't be told from plain offsets over 81 groups"
+   ],
+   [
+    "g:[annual_amp>6.33]",
+    "named, but can't rule out g:[annual_amp>6.33] \u00b7 incidence (+1.4 bits)"
+   ],
+   [
+    "g:[coherence>0.567] \u00b7 annual_amp",
+    "named; no look-alike within 10:1"
+   ],
+   [
+    "g:max(0, east\u22124.85) \u00b7 north",
+    "named, but can't rule out g:[incidence>42.1] \u00b7 north (+1.6 bits), g:max(0, incidence\u221242.1) \u00b7 north (+2.3 bits)"
+   ]
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.0,
+    "param_bits": 26.0,
+    "residual_bits": 30647.729133427772,
+    "total_bits": 30680.729133427772,
+    "bits_per_reading": 10.226909711142591,
+    "n": 3000,
+    "sd": 14.5,
+    "rho": null,
+    "code": "gauss",
+    "coef": {
+     "level": 1.8961436071547602
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "g:[annual_amp>6.33]"
+    ],
+    "structure_bits": 20.39231742277876,
+    "param_bits": 34.0,
+    "residual_bits": 30484.541854631196,
+    "total_bits": 30538.934172053974,
+    "bits_per_reading": 10.179644724017992,
+    "n": 3000,
+    "sd": 10.75,
+    "rho": null,
+    "code": "mix0.1",
+    "coef": {
+     "level": 1.8961436071547602,
+     "g:[annual_amp>6.33]": 2.6659475373221158
+    },
+    "alpha": {},
+    "added": "g:[annual_amp>6.33]"
+   },
+   {
+    "terms": [
+     "g:[annual_amp>6.33]",
+     "ramp"
+    ],
+    "structure_bits": 27.39231742277876,
+    "param_bits": 52.0,
+    "residual_bits": 30360.037338550348,
+    "total_bits": 30439.429655973127,
+    "bits_per_reading": 10.146476551991043,
+    "n": 3000,
+    "sd": 10.125,
+    "rho": null,
+    "code": "mix0.1",
+    "coef": {
+     "level": 1.896143607154731,
+     "g:[annual_amp>6.33]": 2.4805927409733,
+     "ramp": [
+      0.4082091061006095,
+      -0.3284687349467106
+     ]
+    },
+    "alpha": {},
+    "added": "ramp"
+   },
+   {
+    "terms": [
+     "g:[annual_amp>6.33]",
+     "ramp",
+     "g:[coherence>0.567] \u00b7 annual_amp"
+    ],
+    "structure_bits": 45.17695226833628,
+    "param_bits": 60.0,
+    "residual_bits": 30321.229922502796,
+    "total_bits": 30426.40687477113,
+    "bits_per_reading": 10.14213562492371,
+    "n": 3000,
+    "sd": 9.875,
+    "rho": null,
+    "code": "mix0.1",
+    "coef": {
+     "level": 1.89614360715473,
+     "g:[annual_amp>6.33]": 2.2590230698069913,
+     "ramp": [
+      0.37800983892177387,
+      -0.32767115154918564
+     ],
+     "g:[coherence>0.567] \u00b7 annual_amp": 1.5176442271993302
+    },
+    "alpha": {},
+    "added": "g:[coherence>0.567] \u00b7 annual_amp"
+   },
+   {
+    "terms": [
+     "g:[annual_amp>6.33]",
+     "ramp",
+     "g:[coherence>0.567] \u00b7 annual_amp",
+     "g:max(0, east\u22124.85) \u00b7 north"
+    ],
+    "structure_bits": 59.9615871138938,
+    "param_bits": 62.0,
+    "residual_bits": 30297.79733751067,
+    "total_bits": 30419.758924624562,
+    "bits_per_reading": 10.139919641541521,
+    "n": 3000,
+    "sd": 9.75,
+    "rho": null,
+    "code": "mix0.1",
+    "coef": {
+     "level": 1.8961436071547386,
+     "g:[annual_amp>6.33]": 2.25251912694288,
+     "ramp": [
+      0.38957407743519024,
+      -0.2696511337488879
+     ],
+     "g:[coherence>0.567] \u00b7 annual_amp": 1.525151996466168,
+     "g:max(0, east\u22124.85) \u00b7 north": -0.8956137609568127
+    },
+    "alpha": {},
+    "added": "g:max(0, east\u22124.85) \u00b7 north"
+   }
+  ],
+  "coefs": null,
+  "seconds": 237.11040616035461,
+  "library": [
+   "coherence",
+   "jumps",
+   "incidence",
+   "ramp",
+   "ramp2",
+   "annual_amp",
+   "m2_tile"
+  ]
+ }
+}
