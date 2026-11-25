@@ -165,6 +165,22 @@ FLOOD_WALL = [
          ("site_onehot",), lambda c: c["site_onehot"], group="offset", physics=False),
 ]
 
+# Protocol 11, buildings: target = the model's depth at an observed-dry building's wall (should be 0). CHI
+# tools/gate2/walls_bld.py writes the context.
+FLOOD_WALL_BLD = [
+    Term("contributing_area", "flood", "b · ln(1 + A / 100 m²)", "uphill runoff piles against the walls: the model's "
+         "walls block flow the real ground lets past (gaps, yards, drains)", ("contrib",), lambda c: np.log1p(c["contrib"] / 100.0)),
+    Term("roof_drop", "flood", "b · footprint / ring area", "too much roof rain lands at the walls (FloodSim spreads "
+         "each roof's rain over the cells touching it)", ("roof_drop",), lambda c: c["roof_drop"]),
+    Term("bld_slope", "flood", "b · S", "water banks against walls on steep ground", ("slope",), lambda c: c["slope"]),
+    Term("bld_hand", "flood", "b · HAND", "houses high above the stream get wet (rain on the ground, not the river)",
+         ("hand",), lambda c: c["hand"]),
+    Term("bld_edge", "flood", "b · exp(−d_edge / L)", "water piles up or leaves near the model's edge", ("d_edge",),
+         lambda c: (lambda L: np.exp(-c["d_edge"] / L)), family=(30.0, 600.0, True), unit="m"),
+    Term("bld_footprint", "flood", "b · ln(footprint / 100 m²)", "big buildings collect more water (their own size)",
+         ("footprint",), lambda c: np.log(np.maximum(c["footprint"], 1.0) / 100.0)),
+]
+
 
 # ============================================================================================================ ground
 def _span(c): t = np.asarray(c["t"]); return float(t.min()), float(t.max())
@@ -208,7 +224,7 @@ GROUND_RATE = [
     Term("distance", "ground", "b · distance to the house", "a smooth gradient across the area", ("dist",), lambda c: c["dist"]),
 ]
 
-DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "ground": GROUND, "ground_rate": GROUND_RATE}
+DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "flood_wall_bld": FLOOD_WALL_BLD, "ground": GROUND, "ground_rate": GROUND_RATE}
 
 
 # ============================================================================================================ v2 (PROTOCOL-7)
