@@ -461,3 +461,28 @@ Across Camp, Tubbs and Marshall: while the wind drives the fire the modelled are
 mapped one; afterwards the model keeps growing (Camp 1.33 at 20 h, Tubbs about 1.9 at 43 h, Marshall 2.35 at
 14 h) while the real fires all but stop, with 0 to 5 % official containment on Camp and Tubbs and none possible
 on Marshall. The missing physics is what ends a run, and on Marshall crews cannot be the explanation.
+
+## A18 East Troublesome: the model misses the run (25 Nov 2026)
+
+Runs FireSim `f2a7f86` (E0) and `920d039` (x1.30), started from the 21 Oct 21:10 UTC outline (123.0 km²), 43 h,
+3 seeds; chart `/mnt/project-files/wildfire/14_east_troublesome_area_over_time.png`.
+
+| hours | mapped km² | E0 | ratio | overlap | x1.30 | ratio | overlap |
+|---|---|---|---|---|---|---|---|
+| 12.3 | 578 | 166 | 0.29 | 0.27 | 234 | 0.40 | 0.37 |
+| 23.7 | 724 | 221 | 0.30 | 0.26 | 367 | 0.51 | 0.40 |
+| 36.8 | 741 | 269 | 0.36 | 0.28 | 499 | 0.67 | 0.44 |
+
+- A18's prediction (area ratio 0.5 to 1.5 during the run with x1.30) fails: 0.40 at 12.3 h. A8 3.49 and 3.69.
+- The real fire took 455 km² in its first twelve hours, overnight, while the windy stations read 5 to 8 m/s. The
+  model adds 43 km² (E0) or 109 km² (x1.30) in those hours and does its growing at hours 19 to 27, under the
+  surface wind peak. The run was not in the 10 m wind the model is given.
+- By A17's rule the wind does not ease until hour 40, so all three outlines are inside the free-burning window
+  and there is no outline after it: this fire says nothing about stopping.
+- Houses (stored, not scored): 618 destroyed in the record; model 74 (E0) and 596 (x1.30), with no skill in
+  which ones (AUC 0.50 and 0.56).
+- Candidates for what the model lacks, each a term to search before anything is changed: crown fire in
+  beetle-killed lodgepole (LANDFIRE 2016 fuels predate much of the kill and carry no dead-canopy load), long
+  spotting under the wind aloft, and the wind at ridge height. The model is the opposite of wrong here compared
+  with the other three fires: in grass and oak under a wind event it runs right and then fails to stop; in
+  timber it fails to run.
