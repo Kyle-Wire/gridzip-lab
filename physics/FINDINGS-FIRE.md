@@ -486,3 +486,34 @@ Runs FireSim `f2a7f86` (E0) and `920d039` (x1.30), started from the 21 Oct 21:10
   spotting under the wind aloft, and the wind at ridge height. The model is the opposite of wrong here compared
   with the other three fires: in grass and oak under a wind event it runs right and then fails to stop; in
   timber it fails to run.
+
+## A20: the search on four fires, leave one fire out (25 Nov 2026)
+
+Outputs `results/physics/fire_real_a20_T2.json` and `fire_real_a20_T2o.json`. Tables: Camp (corrected, 6,145
+points), Tubbs (2,802), Marshall (230), East Troublesome (7,400).
+
+**No finding.** On both tables the pooled formula fails to beat the one-correction baseline on every one of the
+four held-out fires (0 of 4; three were needed), and the noise-only twin again names terms (five on T2, four on
+T2o).
+
+| table | level per fire (Camp, Tubbs, Marshall, East Troublesome) | pooled winner | bits saved | best null |
+|---|---|---|---|---|
+| T2 reach | +0.07, +0.37, -0.37, -0.71 | wind_run, distance, fuel_timber, canopy_cover, slope_any | 0.29 | 0.05 |
+| T2o | 0.41, 0.48, 0.11, 0.34 | wind_speed, wind_aloft, canopy_cover, humidity, burn_duration | 0.30 | 0.04 |
+
+- The levels carry most of what is known: Tubbs overruns, East Troublesome misses (71 % of its reach points are
+  ground only the real fire took), and Camp's corrected overrun share is 0.41 (it was 0.34 on the wrong times).
+  Marshall's low 0.11 on T2o is against its final outline at 15 h, inside which most of the model's early burn
+  lies; its overrun is in area, later.
+- Leads that survive resampling (block-bootstrap share): on T2o the late group 1.0 (third search running),
+  moisture 0.93 (humid hours go with overrun: the model burns on through the night recovery), canopy cover 0.83;
+  on T2 distance 1.0, canopy cover 0.93 (canopy on the line goes with overrun, +3.1), fuel 0.77 (timber on the
+  line goes with misses, -1.5). The canopy and timber signs pull opposite ways, which is the Camp and East
+  Troublesome contrast in one line: the model burns too far through sheltered canopy at a creep and not far
+  enough through timber that crowned.
+- `slow_edge` and the flank terms are not in either winner.
+- What the search itself shows: with four fires the unit of evidence is the fire, and four is still too few for
+  a formula to carry from three to the fourth; and a noise twin that names terms on every table since A14 means
+  the term cost is too low for errors this patchy. That is a fault in how the search is set for fire, to be
+  fixed (a cost raised until the twin is silent, set on the twin alone) before the next reading, under its own
+  amendment.
