@@ -642,3 +642,20 @@ The stopping term (compressor first, on the Camp and Tubbs tables in hand, befor
 - Predicted: named on both fires with a positive sign (slow modelled edges are the overrun), best near 1 to 2
   m/min, and it takes over from `burn_duration`. If it transfers both ways it becomes a stopping rule proposal
   (an edge slower than v for N hours goes out), tested unchanged on Marshall and East Troublesome.
+
+### A19 (25 Nov 2026, 10:10 AM ET): NASA FEDS outline times are half-day labels, not times
+
+Found while setting up Marshall: the FEDS outline labelled 30 Dec 2021 12:00 already shows 19.85 km², but the
+fire started at 18:08 UTC. FEDS `t` is 00:00 for a date's night satellite passes and 12:00 for its afternoon
+passes, and the runner has read it as a clock time.
+- From now on a FEDS outline's time is the last VIIRS pass over the fire in its half-day (from the fire's own
+  detections file), written to a derived outline file with the original label kept and the rule noted in the
+  data manifest. Where no pass time can be found the outline is not scored.
+- Camp's past readings are affected and are corrected, not reinterpreted: its FEDS outlines were scored at 9.45 h
+  and 21.45 h and are really about 18.5 h and about 30 h (outside the 24-hour window); the afternoon outline of
+  8 Nov (about 6 h) was wrongly dropped. Every Camp score against a FEDS outline so far (A8 scores, A12, A13's
+  x1.30 rerun, A17's table) compared the model with an outline mapped hours later, which flatters the model's
+  area. Tubbs uses GeoMAC outlines and is not affected. The GeoMAC times stand.
+- Camp is rescored with corrected times on the existing runs (same seeds, no new physics): the last outline in
+  the window becomes the fit outline. Old and new scores are both kept in the findings. No rule or gate changes;
+  the Camp window stays 24 hours.
