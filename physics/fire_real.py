@@ -142,7 +142,8 @@ def one(fires, which):
     if len(y) < 40:
         out["skipped"] = "fewer than 40 readings"; return out
     out["planted"] = planted(ctx, y, blk, g)
-    folds = [(f"fit {names[1 - i]}, test {names[i]}", np.where(fid != i)[0], np.where(fid == i)[0]) for i in range(len(names))] if len(names) == 2 else []
+    folds = [(f"fit {names[1 - i]}, test {names[i]}" if len(names) == 2 else f"fit the others, test {names[i]}", np.where(fid != i)[0], np.where(fid == i)[0])
+             for i in range(len(names))] if len(names) >= 2 else []
     res = Q.analyse(T.FIRE, ctx, y, g, grammar=False, folds=folds, groups=blk, bootstrap_B=30, null_N=0, name=which, blocks=None,
                     neighbour=False)
     nb = block_null(res, y, blk, g)
@@ -191,7 +192,7 @@ def main():
     outp = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else ROOT / "results" / "physics" / "fire_real.json"
     fires = {a.split("=", 1)[0]: load(a.split("=", 1)[1]) for a in args}
     res = {"protocol": "PROTOCOL-FIRE A18" if A18 else "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
-    for which in (("T2o",) if A18 else ("T2", "T2o") if A16 else ("T1", "T2", "T3")):
+    for which in (tuple(a.split("=")[1].split(",") for a in sys.argv if a.startswith("--tables="))[0] if any(a.startswith("--tables=") for a in sys.argv) else ("T2o",) if A18 else ("T2", "T2o") if A16 else ("T1", "T2", "T3")):
         res[which] = one(fires, which)
     outp.parent.mkdir(parents=True, exist_ok=True)
     outp.write_text(json.dumps(res, indent=1, default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))

@@ -667,3 +667,21 @@ passes, and the runner has read it as a clock time.
   two starts. It is labelled in the fire's file as derived from a landmark description, not surveyed. The private
   address is not geocoded. If the paper's supporting text is opened later, the point is replaced and the run
   repeated, both kept.
+
+### A20 (25 Nov 2026, 1:15 PM ET): the search on four fires
+
+Seen before writing this: the area tables of Camp (rescored), Marshall and East Troublesome (in FINDINGS-FIRE and
+the runs' result files): three fires overrun after the wind, East Troublesome is far too slow in its first night
+(model 0.29 of the mapped area at 12 h). The new error tables have not been read.
+- Tables: Camp from `camp_2018_E0_a19.npz` (corrected outline times; replaces the A14 Camp table from here on),
+  Tubbs as before, `marshall_2021_E0.npz`, `east_troublesome_2020_E0.npz` (distance and line columns measured
+  from the start outline's edge; points inside it left out). All E0 runs on the HRRR wind as analysed.
+- Search: T2 (reach) and T2o (points the model burned), with every term of A14, A16 and A18 that all four fires
+  have inputs for. Each fire's mean is removed as before.
+- Hold-out: leave one fire out, four ways. "Transfers" now means the formula fitted on three fires beats the
+  one-correction baseline on the fourth, and a finding needs it on at least three of the four folds with the
+  other rules unchanged (bootstrap share 0.5, every block null beaten, planted check, noise twin naming nothing).
+  Requiring three of four is set now because Marshall's table is small (230 points) and one fold may be noise.
+- Predicted: on T2 the winner is led by a term that separates East Troublesome's misses (timber or canopy on the
+  line, wind aloft) from the others' overruns, and it does not transfer to or from East Troublesome; on T2o the
+  late group is still named in most draws and holds on at least three folds.
