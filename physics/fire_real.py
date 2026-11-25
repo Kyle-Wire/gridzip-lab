@@ -16,8 +16,10 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from physlib import engine as E, guards as Q, terms as T            # noqa: E402
 
-PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0)}
-GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0)}
+A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
+PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
+         "late": ("late", None)}
+GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
 def load(path):
@@ -37,6 +39,8 @@ def table(d, meta, which):
         if which == "T1":
             suf = "_to"; rows = ob & mo
             with np.errstate(all="ignore"): y = np.log(d["t12_t_obs"] / np.maximum(d["t12_t_mod"], 10.0))
+        elif which == "T2o":                                         # A16: points the model burned; 1 = the record does not show them burned
+            suf = "_all"; rows = mo; y = 1.0 - ob.astype(float)
         else:
             suf = "_all"; rows = ob | mo; y = mo.astype(float) - ob.astype(float)
         blk = (d["t12_row"] // 100) * 1000 + d["t12_col"] // 100
@@ -52,6 +56,9 @@ def table(d, meta, which):
     for k in ("grass", "shrub", "timber", "nonburn", "developed", "canopy", "slope_run", "slope_any"):
         c["line_" + k] = g("line_" + k)
     if which == "T1": c["lnhours"] = np.log(d["t12_t_obs"][rows] / 60.0)
+    if which in ("T2", "T2o") and A16:
+        c.update(flank=np.sqrt(np.maximum(0.0, 1.0 - c["run"] ** 2)), back=(c["run"] < 0).astype(float))
+    if which == "T2o": c.update(late=d["t12_t_mod"][rows] / te, edge_age=(te - d["t12_t_mod"][rows]) / 60.0)
     if which == "T3": c.update(gap=g("gap"), gap_d=np.array(meta["gap_d"]), mod=g("mod"))
     return c, y[rows], blk[rows]
 
@@ -86,7 +93,8 @@ def planted(ctx, y, blk, g, seed=0):
     """Each planted term's group must be named; a noise-only twin must name nothing."""
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
-    names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap"}
+    names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
+             "late": "late_arrival"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}
@@ -166,8 +174,8 @@ def main():
     args = [a for a in sys.argv[1:] if "=" in a and not a.startswith("--")]
     outp = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else ROOT / "results" / "physics" / "fire_real.json"
     fires = {a.split("=", 1)[0]: load(a.split("=", 1)[1]) for a in args}
-    res = {"protocol": "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
-    for which in ("T1", "T2", "T3"):
+    res = {"protocol": "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
+    for which in (("T2", "T2o") if A16 else ("T1", "T2", "T3")):
         res[which] = one(fires, which)
     outp.parent.mkdir(parents=True, exist_ok=True)
     outp.write_text(json.dumps(res, indent=1, default=lambda o: o.tolist() if hasattr(o, "tolist") else str(o)))

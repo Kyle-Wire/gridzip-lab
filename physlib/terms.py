@@ -287,4 +287,16 @@ FIRE = [
          ("gap", "gap_d"), lambda c: _knots(c, "gap", "gap_d"), family=(3.0, 30.0, True), group="houses", unit="m"),
     Term("contrast", "fire", "β · (modelled destroyed share − ½)", "the model over-states (β<0) or under-states its own range of losses", ("mod",), lambda c: c["mod"] - 0.5),
 ]
+# PROTOCOL-FIRE amendment A16, part 2: the overrun. flank and back come from the wind cosine of the A14 tables; late and
+# edge_age from the model's own arrival time, on table T2o only (points the model burned).
+FIRE += [
+    Term("flank_spread", "fire", "b · sin(wind, line from ignition)", "flanking fire: the model's flanks keep spreading where the real flanks went out or were held",
+         ("flank",), lambda c: c["flank"], group="flank"),
+    Term("backing_spread", "fire", "b · [point is upwind of the ignition]", "backing fire: the model burns back against the wind where the real fire did not",
+         ("back",), lambda c: c["back"], group="flank"),
+    Term("late_arrival", "fire", "b · (model arrival time / window)", "ground the model reaches late in the window: spread that should have slowed or stopped by then",
+         ("late",), lambda c: c["late"], group="late"),
+    Term("burn_duration", "fire", "b · hours from model arrival to the end of the window", "how long the modelled edge has been burning; the opposite sign to late arrival",
+         ("edge_age",), lambda c: c["edge_age"], group="late"),
+]
 DOMAINS["fire"] = FIRE

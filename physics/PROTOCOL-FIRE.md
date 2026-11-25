@@ -553,3 +553,11 @@ Part 2, the overrun. Under the directive of 24 Nov the next step is terms, then 
   next step is the two extra calibration fires, not a spread limit.
 - Nothing fitted goes into FireSim from this. A term that pays becomes a spread rule only through its own
   amendment, tested on Marshall and East Troublesome before any blind fire.
+- A16 note (24 Nov 2026, 9:05 PM ET, before the search is run). The four overrun inputs need no new run: `flank`
+  and `back` follow from the hour-weighted wind cosine already in the A14 tables (`run_all`: flank is
+  sqrt(1 - run_all^2), back is 1 where run_all < 0), and `late` and `edge_age` from the model's arrival time and
+  the window's end. `late` and `edge_age` exist only where the model burned, and on the full T2 table "the model
+  never arrived" would by itself mark every missed point, so they are searched on a new table T2o: the points the
+  model burned by the last outline, y = 1 where the record does not show them burned and 0 where it does, each
+  fire's mean removed. `flank_spread` and `backing_spread` are searched on T2 and T2o. T1 and T3 are not rerun.
+  The tables are the A14 ones (E0 runs on the plain HRRR wind). Output: `results/physics/fire_real_a16.json`.
