@@ -55,6 +55,26 @@ apply here, so a new term set is added.
 - planted volume scale (+0.25 · h) → `volume_scale`, alone;
 - noise only → nothing named (null p = 1.0).
 
+**Buildings (added 24 Nov 2026, evening, before the building search was run).** *Seen before writing: Highland Falls'
+scored run (rules A to D), its 6 wet marks, and the building table's summary: 223 of 242 observed-dry buildings wet in
+the model, median depth in the peak wall cell 0.16 m, roof drop the same for wet and dry houses (1.30 and 1.33),
+uphill drainage 1,312 against 245 m² (medians).* Rule B's false alarms give hundreds of cases where marks give a
+handful. Each row is an observed-dry building (CHI `walls_terms.py --buildings`); the target is the model's depth at
+its wall (peak ring cell, 0 when dry), which should be 0. Terms `physlib.terms.FLOOD_WALL_BLD`:
+
+| Term | Form | If it wins, the model |
+|---|---|---|
+| `contributing_area` | b · ln(1 + A / 100 m²), A the ground draining into the house and its ring (D8 on the filled 1 m ground) | piles uphill runoff against walls (walls block flow the real ground lets past: gaps, yards, drains) |
+| `roof_drop` | b · footprint / ring area | drops too much roof rain at the walls (FloodSim puts each roof's rain on the cells touching it) |
+| `bld_slope` | b · S | banks water against walls on steep ground |
+| `bld_hand` | b · HAND | wets houses high above the stream (rain on the ground, not the river) |
+| `bld_edge` | b · exp(−d_edge / L), L 30 to 600 m | edge effects |
+| `bld_footprint` | b · ln(footprint / 100 m²) | collects more at big buildings (their own size) |
+
+Same search and guards, with the grammar's own candidates; folds leave one of four spatial blocks out (east–west
+quarters of the buildings), and the null permutes within those blocks. **Named** as above. With one town the result is
+a lead for that town only; it is tried as a fix on the tuning towns and changes nothing in the scorer's rules.
+
 **Limits.** Marks are few: Highland Falls has 10, and a new tuning town is still to be placed. Power is low, and a
 null here means "no term is big enough to see with these marks", not "no missing physics". Context comes from
 the 1 m run grids, so the terms can't see sub-grid drains or culverts. HAND here is ground minus the 5th-percentile ground
