@@ -238,3 +238,41 @@ both fires (no weather-model terrain height in either table; house terms only in
   East Troublesome) matter more for it than more terms. Until then the levels and the two-fire tests of each
   change stay the deciding evidence.
 
+### A13's speed scale in the fire runs, and A15's first station score (24 Nov 2026 evening; calibration)
+
+Fire runs with the surface wind times 1.30 (A13's rule), otherwise the E0 runs (priors, road rule on, embers on
+the 20-ft wind). FireSim results `camp_M3_24h_hrrr_g0_ws130_road0_E0_ens3`, `tubbs_M3_44h_g0_ws130_road0_E0`.
+
+| run | seeds | burned km2 (mapped) | overlap at last outline | Camp at 3.35 h, model / mapped km2 | houses modelled / recorded | bits per building (own rate) | AUC | A8 score |
+|---|---|---|---|---|---|---|---|---|
+| camp, wind x1.00 | 3 | 479, 513, 508 (376) | 0.51, 0.51, 0.48 | 56 / 222 | 14,172 / 16,493 | 1.62 (0.99) | 0.753 | 2.81 |
+| camp, wind x1.30 | 3 | 821, 805, 852 (376) | 0.42, 0.43, 0.40 | 182 / 222 | 17,888 / 16,493 | 1.56 (0.99) | 0.737 | 3.48 |
+| tubbs, wind x1.00 | 2 | 238, 237 (125) | 0.44, 0.44 | | 11,619 / 5,185 | 1.62 (0.63) | 0.753 | 4.08 |
+| tubbs, wind x1.30 | 2 | 296, 314 (125) | 0.36, 0.34 | | 15,730 / 5,185 | 2.55 (0.63) | 0.684 | 6.01 |
+
+- The station-true wind level makes both fires score worse. It fixes what it should (Camp's first three hours:
+  182 km2 modelled against 222 mapped, up from 56) and then feeds the error that was already the largest: fire
+  that keeps running where the real ones stopped. Camp ends at 2.1 times the mapped area, Tubbs at 2.4 times.
+- So the wind level was not the main fault. With the wind nearer the truth at exposed places, what is left is
+  (a) the same multiplier also speeding up sheltered ground, where A13 showed the analysis is already 2 to 8
+  times too fast, and (b) no end to spread: no suppression, no burnout, in the model by design (section 7).
+- A13's rule stands as written (the scale is the station-based level); the numbers above are the standing with
+  it. Nothing passes.
+
+WindSim terrain wind W3 (A15), three bearings (30, 45, 60 degrees), each 2.30 million cells, worst
+non-orthogonality 45, no divergence, no limiter; station table FireSim `results/wind_check/camp_2018_w3.txt`.
+
+| class | station-hours (stations) | W3 RMSE, median ratio | W3 from 80 m over a clearing | HRRR 10 m |
+|---|---|---|---|---|
+| all | 28 (2) | 8.2 m/s, 2.09 | 6.4 m/s, 1.63 | 4.3 m/s, 0.92 |
+| windward | 4 (1) | 7.6, 3.51 | 7.9, 3.60 | 1.5, 0.94 |
+| lee | 24 (1) | 8.3, 1.70 | 6.1, 1.32 | 4.6, 0.87 |
+
+- By A15's rule: only 2 stations lie inside the terrain runs (Jarbo Gap and Cohasset), so the check is too thin
+  to decide and W3 is not used in any fire run.
+- What the two stations show anyway: W3 is about twice too fast. Its level comes from the HRRR 80 m wind over
+  the high ground upwind, carried down by a neutral log law; real air that night was stable and did not mix that
+  momentum down everywhere. The prediction in A15 (good on ridges, wrong in the lee) was too kind: the level is
+  wrong at both stations. The pattern (which ground is exposed, which sheltered) is untested, because two
+  stations cannot test a pattern.
+
