@@ -659,3 +659,11 @@ passes, and the runner has read it as a clock time.
 - Camp is rescored with corrected times on the existing runs (same seeds, no new physics): the last outline in
   the window becomes the fit outline. Old and new scores are both kept in the findings. No rule or gate changes;
   the Camp window stays 24 hours.
+- A18 note (25 Nov 2026, 10:45 AM ET, before any Marshall run). No source that could be opened gives a
+  coordinate for either Marshall ignition (the paper's are in supporting text behind a bot check; the Sheriff's
+  release of 8 Jun 2023 gives a street address for the first and a description for the second: "just south of the
+  Marshall Mesa Trailhead"). The run is lit at one place: 200 m south of the trailhead's OpenStreetMap position,
+  at 18:08 UTC, with a 150 m radius to cover the stated uncertainty and the "several 100s of meters" between the
+  two starts. It is labelled in the fire's file as derived from a landmark description, not surveyed. The private
+  address is not geocoded. If the paper's supporting text is opened later, the point is replaced and the run
+  repeated, both kept.
