@@ -700,3 +700,31 @@ patches kilometres across, so a term that fits one patch is paid for as if it ex
   tables. A planted term that can no longer be found at that s is reported as out of reach, and a real term in
   its group cannot be a finding or a null.
 - Predicted: s is 5 or 10; at that spacing the late group is still named on T2o, and little else is.
+
+### A22 (25 Nov 2026, 5:15 PM ET): the held-edge rule H2, a stopping rule that needs no crew record
+
+Seen: the three overrun fires and their hourly weather as the runs used it (humidity never above 37 % in the
+Tubbs, Camp and Marshall windows, so dead fuel stays far below its moisture of extinction and night recovery
+cannot stop these modelled fires); A18's and A20's leads (slow and late ground is the wrong ground). A21's
+calibrated search has not been read.
+- Source for the numbers (opened): NWCG Fire Behavior Field Reference Guide, PMS 437, "Interpreting expected
+  surface fire behavior": flame length 0 to 4 ft "Direct, Hand"; 4 to 8 ft "Direct, Equip"; 8 ft and more
+  "Indirect". Nothing is fitted.
+- Compressor first: the error tables gain `flame_arr`, the model's head-fire flame length (m) at each
+  model-burned point in the hour it arrived. Term `held_edge(L)`: 1 where `flame_arr` is under L, L = 1.22 m and
+  2.44 m (4 and 8 ft), on T2o at A21's thinning, four fires, leave one out. A planted check first.
+- The rule H2(L) in the model: in any hour a cell whose head-fire flame length is under L does not carry fire
+  (its spread rate is zero for that hour; it can burn in a later hour if the flame there rises). It stands for
+  an edge weak enough to be worked directly, wherever people are fighting the fire, and it uses nothing a
+  forecast would not have. It is on from the first minute. Embers can still light such a cell, as now.
+- Test: Camp, Tubbs, Marshall and East Troublesome, E0 priors, HRRR wind as analysed, 3 seeds, H2(1.22) and
+  H2(2.44), against the E0 runs in hand. Read on area ratio and overlap at every mapped time and A8.
+- Rule, fixed now: H2(L) is kept as a candidate setting only if, against E0, the area ratio at the last mapped
+  time moves toward 1 on each of Camp, Tubbs and Marshall, the overlap at each fire's first mapped time (or
+  Tubbs's 5.5 h outside-share) is not worse by more than 0.02, and A8 improves on at least two of the three with
+  none worse by more than 0.1. East Troublesome is reported and cannot veto, since its fault is the opposite
+  one. If both L pass, the smaller is kept. A kept rule is still only a candidate: it goes to the freeze with
+  the rest and is judged on the blind fires.
+- Predicted: H2(1.22) trims Tubbs and Marshall but not enough (ratio at the end still above 1.4); H2(2.44)
+  brings Marshall under 1.5 and Tubbs under 1.5, does little on Camp, and makes East Troublesome slightly worse.
+  `held_edge(2.44)` is named on T2o with a positive sign.
