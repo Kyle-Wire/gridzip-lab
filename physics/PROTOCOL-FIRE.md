@@ -685,3 +685,18 @@ the runs' result files): three fires overrun after the wind, East Troublesome is
 - Predicted: on T2 the winner is led by a term that separates East Troublesome's misses (timber or canopy on the
   line, wind aloft) from the others' overruns, and it does not transfer to or from East Troublesome; on T2o the
   late group is still named in most draws and holds on at least three folds.
+
+### A21 (25 Nov 2026, 4:30 PM ET): a search setting under which noise names nothing
+
+Seen: every fire search since A14 has had its noise-only twin name terms, on every table. The cause is in the
+accounting: the code length counts each 300 m lattice point as an independent reading, but fire errors come in
+patches kilometres across, so a term that fits one patch is paid for as if it explained hundreds of readings.
+- Fix, set on noise alone: the lattice is thinned to every s-th point in both directions (s = 1, 2, 3, 5, 10,
+  that is 300 m to 3 km spacing) and, for each s, five noise-only twins (block-shuffled as in A14, seeds 0 to 4)
+  are searched. The setting is the smallest s at which all five twins name nothing. The real errors are not
+  read while s is chosen. If no s silences the twins, that is reported and no real search is run.
+- The real search then runs once on the thinned tables of the four fires (A20's tables, T2 and T2o, the same
+  terms, leave one fire out, three of four folds to transfer), with the planted checks repeated on the thinned
+  tables. A planted term that can no longer be found at that s is reported as out of reach, and a real term in
+  its group cannot be a finding or a null.
+- Predicted: s is 5 or 10; at that spacing the late group is still named on T2o, and little else is.
