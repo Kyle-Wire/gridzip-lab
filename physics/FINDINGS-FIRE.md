@@ -373,3 +373,19 @@ sheltered stations) was wrong.
   stations as well as Camp's so that it is not tuned to one fire.
 - Code fault found by the run: `box_mean` read the column spacing from distinct x values, which jitter by under
   a metre on a warped mesh; fixed in FireSim `2eef747` (nearest-neighbour spacing), tests pass.
+
+## Correction, 25 Nov 2026 (A19): Camp's NASA FEDS outline times were read wrongly
+
+FEDS outline times are half-day labels (night passes, afternoon passes), not clock times. The two Camp outlines
+scored at 9.45 h and 21.45 h were really mapped at about 18.5 h and about 30 h. What this touches above:
+- Every Camp A8 score, and A12's and A13's verdicts on Camp, compared the model at 21.45 h with a fire mapped
+  about 8 hours later. The mapped area at the model's time was smaller than 376 km², so the Camp overrun is
+  larger than stated everywhere above, and the x1.30 run's 778 km² is more than twice the real area, not twice.
+- A17's Camp table: the rows at 3.35 h and 9.45 h against GeoMAC (222 and 285 km²) stand; the FEDS figures 331
+  and 376 km² belong to about 18.5 h and 30 h. "The real fire grew 14 % in twelve hours" is still about right but
+  for 18.5 h to 30 h. At 9.45 h the x1.30 run (379 km²) is 1.33 times GeoMAC's 285, not 1.15.
+- A14, A16 and A18 tables: Camp's "record" in T2 and T2o is the outline of about 30 h, so Camp's overrun level
+  (0.34 in T2o) is understated, and Camp's T1 arrival times at the FEDS outlines are about 9 hours early.
+  Tubbs is not affected.
+The Camp runs are being rescored with satellite pass times; the corrected numbers will be set beside the old ones
+here, and the Camp error table rebuilt before the compressor reads Camp again.
