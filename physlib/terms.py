@@ -136,6 +136,36 @@ def flood_terms(ctx):
     return out
 
 
+# ------------------------------------------------------------------------------------------- flood at real marks
+# Protocol 11 (flood wall check). Residual r = model minus mark (m) at USGS high-water marks, rule D's error. Context
+# comes from the run and its inputs only (CHI tools/gate2/walls_terms.py), never from other marks.
+FLOOD_WALL = [
+    Term("volume_scale", "flood", "b · h", "the miss grows with the model's depth: too much or too little water (rain "
+         "total, losses) or a roughness that scales every depth", ("h_model",), lambda c: c["h_model"]),
+    Term("depth_power", "flood", "b · ln(h + 0.1)", "shallow and deep water are off by different factors (a depth-"
+         "dependent roughness or infiltration error)", ("h_model",), lambda c: np.log(c["h_model"] + 0.1)),
+    Term("floodplain_height", "flood", "b · HAND", "the miss grows with height above the local low: the channel carries "
+         "too little (missing bathymetry under lidar water) or too much", ("hand",), lambda c: c["hand"], group="valley"),
+    Term("channel_distance", "flood", "b · ln(1 + d_ch / 10 m)", "the miss changes away from the main flow path "
+         "(overbank exchange, floodplain storage)", ("d_channel",), lambda c: np.log1p(c["d_channel"] / 10.0), group="valley"),
+    Term("edge_loss", "flood", "b · exp(−d_edge / L)", "water leaves or piles up at the model's edge within L of it "
+         "(boundary condition, box too small)", ("d_edge",), lambda c: (lambda L: np.exp(-c["d_edge"] / L)),
+         family=(30.0, 600.0, True), unit="m"),
+    Term("blockage", "flood", "b · building share within 30 m", "dense buildings raise or lower water more than the "
+         "model's walls do (conveyance, storage lost)", ("bld_frac",), lambda c: c["bld_frac"]),
+    Term("ground_slope", "flood", "b · S", "the miss tracks ground slope (steep, fast flow: friction or timing)",
+         ("slope",), lambda c: c["slope"]),
+    Term("velocity_head_wall", "flood", "b · V² / 2g", "marks on upstream faces record run-up the model's level omits",
+         ("V",), lambda c: c["V"] ** 2 / (2 * G0)),
+    Term("datum_kind", "flood", "b · [height-above-ground mark]", "marks read as height above ground and marks with a "
+         "NAVD88 level disagree: a datum or ground-reading error", ("kind_hag",), lambda c: c["kind_hag"]),
+    Term("on_building", "flood", "b · [mark on a building]", "marks on walls differ from open-ground marks (wall "
+         "treatment, local run-up or shelter)", ("at_building",), lambda c: c["at_building"]),
+    Term("town_offset", "flood", "per-town offset", "a whole town is off by one amount (its rain product or inflow)",
+         ("site_onehot",), lambda c: c["site_onehot"], group="offset", physics=False),
+]
+
+
 # ============================================================================================================ ground
 def _span(c): t = np.asarray(c["t"]); return float(t.min()), float(t.max())
 
@@ -178,7 +208,7 @@ GROUND_RATE = [
     Term("distance", "ground", "b · distance to the house", "a smooth gradient across the area", ("dist",), lambda c: c["dist"]),
 ]
 
-DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "ground": GROUND, "ground_rate": GROUND_RATE}
+DOMAINS = {"wind": WIND, "heat": HEAT, "flood": FLOOD, "flood_wall": FLOOD_WALL, "ground": GROUND, "ground_rate": GROUND_RATE}
 
 
 # ============================================================================================================ v2 (PROTOCOL-7)
@@ -237,3 +267,33 @@ HEAT_V2 = [
 
 WIND_FULL = WIND + CONVECTIVE + TROPICAL
 DOMAINS.update({"wind_full": WIND_FULL, "heat_full": HEAT + HEAT_V2})
+
+# ============================================================================================================ nwp
+# Errors of a learned (or any gridded) weather model, r = (forecast − analysis) / spread for one variable at one point
+# and lead. Inputs are known at the start or fixed: lat, land (0-1), height_km, sun (cos zenith at valid time),
+# msl_anom (hPa, from the zonal mean), msl_curv (hPa per cell², discrete Laplacian), spin850 (1e-5 s⁻¹),
+# wind850 (m/s), q850 (g/kg), tend (the variable's last 6 h change). Added 24 Nov 2026 for WindSim Part F.
+OMEGA = 7.2921e-5
+NWP = [
+    Term("diffusion", "nwp", "κ · ∇²x₀", "the model smooths highs and lows like extra diffusion (κ>0 fills lows, flattens highs)",
+         ("msl_curv",), lambda c: c["msl_curv"], group="smoothing"),
+    Term("vortex_spin_down", "nwp", "b · ζ₈₅₀ · max(0, U₈₅₀ − U₀)", "strong, windy vortices (storms) are spun down",
+         ("spin850", "wind850"), lambda c: (lambda u0: c["spin850"] * np.maximum(c["wind850"] - u0, 0.0)),
+         family=(0.0, 15.0, False), group="vortex", unit="m/s"),
+    Term("vortex_abs", "nwp", "b · |ζ₈₅₀|", "errors grow with spin of either sign (cyclones and anticyclones)", ("spin850",),
+         lambda c: np.abs(c["spin850"]), group="vortex"),
+    Term("coriolis", "nwp", "b · f,  f = 2Ω sin φ", "wind-pressure balance is off by latitude", ("lat",),
+         lambda c: 2 * OMEGA * np.sin(np.radians(c["lat"])) * 1e4, group="latitude"),
+    Term("polar", "nwp", "b · max(0, |φ| − 60°)", "the lat-lon grid converges near the poles", ("lat",),
+         lambda c: np.maximum(np.abs(c["lat"]) - 60.0, 0.0), group="latitude"),
+    Term("terrain_reduction", "nwp", "b · [land] · z_s · p′", "sea-level pressure reduced over high ground is off", ("land", "height_km", "msl_anom"),
+         lambda c: c["land"] * c["height_km"] * c["msl_anom"], group="land"),
+    Term("land_anomaly", "nwp", "b · [land] · p′", "highs and lows behave differently over land", ("land", "msl_anom"),
+         lambda c: c["land"] * c["msl_anom"], group="land"),
+    Term("extrapolation", "nwp", "b · Δx₋₆ₕ", "the model carries the last change on too far (b>0) or too little (b<0)", ("tend",),
+         lambda c: c["tend"]),
+    Term("diurnal", "nwp", "b · cos Z⁺", "daytime heating is out of phase or too strong", ("sun",), lambda c: c["sun"]),
+    Term("latent_heating", "nwp", "b · q₈₅₀ · max(ζ₈₅₀ · sign φ, 0)", "moist cyclones deepen from latent heat the model lacks",
+         ("q850", "spin850", "lat"), lambda c: c["q850"] * np.maximum(c["spin850"] * np.sign(c["lat"] + 1e-9), 0.0)),
+]
+DOMAINS.update({"nwp": NWP})
