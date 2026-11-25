@@ -19,6 +19,7 @@ from physlib import engine as E, guards as Q, terms as T            # noqa: E402
 CONST = ("ember_L", "gap_d", "slow_v")
 SLOW_V = (0.5, 1.0, 2.0, 5.0, 10.0)
 A18 = "--a18" in sys.argv                                           # amendment A18: slow_edge on T2o only
+THIN = [1]                                                          # amendment A21: lattice thinning step (set in main)
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
          "late": ("late", None), "slow": ("slow", 2.0)}
@@ -58,6 +59,8 @@ def table(d, meta, which):
         else:
             suf = "_all"; rows = ob | mo; y = mo.astype(float) - ob.astype(float)
         blk = (d["t12_row"] // 100) * 1000 + d["t12_col"] // 100
+    if which != "T3" and THIN[0] > 1:                            # A21: every THIN-th lattice point in both directions
+        rows = rows & ((d["t12_row"] // 10) % THIN[0] == 0) & ((d["t12_col"] // 10) % THIN[0] == 0)
     g = lambda k: d[p + k][rows] if p + k in d else None
     c = {"lnu": np.log(np.maximum(g("u10" + suf), 0.3)), "run": g("run" + suf), "calm": g("calm" + suf), "night": g("night" + suf),
          "crew": g("crew" + suf), "moist": g("moist" + suf), "rh": g("rh" + suf), "lndist": np.log(g("dist")),
@@ -187,11 +190,31 @@ def one(fires, which):
     return out
 
 
+def twins(fires, which, seeds=5):
+    """A21: how many of `seeds` noise-only twins name a term at the current thinning."""
+    g = GRIDS[which]; ctx, y, fid, blk, _, _ = pool(fires, which); built = E.assemble(T.FIRE, ctx, len(y)); L = E.library_info(built); bad = []
+    for sd in range(seeds):
+        w, _, _ = E.search(built, block_shuffle(y, blk, np.random.default_rng(sd)), g, library_size=L, robust=True)
+        bad.append(w["terms"])
+    return len(y), bad
+
+
 def main():
     args = [a for a in sys.argv[1:] if "=" in a and not a.startswith("--")]
     outp = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else ROOT / "results" / "physics" / "fire_real.json"
     fires = {a.split("=", 1)[0]: load(a.split("=", 1)[1]) for a in args}
-    res = {"protocol": "PROTOCOL-FIRE A18" if A18 else "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
+    tabs = next((a.split("=")[1].split(",") for a in sys.argv if a.startswith("--tables=")), None)
+    if "--thin=auto" in sys.argv:                                # A21: chosen on noise alone, before the real errors are read
+        choice = {}
+        for s_ in (1, 2, 3, 5, 10):
+            THIN[0] = s_; out_ = {w_: twins(fires, w_) for w_ in tabs}
+            choice[s_] = {w_: {"n": n_, "twins_naming": sum(bool(b) for b in bad), "named": bad} for w_, (n_, bad) in out_.items()}
+            print("thin", s_, {w_: (v["n"], v["twins_naming"]) for w_, v in choice[s_].items()}, flush=True)
+            if all(v["twins_naming"] == 0 for v in choice[s_].values()): break
+        else:
+            outp.parent.mkdir(parents=True, exist_ok=True); outp.write_text(json.dumps({"protocol": "PROTOCOL-FIRE A21", "thinning": choice, "result": "no thinning step silences the noise twins; no real search run"}, indent=1))
+            print("no thinning step silences the twins; wrote", outp); return
+    res = {"thin": THIN[0], "thinning": locals().get("choice"), "protocol": "PROTOCOL-FIRE A18" if A18 else "PROTOCOL-FIRE A16 part 2" if A16 else "PROTOCOL-FIRE A14", "tables": {n: m for n, (_, m) in fires.items()}}
     for which in (tuple(a.split("=")[1].split(",") for a in sys.argv if a.startswith("--tables="))[0] if any(a.startswith("--tables=") for a in sys.argv) else ("T2o",) if A18 else ("T2", "T2o") if A16 else ("T1", "T2", "T3")):
         res[which] = one(fires, which)
     outp.parent.mkdir(parents=True, exist_ok=True)
