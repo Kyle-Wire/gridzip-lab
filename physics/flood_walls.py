@@ -3,6 +3,8 @@
 Usage:
   python physics/flood_walls.py synth                      # planted-law check and null on made-up marks (CPU, ~1 min)
   python physics/flood_walls.py run terms1.csv [terms2.csv ...] --out results/physics/flood_walls.json
+  python physics/flood_walls.py buildings bld1.csv [...] --out results/physics/flood_walls_bld.json   # rule B's false alarms
+  python physics/flood_walls.py synth-buildings            # planted-law check on made-up buildings
 
 Each CSV is one run's per-mark context from Climate Home Inspection `tools/gate2/walls_terms.py` (one tuning town or a
 spent case). The target is rule D's error, model minus mark (m). Model-dry marks are tallied apart, by term value.
@@ -122,14 +124,80 @@ def synth(seed=0):
     return out
 
 
+BLD_CTX = (("contrib", "contrib_m2"), ("roof_drop", "roof_drop"), ("slope", "slope"), ("hand", "hand_m"),
+           ("d_edge", "d_edge_m"), ("footprint", "footprint_m2"))
+
+
+def build_buildings(rows):
+    """ctx, y (the model's depth at an observed-dry building's wall, m) and four east-west blocks; rows with any blank
+    in the context are left out."""
+    keep = [r for r in rows if all(r.get(src) not in ("", None) for _, src in BLD_CTX) and r.get("target_m") not in ("", None)]
+    ctx = {k: np.array([_f(r[src]) for r in keep]) for k, src in BLD_CTX}
+    y = np.array([_f(r["target_m"]) for r in keep])
+    x = np.array([_f(r["x"]) for r in keep])
+    q = np.searchsorted(np.quantile(x, [0.25, 0.5, 0.75]), x) if len(x) else np.array([], int)
+    return ctx, y, q, len(rows) - len(keep)
+
+
+def analyse_buildings(ctx, y, q, name, B=30, N=19):
+    folds = [(f"leave out block {k}", np.where(q != k)[0], np.where(q == k)[0]) for k in range(4) if (q == k).sum() >= 2]
+    blocks = [np.where(q == k)[0] for k in range(4) if (q == k).any()]
+    res = Q.analyse(list(T.FLOOD_WALL_BLD), ctx, y, GRID, folds=folds, groups=q, bootstrap_B=B, null_N=N, blocks=blocks, name=name)
+    gd = res["guards"]
+    return {"name": name, "n": res["n"], "terms_offered": [t.name for t in T.FLOOD_WALL_BLD], "winner": res["winner"]["terms"],
+            "coef": res["winner"]["coef"], "bits_saved_per_reading": res["bits_saved_per_reading"],
+            "sd_before": res["sd_before"], "sd_after": res["sd_after"], "holdout": res["holdout"],
+            "transfers": res["transfers"], "verdict": Q.verdict(res), "null_p": gd.get("null_bits_saved", {}).get("p"),
+            "inclusion": gd.get("inclusion"), "neighbour": gd.get("neighbour")}
+
+
+def synth_buildings(seed=0):
+    """240 made-up buildings, noise sd 0.08 m. Planted: (a) 0.12 · ln(1 + A/100 m²); (b) nothing. Pass: (a) names
+    contributing_area with no other physics term, (b) names nothing (null p > 0.05)."""
+    rng = np.random.default_rng(seed)
+    n = 240
+    rows = [{"x": f"{rng.uniform(0, 1000):.1f}", "contrib_m2": f"{rng.lognormal(6, 1.2):.1f}", "roof_drop": f"{rng.uniform(0.6, 2.2):.3f}",
+             "slope": f"{rng.uniform(0, 0.15):.4f}", "hand_m": f"{rng.uniform(0, 40):.2f}", "d_edge_m": f"{rng.uniform(20, 900):.1f}",
+             "footprint_m2": f"{rng.lognormal(5, 0.6):.1f}"} for _ in range(n)]
+    out = {}
+    for lab, law in (("contributing_area", lambda r: 0.12 * np.log1p(_f(r["contrib_m2"]) / 100)), ("null", lambda r: 0.0)):
+        rr = [dict(r, target_m=f"{law(r) + rng.normal(0, 0.08):.3f}") for r in rows]
+        ctx, y, q, _ = build_buildings(rr)
+        a = analyse_buildings(ctx, y, q, f"synth buildings {lab}", B=10, N=19)
+        phys = [t for t in a["winner"] if t in {t.name for t in T.FLOOD_WALL_BLD}]
+        ok = (a["winner"] == [] or a["null_p"] > 0.05) if lab == "null" else (phys == [lab])
+        out[lab] = {"winner": a["winner"], "bits": a["bits_saved_per_reading"], "null_p": a["null_p"], "pass": bool(ok)}
+        print(lab, out[lab], flush=True)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("synth")
+    sub.add_parser("synth-buildings")
     r = sub.add_parser("run")
     r.add_argument("csv", nargs="+", type=Path)
     r.add_argument("--out", type=Path, default=ROOT / "results" / "physics" / "flood_walls.json")
+    rb = sub.add_parser("buildings")
+    rb.add_argument("csv", nargs="+", type=Path)
+    rb.add_argument("--out", type=Path, default=ROOT / "results" / "physics" / "flood_walls_bld.json")
     a = ap.parse_args()
+    if a.cmd == "synth-buildings":
+        res = synth_buildings()
+        p = ROOT / "results" / "physics" / "flood_walls_bld_synth.json"
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(res, indent=1, default=float))
+        sys.exit(0 if all(v["pass"] for v in res.values()) else 1)
+    if a.cmd == "buildings":
+        ctx, y, q, dropped = build_buildings(load(a.csv))
+        res = analyse_buildings(ctx, y, q, "flood wall buildings: " + ", ".join(p.stem for p in a.csv))
+        res["rows_dropped_blank_context"] = dropped
+        res["sources"] = [p.name for p in a.csv]
+        a.out.parent.mkdir(parents=True, exist_ok=True)
+        a.out.write_text(json.dumps(res, indent=1, default=float))
+        print(json.dumps({k: res[k] for k in ("n", "winner", "coef", "bits_saved_per_reading", "sd_before", "sd_after", "null_p", "verdict")}, indent=1, default=str))
+        return
     if a.cmd == "synth":
         res = synth()
         p = ROOT / "results" / "physics" / "flood_walls_synth.json"

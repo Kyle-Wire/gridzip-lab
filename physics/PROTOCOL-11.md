@@ -74,6 +74,14 @@ its wall (peak ring cell, 0 when dry), which should be 0. Terms `physlib.terms.F
 Same search and guards, with the grammar's own candidates; folds leave one of four spatial blocks out (east–west
 quarters of the buildings), and the null permutes within those blocks. **Named** as above. With one town the result is
 a lead for that town only; it is tried as a fix on the tuning towns and changes nothing in the scorer's rules.
+*Correction, same evening, after the first building search:* the uphill drainage figures above were overcounted (a
+cell next to several ring cells was counted once per cell; CHI `walls_bld.inflow_area`, fixed with a test). The right
+medians are 483 m² (wet) against 84 m² (dry). The search was run again on the corrected table; the terms and rules are
+unchanged.
+
+**Validation of the building terms** (`python physics/flood_walls.py synth-buildings`, 24 Nov 2026, 240 made-up
+buildings, noise 0.08 m): planted 0.12 · ln(1 + A / 100 m²) → `contributing_area`, alone; noise only → nothing named
+(null p = 1.0). Results in `results/physics/flood_walls_bld_synth.json`.
 
 **Limits.** Marks are few: Highland Falls has 10, and a new tuning town is still to be placed. Power is low, and a
 null here means "no term is big enough to see with these marks", not "no missing physics". Context comes from
