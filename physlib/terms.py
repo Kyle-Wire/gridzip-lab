@@ -311,4 +311,10 @@ FIRE += [
     Term("held_edge", "fire", "b · [model flame length < L]", "an edge weak enough to be worked directly is held; the model lets it burn on",
          ("held", "held_v"), lambda c: _knots(c, "held", "held_v"), family=(1.22, 2.44, True), group="held", unit="m"),
 ]
+# PROTOCOL-FIRE amendment A23: dry[:, j] is 1 where there is canopy and the model's largest surface intensity in the
+# window exceeds Van Wagner's initiation intensity at foliar moisture dry_m[j] % (Scott and Reinhardt 2001, eq. 11).
+FIRE += [
+    Term("dry_crown", "fire", "b · [I_surface,max > (CBH (460 + 25.9 m) / 100)^1.5]", "canopy that would light if its foliage were as dry as m (dead needles); the model holds foliage at 100 %",
+         ("dry", "dry_m"), lambda c: _knots(c, "dry", "dry_m"), family=(10.0, 100.0, True), group="crown", unit="%"),
+]
 DOMAINS["fire"] = FIRE
