@@ -416,3 +416,48 @@ rate there):
   one-fire lead until Camp's table is corrected and Marshall and East Troublesome are in.
 - By time both fires agree: the later the model reaches ground, the more likely the real fire never did (Tubbs
   from 23 % in the first sixth of the window to over 90 % after the first third; Camp from 18 % to 54 %).
+
+## A19 Camp rescore and A18 Marshall: three fires now show the same fault (25 Nov 2026)
+
+Runs on THE-COW (FireSim `18cc962` Camp, `8e137ea` and `77211e4` Marshall; E0 priors, 3 seeds unless said). Chart
+`/mnt/project-files/wildfire/13_camp_marshall_area_over_time.png`. Old Camp `result.json` files are kept;
+`result_a19.json` sits beside each.
+
+Camp with corrected outline times (model km², 3-seed mean; x1.30 is seed 0 only):
+
+| hours | mapped km² | E0, HRRR wind | ratio | overlap | E0, wind x1.30 | ratio |
+|---|---|---|---|---|---|---|
+| 3.35 (GeoMAC, doubtful time) | 222 | 76 | 0.34 | 0.10 | 182 | 0.82 |
+| 6.95 (FEDS, was dropped) | 166 | 179 | 1.08 | 0.28 | 310 | 1.87 |
+| 9.45 (GeoMAC) | 285 | 214 | 0.75 | 0.24 | 379 | 1.33 |
+| 20.08 (FEDS) | 331 | 440 | 1.33 | 0.44 | 747 | 2.26 |
+
+- Camp A8 at the corrected fit outline: E0 3.02 (was 2.81), x1.30 4.02 (was 3.48).
+- **A17's reading of Camp is withdrawn in part.** "Early, the x1.30 wind is the better Camp run" rested on the
+  3.35 h GeoMAC outline. The FEDS outline at 6.95 h is smaller than that outline (166 against 222 km²), which a
+  growing fire cannot be, so the 3.35 h time stamp is wrong and that row is no longer used. At 6.95 h the plain
+  HRRR run has the area right (1.08) and x1.30 is nearly twice too large. On Camp the wind scale does not help
+  at any trustworthy time.
+
+Marshall (ran unheld; ignition point from a landmark description, A18 note; outlines at 2.95 h and 15.27 h):
+
+| hours | mapped km² | E0, HRRR wind | ratio | overlap | wind x1.30 | ratio | overlap |
+|---|---|---|---|---|---|---|---|
+| 2.95 | 19.9 | 13.5 | 0.68 | 0.46 | 18.7 | 0.94 | 0.41 |
+| end (14 h) against 15.27 h | 25.3 | 59.5 | 2.35 | 0.27 | 78.8 | 3.1 | 0.21 |
+
+- Both A18 predictions hold: x1.30 puts the area during the run inside 0.5 to 1.5 (0.94), and the model keeps
+  growing after the wind eases (from 8.4 h to the end, +97 % and +92 %, against +27 % mapped over twelve hours).
+- Overlap at 2.95 h (0.41 to 0.48) is at the published Marshall range (0.42 to 0.51) with no tuning, on area
+  alone and one early outline; it is not a pass of anything.
+- The model's growth speeds up between hours 8 and 11, when the observed wind is falling. That needs a look
+  (wind turning the flank into unburned grass, or the HRRR wind not easing) before any stopping rule is written.
+- HRRR wind at Marshall's 14 windy stations: median ratio 0.91, so A13's x1.30 is not supported there; foothill
+  stations are 2 to 3 times over. A13's scale was set on two California fires and does not carry to Colorado.
+- Houses (USGS CC0 points, stored, not scored under A18): 1,196 destroyed in the record; model 2,570 (E0) and
+  4,209 (x1.30).
+
+Across Camp, Tubbs and Marshall: while the wind drives the fire the modelled area is within about a third of the
+mapped one; afterwards the model keeps growing (Camp 1.33 at 20 h, Tubbs about 1.9 at 43 h, Marshall 2.35 at
+14 h) while the real fires all but stop, with 0 to 5 % official containment on Camp and Tubbs and none possible
+on Marshall. The missing physics is what ends a run, and on Marshall crews cannot be the explanation.
