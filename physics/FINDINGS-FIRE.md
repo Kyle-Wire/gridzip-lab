@@ -341,3 +341,35 @@ was right for Tubbs and wrong for Camp.
   an intervention time on Camp; the incident status reports are the next source to open.
 - Limits: three mapped times on Camp and none early on Tubbs; the 3.35 h Camp outline has a doubtful time stamp
   (noted in A5); houses cannot be scored by time. No gate changes.
+
+## A16 part 1: the wide terrain wind and the contrast form W3c against stations (25 Nov 2026)
+
+Three terrain-only WindSim runs (30, 45, 60 degrees; 144 km turned domain, 600 m cells, 2,073,600 cells each,
+worst non-orthogonality 38, about 42 minutes each on 8 cores; residuals for p near 2e-3 at the end, so not fully
+converged). Table: FireSim `results/wind_check/camp_2018_w3c_wide.txt` (`6d69a04`). 21 stations inside, 17 with
+hours of 3 m/s or more, 158 station-hours in the 12 of 24 hours when the reference bearing was in range.
+
+| | speed RMSE (m/s) | median ratio | bias | direction error |
+|---|---|---|---|---|
+| HRRR 10 m | 3.72 | 0.87 | -1.07 | 23° |
+| W3c (HRRR level, terrain pattern) | 4.81 | 1.03 | +0.64 | 24° |
+| W3 (terrain run's own level) | 3.89 | 1.15 | +0.48 | 58° |
+| W3 over a clearing (decides nothing) | 3.23 | 1.08 | +0.44 | 58° |
+
+Windward (13 stations): W3c 4.43, HRRR 3.19. Lee (5): W3c 5.81, HRRR 4.99.
+
+**By A16's rule W3c does not earn a fire test, and by A15's rule neither does W3.** The prediction (W3c better at
+sheltered stations) was wrong.
+- W3c takes out HRRR's low bias (ratio 0.87 to 1.03) but adds scatter: at ridge stations it lifts an HRRR wind
+  that was already about right (CDEC1 observed 3.9, HRRR 9.1, W3c 16.7; CBXC1 9.7, 9.1, 14.5; JBGC1 6.8, 7.7,
+  12.3). At 600 m cells with a 3 km box the pattern is mostly "ridges faster", and HRRR's 3 km terrain already
+  has the big ridges, so the speed-up is counted twice.
+- With enough stations, W3's level is no longer twice too fast (1.15, against 2.09 on the two stations of the
+  first check), but its direction is far worse than HRRR's (58° against 23°): one inflow bearing for a 144 km
+  domain cannot follow the turning of the real flow.
+- The clearing table has the lowest RMSE of all (3.23 against HRRR's 3.72, 13 % lower) but the same poor
+  direction. It was fixed beforehand as deciding nothing, so it is a lead: the terrain run's 80 m wind brought
+  down over open-ground roughness, with HRRR's direction kept, is the form to pre-register next, on Tubbs's
+  stations as well as Camp's so that it is not tuned to one fire.
+- Code fault found by the run: `box_mean` read the column spacing from distinct x values, which jitter by under
+  a metre on a warped mesh; fixed in FireSim `2eef747` (nearest-neighbour spacing), tests pass.
