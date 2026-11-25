@@ -1,0 +1,74 @@
+{
+ "name": "flood wall buildings: highland-falls-buildings-A9, lumber-buildings",
+ "n": 178,
+ "terms_offered": [
+  "contributing_area",
+  "roof_drop",
+  "bld_slope",
+  "bld_hand",
+  "bld_edge",
+  "bld_footprint"
+ ],
+ "winner": [
+  "g:ln slope \u00b7 d_edge\u00b2"
+ ],
+ "coef": {
+  "level": 0.2541516853932584,
+  "g:ln slope \u00b7 d_edge\u00b2": -0.13617440457804153
+ },
+ "bits_saved_per_reading": 0.3646195379520396,
+ "sd_before": 0.34375,
+ "sd_after": 0.125,
+ "holdout": [
+  {
+   "fold": "leave out block 0",
+   "formula_bpr": 8.527277820843224,
+   "one_correction_bpr": 8.540061871535471,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 1",
+   "formula_bpr": 6.635430452709954,
+   "one_correction_bpr": 6.7611742757944375,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 2",
+   "formula_bpr": 6.620226588675999,
+   "one_correction_bpr": 6.73320888708838,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 3",
+   "formula_bpr": 6.597231460412406,
+   "one_correction_bpr": 6.740307585404615,
+   "transfers": true
+  }
+ ],
+ "transfers": true,
+ "verdict": [
+  [
+   "g:ln slope \u00b7 d_edge\u00b2",
+   "named, but can't rule out bld_edge (+-19.0 bits)"
+  ]
+ ],
+ "null_p": 0.45,
+ "inclusion": {
+  "g:ln slope \u00b7 d_edge\u00b2": 0.8649561154192513,
+  "g:e^(\u2212slope/0.154) \u00b7 d_edge": 0.052946515436058765,
+  "g:e^(\u2212slope/0.0952) \u00b7 d_edge": 0.05290552801645773,
+  "g:max(0, d_edge\u2212410)": 0.01923198956084092
+ },
+ "neighbour": {
+  "gain": 0.03997304210037167,
+  "where": "hand \u00d7 d_edge",
+  "null_95": 0.08057281226756634,
+  "p": 0.11,
+  "structure_left": false
+ },
+ "rows_dropped_blank_context": 0,
+ "sources": [
+  "highland-falls-buildings-A9.csv",
+  "lumber-buildings.csv"
+ ]
+}

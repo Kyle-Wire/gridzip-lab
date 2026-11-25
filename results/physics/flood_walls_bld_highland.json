@@ -1,0 +1,74 @@
+{
+ "name": "flood wall buildings: highland-falls-buildings",
+ "n": 242,
+ "terms_offered": [
+  "contributing_area",
+  "roof_drop",
+  "bld_slope",
+  "bld_hand",
+  "bld_edge",
+  "bld_footprint"
+ ],
+ "winner": [
+  "g:e^(\u2212slope/0.093) \u00b7 d_edge"
+ ],
+ "coef": {
+  "level": 0.24314876033057853,
+  "g:e^(\u2212slope/0.093) \u00b7 d_edge": 0.08671322711889386
+ },
+ "bits_saved_per_reading": 0.2938554284151742,
+ "sd_before": 0.3125,
+ "sd_after": 0.125,
+ "holdout": [
+  {
+   "fold": "leave out block 0",
+   "formula_bpr": 8.089527283792783,
+   "one_correction_bpr": 8.094139053088847,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 1",
+   "formula_bpr": 6.630380138434712,
+   "one_correction_bpr": 6.631948551194595,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 2",
+   "formula_bpr": 6.634084376986009,
+   "one_correction_bpr": 6.6802171925641325,
+   "transfers": true
+  },
+  {
+   "fold": "leave out block 3",
+   "formula_bpr": 6.70963930465819,
+   "one_correction_bpr": 6.747402315844905,
+   "transfers": true
+  }
+ ],
+ "transfers": true,
+ "verdict": [
+  [
+   "g:e^(\u2212slope/0.093) \u00b7 d_edge",
+   "named; no look-alike within 10:1"
+  ]
+ ],
+ "null_p": 0.5,
+ "inclusion": {
+  "g:e^(\u2212hand/12.7) \u00b7 d_edge": 0.5311219667317538,
+  "g:d_edge\u00b2 \u00b7 \u221afootprint": 0.27156594792404753,
+  "g:roof_drop \u00b7 d_edge\u00b2": 0.17946136651179764,
+  "g:[hand>24] \u00b7 d_edge": 0.05741322650552222,
+  "g:e^(\u2212hand/16.2) \u00b7 d_edge": 0.010148691760331785
+ },
+ "neighbour": {
+  "gain": 0.06904312196335116,
+  "where": "hand \u00d7 d_edge",
+  "null_95": 0.08367360174523909,
+  "p": 0.1,
+  "structure_left": false
+ },
+ "rows_dropped_blank_context": 0,
+ "sources": [
+  "highland-falls-buildings.csv"
+ ]
+}
