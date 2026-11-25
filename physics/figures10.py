@@ -55,22 +55,22 @@ def main(out):
         ax.text(xi + w / 2, b + (0.25 if b >= 0 else -0.55), f"{b:+.1f}", ha="center", fontsize=8.5, color=INK)
     # C error bars
     ax = fig.add_axes([0.68, 0.33, 0.29, 0.15]); ax.set_facecolor("#fcfcfb")
-    labs = ["error it states", "real spread, points 0.3 km apart", "real spread, places 10+ km apart"]; vals = [0.72, 2.4, 3.0]
+    labs = ["error it states (median)", "real spread, points 0.3 km apart", "real spread, places 10+ km apart"]; vals = [4.75, 2.4, 3.0]
     ax.barh(range(3)[::-1], vals, color=[ORANGE, BLUE, BLUE], height=0.6)
     for k, (l, vv) in enumerate(zip(labs, vals)): ax.text(vv + 0.05, 2 - k, f"{vv:.1f} mm/yr", va="center", fontsize=9, color=INK)
-    ax.set_yticks(range(3)[::-1], labs); ax.set_xlim(0, 3.8); ax.set_xlabel("mm/yr")
+    ax.set_yticks(range(3)[::-1], labs); ax.set_xlim(0, 6.2); ax.set_xlabel("mm/yr")
     for s in ("top", "right"): ax.spines[s].set_visible(False)
-    ax.set_title("C. Its error bars are about 3 times too narrow", loc="left", fontsize=11, color=INK)
+    ax.set_title("C. Its stated error bars are wide enough (corrected 25 Nov)", loc="left", fontsize=11, color=INK)
     # D lag
     ax = fig.add_axes([0.53, 0.07, 0.44, 0.17]); ax.set_facecolor("#fcfcfb")
     Y = D["series_mm"][v][::4]; Y = Y - np.median(Y, 0); lags = [1, 2, 3, 5, 8, 12, 20, 30, 40, 60, 80, 100, 120]
     rms = [np.sqrt(np.mean((Y[:, k:] - Y[:, :-k]) ** 2)) for k in lags]; days = np.array(lags) * 12 / 365.25
     ax.plot(days, rms, color=BLUE, lw=2, marker="o", ms=5, label="what the data does")
-    ax.plot(days, [rms[0]] * len(days), color=ORANGE, lw=2, ls="--", label="what its error bars assume")
+    ax.plot(days, [rms[0]] * len(days), color=ORANGE, lw=2, ls="--", label="if the noise were purely random")
     ax.set_xlabel("years between the two dates"); ax.set_ylabel("typical change, mm"); ax.grid(color=GRID_C); ax.set_ylim(0, 16)
     for s in ("top", "right"): ax.spines[s].set_visible(False)
     ax.legend(frameon=False, loc="lower right", fontsize=9)
-    ax.set_title("D. Why: the noise slowly drifts instead of averaging out, so it builds up into fake trends", loc="left", fontsize=11, color=INK)
+    ax.set_title("D. The noise slowly drifts instead of averaging out, so it builds up into fake trends", loc="left", fontsize=11, color=INK)
     fig.text(0.02, 0.012, "Source: insar_pipeline V2 run (MiaplPy, snaphu, MintPy), 24 Nov 2026; GPS: NGL IGS20 daily, along the satellite's view. "
              "The map is shifted so its middle reads 0. Test site, not a customer property. gridzip-lab protocol 10.", fontsize=8, color=INK2)
     fig.savefig(out, dpi=150); print(out)
