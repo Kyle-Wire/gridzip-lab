@@ -73,3 +73,25 @@ without weather correction) on every reading. V2's failure is not evidence that 
 Pawnee is a hard site for both. Method 1 passes our CHI checks with a GNSS tie and reference-jump handling at
 urban places. So method 2's fair test is the same: CHI's checks, method 2's error bars widened for correlated
 noise (as in insar_pipeline PR #21 for PS), at a fresh place, written first.
+
+## Part E, the corner explained (A4; data 8e77a82; `python -m physics.insar_m2e`; results/physics/insar_m2_partE.json)
+- **E1:** the corner is already in the series before the weather and DEM-error corrections (NW − rest −3.7 before,
+  −3.2 final). The HRRR correction adds −0.4 and the DEM-error correction −0.2. Neither step makes it.
+- **E2, unwrapping:** every valid point is either in the reference's snaphu component in all 375 interferograms
+  (55,487 points, median rate −0.69 mm/yr) or apart from it in all 375 (5,007 points, median −3.79; 67 % of them in
+  the NW). Snaphu splits each interferogram into a median of 2 components. OK02's 200 m cells are apart in all 375;
+  the other five stations' cells are never apart. Among never-apart points the corner shrinks to −1.0 mm/yr
+  (rule: not surviving), so the corner is the **second component, joined to the reference by MintPy's bridging**.
+- **E3, compressor:** `√coherence · apart_late²` is named (bootstrap 0.8, inclusion ≈ 1, transfers 4/4, no
+  look-alike). One sample only, and the whole search's null p is 0.1, so it is a strong lead, not a part A "named".
+  E2's split is the cleaner evidence.
+
+## Reading after part E
+Method 2's failing rows (pair share, noise benchmark) come from one processing step: a separate unwrapping
+component bridged to the reference, carrying about −3 mm/yr of false rate, with OK02 inside it. Fix candidates, to be
+written as a plan before a fresh-site run:
+(1) label points outside the reference's component as bridged, carry a wider stated error for them, and keep them
+out of pass/fail statistics until tied ("a label, not a switch");
+(2) unwrap so the components join (snaphu connectivity / tiling settings, or a stack-wise unwrapper);
+(3) tie each component to its own stable anchor or GNSS station where one exists (circular for that station, so
+not graded on it).
