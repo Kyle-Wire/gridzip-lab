@@ -8,7 +8,7 @@ def main(out):
     D = load(); C = np.load("data/insar_m2/v2_components.npz"); a = C["n_ifgrams_apart"]; v = D["valid"]; e, n = D["east_km"], D["north_km"]; r = D["rate_mm_yr"]
     main_c = v & (a == 0); br = v & (a == 375)
     fig = plt.figure(figsize=(14, 7), facecolor="#fcfcfb")
-    fig.suptitle("Found it: the false-sinking corner is one piece of the map that the processing stitched on by guesswork", fontsize=14, color=INK, x=0.02, ha="left")
+    fig.suptitle("Found it: the false-sinking corner is one piece of the map that the processing stitched on separately", fontsize=14, color=INK, x=0.02, ha="left")
     ax = fig.add_axes([0.04, 0.08, 0.5, 0.8]); rng = np.random.default_rng(0)
     for m, col, lab in [(main_c, "#bdbcb7", "connected directly to the reference point"), (br, ORANGE, "a separate piece, stitched on afterwards")]:
         idx = np.where(m)[0]; idx = rng.choice(idx, min(len(idx), 15000), replace=False); ax.scatter(e[idx], n[idx], s=1.2, c=col, label=lab, rasterized=True)
