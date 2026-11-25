@@ -16,13 +16,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from physlib import engine as E, guards as Q, terms as T            # noqa: E402
 
-CONST = ("ember_L", "gap_d", "slow_v")
+CONST = ("ember_L", "gap_d", "slow_v", "held_v")
 SLOW_V = (0.5, 1.0, 2.0, 5.0, 10.0)
 A18 = "--a18" in sys.argv                                           # amendment A18: slow_edge on T2o only
 THIN = [1]                                                          # amendment A21: lattice thinning step (set in main)
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
-         "late": ("late", None), "slow": ("slow", 2.0)}
+         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44)}
 GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
@@ -78,6 +78,8 @@ def table(d, meta, which):
     if which == "T2o": c.update(late=d["t12_t_mod"][rows] / te, edge_age=(te - d["t12_t_mod"][rows]) / 60.0)
     if which == "T2o" and A18:
         r_ = ros(d, te)[rows]; c.update(slow=np.stack([(r_ < v).astype(float) for v in SLOW_V], 1), slow_v=np.array(SLOW_V))
+    if which == "T2o" and "t12_flame_arr" in d:                  # A22
+        f_ = d["t12_flame_arr"][rows]; c.update(held=np.stack([(f_ < v).astype(float) for v in (1.22, 2.44)], 1), held_v=np.array((1.22, 2.44)))
     if which == "T3": c.update(gap=g("gap"), gap_d=np.array(meta["gap_d"]), mod=g("mod"))
     return c, y[rows], blk[rows]
 
@@ -113,7 +115,7 @@ def planted(ctx, y, blk, g, seed=0):
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
     names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
-             "late": "late_arrival", "slow": "slow_edge"}
+             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}

@@ -305,4 +305,10 @@ FIRE += [
     Term("slow_edge", "fire", "b · [model spread rate < v]", "a slowly moving edge goes out or is held; the model lets it creep on",
          ("slow", "slow_v"), lambda c: _knots(c, "slow", "slow_v"), family=(0.5, 10.0, True), group="slow", unit="m/min"),
 ]
+# PROTOCOL-FIRE amendment A22: held[:, j] is 1 where the model's head-fire flame length at arrival is under held_v[j] m
+# (1.22 and 2.44 m: the 4 ft and 8 ft classes of NWCG PMS 437, direct attack by hand and with equipment). Table T2o.
+FIRE += [
+    Term("held_edge", "fire", "b · [model flame length < L]", "an edge weak enough to be worked directly is held; the model lets it burn on",
+         ("held", "held_v"), lambda c: _knots(c, "held", "held_v"), family=(1.22, 2.44, True), group="held", unit="m"),
+]
 DOMAINS["fire"] = FIRE
