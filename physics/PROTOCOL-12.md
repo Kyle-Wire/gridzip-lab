@@ -84,3 +84,13 @@ the true wall depth, ln(1 + 2h_true/W) takes −0.399 (residual sd 0.001), the t
 built on the model's depth (the only depth a field audit has), and in narrow deep channels that is half the true depth,
 which bends the relation. A term defined from the model's depth by inverting the Manning relation is a new term and
 would need its own planted check before use. Until then, C's wall-drag lead is read from the planted cases directly.
+
+**Results (25 Nov 2026).** Family R: the model's sheet flow is below the kinematic depth at x ≥ 20 m, worse with slope
+and cell size (1 m cells: 0.36 to 1.00 of truth; 4 m cells: 0.10 to 0.78); best term g:√S·√dx, sd 0.56 → 0.25, null
+p 0.05. That fails the 15 % expectation and is a FloodSim fix candidate (thin film over a steep cell step under
+hydrostatic reconstruction). Family C (held edge): the model equals the 2D ideal at its own width to 0.5 % in all 96
+cases; instrument check fails as written (A2). Family B: held edge matches the profile to 0.2 % and the search names
+nothing (null p 1.0), **pass**; free edge drains the river to 0.26 to 0.44 of the true depth at the edge, and the
+search names `edge_drawdown` (−0.66) with smaller grammar terms, null p 0.05, **pass**. Figures in
+`results/physics/figures/`. Note: `mass_rel` in the case files counts the harness's injected inflow as a gain; it is not
+a solver imbalance.
