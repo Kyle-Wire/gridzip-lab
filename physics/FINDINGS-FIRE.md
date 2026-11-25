@@ -276,3 +276,33 @@ non-orthogonality 45, no divergence, no limiter; station table FireSim `results/
   wrong at both stations. The pattern (which ground is exposed, which sheltered) is untested, because two
   stations cannot test a pattern.
 
+
+## A16 part 2: the overrun, searched with flank, backing, late-arrival and burn-duration terms (24 Nov 2026)
+
+Run: `python physics/fire_real.py Camp=... Tubbs=... --a16` on the A14 tables (E0 runs, plain HRRR wind), terms and
+table fixed in A16 and its note before the run. Output `results/physics/fire_real_a16.json`.
+
+**No finding passes.** On both tables no formula transfers from one fire to the other, and the noise-only twin
+names terms (5 on each table), so the search still over-reads these two fires. What follows are leads.
+
+| table | readings | level (Camp, Tubbs) | pooled winner | bits saved per reading | best null | transfers |
+|---|---|---|---|---|---|---|
+| T2 reach | 9,193 | +0.03, +0.37 | wind_speed, wind_aloft, fuel_shrub, fuel_developed, flank_spread | 0.36 | 0.06 | no |
+| T2o (points the model burned) | 7,519 | 0.34, 0.48 | wind_aloft, calm_share, night_share, fuel_shrub, burn_duration | 0.46 | 0.08 | no |
+
+- The level itself is the main fact: 34 % of the ground the model burned on Camp and 48 % on Tubbs is outside
+  the record.
+- Late spread (predicted): the late group is named in every one of the 30 block-bootstrap draws on T2o, and its
+  planted check passes. `burn_duration` is -0.019 per hour: ground the model reached in the last hours is about
+  0.4 more likely to be overrun than ground it reached at the start of a 20-hour window. Tubbs alone names
+  `late_arrival` (+0.84). This is the one overrun lead both fires share, and it says the modelled edge keeps
+  running late in the window when the real one had slowed or was held.
+- Flanks (predicted, not borne out): `flank_spread` is named pooled on T2 (bootstrap share 0.47, under the 0.5
+  rule) with a negative sign, and on Tubbs alone with a positive one (+1.95). Camp alone names `backing_spread`
+  with opposite signs on the two tables. No consistent flank or backing story.
+- Camp alone: canopy cover on the line is the strongest single term (+3.5 on T2, +4.8 on T2o, 0.9 bits saved
+  per reading). The Camp overrun sits in forest, which fits a fire that in the record was a wind-driven run
+  through the towns and not a spread through timber on all sides.
+- What it means for the model: a term that pays is a lead, not a correction. The lead to carry to Marshall and
+  East Troublesome under its own amendment is a spread that weakens with hours since the wind event (night
+  recovery, crews), and for Camp the timber and canopy spread rate under wind.
