@@ -23,6 +23,7 @@ sys.path.insert(0, str(ROOT))
 from physlib import engine as E, guards as Q, terms as T  # noqa: E402
 
 GRID = E.Grid(0.01, -5.0, 5.0)
+MIN_WET = 20  # PROTOCOL-11: the search runs at 20 or more wet scored marks
 
 
 def _f(v):
@@ -137,6 +138,18 @@ def main():
         sys.exit(0 if all(v["pass"] for v in res.values()) else 1)
     rows = load(a.csv)
     ctx, y, s, wb, dry = build(rows)
+    if len(y) < MIN_WET:  # PROTOCOL-11: with fewer, only the residuals and the dry tally; no search
+        wet = [r for r in rows if r["model_dry"] in ("0", 0) and r["err_m"] not in ("", None)]
+        keep = ("site", "hwm_id", "kind", "waterbody", "at_building", "err_m", "h_model_m", "hand_m", "d_channel_m", "d_edge_m", "bld_frac_30", "slope")
+        res = {"name": "flood walls: " + ", ".join(sorted(set(s.tolist()))), "n": int(len(y)), "searched": False,
+               "why": f"{len(y)} wet scored marks; the search runs at {MIN_WET} or more (PROTOCOL-11)",
+               "residuals": [{k: r.get(k) for k in keep} for r in wet],
+               "err_m": {"median": float(np.median(y)), "mean": float(y.mean()), "min": float(y.min()), "max": float(y.max())} if len(y) else None,
+               "dry": dry_tally(dry), "sources": [p.name for p in a.csv]}
+        a.out.parent.mkdir(parents=True, exist_ok=True)
+        a.out.write_text(json.dumps(res, indent=1, default=float))
+        print(json.dumps({k: res[k] for k in ("n", "searched", "why", "err_m")}, indent=1, default=str))
+        return
     res = analyse(ctx, y, s, wb, "flood walls: " + ", ".join(sorted(set(s.tolist()))))
     arr = {"y": res.pop("_y"), "mu": res.pop("_mu")}
     res["dry"] = dry_tally(dry)

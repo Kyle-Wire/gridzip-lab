@@ -1,0 +1,104 @@
+{
+ "name": "flood walls: highland-falls-ny-2023",
+ "n": 6,
+ "searched": false,
+ "why": "6 wet scored marks; the search runs at 20 or more (PROTOCOL-11)",
+ "residuals": [
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44716",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "1",
+   "err_m": "0.261",
+   "h_model_m": "1.503",
+   "hand_m": "38.006",
+   "d_channel_m": "0.0",
+   "d_edge_m": "311.0",
+   "bld_frac_30": "0.0992",
+   "slope": "0.0387"
+  },
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44717",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "0",
+   "err_m": "0.03",
+   "h_model_m": "0.648",
+   "hand_m": "33.032",
+   "d_channel_m": "2.8",
+   "d_edge_m": "281.5",
+   "bld_frac_30": "0.0505",
+   "slope": "0.1175"
+  },
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44724",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "1",
+   "err_m": "2.63",
+   "h_model_m": "4.243",
+   "hand_m": "5.512",
+   "d_channel_m": "0.0",
+   "d_edge_m": "301.8",
+   "bld_frac_30": "0.1258",
+   "slope": "0.0658"
+  },
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44715",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "1",
+   "err_m": "0.29",
+   "h_model_m": "2.801",
+   "hand_m": "36.21",
+   "d_channel_m": "0.0",
+   "d_edge_m": "302.0",
+   "bld_frac_30": "0.0989",
+   "slope": "0.0287"
+  },
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44719",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "1",
+   "err_m": "2.779",
+   "h_model_m": "4.243",
+   "hand_m": "5.512",
+   "d_channel_m": "0.0",
+   "d_edge_m": "301.8",
+   "bld_frac_30": "0.1258",
+   "slope": "0.0658"
+  },
+  {
+   "site": "highland-falls-ny-2023",
+   "hwm_id": "44722",
+   "kind": "level",
+   "waterbody": "highland brook",
+   "at_building": "0",
+   "err_m": "0.097",
+   "h_model_m": "0.648",
+   "hand_m": "33.032",
+   "d_channel_m": "2.8",
+   "d_edge_m": "281.5",
+   "bld_frac_30": "0.0505",
+   "slope": "0.1175"
+  }
+ ],
+ "err_m": {
+  "median": 0.27549999999999997,
+  "mean": 1.0145000000000002,
+  "min": 0.03,
+  "max": 2.779
+ },
+ "dry": {
+  "n": 0
+ },
+ "sources": [
+  "highland-falls-terms.csv"
+ ]
+}
