@@ -569,3 +569,31 @@ Part 2, the overrun. Under the directive of 24 Nov the next step is terms, then 
   Code: FireSim `firesim/windsim.py` (`contrast=True`, `box_mean`) and `scripts/wind_check_w3.py` (column `w3c`).
 - A16 note 3 (24 Nov 2026, 10:00 PM ET, no terrain run yet). The wide domain's relief is 3,153 m (valley floor to
   Lassen), and WindSim refuses a top under 4 times the relief, so the top is 13 km, not 12. Nothing else changes.
+
+### A17 (25 Nov 2026, 12:05 AM ET): the free-burning window (Kyle: "can we test fires up until intervention?")
+
+Seen before writing this: every run's area and overlap at each mapped time (they are in each `result.json`: Camp
+at 3.35, 9.45 and 21.45 h; Tubbs satellite passes from 5.5 h and outlines from 35 h), and A16 part 2's lead that
+the model's late ground is its wrong ground. Not yet seen: the hour-by-hour station wind series, and how much of
+Tubbs's modelled fire at 5.5 h lies inside the final outline.
+
+- Why: the model has no crews, no burnout and no end to a wind event's run except the weather it is given. A
+  score at the last outline mixes two questions: does the fire spread right while nothing holds it, and does it
+  stop when the real one did. They need different fixes, so they are read apart.
+- The cut, from weather only: the end of the wind event. Stations are A13's windy class (window mean of 5 m/s or
+  more) in `results/wind_check/<fire>.csv`. Take the hourly mean of their observed speed and its 3-hour running
+  mean; the event ends at the first hour after the peak from which that running mean stays under half its peak to
+  the end of the window. If it never does, the cut is the end of the window. Reported beside it and deciding
+  nothing: the first containment figure in the public incident status reports, once opened.
+- Free-burning score: at each mapped time up to and including the first one after the cut, the area ratio
+  (model / mapped) and the overlap (Jaccard). For a fire with no outline that early (Tubbs), the share of the
+  ground the model has burned at each satellite pass before the cut that lies outside the final outline (certain
+  overrun), and the share of that pass's detections on the modelled fire. Houses have no time in the record, so
+  the house score stays whole-window.
+- What it decides: nothing at the gate (section 5 stands, read at the last outline on the blind fires). From
+  here each calibration run is reported with both readings, and a spread or wind setting is judged on the
+  free-burning score while a stopping rule (night recovery, crews, burnout), which needs its own amendment, is
+  judged on the growth after the cut.
+- Predicted before computing the cut: both events end 8 to 12 hours after ignition; before it the x1.30 wind is
+  the better of the two on Camp, and after it the modelled fires roughly double while the mapped ones grow under
+  a fifth.
