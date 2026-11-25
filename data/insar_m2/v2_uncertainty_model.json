@@ -1,0 +1,79 @@
+{
+ "source": "exp_v2_pawnee_asc34/deliverables/uncertainty_model.json",
+ "sha256": "9f34407a6f16fd9ea085bf0aaeb785c6ac80454725edb707600f31e7dfa502ef",
+ "basis": "far-field pixels (inside the AOI, outside every mapped panel + buffer) whose series is finite on every date; empirical = robust sd of (second-half rate - first-half rate) / 2, the full-record rate error under random-walk-like noise",
+ "halves": [
+  "20211001",
+  "20230915",
+  "20230927",
+  "20251103"
+ ],
+ "by_class": [
+  {
+   "tc": "0.4-0.6",
+   "class_index": 0,
+   "n": 176076,
+   "formal_median_mm_yr": 0.77,
+   "ar1_median_mm_yr": 1.175,
+   "lag1_autocorrelation_median": 0.416,
+   "split_half_robust_sd_mm_yr": 13.185,
+   "empirical_mm_yr": 6.593,
+   "empirical_white_scaling_mm_yr": 3.296,
+   "farmland_cell_spread_mm_yr": 7.538,
+   "cell_null_mm_yr": 7.538
+  },
+  {
+   "tc": "0.6-0.7",
+   "class_index": 1,
+   "n": 570586,
+   "formal_median_mm_yr": 0.701,
+   "ar1_median_mm_yr": 1.03,
+   "lag1_autocorrelation_median": 0.386,
+   "split_half_robust_sd_mm_yr": 9.495,
+   "empirical_mm_yr": 4.748,
+   "empirical_white_scaling_mm_yr": 2.374,
+   "farmland_cell_spread_mm_yr": 5.011,
+   "cell_null_mm_yr": 5.011
+  },
+  {
+   "tc": "0.7-0.8",
+   "class_index": 2,
+   "n": 612797,
+   "formal_median_mm_yr": 0.665,
+   "ar1_median_mm_yr": 0.92,
+   "lag1_autocorrelation_median": 0.342,
+   "split_half_robust_sd_mm_yr": 6.391,
+   "empirical_mm_yr": 3.196,
+   "empirical_white_scaling_mm_yr": 1.598,
+   "farmland_cell_spread_mm_yr": 3.094,
+   "cell_null_mm_yr": 3.196
+  },
+  {
+   "tc": "0.8-0.9",
+   "class_index": 3,
+   "n": 208623,
+   "formal_median_mm_yr": 0.644,
+   "ar1_median_mm_yr": 0.831,
+   "lag1_autocorrelation_median": 0.289,
+   "split_half_robust_sd_mm_yr": 4.527,
+   "empirical_mm_yr": 2.263,
+   "empirical_white_scaling_mm_yr": 1.132,
+   "farmland_cell_spread_mm_yr": 2.059,
+   "cell_null_mm_yr": 2.263
+  },
+  {
+   "tc": "0.9-1.0",
+   "class_index": 4,
+   "n": 13865,
+   "formal_median_mm_yr": 0.621,
+   "ar1_median_mm_yr": 0.726,
+   "lag1_autocorrelation_median": 0.229,
+   "split_half_robust_sd_mm_yr": 3.504,
+   "empirical_mm_yr": 1.752,
+   "empirical_white_scaling_mm_yr": 0.876,
+   "farmland_cell_spread_mm_yr": 1.365,
+   "cell_null_mm_yr": 1.752
+  }
+ ],
+ "cell_null_basis": "per coherence class, max(farmland cell spread, empirical repeatability), mm/yr line of sight: the noise a single cell's class-matched relative rate is tested against (rate_signal_to_noise.tif, significant_95)"
+}

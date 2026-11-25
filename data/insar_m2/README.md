@@ -19,7 +19,7 @@ the project, in about 7 s of CPU. `meta.json` holds the counts.
 | row, col | cell | position on the MintPy radar grid |
 | lat, lon | degrees | from `geometryRadar.h5` |
 | rate_mm_yr | mm/yr, LOS | MintPy `velocity`; positive is toward the satellite |
-| sigma_mm_yr | mm/yr | MintPy `velocityStd`, the stated 1-sigma |
+| sigma_mm_yr | mm/yr | MintPy's formal `velocityStd` (white noise). **Not the pipeline's stated 1-sigma** (corrected 25 Nov 2026; see below) |
 | temporal_coherence | 0-1 | MintPy temporal coherence |
 | ps_fraction | 0-1 | share of the cell's 33 full-resolution pixels in MiaplPy's PS mask (the rest are distributed scatterers) |
 | amp_dispersion_median | - | median MiaplPy amplitude dispersion of those pixels |
@@ -37,6 +37,21 @@ The full-resolution PS layers are mapped into each look cell through the two sub
 `full_row = 3 * (row + 362) - 666` and `full_col = 11 * (col + 1928) - 19789`. I checked the mapping by
 correlating MiaplPy's full-resolution temporal coherence, block-averaged, with MintPy's: r = 0.69 at zero offset
 against 0.64 or less at one block off. (`ps_fraction` itself correlates only weakly with temporal coherence, r = 0.07.)
+
+## The stated 1-sigma (added 25 Nov 2026)
+Until 25 Nov 2026 this README called `sigma_mm_yr` "the stated 1-sigma". That was my error (Claude). It is MintPy's
+formal velocityStd, a white-noise figure with a median of 0.72 mm/yr, which the pipeline itself labels a floor.
+
+The pipeline states, and the V2 harness graded, the **empirical rate repeatability by temporal-coherence class**.
+It comes from the run's own `deliverables/uncertainty_model.json`, measured on far-field cells: the robust sd of
+(second-half rate - first-half rate) / 2. That is the full-record rate error under random-walk-like noise, so it
+already counts temporally correlated noise.
+- `v2_stated_sigma.npz` holds it per point, in the same row order as `v2_pawnee_points.npz`:
+  - `stated_sigma_mm_yr`, median 4.75;
+  - `cell_noise_mm_yr`, the max of that and the farmland cell spread, the figure the pipeline tests a cell against.
+- `v2_uncertainty_model.json` is a copy of the model's table and basis, with its sha256.
+- By class (temporal coherence → mm/yr): 0.4-0.6 → 6.59, 0.6-0.7 → 4.75, 0.7-0.8 → 3.20, 0.8-0.9 → 2.26,
+  0.9-1.0 → 1.75.
 
 ## Per date
 - `dates` (yyyymmdd).
