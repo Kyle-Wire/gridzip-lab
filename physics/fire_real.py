@@ -206,6 +206,8 @@ def main():
     outp = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else ROOT / "results" / "physics" / "fire_real.json"
     fires = {a.split("=", 1)[0]: load(a.split("=", 1)[1]) for a in args}
     tabs = next((a.split("=")[1].split(",") for a in sys.argv if a.startswith("--tables=")), None)
+    for a_ in sys.argv:
+        if a_.startswith("--thin=") and a_ != "--thin=auto": THIN[0] = int(a_.split("=")[1])   # a step already chosen on noise (A21)
     if "--thin=auto" in sys.argv:                                # A21: chosen on noise alone, before the real errors are read
         choice = {}
         for s_ in (1, 2, 3, 5, 10):

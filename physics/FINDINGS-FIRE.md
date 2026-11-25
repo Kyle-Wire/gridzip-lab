@@ -517,3 +517,36 @@ T2o).
   the term cost is too low for errors this patchy. That is a fault in how the search is set for fire, to be
   fixed (a cost raised until the twin is silent, set on the twin alone) before the next reading, under its own
   amendment.
+
+## A21 and A22 (term): a search that is silent on noise, and the held-edge term (25 Nov 2026)
+
+Outputs `results/physics/fire_real_a21.json` and `fire_real_a22.json`.
+
+A21, thinning chosen on noise alone (five noise-only twins per step; count that named any term, T2 / T2o):
+300 m 5 / 5, 600 m 5 / 4, 900 m 4 / 3, **1.5 km 0 / 0**. From here the fire search runs on the 1.5 km lattice
+(659 reach points and 351 model-burned points over four fires). The prediction (step 5 or 10) held. At this
+setting the noise twin passes for the first time since A14, and every planted term but the flank term on T2o is
+still found.
+
+The real search at that setting: **still no finding** (T2: 0 of 4 folds transfer; T2o: 1 of 4, Marshall, which
+has 5 points). What is left standing after the noise is taken out, by block-bootstrap share:
+- T2: distance 0.97, canopy cover 0.83 (+3.6: canopy on the line goes with overrun), fuel 0.60 (timber -1.6:
+  goes with misses).
+- T2o: canopy cover 0.93 (+4.9), fuel 0.77 (timber -2.4), moisture 0.70 (humid hours with overrun), late 0.57.
+- Gone at this setting: the wind terms, flank, slow_edge. Those were patch fits.
+
+A22's term `held_edge(L)` (model flame length at arrival under 1.22 or 2.44 m): found when planted, **not named**
+on the real errors (the prediction was wrong). The plain counts say why (share of model-burned points outside
+the record, by the model's flame length there):
+
+| | under 1.22 m | 1.22 to 2.44 m | over 2.44 m |
+|---|---|---|---|
+| Tubbs | 0.62 | 0.56 | 0.31 |
+| Camp | 0.26 | 0.28 | 0.52 |
+| East Troublesome | 0.25 | 0.56 | 0.41 |
+| Marshall (130 points) | 0.12 | 0.00 | 0.11 |
+
+Tubbs's overrun is weak edge, as a held-edge rule assumes. Camp's is the opposite: its wrong ground is where the
+model has tall flames, which with the canopy lead means the model drives a strong fire through forest the real
+fire did not take. One stopping rule will not serve both. The H2 model runs (A22) are in progress and will be
+read by their fixed rule; this term result says to expect a gain on Tubbs and none on Camp.
