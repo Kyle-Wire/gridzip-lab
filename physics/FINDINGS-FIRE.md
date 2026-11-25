@@ -306,3 +306,38 @@ names terms (5 on each table), so the search still over-reads these two fires. W
 - What it means for the model: a term that pays is a lead, not a correction. The lead to carry to Marshall and
   East Troublesome under its own amendment is a spread that weakens with hours since the wind event (night
   recovery, crews), and for Camp the timber and canopy spread rate under wind.
+
+## A17: the free-burning window (25 Nov 2026)
+
+Kyle's question: "can we test fires up until intervention? would that help?" Rule and score fixed in A17 before the
+cut was computed. Numbers are from each run's `result.json` and the A14 tables; chart
+`/mnt/project-files/wildfire/11_free_burning_window.png`.
+
+The cut (end of the wind event at A13's windy stations): **Tubbs hour 13** (peak 14.7 m/s, under half from hour
+13 on). **Camp: no cut inside the 24 hours** (peak 9.9 m/s, still 4.9 at hour 23). The prediction of 8 to 12 hours
+was right for Tubbs and wrong for Camp.
+
+| Camp, hours | mapped km² | model km², HRRR wind | overlap | model km², wind x1.30 | overlap |
+|---|---|---|---|---|---|
+| 3.35 | 222 | 56 | 0.10 | 182 | 0.25 |
+| 9.45 | 331 | 208 | 0.30 | 379 | 0.36 |
+| 21.45 | 376 | 442 | 0.51 | 778 | 0.42 |
+
+| Tubbs, hours | model km² (HRRR wind) | share outside the final outline | detections on the modelled fire |
+|---|---|---|---|
+| 5.5 | 128 | 0.18 | 0.96 |
+| 15.2 (first pass after the cut) | 171 | 0.31 | 0.87 |
+| 43.0 | 234 (mapped 125) | 0.48 | |
+
+- It helps, and it changes the reading of A13's wind scale. Up to 9.45 h the station-corrected wind is the better
+  Camp run at both mapped times (overlap 0.10 to 0.25, and 0.30 to 0.36; area 0.82 and 1.15 of mapped against 0.25
+  and 0.63). It only loses at 21 h, where the real fire grew 14 % in twelve hours and the model doubled.
+- Tubbs at 5.5 h is already the size of the final fire with 18 % of it outside the final outline; every later
+  hour adds mostly ground the real fire never took. No outline exists before hour 35, so there is no early overlap
+  number for Tubbs, only this bound.
+- Camp's slowdown is not the weather: the wind at the windy stations was still two thirds of its peak when the
+  mapped fire all but stopped growing. That leaves crews, burnout and the ground it had reached (valley farmland,
+  the lake, earlier burn scars) as the causes, none of which the model has. The weather cut cannot stand in for
+  an intervention time on Camp; the incident status reports are the next source to open.
+- Limits: three mapped times on Camp and none early on Tubbs; the 3.35 h Camp outline has a doubtful time stamp
+  (noted in A5); houses cannot be scored by time. No gate changes.
