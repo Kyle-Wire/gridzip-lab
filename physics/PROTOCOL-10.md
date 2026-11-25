@@ -113,3 +113,21 @@ CHI's reference-jump handling (A11, A17, A19).
   incidence, ramp, ramp2, annual_amp, jumps), 3,000 points, B = 10 and N = 9, as in part A. Plus a cross-method
   term `m2_tile`: method 2's 1 km tile median at each m1 cell. If it is named, the two methods share the
   structure.
+
+## A4, part E: the corner, with processing records (25 Nov 2026, written before these files were read here)
+
+**Seen by then:** the export's README (8e77a82). Its first look said the HRRR correction's own rate runs −0.55 to
++0.37 mm/yr (5th to 95th percentile), and the median count of interferograms apart from the reference is 3 of 375.
+Also corrected by then: the stated sigma reading (FINDINGS-10 correction).
+
+**Readings, fixed now (valid points; NW and rest regions as in D1; target = the rate):**
+- E1, which step makes the corner. NW − rest, taken of the rate from (i) the series before both corrections,
+  (ii) the HRRR correction alone, (iii) the DEM-error correction alone (before − final − HRRR), and (iv) the final
+  series. A step "makes the corner" if its own NW − rest is at least half of the final value, with the same sign.
+- E2, unwrapping. New terms: `apart` (n_ifgrams_apart / 375) and `apart_late` (the share of the point's apart
+  interferograms in the second half of the record). Plus the rate made only by the interferograms where the point is
+  apart: the rate of the final series minus the rate re-inverted with those interferograms dropped is not
+  available here, so the proxy is the corner's NW − rest inside the points with `apart` = 0. If the corner stays
+  (at least half) among points never apart, unwrapping islands are not its cause.
+- E3, compressor. `INSAR_RATE` plus `hrrr_rate`, `dem_rate`, `apart` and `apart_late` on 3,000 points, with
+  B = 10 and N = 9, as in part A.
