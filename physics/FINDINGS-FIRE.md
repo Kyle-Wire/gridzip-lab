@@ -550,3 +550,24 @@ Tubbs's overrun is weak edge, as a held-edge rule assumes. Camp's is the opposit
 model has tall flames, which with the canopy lead means the model drives a strong fire through forest the real
 fire did not take. One stopping rule will not serve both. The H2 model runs (A22) are in progress and will be
 read by their fixed rule; this term result says to expect a gain on Tubbs and none on Camp.
+
+## A23 (term): the dry-crown term (25 Nov 2026)
+
+Output `results/physics/fire_real_a23.json` (T2, 1.5 km lattice, four fires, tables `*_E0_a23.npz`).
+
+`dry_crown(m)` (a cell whose model surface intensity would start a crown fire at foliar moisture m, 10 to 100 %,
+but does not at the model's fixed 100 %): found when planted, **not named** on the real errors. The winner is
+unchanged from A21 (wind run, distance, timber -1.6, canopy cover +3.6) and 0 of 4 folds transfer. The
+prediction (named, with a negative sign, on East Troublesome) was wrong.
+
+The plain counts say why. Share of reach points the model missed on East Troublesome, by crown class:
+
+| no canopy | crowns at 100 % | crowns only if drier | never crowns |
+|---|---|---|---|
+| 0.65 | 0.80 | 0.80 | 0.83 |
+
+The miss is about 0.8 in every class, cells the model already crowns included. So the timber miss is not a
+crown-initiation threshold, and lowering foliar moisture in the model would not close it. By A23's own wording,
+the next terms are the wind aloft over the fire and spotting distance. On Camp the cells that crown at 100 %
+are overrun 0.48 of the time (missed 0.13), the same picture as the flame-length table above: the model's
+strong fire in forest goes too far there.
