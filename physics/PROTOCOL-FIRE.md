@@ -567,3 +567,5 @@ Part 2, the overrun. Under the directive of 24 Nov the next step is terms, then 
   turned domain with 600 m cells (about 2 million cells), DEM at 120 m, top 12 km. A station counts when it is
   inside a run's inner square (4 km in from its edge) for all three bearings. The 3 km box mean is 5 cells.
   Code: FireSim `firesim/windsim.py` (`contrast=True`, `box_mean`) and `scripts/wind_check_w3.py` (column `w3c`).
+- A16 note 3 (24 Nov 2026, 10:00 PM ET, no terrain run yet). The wide domain's relief is 3,153 m (valley floor to
+  Lassen), and WindSim refuses a top under 4 times the relief, so the top is 13 km, not 12. Nothing else changes.
