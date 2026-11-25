@@ -511,3 +511,45 @@ thread's notes on what its terrain solver needs at this size. No WindSim run on 
   artefact would show. checkMesh's worst non-orthogonality is reported; above 70 the run is repeated with two
   non-orthogonal correctors before it is read.
 
+
+### A16 (24 Nov 2026, 8:50 PM ET): a wider terrain wind check, a contrast form of W3, and the overrun
+
+Seen before writing this: A15's first station score (2 stations inside the 28 km focus square, W3 about twice too
+fast at both, too thin by A15's rule, W3 not used) and the x1.30 reruns (Camp A8 2.81 to 3.48, Tubbs 4.08 to 6.01;
+both fires burn two to two and a half times the mapped area). Both are in `FINDINGS-FIRE.md`. No blind fire has
+been read.
+
+Part 1, the wind. Weather only; no fire run reads it until its rule is met.
+- W3c ("contrast form"): the 10 m wind is HRRR's own 10 m wind times S / mean(S), where S is the terrain run's
+  10 m speed over its 80 m reference as in A15 and mean(S) is S averaged over the 3 km HRRR cell around the point
+  (a 3 km box mean on the terrain grid). The level stays HRRR's; the terrain run supplies only the pattern inside
+  each HRRR cell. Direction is the terrain run's turning added to HRRR's 10 m direction. W3 as in A15 is scored
+  beside it and stays unused.
+- Domain: one Camp terrain project wide enough for the A13 stations: a 120 km focus square on the same centre,
+  12 km margin, 500 m cells, 20 m first cell, top 12 km, the same three bearings (30, 45, 60 degrees). Each run
+  must fit A12's 2-hour CPU cap on 8 cores; if the mesh passes 2.5 million cells the focus square is cut to
+  100 km, and that is said in the result.
+- Score, same hours and 3 m/s floor as A15: speed RMSE, median ratio and direction error for HRRR, W3 and W3c,
+  pooled and split windward and lee.
+- Rule: W3c earns a Camp fire test only with 8 or more stations inside, pooled speed RMSE at least 10 % under
+  HRRR's, and not more than 10 % worse in either class. Fewer than 8 stations is "too thin" and nothing changes.
+  If earned, the test is A15's (E0, 3 seeds, A8 score against the same run on HRRR wind) with the x1.30 scale off,
+  because the scale and the contrast would otherwise correct the same thing twice.
+- Predicted before running: W3c beats HRRR at sheltered and valley stations (where A13 found HRRR 2 to 8 times too
+  fast) and gains little on ridges; W3 stays about twice too fast everywhere.
+
+Part 2, the overrun. Under the directive of 24 Nov the next step is terms, then the search, before any setting.
+- New inputs in the T2 table (FireSim `scripts/error_table.py`), all from the run and the public record, none
+  from the blind fires: `flank` (sine of the angle between the hour-weighted wind and the line from the ignition
+  to the point, 0 on the head axis, 1 on the flank), `back` (1 if the point is upwind of the ignition), `late`
+  (share of the window already gone when the model arrives), and `edge_age` (hours between the model's arrival and
+  the end of the window).
+- New terms in `physlib.terms.FIRE`: `flank_spread`, `backing_spread`, `late_arrival`, `burn_duration`, each with
+  its formula and plain meaning. A planted check on each runs before the real errors are read, and the A14 rules
+  for a finding stand unchanged (two-way transfer, bootstrap share, block nulls, noise twin).
+- Predicted before running: the overrun sits on the flanks and behind the ignition and late in the window (the
+  model's flank and backing fire never go out, and nobody holds a line), so `flank_spread` and `late_arrival` are
+  named on both fires. If neither transfers, the overrun is not a shape the model's own inputs explain, and the
+  next step is the two extra calibration fires, not a spread limit.
+- Nothing fitted goes into FireSim from this. A term that pays becomes a spread rule only through its own
+  amendment, tested on Marshall and East Troublesome before any blind fire.
