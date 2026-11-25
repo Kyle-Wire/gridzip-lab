@@ -389,3 +389,30 @@ scored at 9.45 h and 21.45 h were really mapped at about 18.5 h and about 30 h. 
   Tubbs is not affected.
 The Camp runs are being rescored with satellite pass times; the corrected numbers will be set beside the old ones
 here, and the Camp error table rebuilt before the compressor reads Camp again.
+
+## A18: the slow-edge stopping term on Camp and Tubbs (25 Nov 2026)
+
+Run `fire_real.py --a16 --a18`, table T2o, output `results/physics/fire_real_a18.json`; chart
+`/mnt/project-files/wildfire/12_overrun_by_speed_and_time.png`. Camp's table still carries the outline-time fault
+of A19, so Camp's part is provisional until its table is rebuilt.
+
+**No finding.** `slow_edge` is found when planted, and is named in the pooled winner (+0.24 for edges slower than
+about 2.9 m/min), but it is chosen in only 13 % of bootstrap draws, does not transfer either way, and neither fire
+alone names it. The prediction that it would take over from `burn_duration` was wrong: the late group is still
+named in every draw.
+
+Plain counts behind it (share of model-burned points the record does not show burned, by the model's own spread
+rate there):
+
+| m/min | under 1 | 1 to 2 | 2 to 5 | 5 to 10 | 10 to 20 | over 20 |
+|---|---|---|---|---|---|---|
+| Tubbs | 0.90 | 0.83 | 0.59 | 0.40 | 0.20 | 0.20 |
+| Camp | 0.25 | 0.37 | 0.48 | 0.44 | 0.20 | 0.20 |
+
+- Fast ground (over 10 m/min) is right four times in five on both fires: the wind-driven run is the part the
+  model does well.
+- On Tubbs, nearly everything the model burned slowly is ground the real fire never took. On Camp the slow ground
+  is no worse than the middle. So "slow edges go out" would fix Tubbs and do little for Camp as tabled; it is a
+  one-fire lead until Camp's table is corrected and Marshall and East Troublesome are in.
+- By time both fires agree: the later the model reaches ground, the more likely the real fire never did (Tubbs
+  from 23 % in the first sixth of the window to over 90 % after the first third; Camp from 18 % to 54 %).
