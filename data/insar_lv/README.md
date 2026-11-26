@@ -11,7 +11,7 @@ Each table is exported by `export_lv.py`, read-only on the project. The layout f
 |---|---|---|
 | `br1_a_points.npz`, `br1_a_meta.json` | BR1-A | as now: snaphu CONNCOMPTHRESH 300, MintPy bridging+phase_closure |
 | `br1_b_points.npz`, `br1_b_meta.json` | BR1-B | CONNCOMPTHRESH 1000, re-unwrapped from A's phase linking |
-| `br1_c_points.npz` (when C is done) | BR1-C | no bridging (phase_closure only), re-unwrapped from A's phase linking |
+| `br1_c_points.npz`, `br1_c_meta.json` | BR1-C | no bridging (phase_closure only), re-unwrapped from A's phase linking |
 
 B and C are read at A's cells (`--points-from`), so all three tables line up row for row.
 
@@ -55,3 +55,10 @@ B and C are read at A's cells (`--points-from`), so all three tables line up row
 ## What run B showed (recorded, not a finding of this folder)
 - CONNCOMPTHRESH 1000 reached snaphu: every pair re-unwrapped, because its config had changed. But the components were the same at every one of the 200,000 points (identical `bridged_fraction`, `n_ifgrams_outside_component`, `in_conncomp_mask`), and the bridged cells were still 302 in the whole grid. Rates differ from A by at most 0.003 mm/yr.
 - Every graded row passes, both with bridged cells left out and with every cell counted, and the figures match A's. CHI A12 pair: 1.54 against 1.64, pass.
+
+## What run C showed (recorded, not a finding of this folder)
+- MintPy ran phase_closure only (`mintpy.unwrapError.method = phase_closure`), with no bridging. The bridged cells were still 302 in the whole grid (38 valid), with no numbered region. Rates differ from A by at most 0.003 mm/yr, and no point moved by more than 0.5.
+- Every graded row passes, both with bridged cells left out and with every cell counted. CHI A12 pair: 1.54 against 1.64, pass.
+
+## The three runs together
+All three pass, with 7 testable stations each. Under the plan's adoption rule (most testable stations, ties go to A), **A is adopted**. Las Vegas has no ground that bridging joins on, so the three variants give the same answer: the bridged rule does no harm here, but this site cannot show that it helps.
