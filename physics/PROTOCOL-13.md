@@ -134,3 +134,25 @@ Also corrected by then: the stated sigma reading (FINDINGS-13 correction).
   (at least half) among points never apart, unwrapping islands are not its cause.
 - E3, compressor. `INSAR_RATE` plus `hrrr_rate`, `dem_rate`, `apart` and `apart_late` on 3,000 points, with
   B = 10 and N = 9, as in part A.
+
+## A5, part H: what is left after the bridged fix (26 Nov 2026, written before part H's terms were computed)
+
+**Seen by then:** the fix rerun (data/insar_m2/fix_rerun, FINDINGS part G): pair share 6/10 and noise 7.75 still fail;
+the failing pairs involve OK04, OK05, OK07. A first look at the station residual series (radar − GNSS) per
+ministack showed offsets that move together across stations. Part B3 had seen a scene-wide sawtooth (series rise
+within each ministack and step back at joins), which "barely varies by point" by its per-point sawtooth bit count.
+
+**New term (physics: the fading-signal bias of phase-linked short-baseline stacks, whose size varies with land cover and
+soil moisture, so a rate bias that follows a per-point sawtooth amplitude).** `sawtooth`: for each point, the
+coefficient on the scene's sawtooth pattern P(t) in a fit of the point's residual (series minus its own whole-record
+[1, t, sin, cos] fit) on P. P is built from the valid non-bridged points: take the median residual on each date, and
+within each ministack keep only its straight-line part (a ramp per ministack, the sawtooth). P is orthogonalised against
+[1, t, sin, cos], so the amplitude is not a function of the point's fitted rate by construction.
+
+**Readings:**
+- H0, synthetic: plant `k · sawtooth` (10 % of variance) on permuted rates; must be named in ≥ 4 of 5. A permuted null
+  must name nothing in ≥ 4 of 5. If H0 fails, H1 is not read.
+- H1, compressor: `INSAR_RATE` + `sawtooth` on the fix rerun's rates, non-bridged valid points only, two disjoint
+  3,000-point samples, B = 10, N = 9. Named by the usual rule (both samples, bootstrap ≥ 0.6, ≥ 3 of 4 folds).
+- H2, stations (described, 5 stations, no test): each station's 200 m mean `sawtooth` against its radar − GNSS
+  residual rate minus the five-station mean.
