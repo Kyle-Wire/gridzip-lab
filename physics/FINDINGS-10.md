@@ -95,3 +95,15 @@ out of pass/fail statistics until tied ("a label, not a switch");
 (2) unwrap so the components join (snaphu connectivity / tiling settings, or a stack-wise unwrapper);
 (3) tie each component to its own stable anchor or GNSS station where one exists (circular for that station, so
 not graded on it).
+
+## Part F, the fresh-site test (Las Vegas BR1, insar_pipeline PR #22 plan; data/insar_lv)
+Run by insar_pipeline's own protocol BR1 (written before the runs), not by this protocol; recorded here for the
+ledger. Box from public facts only (7 NGL stations within 15 km of the city centre; descending 173, IW2).
+- A (as now), B (snaphu CONNCOMPTHRESH 1000) and C (no bridging) all pass every graded row: pair RMSE 1.1 mm/yr,
+  pairs within 5 mm/yr 21/21, bias +0.04, uncertainty calibration 7/7, noise benchmark worst bin 2.05 mm/yr; CHI's
+  A12 two-station check 1.54 vs 1.64 allowed. A is adopted (plan's tie rule).
+- Las Vegas has essentially no bridged ground (38 valid of 537,526; no numbered region), and A, B and C differ by at
+  most 0.003 mm/yr. So the site shows the bridged rule does no harm; it cannot show it helps. A site with real
+  bridged ground is still needed for that.
+- No compressor search was run on Las Vegas: its rates are real ground motion, not errors, and with every row
+  passing there is no error target. The tables are kept for a later error study.
