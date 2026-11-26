@@ -1,0 +1,729 @@
+{
+ "protocol": "physics/PROTOCOL-10.md",
+ "n": 120,
+ "level": {
+  "R0": 1.2539160465611343,
+  "R1": 1.2691027273444342
+ },
+ "ledger": {
+  "R0": {
+   "Q_over_Q_upstream": {
+    "front": 0.7856049456957234,
+    "middle": 0.6720370020247857,
+    "back": 0.674991448778909
+   },
+   "array_mean_roof_speed": 1.088872187073207,
+   "array_mean_roof_stress": 0.00895782826506871,
+   "plan_mean_w_at_D_over_Uapp": 0.06493070596973002,
+   "u_ref_upstream_at_D": 3.4758215120901355,
+   "approach_minus_uw_over_uref2": {
+    "0.50D": 0.0013061640505057418,
+    "1.00D": 0.0006652250263664776,
+    "1.25D": -0.00011392446642468371,
+    "1.50D": -6.235025590992254e-05,
+    "2.00D": -0.0027173593964304192
+   },
+   "moved_samples": {
+    "z0.02": 0,
+    "1.25D": 0,
+    "0.75D": 0,
+    "D": 0
+   }
+  },
+  "R1": {
+   "Q_over_Q_upstream": {
+    "front": 0.9044691593848093,
+    "middle": 0.8530008504262258,
+    "back": 0.8705065982870483
+   },
+   "array_mean_roof_speed": 1.0906431064365691,
+   "array_mean_roof_stress": 0.009837296265642075,
+   "plan_mean_w_at_D_over_Uapp": 0.06915025101230132,
+   "u_ref_upstream_at_D": 3.6229569014488727,
+   "approach_minus_uw_over_uref2": {
+    "0.50D": 0.002155900270535297,
+    "1.00D": 0.003388451937433761,
+    "1.25D": 0.0001630357862166996,
+    "1.50D": -0.00010205967144301907,
+    "2.00D": -0.0005280622083260655
+   },
+   "moved_samples": {
+    "z0.02": 0,
+    "1.25D": 0,
+    "0.75D": 0,
+    "D": 0
+   }
+  }
+ },
+ "roof_term_summary": {
+  "roof_speed": {
+   "mean": 1.088872187073207,
+   "sd": 0.15475465652946485,
+   "min": 0.5440902832013271,
+   "max": 1.279570519156037
+  },
+  "roof_stress": {
+   "mean": 0.00895782826506871,
+   "sd": 0.007260919898985103,
+   "min": -0.0002507895630985542,
+   "max": 0.03428654334624325
+  },
+  "roof_k": {
+   "mean": 0.0649023370977689,
+   "sd": 0.018795480258545137,
+   "min": 0.03404982468697574,
+   "max": 0.11700845636797691
+  },
+  "roof_shear": {
+   "mean": 0.8702184687390417,
+   "sd": 0.6756975221347411,
+   "min": 0.0703777034453533,
+   "max": 2.1900440408220576
+  },
+  "coupling": {
+   "mean": 0.33850237119112875,
+   "sd": 0.2732357373399096,
+   "min": -0.33950245850400673,
+   "max": 0.7938635238494512
+  },
+  "ti_full": {
+   "mean": 0.7642425534644802,
+   "sd": 0.7575311288357883,
+   "min": 0.17948175550102188,
+   "max": 4.648794607460861
+  }
+ },
+ "synthetic": {
+  "noise_sd": 0.109375,
+  "a_none": {
+   "no_roof_term": 8,
+   "of": 10,
+   "runs": [
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[roof_shear>0.341] \u00b7 lp"
+     ],
+     "roof": [
+      "g:[roof_shear>0.341] \u00b7 lp"
+     ]
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "roof_shear"
+     ],
+     "roof": [
+      "roof_shear"
+     ]
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    },
+    {
+     "winner": [
+      "g:[ti_local>0.412] \u00b7 lp"
+     ],
+     "roof": []
+    }
+   ]
+  },
+  "power": {
+   "roof_stress": {
+    "found_by_sd": {
+     "0.02": 0,
+     "0.04": 0,
+     "0.06": 1,
+     "0.08": 2,
+     "0.1": 1
+    },
+    "mde_sd": null
+   },
+   "roof_speed": {
+    "found_by_sd": {
+     "0.02": 0,
+     "0.04": 0,
+     "0.06": 1,
+     "0.08": 5,
+     "0.1": 8
+    },
+    "mde_sd": 0.1
+   }
+  },
+  "passed": false
+ },
+ "A": {
+  "winner": [
+   "g:[ti_local>0.412] \u00b7 lp"
+  ],
+  "coef": {
+   "level": 0.2262714914537353,
+   "g:[ti_local>0.412] \u00b7 lp": 0.16818754647019085
+  },
+  "sd_before": 0.203125,
+  "sd_after": 0.109375,
+  "bits_saved_per_reading": 0.5922006303606144,
+  "holdout": [
+   {
+    "fold": "leave out x<0,y<0",
+    "formula_bpr": 5.504079271160521,
+    "one_correction_bpr": 6.134962598174951,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x<0,y>=0",
+    "formula_bpr": 5.500444011646576,
+    "one_correction_bpr": 6.473605289961831,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y<0",
+    "formula_bpr": 5.558305694128621,
+    "one_correction_bpr": 6.5346917836781335,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y>=0",
+    "formula_bpr": 5.803054314315952,
+    "one_correction_bpr": 6.438864302887221,
+    "transfers": true
+   },
+   {
+    "fold": "upstream -> downstream",
+    "formula_bpr": 6.009223823009313,
+    "one_correction_bpr": 6.52296474499495,
+    "transfers": true
+   }
+  ],
+  "inclusion": {
+   "g:[ti_local>0.412] \u00b7 lp": 0.729317049942178,
+   "g:\u221afetch \u00b7 1/ti_local": 0.24907497619235794,
+   "g:[lateral>1]": 0.16059977415227492,
+   "corner": 0.14146701757962227,
+   "g:[lp>-0.596] \u00b7 corner": 0.13930746544797032,
+   "g:max(0, fetch\u22121.5) \u00b7 corner": 0.09919429098290292,
+   "g:x_pos\u00b2": 0.07246023797641397,
+   "g:ln fetch \u00b7 corner": 0.05526704938488553,
+   "g:max(0, lateral\u22121)": 0.04793440467665958,
+   "g:[lateral>1] \u00b7 street_flux": 0.03695606871100799,
+   "g:[street_flux>0.734] \u00b7 corner": 0.023834001528401615,
+   "g:[fetch>1.5] \u00b7 corner": 0.018453300723098087,
+   "g:lateral \u00b7 street_flux\u00b2": 0.015902071235915877,
+   "g:1/fetch \u00b7 lateral": 0.015354794291691733,
+   "g:fetch \u00b7 corner": 0.015181340809145526,
+   "g:fetch\u00b2 \u00b7 corner": 0.014718002508901424,
+   "g:e^(\u2212fetch/2.5) \u00b7 lateral": 0.012945193078963128,
+   "g:[street_flux>0.802] \u00b7 x_pos": 0.012803218737415476,
+   "fetch": 0.012114033417916326,
+   "g:e^(\u2212ti_local/0.843) \u00b7 corner": 0.010209546893378014
+  },
+  "inclusion_by_input": {
+   "ti_local": 0.9844323353364001,
+   "lp": 0.881537299325551,
+   "corner": 0.5730041995148175,
+   "fetch": 0.5130166799905705,
+   "lateral": 0.33680054587238745,
+   "street_flux": 0.14094184927427716,
+   "x_pos": 0.10045280794477382,
+   "cross": 0.013641350024260444
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "g:[ti_local>0.412] \u00b7 lp": 0.5666666666666667,
+    "g:\u221afetch \u00b7 1/ti_local": 0.16666666666666666,
+    "g:[lp>-0.596] \u00b7 corner": 0.16666666666666666,
+    "g:[downwash>0.00264] \u00b7 street_flux": 0.13333333333333333,
+    "g:\u221afetch \u00b7 ln ti_local": 0.13333333333333333,
+    "g:max(0, fetch\u22121.5) \u00b7 corner": 0.06666666666666667,
+    "canyon_cross": 0.06666666666666667,
+    "g:x_pos\u00b2": 0.06666666666666667,
+    "g:x_pos\u00b2 \u00b7 lateral": 0.03333333333333333,
+    "g:[lateral>1]": 0.03333333333333333,
+    "g:max(0, lp\u2212-0.596) \u00b7 corner": 0.03333333333333333,
+    "turn": 0.03333333333333333,
+    "g:[street_flux>0.734] \u00b7 corner": 0.03333333333333333,
+    "g:[lateral>1] \u00b7 fetch": 0.03333333333333333,
+    "g:max(0, street_flux\u22120.802)": 0.03333333333333333,
+    "g:max(0, lateral\u22121)": 0.03333333333333333,
+    "street_flux": 0.03333333333333333,
+    "g:ln fetch \u00b7 corner": 0.03333333333333333,
+    "g:\u221alateral \u00b7 corner": 0.03333333333333333,
+    "g:e^(\u2212lateral/1) \u00b7 street_flux": 0.03333333333333333,
+    "ti_local": 0.03333333333333333,
+    "g:e^(\u2212lateral/0.75) \u00b7 street_flux": 0.03333333333333333,
+    "g:[downwash>0.00264] \u00b7 lateral": 0.03333333333333333,
+    "g:max(0, lp\u2212-0.596) \u00b7 fetch": 0.03333333333333333,
+    "g:e^(\u2212ti_local/0.843)": 0.03333333333333333,
+    "g:corner \u00b7 \u221astreet_flux": 0.03333333333333333,
+    "g:corner \u00b7 ln ti_local": 0.03333333333333333
+   },
+   "coef_90": {
+    "g:[ti_local>0.412] \u00b7 lp": [
+     0.15053353669208006,
+     0.18166859635867916
+    ]
+   }
+  },
+  "null_p": 0.05,
+  "neighbour": {
+   "gain": 0.36211043061484827,
+   "where": "all inputs",
+   "null_95": 0.06392626038694883,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": [
+   [
+    "g:[ti_local>0.412] \u00b7 lp",
+    "named, but can't rule out canyon_cross (+0.4 bits)"
+   ]
+  ]
+ },
+ "B": {
+  "winner": [
+   "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k"
+  ],
+  "coef": {
+   "level": 0.2262714914537353,
+   "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k": 0.17478256470800155
+  },
+  "sd_before": 0.203125,
+  "sd_after": 0.1015625,
+  "bits_saved_per_reading": 0.7345885180552045,
+  "holdout": [
+   {
+    "fold": "leave out x<0,y<0",
+    "formula_bpr": 5.080644358619228,
+    "one_correction_bpr": 6.134962598174951,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x<0,y>=0",
+    "formula_bpr": 5.1579193745140115,
+    "one_correction_bpr": 6.473605289961831,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y<0",
+    "formula_bpr": 5.540134346038003,
+    "one_correction_bpr": 6.5346917836781335,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y>=0",
+    "formula_bpr": 5.7912217717875105,
+    "one_correction_bpr": 6.438864302887221,
+    "transfers": true
+   },
+   {
+    "fold": "upstream -> downstream",
+    "formula_bpr": 6.050812628612701,
+    "one_correction_bpr": 6.52296474499495,
+    "transfers": true
+   }
+  ],
+  "inclusion": {
+   "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k": 0.999761301206167,
+   "g:[lateral>1]": 0.06664471142969973,
+   "canyon_cross": 0.017381788763996608,
+   "corner": 0.015345460423667405,
+   "g:lateral\u00b2": 0.012136174993033754
+  },
+  "inclusion_by_input": {
+   "roof_shear": 0.99994414968388,
+   "roof_k": 0.9998573507779783,
+   "lateral": 0.10796775723633643,
+   "corner": 0.019219249095401278,
+   "cross": 0.01743072468134363
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k": 0.7333333333333333,
+    "g:[ti_local>0.412] \u00b7 lp": 0.1,
+    "g:[lateral>1] \u00b7 fetch": 0.06666666666666667,
+    "g:[lateral>1]": 0.06666666666666667,
+    "g:[roof_k>0.0757]": 0.06666666666666667,
+    "g:coupling\u00b2 \u00b7 fetch": 0.06666666666666667,
+    "g:lateral\u00b2 \u00b7 x_pos\u00b2": 0.03333333333333333,
+    "g:[lateral>1] \u00b7 downwash": 0.03333333333333333,
+    "roof_shear": 0.03333333333333333,
+    "g:e^(\u2212turn/0.277) \u00b7 fetch": 0.03333333333333333,
+    "g:lateral": 0.03333333333333333,
+    "street_flux": 0.03333333333333333,
+    "corner": 0.03333333333333333,
+    "g:1/ti_local \u00b7 \u221afetch": 0.03333333333333333,
+    "g:[coupling>0.123] \u00b7 corner": 0.03333333333333333,
+    "g:coupling \u00b7 corner": 0.03333333333333333,
+    "g:\u221aroof_k \u00b7 lp\u00b2": 0.03333333333333333
+   },
+   "coef_90": {
+    "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k": [
+     0.15593435696829197,
+     0.18956468949399238
+    ]
+   }
+  },
+  "null_p": 0.05,
+  "neighbour": {
+   "gain": 0.2733899802467563,
+   "where": "all inputs",
+   "null_95": 0.06642445428266439,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": [
+   [
+    "g:e^(\u2212roof_shear/0.522) \u00b7 roof_k",
+    "named; no look-alike within 10:1"
+   ]
+  ]
+ },
+ "single_term_savings_bits": {
+  "roof_speed": 18.658419899053683,
+  "roof_stress": 10.324328233165602,
+  "roof_k": -13.854001231719053,
+  "roof_shear": 79.45491333221935,
+  "coupling": 60.98481139307694
+ },
+ "single_term_coef": {
+  "roof_speed": 0.762610988245056,
+  "roof_stress": -15.008141978408629,
+  "roof_k": -1.6474452307234213,
+  "roof_shear": -0.24463062965222593,
+  "coupling": 0.5688527776210113
+ },
+ "bootstrap_by_input": {
+  "A": {
+   "ti_local": 0.9,
+   "lp": 0.7666666666666667,
+   "fetch": 0.4666666666666667,
+   "corner": 0.43333333333333335,
+   "street_flux": 0.3333333333333333,
+   "lateral": 0.26666666666666666,
+   "downwash": 0.16666666666666666,
+   "x_pos": 0.1,
+   "cross": 0.06666666666666667,
+   "turn": 0.03333333333333333
+  },
+  "B": {
+   "roof_k": 0.8333333333333334,
+   "roof_shear": 0.7666666666666667,
+   "fetch": 0.2,
+   "lateral": 0.2,
+   "lp": 0.13333333333333333,
+   "ti_local": 0.13333333333333333,
+   "coupling": 0.1,
+   "corner": 0.1,
+   "downwash": 0.03333333333333333,
+   "x_pos": 0.03333333333333333,
+   "turn": 0.03333333333333333,
+   "street_flux": 0.03333333333333333
+  }
+ },
+ "Q1": {
+  "lateral_recurs_at_D16": false,
+  "lateral_inclusion_A": 0.33680054587238745,
+  "lateral_inclusion_B": 0.10796775723633643,
+  "quadrant_folds_A": 4,
+  "quadrant_folds_B": 4,
+  "roof_terms": {
+   "roof_speed": {
+    "inclusion": 0,
+    "bootstrap_share_any_term": 0,
+    "quadrant_folds": 4,
+    "pays": false,
+    "names_lateral": false
+   },
+   "roof_stress": {
+    "inclusion": 0,
+    "bootstrap_share_any_term": 0,
+    "quadrant_folds": 4,
+    "pays": false,
+    "names_lateral": false
+   },
+   "roof_k": {
+    "inclusion": 0.9998573507779783,
+    "bootstrap_share_any_term": 0.8333333333333334,
+    "quadrant_folds": 4,
+    "pays": true,
+    "names_lateral": true
+   },
+   "roof_shear": {
+    "inclusion": 0.99994414968388,
+    "bootstrap_share_any_term": 0.7666666666666667,
+    "quadrant_folds": 4,
+    "pays": true,
+    "names_lateral": true
+   },
+   "coupling": {
+    "inclusion": 0,
+    "bootstrap_share_any_term": 0.1,
+    "quadrant_folds": 4,
+    "pays": false,
+    "names_lateral": false
+   },
+   "ti_full": {
+    "inclusion": 0,
+    "bootstrap_share_any_term": 0,
+    "quadrant_folds": 4,
+    "pays": false,
+    "names_lateral": false
+   }
+  },
+  "named": [
+   "roof_k",
+   "roof_shear"
+  ],
+  "adds_to": []
+ },
+ "Q2": {
+  "dy_mean": -0.012038645416180235,
+  "dy_sd": 0.07891036398835663,
+  "null_p": 0.05,
+  "search": {
+   "winner": [
+    "d_coupling",
+    "g:[coupling>0.123] \u00b7 d_coupling",
+    "g:e^(\u2212fetch/1.5) \u00b7 roof_shear"
+   ],
+   "coef": {
+    "level": -0.012038645416180238,
+    "d_coupling": 0.5402433008937045,
+    "g:[coupling>0.123] \u00b7 d_coupling": 0.03130236337177011,
+    "g:e^(\u2212fetch/1.5) \u00b7 roof_shear": -0.04321548289657732
+   },
+   "sd_before": 0.078125,
+   "sd_after": 0.021484375,
+   "bits_saved_per_reading": 1.0013347552075107,
+   "holdout": [
+    {
+     "fold": "leave out x<0,y<0",
+     "formula_bpr": 3.2421600584272285,
+     "one_correction_bpr": 5.150195988587558,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x<0,y>=0",
+     "formula_bpr": 3.4522383632754297,
+     "one_correction_bpr": 5.2058683518156785,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x>=0,y<0",
+     "formula_bpr": 3.1542888241810254,
+     "one_correction_bpr": 5.127869208104726,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x>=0,y>=0",
+     "formula_bpr": 3.9380425129579644,
+     "one_correction_bpr": 5.160861175200995,
+     "transfers": true
+    },
+    {
+     "fold": "upstream -> downstream",
+     "formula_bpr": 5.143889437848949,
+     "one_correction_bpr": 5.732815959011615,
+     "transfers": true
+    }
+   ],
+   "inclusion": {
+    "g:\u221astreet_flux \u00b7 d_coupling": 0.9999928452295495,
+    "g:\u221ati_local \u00b7 1/fetch": 0.9996072634805795,
+    "g:[ti_local>0.843] \u00b7 fetch": 0.9996048415094808,
+    "g:max(0, side_flux\u2212-0.0796) \u00b7 lp": 0.9928455996155268,
+    "g:e^(\u2212roof_shear/0.341) \u00b7 d_coupling": 0.72111806879455,
+    "g:ln roof_shear \u00b7 d_coupling": 0.14053457840728295,
+    "g:e^(\u2212roof_shear/0.522) \u00b7 d_coupling": 0.1272757176973874
+   },
+   "inclusion_by_input": {
+    "d_coupling": 1.0,
+    "fetch": 0.9999999999999998,
+    "street_flux": 0.9999928679164737,
+    "ti_local": 0.999607298429237,
+    "side_flux": 0.9995435258045795,
+    "roof_shear": 0.9952254587728598,
+    "lp": 0.9938286175989678
+   },
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "g:e^(\u2212fetch/1.5) \u00b7 roof_shear": 0.4666666666666667,
+     "g:\u221ati_local \u00b7 1/fetch": 0.26666666666666666,
+     "g:roof_speed\u00b2 \u00b7 d_coupling": 0.23333333333333334,
+     "d_coupling": 0.2,
+     "side_flux": 0.16666666666666666,
+     "g:street_flux \u00b7 d_coupling": 0.16666666666666666,
+     "g:[coupling>0.123] \u00b7 d_coupling": 0.1,
+     "g:coupling \u00b7 d_coupling": 0.1,
+     "g:\u221astreet_flux \u00b7 d_coupling": 0.1,
+     "g:e^(\u2212roof_shear/1.63) \u00b7 d_coupling": 0.1,
+     "g:max(0, d_coupling\u2212-0.0197) \u00b7 lateral": 0.06666666666666667,
+     "g:[lateral>0.75] \u00b7 side_flux": 0.06666666666666667,
+     "g:roof_speed\u00b2 \u00b7 \u221afetch": 0.06666666666666667,
+     "g:max(0, d_coupling\u22120.048) \u00b7 d_street_flux": 0.06666666666666667,
+     "g:max(0, turn\u22120.0423) \u00b7 side_flux": 0.06666666666666667,
+     "g:[ti_local>0.843] \u00b7 fetch": 0.06666666666666667,
+     "g:[street_flux>0.734] \u00b7 d_roof_shear": 0.06666666666666667,
+     "g:max(0, d_street_flux\u2212-0.00412) \u00b7 d_roof_shear": 0.06666666666666667,
+     "g:ln roof_shear \u00b7 d_coupling": 0.06666666666666667,
+     "d_roof_k": 0.06666666666666667,
+     "g:e^(\u2212turn/0.0175) \u00b7 roof_shear": 0.03333333333333333,
+     "roof_speed": 0.03333333333333333,
+     "g:[d_coupling>0.000693] \u00b7 x_pos": 0.03333333333333333,
+     "g:max(0, d_coupling\u22120.048) \u00b7 d_roof_shear": 0.03333333333333333,
+     "g:1/roof_speed \u00b7 1/fetch": 0.03333333333333333,
+     "g:[d_roof_speed>-0.0109] \u00b7 d_coupling": 0.03333333333333333,
+     "contrast": 0.03333333333333333,
+     "g:d_coupling \u00b7 d_street_flux": 0.03333333333333333,
+     "g:max(0, side_flux\u2212-0.00269)": 0.03333333333333333,
+     "g:e^(\u2212fetch/2.5) \u00b7 side_flux": 0.03333333333333333,
+     "g:max(0, d_side_flux\u2212-0.0349) \u00b7 d_roof_k": 0.03333333333333333,
+     "g:e^(\u2212fetch/1.5) \u00b7 ti_local": 0.03333333333333333,
+     "g:e^(\u2212lateral/0.75) \u00b7 side_flux": 0.03333333333333333,
+     "g:[d_roof_stress>-5.85e-05] \u00b7 roof_shear": 0.03333333333333333,
+     "g:[roof_k>0.0628] \u00b7 x_pos": 0.03333333333333333,
+     "g:max(0, d_roof_k\u2212-0.000615) \u00b7 d_coupling": 0.03333333333333333,
+     "g:\u221aroof_shear \u00b7 1/fetch": 0.03333333333333333,
+     "g:max(0, lateral\u22120.75) \u00b7 d_downwash": 0.03333333333333333,
+     "g:e^(\u2212turn/0.0175) \u00b7 d_roof_shear": 0.03333333333333333,
+     "g:max(0, d_side_flux\u2212-0.0349) \u00b7 x_pos": 0.03333333333333333,
+     "g:max(0, downwash\u22120.00264) \u00b7 side_flux": 0.03333333333333333,
+     "g:max(0, turn\u22120.0175) \u00b7 side_flux": 0.03333333333333333,
+     "g:1/roof_speed \u00b7 d_roof_speed\u00b2": 0.03333333333333333,
+     "g:e^(\u2212street_flux/0.802) \u00b7 x_pos": 0.03333333333333333,
+     "g:lp \u00b7 d_roof_speed\u00b2": 0.03333333333333333,
+     "g:[ti_local>0.843] \u00b7 lp": 0.03333333333333333,
+     "g:[roof_speed>1] \u00b7 lp": 0.03333333333333333,
+     "g:[ti_local>0.843] \u00b7 d_roof_shear": 0.03333333333333333,
+     "g:[d_coupling>-0.0197] \u00b7 d_roof_k": 0.03333333333333333,
+     "g:[lateral>1]": 0.03333333333333333,
+     "g:[ti_local>0.843] \u00b7 d_side_flux": 0.03333333333333333,
+     "g:[street_flux>0.997] \u00b7 d_ti_full": 0.03333333333333333,
+     "g:lateral\u00b2 \u00b7 d_street_flux\u00b2": 0.03333333333333333,
+     "g:e^(\u2212roof_shear/0.341) \u00b7 d_coupling": 0.03333333333333333,
+     "g:max(0, lateral\u22120.75) \u00b7 d_coupling": 0.03333333333333333,
+     "g:max(0, d_roof_speed\u22120.0101) \u00b7 cross": 0.03333333333333333,
+     "g:max(0, d_coupling\u2212-0.0197) \u00b7 coupling": 0.03333333333333333,
+     "g:e^(\u2212lateral/0.75) \u00b7 x_pos": 0.03333333333333333,
+     "g:ln turn": 0.03333333333333333,
+     "g:lp \u00b7 x_pos": 0.03333333333333333
+    },
+    "coef_90": {
+     "d_coupling": [
+      0.45895570572302036,
+      0.6888382394998069
+     ],
+     "g:[coupling>0.123] \u00b7 d_coupling": [
+      0.024486186371584815,
+      0.03543665839940367
+     ],
+     "g:e^(\u2212fetch/1.5) \u00b7 roof_shear": [
+      -0.04920541435766245,
+      -0.03974146134475003
+     ]
+    }
+   },
+   "null_p": 0.05,
+   "neighbour": {
+    "gain": 0.3594285934827216,
+    "where": "fetch \u00d7 d_roof_speed",
+    "null_95": 0.12203606721185999,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "verdict": [
+    [
+     "d_coupling",
+     "named; no look-alike within 10:1"
+    ],
+    [
+     "g:[coupling>0.123] \u00b7 d_coupling",
+     "named, but can't rule out g:coupling \u00b7 d_coupling (+-9.8 bits)"
+    ],
+    [
+     "g:e^(\u2212fetch/1.5) \u00b7 roof_shear",
+     "named, but can't rule out g:\u221aroof_shear \u00b7 1/fetch (+2.1 bits)"
+    ]
+   ]
+  },
+  "bootstrap_by_input": {
+   "d_coupling": 1.0,
+   "fetch": 0.9,
+   "roof_shear": 0.6333333333333333,
+   "side_flux": 0.4666666666666667,
+   "roof_speed": 0.43333333333333335,
+   "street_flux": 0.36666666666666664,
+   "ti_local": 0.3333333333333333,
+   "lateral": 0.26666666666666666,
+   "coupling": 0.23333333333333334,
+   "d_roof_shear": 0.23333333333333334,
+   "turn": 0.2,
+   "d_street_flux": 0.2,
+   "x_pos": 0.2,
+   "d_roof_k": 0.16666666666666666,
+   "d_roof_speed": 0.13333333333333333,
+   "lp": 0.13333333333333333,
+   "d_side_flux": 0.1,
+   "d_roof_stress": 0.03333333333333333,
+   "roof_k": 0.03333333333333333,
+   "d_downwash": 0.03333333333333333,
+   "downwash": 0.03333333333333333,
+   "d_ti_full": 0.03333333333333333,
+   "cross": 0.03333333333333333
+  },
+  "named": [
+   "roof_shear",
+   "d_coupling",
+   "fetch"
+  ],
+  "reading": "structured: blockage footprint"
+ },
+ "Q3": {
+  "level_R0": 1.2539160465611343,
+  "level_R1": 1.2691027273444342,
+  "roof_speed_R0": 1.088872187073207,
+  "roof_speed_R1": 1.0906431064365691,
+  "roof_stress_R0": 0.00895782826506871,
+  "roof_stress_R1": 0.009837296265642075
+ }
+}
