@@ -1,8 +1,8 @@
-"""Protocol 10 part D figure: method 1 vs method 2 at Pawnee, for a reader with no InSAR background."""
+"""Protocol 13 part D figure: method 1 vs method 2 at Pawnee, for a reader with no InSAR background."""
 import json, numpy as np, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from physics.figures10 import cmap, INK, INK2, GRID_C, BLUE, ORANGE
+from physics.figures13 import cmap, INK, INK2, GRID_C, BLUE, ORANGE
 
 def main(out):
     r = json.load(open("results/physics/insar_m1_vs_m2.json")); T = np.load("results/physics/insar_m1_tiles.npz")
@@ -36,7 +36,7 @@ def main(out):
     for s in ("top", "right"): ax.spines[s].set_visible(False)
     ax.set_title("How fast false movement builds up over time (lower is better)", loc="left", fontsize=10.5, color=INK)
     fig.text(0.02, 0.01, "Same satellite track, box and 126 dates. Method 1: OPERA DISP-S1, no weather correction, GNSS tie off. Method 2: insar_pipeline V2 (MiaplPy) with HRRR weather correction. "
-             "Maps shifted so their middle reads 0. gridzip-lab protocol 10, part D.", fontsize=8, color=INK2)
+             "Maps shifted so their middle reads 0. gridzip-lab protocol 13, part D.", fontsize=8, color=INK2)
     fig.savefig(out, dpi=150); print(out)
 
 if __name__ == "__main__":

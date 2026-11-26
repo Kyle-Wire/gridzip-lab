@@ -2,7 +2,7 @@
 import numpy as np, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from physics.figures10 import cmap, INK, INK2, GRID_C, BLUE, ORANGE
+from physics.figures13 import cmap, INK, INK2, GRID_C, BLUE, ORANGE
 from physics.insar_m2 import design
 
 def rate(t, y):

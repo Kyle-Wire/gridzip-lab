@@ -1,79 +1,64 @@
-"""Protocol 10 figure: method 2 (V2 Pawnee) on stable ground, for a reader with no InSAR background."""
-import numpy as np, matplotlib
-matplotlib.use("Agg")
+"""Figure for protocol 10 (physics/FINDINGS-10.md): python physics/figures10.py"""
+import json, sys
+from pathlib import Path
+import numpy as np
+import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.colors import LinearSegmentedColormap
-from physics.insar_m2 import load, design, rsd
+from matplotlib.colors import TwoSlopeNorm
+ROOT = Path(__file__).resolve().parents[1]; F = ROOT / "physics/figures/roof"; F.mkdir(parents=True, exist_ok=True)
+sys.path.insert(0, str(ROOT / "physics"))
+import lateral_fields as LF  # noqa: E402
+d = json.loads((ROOT / "results/physics/roof_fields.json").read_text()); a = np.load(ROOT / "results/physics/roof_fields_arrays.npz")
+INK, MUTE, ACC, WARN = "#1f2933", "#7b8794", "#2f6fdf", "#d9822b"
+plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False, "axes.edgecolor": MUTE})
 
-INK, INK2, GRID_C = "#0b0b0b", "#52514e", "#e4e3df"
-BLUE, ORANGE = "#2a78d6", "#eb6834"
-cmap = LinearSegmentedColormap.from_list("div", ["#1c5cab", "#86b6ef", "#f0efec", "#ee9a99", "#a12a2a"])
-cmap.set_bad("#bdbcb7")
 
-def main(out):
-    D = load(); v = D["valid"]; e, n = D["east_km"], D["north_km"]; t = D["t_yr"]; st = list(D["stations"])
-    plt.rcParams.update({"font.size": 10, "axes.edgecolor": INK2, "axes.labelcolor": INK2, "xtick.color": INK2, "ytick.color": INK2})
-    fig = plt.figure(figsize=(15, 10.5), facecolor="#fcfcfb")
-    fig.suptitle("Our own InSAR processing (method 2) on ground that isn't moving: Pawnee, Oklahoma test site, Oct 2021 to Nov 2025",
-                 fontsize=14, color=INK, x=0.02, ha="left", y=0.985)
-    # A map
-    ax = fig.add_axes([0.05, 0.1, 0.4, 0.8]); ax.set_facecolor("#fcfcfb")
-    step = 1.0; ex = np.arange(-16, 16.01, step); ny = np.arange(-16.5, 16.01, step)
-    M = np.full((len(ny) - 1, len(ex) - 1), np.nan); r = D["rate_mm_yr"]
-    ix = np.digitize(e[v], ex) - 1; iy = np.digitize(n[v], ny) - 1
-    for a in range(M.shape[1]):
-        for b in range(M.shape[0]):
-            m = (ix == a) & (iy == b)
-            if m.sum() >= 30: M[b, a] = np.median(r[v][m])
-    off = np.nanmedian(M)
-    im = ax.pcolormesh(ex, ny, np.ma.masked_invalid(M - off), cmap=cmap, vmin=-6, vmax=6)
-    for i, s in enumerate(st):
-        sx = (D["station_lon"][i] - D["lon"].mean()) * 111.32 * np.cos(np.radians(D["lat"].mean())); sy = (D["station_lat"][i] - D["lat"].mean()) * 110.57
-        ax.plot(sx, sy, "^", ms=11, mfc="white", mec=INK, mew=1.5); ax.text(sx + 0.6, sy + 0.5, s, fontsize=10, color=INK, weight="bold")
-    ax.set_aspect("equal"); ax.set_xlabel("km east"); ax.set_ylabel("km north")
-    ax.set_title("A. What method 2 says the ground is doing (should be about 0 everywhere)", loc="left", fontsize=11, color=INK)
-    ax.annotate("this corner reads 4 to 7 mm/yr sinking,\nbut the GPS station there (OK02) says it isn't",
-                xy=(-9, 8.5), xytext=(-15.5, 13.6), fontsize=9.5, color=INK, arrowprops=dict(arrowstyle="-", color=INK2))
-    cb = fig.colorbar(im, ax=ax, orientation="horizontal", fraction=0.04, pad=0.08)
-    cb.set_label("mm per year: blue = moving away from the satellite (mostly sinking), red = toward it (rising)\ngrey = no trusted reading (the processing could not follow the signal there)", fontsize=8.5)
-    # B stations
-    ax = fig.add_axes([0.53, 0.58, 0.44, 0.31]); ax.set_facecolor("#fcfcfb")
-    G = D["station_gnss_los_mm"]; R = D["station_radar_mean_200m_mm"]; X = design(t)
-    def rate(y):
-        m = np.isfinite(y); return np.linalg.lstsq(X[m], y[m], rcond=None)[0][1]
-    names = [s for s in st if s != "OK03"]; i0 = st.index("OK03")
-    rr = [rate(R[st.index(s)] - R[i0]) for s in names]; gg = [rate(G[st.index(s)] - G[i0]) for s in names]
-    x = np.arange(len(names)); w = 0.36
-    ax.bar(x - w / 2 - 0.01, rr, w, color=BLUE, label="satellite (method 2)"); ax.bar(x + w / 2 + 0.01, gg, w, color=ORANGE, label="GPS station")
-    ax.axhline(0, color=INK2, lw=0.8); ax.set_xticks(x, [s + ("\n(GPS has gaps)" if s == "OK05" else "") for s in names])
-    ax.set_ylabel("mm/yr, compared with OK03"); ax.grid(axis="y", color=GRID_C); ax.set_axisbelow(True)
-    for s in ("top", "right"): ax.spines[s].set_visible(False)
-    ax.legend(frameon=False, loc="lower right", fontsize=9)
-    ax.set_title("B. Station check: the satellite and GPS agree at OK04 and OK06, not at OK02 and OK07", loc="left", fontsize=11, color=INK)
-    for xi, a, b in zip(x, rr, gg):
-        ax.text(xi - w / 2, a + (0.25 if a >= 0 else -0.55), f"{a:+.1f}", ha="center", fontsize=8.5, color=INK)
-        ax.text(xi + w / 2, b + (0.25 if b >= 0 else -0.55), f"{b:+.1f}", ha="center", fontsize=8.5, color=INK)
-    # C error bars
-    ax = fig.add_axes([0.68, 0.33, 0.29, 0.15]); ax.set_facecolor("#fcfcfb")
-    labs = ["error it states (median)", "real spread, points 0.3 km apart", "real spread, places 10+ km apart"]; vals = [4.75, 2.4, 3.0]
-    ax.barh(range(3)[::-1], vals, color=[ORANGE, BLUE, BLUE], height=0.6)
-    for k, (l, vv) in enumerate(zip(labs, vals)): ax.text(vv + 0.05, 2 - k, f"{vv:.1f} mm/yr", va="center", fontsize=9, color=INK)
-    ax.set_yticks(range(3)[::-1], labs); ax.set_xlim(0, 6.2); ax.set_xlabel("mm/yr")
-    for s in ("top", "right"): ax.spines[s].set_visible(False)
-    ax.set_title("C. Its stated error bars are wide enough (corrected 25 Nov)", loc="left", fontsize=11, color=INK)
-    # D lag
-    ax = fig.add_axes([0.53, 0.07, 0.44, 0.17]); ax.set_facecolor("#fcfcfb")
-    Y = D["series_mm"][v][::4]; Y = Y - np.median(Y, 0); lags = [1, 2, 3, 5, 8, 12, 20, 30, 40, 60, 80, 100, 120]
-    rms = [np.sqrt(np.mean((Y[:, k:] - Y[:, :-k]) ** 2)) for k in lags]; days = np.array(lags) * 12 / 365.25
-    ax.plot(days, rms, color=BLUE, lw=2, marker="o", ms=5, label="what the data does")
-    ax.plot(days, [rms[0]] * len(days), color=ORANGE, lw=2, ls="--", label="if the noise were purely random")
-    ax.set_xlabel("years between the two dates"); ax.set_ylabel("typical change, mm"); ax.grid(color=GRID_C); ax.set_ylim(0, 16)
-    for s in ("top", "right"): ax.spines[s].set_visible(False)
-    ax.legend(frameon=False, loc="lower right", fontsize=9)
-    ax.set_title("D. The noise slowly drifts instead of averaging out, so it builds up into fake trends", loc="left", fontsize=11, color=INK)
-    fig.text(0.02, 0.012, "Source: insar_pipeline V2 run (MiaplPy, snaphu, MintPy), 24 Nov 2026; GPS: NGL IGS20 daily, along the satellite's view. "
-             "The map is shifted so its middle reads 0. Test site, not a customer property. gridzip-lab protocol 10.", fontsize=8, color=INK2)
-    fig.savefig(out, dpi=150); print(out)
+def blocks(ax):
+    from matplotlib.patches import Rectangle
+    for cx in (-0.4, 0.0, 0.4):
+        for cy in (-0.4, 0.0, 0.4):
+            ax.add_patch(Rectangle((cx - 0.1, cy - 0.1), 0.2, 0.2, color="#cbd2d9", zorder=0))
+    ax.set_xlim(-0.55, 0.55); ax.set_ylim(-0.55, 0.55); ax.set_aspect("equal"); ax.set_xticks([]); ax.set_yticks([])
+    ax.annotate("wind", xy=(-0.33, 0.52), xytext=(-0.53, 0.52), arrowprops=dict(arrowstyle="->", color=INK), va="center", color=INK)
+C0, C1 = ACC, WARN
 
-if __name__ == "__main__":
-    import sys; main(sys.argv[1])
+fig, axs = plt.subplots(1, 3, figsize=(15, 4.9)); fig.subplots_adjust(wspace=0.42, top=0.8)
+
+# 1: approach flow at x = -0.8, y = 0, in both sections
+ax = axs[0]; ax2 = ax.twiny()
+for run, c in (("R0", C0), ("R1", C1)):
+    f = np.load(ROOT / f"results/physics/f3s6_{run}_fields.npz"); st = f["mean_sums"].astype(float); o = f["origin"].astype(float); dx = float(f["dx_m"])
+    z = np.linspace(0.01, 0.44, 60); P = np.c_[np.full(60, -0.8), np.zeros(60), z]
+    v = LF.interp(st[..., [0, 2, 8]], o, dx, P); u, w, uw = v[:, 0], v[:, 1], v[:, 2]
+    uref = float(LF.interp(st[..., [0]], o, dx, np.array([[-0.8, 0, 0.2]]))[0, 0])
+    lab = "standard section" if run == "R0" else "wider, taller section"
+    ax.plot(u, z / 0.2, color=c, lw=2, label=f"speed, {lab}")
+    ax2.plot(-(uw - u * w) / uref ** 2 * 1000, z / 0.2, color=c, lw=1.4, ls="--", label=f"stress ×1000, {lab}")
+ax.axhline(1, color=MUTE, lw=0.6); ax.text(2.3, 1.03, "roof height", color=MUTE, fontsize=8.5)
+ax.set_xlabel("mean speed, m/s (solid)"); ax2.set_xlabel("−u'w' / U_ref² × 1000 (dashed)", color=INK); ax.set_ylabel("height / block height D")
+ax.legend(loc="upper left", fontsize=8, frameon=False); ax2.legend(loc="lower right", fontsize=8, frameon=False)
+ax.set_title("1. The wind coming in is not the same in the two runs\n(5.1 % apart, limit 3 %), so blockage can't be judged",
+             loc="left", fontsize=10.5, color=INK, pad=34)
+
+# 2: per-point change between the two runs
+ax = axs[1]; blocks(ax); dy = a["y0"] - a["y1"]
+sc = ax.scatter(a["x"], a["y"], c=-dy, cmap="RdBu_r", norm=TwoSlopeNorm(vcenter=0, vmin=-0.2, vmax=0.2), s=40, edgecolor="white", lw=0.4, zorder=2)
+cb = fig.colorbar(sc, ax=ax, fraction=0.046, pad=0.02); cb.set_ticks(np.log([0.85, 1, 1.18])); cb.set_ticklabels(["15 % lower", "same", "18 % higher"])
+ax.set_title(f"2. Overall level barely moves (×{d['level']['R0']:.3f} → ×{d['level']['R1']:.3f}),\n"
+             f"but points move ±{dy.std() * 100:.0f} %: wider vs standard, per point", loc="left", fontsize=10.5, color=INK)
+
+# 3: the compressor's false-alarm test and its power
+ax = axs[2]; syn = d["synthetic"]; sds = [0.02, 0.04, 0.06, 0.08, 0.10]
+for nm, c in (("roof_speed", C0), ("roof_stress", C1)):
+    ax.plot(sds, [syn["power"][nm]["found_by_sd"][str(s)] for s in sds], "o-", color=c, label=f"planted {nm.replace('_', ' ')}")
+ax.axhline(8, color=MUTE, lw=0.8, ls=":"); ax.text(0.021, 8.2, "found in 8 of 10 = detectable", fontsize=8.5, color=MUTE)
+fa = syn["a_none"]["of"] - syn["a_none"]["no_roof_term"]
+ax.bar([0.0], [fa], width=0.012, color="#c0392b"); ax.text(0.0, fa + 0.3, f"{fa} false\nalarms\n(limit 1)", ha="center", fontsize=8.5, color="#c0392b")
+ax.set_xticks([0.0] + sds); ax.set_xticklabels(["nothing\nplanted"] + [f"{s:.2f}" for s in sds]); ax.set_ylim(0, 10.5)
+ax.set_xlabel("planted effect size (sd of ln speed)"); ax.set_ylabel("runs out of 10"); ax.legend(fontsize=8, frameon=False, loc="center right")
+ax.set_title("3. Self-test failed: with nothing planted it named\n'roof shear' twice, so its roof answer isn't trusted", loc="left", fontsize=10.5, color=INK)
+
+fig.suptitle("AIJ Case C 1D, LBM D/16 (WindSim F3 step 6, 24 Nov 2026): wider tunnel and flow over the roofs, read by the compressor (protocol 10)",
+             x=0.01, y=1.06, ha="left", fontsize=11.5, color=INK)
+fig.savefig(F / "roof_01_step6.png", dpi=160, bbox_inches="tight")
+print(F / "roof_01_step6.png")

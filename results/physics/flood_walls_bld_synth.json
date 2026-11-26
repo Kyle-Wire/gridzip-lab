@@ -1,0 +1,16 @@
+{
+ "contributing_area": {
+  "winner": [
+   "contributing_area"
+  ],
+  "bits": 0.6412917623050518,
+  "null_p": 0.05,
+  "pass": true
+ },
+ "null": {
+  "winner": [],
+  "bits": 0.0,
+  "null_p": 1.0,
+  "pass": true
+ }
+}

@@ -1,133 +1,90 @@
-# Protocol 10: what our own InSAR processing (method 2) is missing on stable ground, V2 Pawnee (written 24 Nov 2026, before the search ran)
+# Protocol 10: does the flow over the roofs name the LBM's Case C pattern or its level? (written 24 Nov 2026, before either F3 step 6 field was read)
 
-**Why.** Kyle (24 Nov, 11:57 AM ET) wants the insar_pipeline's own processing ("method 2": MiaplPy phase linking,
-snaphu, MintPy) to pass, since it is finer and more flexible than OPERA DISP-S1 ("method 1"), which passes. V2 at
-Pawnee, Oklahoma, a stable-ground test site, is graded FAIL in insar_pipeline PR #20 (`results/D49/V2.yaml`):
-noise_benchmark 7.75 mm/yr, pair share 8/15, rate RMSE 5.7, false-movement caveats; bias, series RMSE and
-uncertainty calibration pass. This protocol asks which named mechanism makes the false rates, so the fix can be
-written down and tested on a fresh site.
+**Why.** Protocol 9 (FINDINGS-9) found that the LBM's lateral pattern on Case C 1D recurs. No near-ground flow
+term names it. `downwash` × `lateral` adds to it, and the ledger shows the street flux below 0.1 m at 0.60 to 0.69 of
+upstream. The step 5 level, ×1.29, is set by nothing below half the block height. WindSim F3 step 6
+(`docs/validation.md` in WindSim, "F3 step 6") reruns Case C 1D at D/16 in two sections:
+- R0, the standard section, blockage 5.6 %;
+- R1, a 3.6 × 2.0 m section, blockage 1.7 %.
 
-**Data.** `data/insar_m2/v2_pawnee_points.npz` (cd9ceab; README there). 200,000 MintPy cells, 127 dates
-(2021-10-01 to 2025-11-03), ministacks of 10, six GNSS stations OK02 to OK07 with 77 to 81 cells within 200 m.
+Both keep the mean fields to z = 0.45 m (2.25 D), now with u'w', u'v' and v'w'. Kyle's standing rule (24 Nov): when
+a model fails a test, extend the compressor with that domain's formulas and run it against the model's errors. This
+protocol is that step for the roof-level shear layer and the section.
 
-**Seen before this was written:** the README and meta.json; the per-point rate percentiles (median −1.5, 5–95 %
-−12.3 to +6.7 mm/yr, sd 6.4), stated sigma percentiles (5/50/95 %: 0.44/0.72/0.99 mm/yr) and the per-date
-ministack index. No relation between rate and any covariate, and no station series, has been looked at.
+**Seen before this was written:**
+- the step 6 protocol and its readings script (WindSim 1705cba);
+- that the CUDA self-test passed, that R0 started at 19:20 UTC, and R0's estimated finish time.
 
-V2 is spent data (graded). Nothing here is evidence that method 2 passes. It names suspects; the fix is tested
-only on a fresh site under insar_pipeline's own plan.
+No R0 or R1 value has been read in this thread: no level, no point value and no field value.
 
-## Part A: the rate field (space)
+**Data.**
+- Fields: `f3s6_R0_fields.npz` and `f3s6_R1_fields.npz`. Each holds the mean u, v, w, the second moments
+  (uu, vv, ww, uv, uw, vw), the mean |u| per cell to z = 0.45 m, and the solid mask, dx and origin.
+- Points: each run's 120 points with the AIJ measurements, mirror fold as WindSim scores them.
+- Targets on grid 0.01:
+  - y0 = ln(model R0 / measured);
+  - y1 = ln(model R1 / measured);
+  - dy = y0 − y1, the per-point change from the wider section.
 
-- Target: y = rate_mm_yr per point. Stable ground, so the truth is about 0 up to the GNSS frame; whatever the
-  formula takes out is a candidate error. Grid 0.05 mm/yr, robust coding.
-- Sample: 20,000 points drawn at random (seed 10) from the valid points (finite rate, in the connected-component
-  mask). The same search is repeated on a second, disjoint 20,000 (seed 11): a term counts only if it is named on both.
-- Blocks and groups: 3 km tiles on lat/lon. Bootstrap by tile, B = 20; null search with tile-blocked shuffles, N = 9.
-- Folds: west half → east half, east → west, south → north, north → south.
-- Library (fixed now; each is a free slope unless said):
-  - quality: `coherence` (temporal coherence), `ps_share` (ps_fraction), `amp_disp`, `outside_comp`
-    (n_ifgrams_outside_component / 375), `closure_amb` (n_triplets_nonzero_ambiguity, log1p), `jumps` (n_jump_dates);
-  - geometry: `height` (DEM height minus its mean), `incidence`, `ref_dist` (distance to the reference cell, km),
-    `ramp` (east and north, 2 columns), `ramp2` (quadratic in east and north, 3 columns);
-  - season: `annual_amp` (annual amplitude, mm).
-- Grammar on (physlib v2), so shapes of these inputs are searched too.
+**New roof terms, computed per point by trilinear interpolation on the column above the point (fixed now).** U_app(z)
+is mean u at the upstream column x = −0.8, y = 0. U_ref is U_app at z = D.
+- `roof_speed`: mean u at z = 1.25 D over U_app(1.25 D). This is D1's "flow above the array runs fast", per point.
+- `roof_stress`: −u'w' at z = D over U_ref². It is the momentum flux down into the street.
+- `roof_k`: k = (u'² + v'² + w'²) / 2 at z = D, over U_ref².
+- `roof_shear`: (u(1.25 D) − u(0.75 D)) / (0.5 D) × D / U_ref. It is the strength of the shear layer.
+- `coupling`: mean u at 0.02 m over mean u at 1.25 D. It says how much of the roof flow reaches the probe.
+- `ti_full`: the turbulence intensity at 0.02 m from the full stress tensor, sqrt(2k/3) / |U_h|. It replaces protocol
+  9's isotropic form.
 
-## Part B: the series (time), the mechanisms a rate field can't name
+Where a column point falls inside a block (z ≤ D over a roof), the term is taken at the nearest street cell at the
+same height, and the point is listed. These join protocol 9's field terms and FINDINGS-7's Case C inputs.
 
-For every sampled point, the line + annual fit is compared with richer fits, each adding one named piece. The
-reading is the spread (robust sd) of the fitted rate across points, and its bits saved over the plain fit
-(Gaussian, summed over points, with the parameter cost 0.5 log2(127) per extra coefficient per point).
+**Search, as in protocol 9:**
+- `physlib.guards.analyse(..., grammar=True, bootstrap_B=30, null_N=19)`;
+- folds: leave one quadrant out (4), plus upstream half → downstream half.
 
-- B1 `ministack steps`: one offset per ministack join (12 steps). Tests the MiaplPy sequential-estimator join bias.
-- B2 `common mode`: subtract, per date, the median over all valid points of the 3 km tile (long-wavelength
-  atmosphere or orbit left in every date).
-- B3 `fading`: rate fitted on each ministack alone (10 dates), then the spread of those short rates around the
-  whole-record rate. A phase-linking (fading-signal) bias shows as short rates that are biased in one direction,
-  more strongly for low coherence and distributed scatterers.
-- B4 `late start`: rate from 2022-10 onward only (drops the first year).
+**Questions and rules (fixed now):**
+- **Q1, the point pattern (R0, y0).** First, (A) FINDINGS-7 inputs plus protocol 9's terms. Then (B) with the roof
+  terms added.
+  - A roof term *names* the lateral pattern if, in B, all four hold: inclusion ≥ 0.8; picked in ≥ 60 % of
+    per-input bootstrap resamples (`boot_inputs`, fixed now, which mends protocol 9's disclosed deviation); transfers
+    on ≥ 3 of 4 quadrant folds; and `lateral`'s inclusion falls below 0.5.
+  - If a roof term pays but `lateral` stays, it *adds to* the pattern.
+  - Q1 is first checked on y0: does `lateral` recur at D/16 in R0 (inclusion ≥ 0.8 in A, transfer on ≥ 3 folds)?
+    If not, Q1 is reported as "pattern absent at D/16", and B is still run.
+- **Q2, what the wider section changes (dy).** Is dy a uniform shift (blockage acts on the level only), or does it
+  carry structure?
+  - Search dy with the same library and terms, and also each term's R0 − R1 difference.
+  - If nothing is named (the null's 95th percentile), report it as "uniform shift" with the mean and sd of dy.
+  - If a term is named under Q1's rules, report it as the blockage's footprint.
+- **Q3, the level (described, not gated).** The step 5 ledger repeated per run: Q(x) below 0.1 m over Q₀, at the
+  array's front, middle and back. Added to it:
+  - the array-mean `roof_speed`;
+  - the array-mean `roof_stress`;
+  - the plan-mean w at z = D.
 
-## Part C: the GNSS stations
+  Read them next to WindSim's blockage share s. This reads whether the section's effect goes through the air over the
+  roofs (roof_speed falls from R0 to R1 together with the level) or through the street itself.
+- Expected signs: `roof_speed`, `roof_stress` and `coupling` positive (more momentum brought down means the probe
+  reads fast); `roof_k` and `ti_full` unknown.
 
-Per station: radar series (200 m mean) minus the GNSS LOS series. The rate of that difference, and how much of it the
-B1, B2 and B4 corrections take out. Six stations, so this is described, not gated.
+**Synthetic check first,** on R0's real covariates with noise sd from run A's residual, 10 seeds each:
+- (a) nothing planted: no roof term named in 9 of 10;
+- (b) planted `roof_stress` at 0.02 to 0.10 sd;
+- (c) planted `roof_speed` at 0.02 to 0.10 sd.
 
-## Readings, fixed now
+Power is the smallest sd named in 8 of 10. If (a) fails, Q1 and Q2 are reported as untrustworthy.
 
-- **A named.** A term is named if it is in both samples' winners, transfers on at least 3 of 4 folds and is picked in
-  at least 60 % of bootstrap resamples. Its share of the rate variance is reported.
-- **B named.** A B piece is named if it saves bits on average per point and cuts the robust sd of the rates by at
-  least 20 %.
-- **Unnamed.** The neighbour test on A's remainder says how much structure is left.
-- **The headline is a ledger:** the rate sd at the start; the sd after each named piece (A first, then B); what is
-  left. Expected (stated now, may be wrong): B1 or B3 (the phase-linking side) carry most of it, because OPERA, whose
-  phase linking re-references differently, passes the same checks.
+**Limits, stated now.**
+- Two runs of one layout (1D), at D/16 only. The run-to-run noise at D/16 is unmeasured, so a small dy structure
+  could be noise. dy is read with that caveat.
+- The roof terms come from the model whose error is explained. A named term says where the model's flow differs. It
+  does not show the tunnel's flow differs, because the AIJ data for Case C have no roof-level profiles over the
+  streets (a check against D1 in Case B is a later step).
+- Nothing here changes WindSim's scoring. A fix goes through WindSim's protocol and a held-out case.
 
-## Synthetic check first
-
-On the real covariates and the real date list, with noise from a plain fit's residual:
-- (a) no planted term in A: nothing named in at least 4 of 5 seeds;
-- (b) planted `coherence` slope worth 10 % of the rate variance: named in at least 4 of 5;
-- (c) planted ministack steps of 2 mm sd in B: B1 cuts the rate sd by at least 20 % in at least 4 of 5.
-
-## Limits, stated now
-
-- One site, one track, one season mix. Pawnee is rural Oklahoma (farmland), so distributed scatterers dominate;
-  an urban site may behave differently.
-- The full-resolution PS layer is mapped by look cell, so `ps_share` is a cell share, not a pixel flag.
-- No land cover or soil moisture is in the table; `annual_amp` stands in for the seasonal ground.
-- Nothing here changes insar_pipeline. Any fix goes through its own plan, written first, and a fresh site.
-
-## A1 (24 Nov 2026, after parts B and C and a first timing run, before the synthetic check and part A)
-
-**Seen by then:** parts B and C in full (results/physics/insar_m2.json), a 3,000-point timing run of part A
-(no bootstrap; quality and geometry terms cut the rate sd only from 2.88 to 2.63 mm/yr, neighbour test p = 0.01),
-and exploratory looks at the station rings, the 4 km tile map, a rate variogram and the series' lag structure.
-
-**Change:** a 20,000-point search with bootstrap and null takes about 2.5 h per sample on this CPU. Part A now
-uses 6,000 points per sample (seeds 10 and 11, disjoint), bootstrap B = 10 by tile, null N = 9. The readings
-are unchanged.
-
-## A2 (24 Nov 2026, same day, before any synthetic or part A result was read)
-
-The 6,000-point run was killed for memory (the grammar's product terms on 15 GB) before it printed anything.
-Part A and the synthetic check now use 3,000 points per sample. Nothing else changes.
-
-## A3, part D: the method 1 control (24 Nov 2026 evening, written before any m1 value was computed here)
-
-**Seen by then:** `data/insar_m1/README.md` (71b575a), including its untested first look: m1 rate 5–95 % −19.8 to
-+29.7 mm/yr, median coherence 0.57, station series 11–17 mm RMS off GNSS. No m1 map, pair or station rate has
-been computed. Confounds stated now: m1 had no weather correction (m2 had HRRR), and m1's rate is re-fitted after
-CHI's reference-jump handling (A11, A17, A19).
-
-**Readings, fixed now (same windows for both: dates in both tables):**
-- **D1, the corner.** Using the same regions as before, NW (east < −4 km, north > 4 km) against the rest (east > −2 km, north < 4 km), take the
-  median rate of each and difference them. "Ground or common physics" if m1's NW − rest ≤ −2 mm/yr; "our
-  processing" if |m1 NW − rest| < 1 mm/yr; otherwise "unclear". Also the correlation of the two methods' 1 km
-  tile maps.
-- **D2, stations.** Rate of each station's 200 m radar series minus its GNSS LOS, relative to OK03, both methods,
-  on the shared dates. The reading is the share of the 15 pairs within 2 mm/yr.
-- **D3, error bars.** Stated sigma (median) against the rate spread between cells 0.2 to 0.4 km apart.
-- **D4, lag structure.** RMS change at lags of 1, 10, 40 and 120 dates, with each date's median removed.
-- **D5, compressor.** `physlib.insar.INSAR_RATE` on m1's rates, for the terms its table supports (coherence,
-  incidence, ramp, ramp2, annual_amp, jumps), 3,000 points, B = 10 and N = 9, as in part A. Plus a cross-method
-  term `m2_tile`: method 2's 1 km tile median at each m1 cell. If it is named, the two methods share the
-  structure.
-
-## A4, part E: the corner, with processing records (25 Nov 2026, written before these files were read here)
-
-**Seen by then:** the export's README (8e77a82). Its first look said the HRRR correction's own rate runs −0.55 to
-+0.37 mm/yr (5th to 95th percentile), and the median count of interferograms apart from the reference is 3 of 375.
-Also corrected by then: the stated sigma reading (FINDINGS-10 correction).
-
-**Readings, fixed now (valid points; NW and rest regions as in D1; target = the rate):**
-- E1, which step makes the corner. NW − rest, taken of the rate from (i) the series before both corrections,
-  (ii) the HRRR correction alone, (iii) the DEM-error correction alone (before − final − HRRR), and (iv) the final
-  series. A step "makes the corner" if its own NW − rest is at least half of the final value, with the same sign.
-- E2, unwrapping. New terms: `apart` (n_ifgrams_apart / 375) and `apart_late` (the share of the point's apart
-  interferograms in the second half of the record). Plus the rate made only by the interferograms where the point is
-  apart: the rate of the final series minus the rate re-inverted with those interferograms dropped is not
-  available here, so the proxy is the corner's NW − rest inside the points with `apart` = 0. If the corner stays
-  (at least half) among points never apart, unwrapping islands are not its cause.
-- E3, compressor. `INSAR_RATE` plus `hrrr_rate`, `dem_rate`, `apart` and `apart_late` on 3,000 points, with
-  B = 10 and N = 9, as in part A.
+Outputs:
+- code: `physics/roof_fields.py`;
+- figures: `physics/figures10.py` → `physics/figures/roof/`;
+- results: `results/physics/roof_fields.json`;
+- write-up: `physics/FINDINGS-10.md`, every failure reported.

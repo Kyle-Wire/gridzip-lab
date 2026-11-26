@@ -1,97 +1,61 @@
-# Findings 10: method 2 (V2 Pawnee) on stable ground (protocol 10, A1, A2; 24 Nov 2026)
+# Findings 10: the flow over the roofs and the wider section, read by the compressor (WindSim F3 step 6, 25 Nov 2026)
 
-> **Correction (25 Nov 2026).** The "error bars about 3× too small" reading below is wrong. The table's
-> `sigma_mm_yr` was MintPy's formal white-noise `velocityStd` (median 0.72), not the pipeline's stated 1-sigma.
-> The stated sigma is an empirical split-half figure from far-field cells, by coherence class (median 4.75 mm/yr;
-> `data/insar_m2/v2_stated_sigma.npz`, 9d4a7da). Against the 2.3 to 2.4 mm/yr seen between neighbouring cells it
-> is wide, not narrow, and V2's calibration row passes (6 of 6). The lag-structure reading (temporally correlated
-> noise) stands; only the comparison with the formal floor misled. Part D's sigma medians are also formal values for
-> both methods. What fails V2 is the false-rate field (the OK02 patch): pair share and the noise benchmark.
+Protocol: `PROTOCOL-10.md` (4080861, pushed before either field was read). Code `physics/roof_fields.py`, figure
+`physics/figures10.py` → `physics/figures/roof/roof_01_step6.png`, results `results/physics/roof_fields.json`.
+Data: WindSim F3 step 6 (bf85eca, CUDA, Case C 1D, D/16, L 0.5 D, z0 0.0003, Cs 0.12). R0 is the standard section;
+R1 is 3.6 × 2.0 m. Fields `f3s6_R{0,1}_fields.npz`, points `f3s6_R{0,1}_points.csv`.
 
-Data: `data/insar_m2/v2_pawnee_points.npz` (cd9ceab). Script: `python -m physics.insar_m2 [synth|A|B|C]`;
-results in `results/physics/insar_m2.json`; figure `physics/figures/p10_method2_pawnee.png` (`physics/figures10.py`).
-V2 is spent data. Nothing here is evidence that method 2 passes.
+**Verdict: no trustworthy answer.** The synthetic check failed. With nothing planted, a roof term was named in 2 of 10
+runs, against a limit of 1, and both false picks were `roof_shear`, the very term the real search then named. By the
+protocol, Q1 and Q2 are reported as untrustworthy. WindSim's own approach check also failed (5.1 % RMS against 3 %),
+so neither suspect, blockage or the roof shear layer, is settled by this step.
 
-## Synthetic check
-- (a) null: nothing named in 5 of 5. Pass.
-- (b) planted coherence slope (10 % of variance): named in 5 of 5. Pass.
-- (c) planted ministack steps: FAIL. B1 as written (12 free step columns plus a line) makes the rate badly
-  determined, so the rate spread rises (cut −0.9 to −1.3) with or without a plant. **B1 cannot be read**: its
-  "not named" below is a broken test, not a null.
+## Synthetic check (on R0's real covariates, noise sd 0.109)
+- (a) Nothing planted: no roof term in 8 of 10 (rule: 9). **Fail.** The false picks were `[roof_shear > 0.34] · lp`
+  and `roof_shear`.
+- Power: `roof_speed` is found in 8 of 10 at sd 0.10, and not reliably below that. `roof_stress` is never found
+  reliably up to 0.10 (at most 2 of 10). The library cannot see a roof-stress effect of the size that matters here.
 
-## Part A, rate field (3,000 points per sample, A2)
-- Nothing named. Both samples pick grammar shapes of coherence × incidence and closure ambiguity × east, but no
-  term reaches 60 % of bootstrap resamples (best 0.5 to 0.6), and the search saves 0.094 and 0.078 bits per reading
-  against 0.071 and 0.058 for shuffled data (p = 0.1 both). sd 2.88 → 2.63 and 2.75 → 2.50 mm/yr (about 9 %).
-- Neighbour test: structure left (p = 0.01 both): the remainder is spatially organised, and no quality or geometry
-  word names it.
+## Q1, the point pattern (R0, untrustworthy)
+- At D/16 the lateral pattern does not recur: `lateral` inclusion is 0.34 (rule 0.8). Run A's winner is
+  `[ti_local > 0.41] · lp`, which takes the sd from 0.203 to 0.109, transfers on 4 of 4 quadrant folds, and sits at
+  the null floor (p 0.05).
+- Run B's winner is `e^(−roof_shear/0.52) · roof_k`: sd 0.102, inclusion 1.00 for both inputs, bootstrap 83 % and
+  77 %, and it transfers on 4 of 4 folds. On the protocol's words this "names" the pattern. Given the false-alarm test,
+  it is not read as a finding.
 
-## Part B, series
-- B2 (3 km tile common mode per date) saves bits (164 per point) but cuts the rate spread only 9 %. Not named.
-- B3: within each ministack the series rises about 9 to 11 mm/yr against the reference and steps back at joins.
-  This is a scene-wide sawtooth relative to the reference cell; it barely varies by point (a sawtooth term
-  per point saves −2.2 bits), so it moves the common level, not the spread.
-- B4 (drop the first year): per-point rates correlate with the full-record ones (r 0.97 for a winter-only fit);
-  the false rates are steady, not a first-year artefact.
-- Lag structure (exploratory): the typical change between two dates grows from 8 mm (1 date apart) to 14 mm (4
-  years apart). The noise is temporally correlated, so the white-noise stated sigma (median 0.72 mm/yr) is about
-  3× too small: the rate spread between cells 0.3 km apart is 2.4 mm/yr, between places 10+ km apart 3.0.
+## Q2, what the wider section changes (untrustworthy)
+- dy = ln(R0) − ln(R1) per point: mean −0.012, sd 0.079. The level hardly moves, but the points rearrange (figure
+  panel 2). The along-wind streets read higher in the wider section and the cross streets lower, in a smooth and
+  symmetric pattern.
+- The search names `d_coupling` (the change in near-ground over roof-level speed) plus `roof_shear` and `fetch`. It
+  takes the sd from 0.078 to 0.021, at null p 0.05, transferring on all folds. This is close to circular, because
+  coupling's numerator is the model's own near-ground speed at the point. The run-to-run noise at D/16 is unmeasured,
+  so even the pattern's size cannot yet be called a section effect.
 
-## Part C, GNSS (described)
-Station rates relative to OK03 (radar 200 m mean / GNSS LOS, mm/yr): OK02 −7.1 / −0.4, OK04 −1.4 / +0.1,
-OK05 +0.6 / −3.6 (GNSS has gaps), OK06 −0.6 / −0.1, OK07 +0.6 / −3.4.
-- OK02 sits in a NW patch of about −4 mm/yr (8 km across) that the radar shows in winter-only dates too; its GNSS
-  does not share it. A radar error, mechanism not named.
-- OK07's GNSS drifts about 10 to 15 mm against OK03 over the first 2.7 years, while the radar ground around it,
-  out to 2 km, stays with OK03. Most likely the station's own monument, not the radar (not proven).
+## Q3, the level (described)
+| | R0 | R1 |
+| --- | --- | --- |
+| Level (model / measured) | ×1.254 | ×1.269 |
+| Roof speed over the array / upstream at 1.25 D | 1.089 | 1.091 |
+| −u'w' at D over the array / U_ref² | 0.0090 | 0.0098 |
+| Plan-mean w at D / U_app | +0.065 | +0.069 |
+| Upstream −u'w' / U_ref² at 0.5 D, D, 1.25 D | 0.0013, 0.0007, −0.0001 | 0.0022, 0.0034, 0.0002 |
 
-## Reading
-Method 2's misses on stable ground are (1) error bars about 3× too narrow, from temporally correlated noise, and
-(2) a spatially organised false-rate field (the NW patch), which no quality, geometry or seasonal word explains.
-Masking by quality would not fix it. Next: the method 1 (OPERA DISP-S1) control on the same box and dates, with
-the GNSS tie off, running on THE-COW. If method 1 shows the same patch, the cause is the ground (farmland), not the
-processing.
+The flow over the roofs runs about 9 % fast in both sections, and the level does not follow the section. One lead
+comes out of the ledger, not out of the compressor. The approach flow carries almost no turbulent shear stress above
+half the block height in R0, and a different profile of it in R1 (figure panel 1). That is not the near-constant stress
+layer of a developed boundary layer. The inflow, not the section, is the next thing to pin down.
 
-## Part D, the method 1 control (A3; data/insar_m1 at 71b575a; `python -m physics.insar_m1`)
-126 shared dates. Method 1 = OPERA DISP-S1, GNSS tie off, **no weather correction**; method 2 had HRRR.
-- **Method 1 is far noisier here.** Rate spread (robust sd) is 11.4 against 2.8 mm/yr. Cells 0.2 to 0.4 km apart
-  differ by 8.0 against 2.3. The typical change at 120 dates apart is 46 against 14 mm. Station pairs within
-  2 mm/yr: 3 of 15 against 4 of 15. Stated sigma medians are 1.41 and 0.66.
-- **D1, the corner:** by the fixed rule the verdict is "ground or common physics" (m1 NW − rest −7.4 mm/yr). But
-  method 1 carries a box-wide ramp and a patchwork of ±10 mm/yr tiles, and the two methods' tile maps correlate
-  only r = 0.20. The compressor's cross-method term `m2_tile` was not named (bootstrap 0.3). So method 1 does not
-  clearly reproduce method 2's corner; the rule's verdict is driven by method 1's own large-scale error.
-- **D5, compressor on method 1:** sd 14.5 → 9.75 (inputs east/north, annual amplitude, coherence). The winner is
-  `ramp` plus seasonal-amplitude and coherence shapes. Only one of them clears 60 % of resamples
-  (annual_amp > 6.3 · coherence, 0.7), and the null search's p is 0.1. Neighbour test: structure left in east × north.
-  Read: a long-wavelength (troposphere-like) ramp plus seasonal-ground leakage, which a weather correction and a
-  GNSS tie would target.
+## Next (WindSim, a new protocol before any run)
+1. Run-to-run noise at D/16: R0 repeated with a different averaging window (about 17 min GPU), so that dy and Δ
+   level can be judged.
+2. An inflow check against the AIJ Case C approach profiles (U and turbulence), and R1 rerun with its inflow
+   matched to R0's within 3 %.
+3. In the compressor: the roof terms stay in the library, but `roof_shear` needs a guard. A term that is named on pure
+   noise 2 times in 10 is too willing to stand in for `lp` and `ti_local` structure.
 
-## Reading after part D
-At this rural site our own processing (method 2) beats the product the reports use (method 1, untied and
-without weather correction) on every reading. V2's failure is not evidence that method 2 is worse than method 1.
-Pawnee is a hard site for both. Method 1 passes our CHI checks with a GNSS tie and reference-jump handling at
-urban places. So method 2's fair test is the same: CHI's checks, method 2's error bars widened for correlated
-noise (as in insar_pipeline PR #21 for PS), at a fresh place, written first.
-
-## Part E, the corner explained (A4; data 8e77a82; `python -m physics.insar_m2e`; results/physics/insar_m2_partE.json)
-- **E1:** the corner is already in the series before the weather and DEM-error corrections (NW − rest −3.7 before,
-  −3.2 final). The HRRR correction adds −0.4 and the DEM-error correction −0.2. Neither step makes it.
-- **E2, unwrapping:** every valid point is either in the reference's snaphu component in all 375 interferograms
-  (55,487 points, median rate −0.69 mm/yr) or apart from it in all 375 (5,007 points, median −3.79; 67 % of them in
-  the NW). Snaphu splits each interferogram into a median of 2 components. OK02's 200 m cells are apart in all 375;
-  the other five stations' cells are never apart. Among never-apart points the corner shrinks to −1.0 mm/yr
-  (rule: not surviving), so the corner is the **second component, joined to the reference by MintPy's bridging**.
-- **E3, compressor:** `√coherence · apart_late²` is named (bootstrap 0.8, inclusion ≈ 1, transfers 4/4, no
-  look-alike). One sample only, and the whole search's null p is 0.1, so it is a strong lead, not a part A "named".
-  E2's split is the cleaner evidence.
-
-## Reading after part E
-Method 2's failing rows (pair share, noise benchmark) come from one processing step: a separate unwrapping
-component bridged to the reference, carrying about −3 mm/yr of false rate, with OK02 inside it. Fix candidates, to be
-written as a plan before a fresh-site run:
-(1) label points outside the reference's component as bridged, carry a wider stated error for them, and keep them
-out of pass/fail statistics until tied ("a label, not a switch");
-(2) unwrap so the components join (snaphu connectivity / tiling settings, or a stack-wise unwrapper);
-(3) tie each component to its own stable anchor or GNSS station where one exists (circular for that station, so
-not graded on it).
+## Disclosures
+- The script ran search B and the Q2 search even though the synthetic check had failed. The protocol said to run
+  them and report them as untrustworthy, which is what is done here. Protocol 9's script had skipped B in that case.
+- Field values were first read by this script. The step 6 readings (WindSim 1705cba) had been seen before.
