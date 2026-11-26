@@ -16,13 +16,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from physlib import engine as E, guards as Q, terms as T            # noqa: E402
 
-CONST = ("ember_L", "gap_d", "slow_v", "held_v", "dry_m")
+CONST = ("ember_L", "gap_d", "slow_v", "held_v", "dry_m", "cac_c")
 SLOW_V = (0.5, 1.0, 2.0, 5.0, 10.0)
 A18 = "--a18" in sys.argv                                           # amendment A18: slow_edge on T2o only
 THIN = [1]                                                          # amendment A21: lattice thinning step (set in main)
+A25 = "--a25" in sys.argv                                           # amendment A25: Cruz crown-rate terms
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
-         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0), "heldx": ("heldx", 1.22)}
+         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0), "heldx": ("heldx", 1.22), "crownrate": ("crown_ln", None)}
 GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
@@ -86,6 +87,12 @@ def table(d, meta, which):
     if which in ("T2", "T2o") and "t12_fli_max" in d:           # A23
         cbh_, cbd_, fm_ = d["t12_cbh"][rows], d["t12_cbd"][rows], d["t12_fli_max"][rows]; ms_ = (10.0, 30.0, 60.0, 100.0)
         c.update(dry=np.stack([((cbd_ > 0) & (cbh_ > 0) & (fm_ > (cbh_ * (460.0 + 25.9 * m_) / 100.0) ** 1.5)).astype(float) for m_ in ms_], 1), dry_m=np.array(ms_))
+    if which in ("T2", "T2o") and A25 and "t12_cbd" in d:       # A25: Cruz et al. 2005 crown fire rate
+        cbd_, u_, m_ = d["t12_cbd"][rows], np.maximum(g("u10" + suf) * 3.6, 1.0), g("moist" + suf) * 100.0
+        ca = 11.02 * u_ ** 0.90 * np.maximum(cbd_, 1e-3) ** 0.19 * np.exp(-0.17 * m_); cac_ = ca * cbd_ / 3.0
+        cr = np.where(cac_ >= 1.0, ca, ca * np.exp(-cac_)); cc_ = (0.5, 1.0, 2.0)
+        c.update(crown_ln=np.where(cbd_ > 0, np.log(np.maximum(cr, 1e-3)), 0.0),
+                 cac=np.stack([((cbd_ > 0) & (cac_ >= v)).astype(float) for v in cc_], 1), cac_c=np.array(cc_))
     if which == "T3": c.update(gap=g("gap"), gap_d=np.array(meta["gap_d"]), mod=g("mod"))
     return c, y[rows], blk[rows]
 
@@ -121,7 +128,7 @@ def planted(ctx, y, blk, g, seed=0):
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
     names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
-             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown", "heldx": "held_after_event"}
+             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown", "heldx": "held_after_event", "crownrate": "cruz_crown"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}
