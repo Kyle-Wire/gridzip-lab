@@ -749,6 +749,44 @@ misses). Not seen: any crown-fire quantity at the missed points.
   under its own amendment. If not named, the miss is not a crown-initiation threshold and the next terms are the
   wind aloft over the fire and spotting distance.
 
+### A24 (26 Nov 2026, 10:05 AM ET): the held edge waits for the wind event to end (rule H3)
+
+Seen: the A22 model runs and their findings (H2 trims Tubbs's late overrun but cuts Marshall's first three hours and
+kills Camp at ignition), A22's term table (Tubbs's wrong ground is weak edge; Camp's is tall flame), and every E0
+run's hourly area. Also seen, before writing this, because it is the rule's input and uses no fire record: the end
+of the wind event from the HRRR wind each run is given (below). No H3 run, no A24 table.
+- Idea: an edge weak enough to be worked directly is held only once the wind-driven run is over. During the run
+  nobody holds anything (Marshall's grass run, Camp's first morning); afterwards crews work the weak edges, which
+  is what Tubbs's late overrun looks like. "Over" comes from forecast-available weather, never from the fire.
+- The cut (FireSim `scripts/wind_event.py`): A17's rule applied to the HRRR 20-ft wind the run uses (as analysed,
+  gust share 0), averaged over the run's box each hour; its trailing 3-hour running mean; the cut is the first hour
+  after that mean's peak from which it stays under half the peak to the end of the window, else the window's end.
+  Computed now: Marshall hour 6 of 14 (peak 12.5 m/s at hour 2); Tubbs hour 17 of 44 (peak 7.3 at hour 4); East
+  Troublesome hour 27 of 43 (peak 8.5 at hour 0, from the start outline; a second event peaks at hour 22); Camp
+  never (peak 6.6 at hour 4, still 3.6 at hour 23), so the cut is the window's end.
+- Rule H3(L): A22's H2(L) in hours from the cut on, and never in the ignition hour. Nothing is fitted; L = 1.22 m
+  and 2.44 m as in A22.
+- Compressor first. The error tables are rebuilt from the same E0 runs (`*_E0_a24.npz`), adding `u10_marr` (the
+  HRRR box 10 m wind in the hour the model reached the point), `u700` (`_to`, `_all`: 700 hPa wind, for A25) and
+  the cut hour in the table's meta. Term `held_after_event(L)`: 1 where `flame_arr` is under L and the model
+  reached the point in or after the cut hour. On T2o at A21's thinning, four fires, leave one out, planted check
+  first. Camp's column is all zero by construction.
+- Test in the model: H3(1.22) and H3(2.44) on Marshall, Tubbs and East Troublesome, E0 priors, HRRR as analysed,
+  3 seeds (Tubbs 2), the same reports as A22. Camp is not run: with no cut in its window H3 is E0 there, and its
+  E0 scores stand for H3 in the rule.
+- Rule, fixed now: A22's rule unchanged (Camp counted with its E0 scores). H3(L) is kept as a candidate only if,
+  against E0, the area ratio at the last mapped time moves toward 1 on each of Camp, Tubbs and Marshall, the
+  first mapped time's overlap (Tubbs: the 5.5 h outside-share) is not worse by more than 0.02, and A8 improves on
+  at least two of the three with none worse by more than 0.1. Camp cannot move, so H3 is not kept under this rule
+  as written; that is said now, and the runs are read and reported against it all the same. A rule that also
+  moves Camp needs the opposite fault fixed there (A25's crown rate, or a stopping rule for tall flame) and is a
+  later amendment.
+- Predicted: on Marshall, H3 leaves the first 6 hours as E0 (overlap 0.461 at 2.95 h unchanged) and ends with a
+  ratio between 1.0 and 1.5 (E0 is at 24 km² at the cut, against 25.3 mapped). On Tubbs, E0 already has 176 km²
+  at the cut, above every mapped area (108 to 125), so H3 cannot bring the end ratio under 1.4; it lands between
+  1.4 and 1.7, with the 5.5 to 16.8 h passes unchanged. East Troublesome changes little before 27 h and is reported
+  only. `held_after_event(1.22)` is named on T2o with a positive sign, carried by Tubbs.
+
 ### A25 (26 Nov 2026, 10:40 AM ET): the crown fire rate, as a term first and then as a model setting
 
 Seen: A23's class table (East Troublesome's missed share is about 0.8 even in cells the model already crowns, so
