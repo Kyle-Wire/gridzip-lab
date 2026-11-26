@@ -748,3 +748,42 @@ misses). Not seen: any crown-fire quantity at the missed points.
   dead-canopy map (the Forest Service's public insect and disease survey) feeding foliar moisture, proposed
   under its own amendment. If not named, the miss is not a crown-initiation threshold and the next terms are the
   wind aloft over the fire and spotting distance.
+
+### A25 (26 Nov 2026, 10:40 AM ET): the crown fire rate, as a term first and then as a model setting
+
+Seen: A23's class table (East Troublesome's missed share is about 0.8 even in cells the model already crowns, so
+the miss is in how fast crown fire runs once it starts, not whether it starts); East Troublesome's E0 weather as
+the runs used it (1-h dead fuel 3.9 to 6 % over the first 16 hours, humidity 15 to 28 %); a preview of the Cruz
+rate below on the A23 tables (median active rate with the window-mean wind and the tables' moisture: Camp 60,
+Tubbs 34, Marshall 87, East Troublesome 21 m/min). A24 (the device's run-phase held edge) is separate and not read.
+- Source (opened 26 Nov): Cruz, Alexander and Wakimoto 2005, "Development and testing of models for predicting
+  crown fire rate of spread in conifer forest stands", Can. J. For. Res. 35: 1626-1639. Active rate eq. 3,
+  CROS_A = 11.02 U10^0.90 CBD^0.19 exp(-0.17 EFFM) (m/min; U10 the 10 m open wind in km/h, CBD kg/m3, EFFM the
+  1-h dead fuel moisture in %); criterion for active crowning eqs. 1-2, CAC = CROS_A / (3.0 / CBD); passive rate
+  eq. 4, CROS_P = CROS_A exp(-CAC). Fitted on 5 to 32 km/h, CBD 0.12 to 0.48, EFFM 7 to 12 %, level ground;
+  "not applicable for zero wind speed". The PDF's equation text is garbled in extraction; the form is checked
+  against the paper's own worked numbers (137 m/min at 50 km/h, CBD 0.2, EFFM 4; within 3 %). The model now
+  uses Rothermel 1991 (3.34 x fuel model 10 at 40 % of the open wind) with Scott and Reinhardt's crown fraction.
+- Part 1, compressor first. Term `cruz_crown`: b · [canopy] · ln(CROS / 1 m/min), CROS = CROS_A where CAC >= 1
+  and CROS_P otherwise, from each point's own window-mean HRRR 10 m wind, its LANDFIRE CBD, and the fire's
+  window-mean 1-h moisture from the run's weather (not the tables' `moist`, which averages the three dead
+  classes). Term `cruz_active` (family over CAC 0.5, 1, 2): [CAC >= c]. Group "crownrate". T2 and T2o, A21's
+  thinning, four fires, leave one out, planted check first.
+- Predicted: not named on T2. In the window means East Troublesome has the lowest Cruz rate of the four, so the
+  term cannot carry its miss; if anything it is named with a positive sign on T2o through Camp (fast crown
+  ground the model overran). That would say the formula's inputs, not the formula, are where East Troublesome's
+  miss lives.
+- Part 2, the model setting C1 (pre-registered now; it runs whatever part 1 says, because it is a published
+  alternative and not a fit): in each hour and canopy cell the crown rate is Cruz's instead of Rothermel 1991.
+  Crown initiation stays Van Wagner's; once a cell torches, it is active at CROS_A when CAC >= 1 and passive at
+  the larger of the surface rate and CROS_P otherwise. Intensity keeps the Scott and Reinhardt canopy fraction
+  (cfb) for its canopy load, so flame and ember behaviour change only through the rate. Inputs out of Cruz's
+  fitted range are run as they are and counted (share of torching cell-hours out of range), a label, not a switch.
+  Runs: the four fires, E0 priors, HRRR as analysed, 3 seeds (Tubbs 2), CPU on THE-COW after InSAR and wind.
+- Rule, fixed now: C1 is kept as a candidate only if, against E0, East Troublesome's area ratio moves toward 1
+  at every mapped time and its A8 improves, and on Camp, Tubbs and Marshall A8 is not worse by more than 0.1 and
+  the area ratio at the last mapped time does not move away from 1 by more than 0.1. If East Troublesome passes
+  and the others fail, C1 is not kept alone, and is re-tested only together with a stopping rule that passed its
+  own test (A24 or later), under a new amendment.
+- Predicted: East Troublesome's ratio at 12.3 h rises from 0.29 to between 0.4 and 0.7; Camp overruns more
+  (last ratio above 1.33), so C1 alone fails the rule.
