@@ -571,3 +571,39 @@ crown-initiation threshold, and lowering foliar moisture in the model would not 
 the next terms are the wind aloft over the fire and spotting distance. On Camp the cells that crown at 100 %
 are overrun 0.48 of the time (missed 0.13), the same picture as the flame-length table above: the model's
 strong fire in forest goes too far there.
+
+## A22 (model runs): the held-edge rule H2 is not kept (26 Nov 2026)
+
+Runs in FireSim `results/*/..._E0_H2_122*` and `..._E0_H2_244*` (M3, E0 priors, HRRR as analysed, 3 seeds, Tubbs 2).
+
+| | E0 | H2(1.22 m) | H2(2.44 m) |
+|---|---|---|---|
+| Area ratio at last mapped time: Camp (20.08 h) | 1.33 | 0.54 | 0.00 |
+| Tubbs (42.98 h) | 1.86 | 1.03 | 0.69 |
+| Marshall (end state) | 2.35 | 1.35 | 0.56 |
+| East Troublesome (36.83 h) | 0.36 | 0.20 | 0.18 |
+| First mapped time: Camp overlap (3.35 h) | 0.106 | 0.011 | 0 |
+| Marshall overlap (2.95 h) | 0.461 | 0.385 | 0.375 |
+| Tubbs outside-share (5.5 h) | 0.18 | 0.13 / 0.16 | 0.18 / 0.15 |
+| A8: Camp | 3.02 | 4.35 | 5.92 |
+| Tubbs | 4.08 | 2.75 | 2.79 |
+| Marshall | 2.45 | 1.94 | 2.07 |
+| East Troublesome | 3.49 | 3.66 | 3.53 |
+
+By the rule fixed in A22, **neither setting is kept**.
+- H2(1.22) fails three ways: Camp's ratio moves away from 1 (1.33 to 0.54), the first-time overlap drops by more
+  than 0.02 on Marshall (0.076) and Camp (0.095), and Camp's A8 is worse by 1.33.
+- H2(2.44) never lets Camp start: the head-fire flame at the ignition point is under 2.44 m in the first hour
+  and the rule is on from minute 0, so all three seeds stay at one 30 m cell. Under 1.22 one Camp seed goes out
+  at ignition and two escape by embers (263 and 333 km²).
+- The prediction was wrong in size: H2(1.22) trimmed Tubbs and Marshall more than predicted (1.03 and 1.35, not
+  above 1.4), and both settings cut Camp hard instead of doing little.
+
+What it does show: on Tubbs, H2(1.22) lands the area at 123, 125 and 129 km² against 108, 122 and 125 mapped,
+with overlap up at every outline and modelled houses destroyed 5,674 against 5,185 observed (E0: 11,619). On
+Marshall the end state improves (overlap 0.27 to 0.33) but the first three hours get worse, when the real fire
+was a wind-driven grass run that nobody held. This agrees with the term result above: Tubbs's overrun is weak
+edge late in the fire; Camp's and Marshall's early runs are not. A rule that holds weak edges from the first
+minute is the wrong shape. The lead for a new amendment is a rule that is off while the fire is in its
+wind-driven run and comes on only afterwards (and never at the ignition), with "afterwards" defined from
+forecast-available weather, not from the fire record.
