@@ -38,4 +38,26 @@ INSAR_RATE = [
     _t("annual_amp", "b · annual amplitude", "seasonal ground (soil moisture) leaks into the rate", "annual_amp"),
 ]
 
+# Fading-signal term (PROTOCOL-13 A5): ctx key "sawtooth" = the point's amplitude on the scene's per-ministack ramp
+# pattern, fitted after the point's own [1, t, sin, cos] fit (see sawtooth_amplitude). Not in INSAR_RATE by default,
+# because it needs the series.
+SAWTOOTH = _t("sawtooth", "b · a_saw,  a_saw = point's amplitude on the scene ministack-ramp pattern",
+              "fading-signal bias of phase-linked short-baseline stacks: a rate bias that scales with the sawtooth", "sawtooth", "fading")
+
+
+def sawtooth_amplitude(Y, t, ministack, ref_rows=None):
+    """Y: points x dates (mm), t: years, ministack: (dates,) ints. Returns (amplitude per point, pattern P)."""
+    X = np.column_stack([np.ones_like(t), t, np.sin(2 * np.pi * t), np.cos(2 * np.pi * t)])
+    beta, *_ = np.linalg.lstsq(X, Y.T, rcond=None); R = Y.T - X @ beta            # dates x points
+    med = np.median(R if ref_rows is None else R[:, ref_rows], axis=1)
+    P = np.zeros_like(t)
+    for k in np.unique(ministack):
+        m = ministack == k
+        if m.sum() < 2: continue
+        A = np.column_stack([np.ones(m.sum()), t[m]]); b, *_ = np.linalg.lstsq(A, med[m], rcond=None)
+        P[m] = t[m] * b[1] - (t[m] * b[1]).mean()
+    P = P - X @ np.linalg.lstsq(X, P, rcond=None)[0]
+    amp = (P @ R) / (P @ P)
+    return amp, P
+
 

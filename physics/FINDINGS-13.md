@@ -116,3 +116,16 @@ counts every cell by the protocol); bias and calibration pass. The fix does what
 on two rows that are not bridged ground. Remaining pairs involve OK04, OK05 (GPS on 57 of 127 dates) and OK07.
 A first look (not a test) at the station residual series shows per-ministack offsets that move together across
 stations (e.g. batch 9 about -6 mm, batch 12 about +5 to +7 mm), so the ministack joins are the next suspect.
+
+## Part H (A5), a fading (sawtooth) term on what is left (26 Nov; results/physics/insar_m2_partH.json)
+- H0 synthetic: null names nothing 5/5; a planted sawtooth rate bias is named 5/5. The test works.
+- H1: **not named.** The fading term enters both samples (as `sawtooth`, and in grammar shapes with ref_dist), but
+  its bootstrap share is 0.2 to 0.4 (rule 0.6); the search saves 0.053 and 0.045 bits per reading against 0.028 and
+  0.024 for shuffled data (p = 0.1 both); sd 2.75 → 2.50 and 2.63 → 2.50 mm/yr. Spatial structure is still left
+  (neighbour p = 0.01) and no quality, geometry or fading word names it.
+- H2 (5 stations, described): station sawtooth against residual-rate deviation, r = −0.35. OK04's 200 m circle has
+  only 4 valid non-bridged points.
+- Reading: the fix removed the one cause we could name (bridged ground). What is left on V2 is spatially organised,
+  modest (about 2.5 mm/yr spread) and not named by any term we have; the pair failures hang on OK04/OK05/OK07, one with
+  a short GNSS record and one earlier suspected of monument drift. V2 is spent data and is not tuned on further;
+  Houston (fresh, with real bridged ground) is the test that counts.

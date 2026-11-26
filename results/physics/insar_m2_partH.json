@@ -1,0 +1,676 @@
+{
+ "pattern": {
+  "P_mm": [
+   -2.232246705135103,
+   -1.874083518152166,
+   -1.5091389913841993,
+   -1.137251716791817,
+   -0.7583341834689846,
+   -0.3723737090905167,
+   0.020567425099947356,
+   0.8267724983886062,
+   1.2395469620592248,
+   1.6583283445591823,
+   3.0908152534459132,
+   2.6765036268097844,
+   2.2667904085173594,
+   1.4588177300110905,
+   0.6618258251105493,
+   -0.12972296307532613,
+   -0.9215974162989697,
+   -1.7195524879694843,
+   -2.5290849371251323,
+   -3.3551999258191003,
+   -0.13379945375486502,
+   0.11000210068502247,
+   0.32712324905656875,
+   0.5163143421660306,
+   0.6775116929235432,
+   0.8118402806154277,
+   0.9215659821909302,
+   1.0099993589118141,
+   1.0813550837626442,
+   1.1931082601044136,
+   -2.775557319167316,
+   -2.287635685117871,
+   -1.7893049284025027,
+   -1.27543331824684,
+   -0.7415490174237702,
+   -0.1840299647809398,
+   0.3997423253047242,
+   1.0112715771563578,
+   1.6508829028650598,
+   2.31770899742571,
+   2.7471009437169442,
+   1.778886518639243,
+   1.3170836066446783,
+   0.863189180401078,
+   0.411505776220516,
+   -0.04375795369481472,
+   -0.5082413298516643,
+   -0.9871921894263237,
+   -1.4852440533357394,
+   -2.006219378319777,
+   -8.244850258110262,
+   -6.241098521907729,
+   -4.265459938722128,
+   -2.317326646048181,
+   -0.3949228555781691,
+   1.5046197435229733,
+   3.3851401908038845,
+   5.251285241765787,
+   7.108312057979729,
+   8.961864978226581,
+   0.4168482744863792,
+   0.16325260582889867,
+   -0.07697844502392048,
+   -0.29905912005889834,
+   -0.4989743599846801,
+   -0.6736502911183484,
+   -0.8210847477802251,
+   -0.9404322879732139,
+   -1.0320400924227342,
+   -1.0974332226372818,
+   -3.927251143880881,
+   -3.2359821155289197,
+   -1.8122319761507268,
+   -1.0904725220288605,
+   0.34415791845477417,
+   1.0458452500869266,
+   1.7303698385079647,
+   2.3935322075796215,
+   3.032039960736716,
+   3.6436475822700443,
+   3.1446033714041723,
+   2.5543410732891574,
+   1.937432374091272,
+   1.2962799550592106,
+   0.6343159308856945,
+   -0.04414388426703286,
+   -0.7340832342651449,
+   -1.4299984205702225,
+   -2.126131999517583,
+   -2.816717254084704,
+   -4.514290164344109,
+   -3.712919821057847,
+   -2.8910340264197862,
+   -2.0451285733579927,
+   -1.1727191741802572,
+   -0.2724469480509689,
+   0.6558638784007916,
+   1.611198507416796,
+   2.5913946603104208,
+   3.5932343918420337,
+   1.4966785150140014,
+   1.2046037814134034,
+   0.9197388497231723,
+   0.6363611084085689,
+   0.34868479706493505,
+   0.051106680567537754,
+   -0.2615560271414682,
+   -0.593845592315704,
+   -0.9494708883295411,
+   -1.3311499100151458,
+   -3.0485507844197226,
+   -2.6040455992434755,
+   -1.7361106633815981,
+   -0.8955218367713444,
+   -0.08036165163514253,
+   0.7123671072257086,
+   1.4866141350981215,
+   2.2471138959477317,
+   2.9991845882716306,
+   3.7485023244968616,
+   -3.208983278830696,
+   -2.4098379978306563,
+   -1.591994467519627,
+   -0.7515467096886402,
+   0.11445143632074772,
+   1.0078612141543992,
+   1.9293799185777665
+  ],
+  "sawtooth_median": 1.0654037006375117,
+  "sawtooth_rsd": 0.46264732842653894,
+  "corr_rate": -0.09140997964871148
+ },
+ "H2": {
+  "stations": {
+   "OK03": {
+    "n_dates": 127,
+    "resid_rate": -9.65553392580487,
+    "sawtooth_200m": 0.8676549611338407,
+    "n_pts": 81,
+    "resid_rate_minus_mean": -1.5095372567413001
+   },
+   "OK04": {
+    "n_dates": 127,
+    "resid_rate": -12.070799034687962,
+    "sawtooth_200m": 1.7654847723215894,
+    "n_pts": 4,
+    "resid_rate_minus_mean": -3.9248023656243927
+   },
+   "OK05": {
+    "n_dates": 57,
+    "resid_rate": -3.8990499430011036,
+    "sawtooth_200m": 1.4400596285788927,
+    "n_pts": 57,
+    "resid_rate_minus_mean": 4.246946726062466
+   },
+   "OK06": {
+    "n_dates": 125,
+    "resid_rate": -9.660061626479749,
+    "sawtooth_200m": 0.9325195465890642,
+    "n_pts": 47,
+    "resid_rate_minus_mean": -1.5140649574161795
+   },
+   "OK07": {
+    "n_dates": 127,
+    "resid_rate": -5.444538815344157,
+    "sawtooth_200m": 0.3872893887723518,
+    "n_pts": 52,
+    "resid_rate_minus_mean": 2.701457853719412
+   }
+  },
+  "corr": -0.3453425765234891
+ },
+ "H0": {
+  "null": [
+   [],
+   [],
+   [],
+   [],
+   []
+  ],
+  "plant": [
+   [
+    "sawtooth"
+   ],
+   [
+    "sawtooth"
+   ],
+   [
+    "sawtooth"
+   ],
+   [
+    "sawtooth"
+   ],
+   [
+    "sawtooth"
+   ]
+  ],
+  "pass_null": true,
+  "pass_plant": true
+ },
+ "H1": {
+  "a": {
+   "winner": [
+    "coherence",
+    "annual_amp",
+    "g:max(0, east\u2212-7.06) \u00b7 coherence",
+    "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist"
+   ],
+   "sd_before": 2.75,
+   "sd_after": 2.5,
+   "bits_saved_per_reading": 0.05349201311041263,
+   "transfers": false,
+   "holdout": [
+    {
+     "fold": "west -> east",
+     "formula_bpr": 8.185705893571376,
+     "one_correction_bpr": 8.143029894126133,
+     "transfers": false
+    },
+    {
+     "fold": "east -> west",
+     "formula_bpr": 8.028567291744567,
+     "one_correction_bpr": 8.038730999795126,
+     "transfers": true
+    },
+    {
+     "fold": "south -> north",
+     "formula_bpr": 7.940605709134178,
+     "one_correction_bpr": 8.01067090120965,
+     "transfers": true
+    },
+    {
+     "fold": "north -> south",
+     "formula_bpr": 7.972571913840693,
+     "one_correction_bpr": 8.033516703870106,
+     "transfers": true
+    }
+   ],
+   "inclusion": {
+    "quality": 0.8998394947378854,
+    "g:max(0, east\u2212-7.06) \u00b7 coherence": 0.8945442998559571,
+    "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist": 0.8906772759199466,
+    "annual_amp": 0.7666107127610592,
+    "g:[incidence>41.3] \u00b7 east": 0.10544445036090622,
+    "g:ln coherence \u00b7 \u221aannual_amp": 0.09972600361081435,
+    "g:sawtooth\u00b2": 0.06567258913311089,
+    "fading": 0.033701083505184005,
+    "g:[incidence>41.3]": 0.03326756783380213,
+    "g:[east>-7.06]": 0.028733302101345136,
+    "g:\u221aannual_amp": 0.026902768237586104,
+    "g:e^(\u2212coherence/0.714) \u00b7 annual_amp": 0.019613025193504788,
+    "incidence": 0.01804653001607798,
+    "g:e^(\u2212coherence/0.762) \u00b7 annual_amp": 0.017266316182424968,
+    "g:e^(\u2212coherence/0.806) \u00b7 annual_amp": 0.016483876441212963
+   },
+   "bootstrap": {
+    "B": 10,
+    "selected": {
+     "g:[incidence>41.3] \u00b7 east": 0.4,
+     "g:1/annual_amp \u00b7 sawtooth\u00b2": 0.2,
+     "g:ln coherence \u00b7 \u221aannual_amp": 0.2,
+     "fading": 0.2,
+     "g:max(0, east\u2212-0.094) \u00b7 sawtooth": 0.2,
+     "quality": 0.2,
+     "g:\u221acoherence \u00b7 incidence\u00b2": 0.1,
+     "g:[north>-0.989] \u00b7 east": 0.1,
+     "g:coherence \u00b7 incidence\u00b2": 0.1,
+     "g:max(0, east\u2212-7.06) \u00b7 sawtooth": 0.1,
+     "g:max(0, east\u2212-7.06)": 0.1,
+     "g:e^(\u2212closure_amb/1.79) \u00b7 jumps": 0.1,
+     "g:ln coherence \u00b7 ln annual_amp": 0.1,
+     "incidence": 0.1,
+     "g:max(0, sawtooth\u22121.07) \u00b7 closure_amb": 0.1,
+     "g:[jumps>13] \u00b7 height": 0.1,
+     "g:max(0, closure_amb\u22121.39) \u00b7 north": 0.1,
+     "g:\u221acoherence \u00b7 incidence": 0.1,
+     "g:1/coherence \u00b7 1/incidence": 0.1,
+     "g:east \u00b7 north\u00b2": 0.1,
+     "g:e^(\u2212ref_dist/8.01) \u00b7 east": 0.1,
+     "g:max(0, incidence\u221241.3) \u00b7 coherence": 0.1,
+     "g:max(0, jumps\u221229) \u00b7 sawtooth": 0.1,
+     "g:coherence\u00b2 \u00b7 incidence\u00b2": 0.1
+    },
+    "coef_90": {
+     "coherence": [
+      5.605026897514932,
+      9.88785228623466
+     ],
+     "annual_amp": [
+      -0.19212681539141932,
+      -0.07029187061335294
+     ],
+     "g:max(0, east\u2212-7.06) \u00b7 coherence": [
+      0.8690738669031005,
+      1.1364800103476915
+     ],
+     "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist": [
+      0.5769442863326677,
+      0.8215327617944747
+     ]
+    }
+   },
+   "null": {
+    "max": 0.027892699862265242,
+    "mean": 0.02655661265216959,
+    "p": 0.1
+   },
+   "neighbour": {
+    "gain": 0.011029070659962392,
+    "where": "east \u00d7 north",
+    "null_95": -0.0673861888415271,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "verdict": [
+    [
+     "coherence",
+     "named; no look-alike within 10:1"
+    ],
+    [
+     "annual_amp",
+     "named, but can't rule out g:\u221aannual_amp (+1.9 bits)"
+    ],
+    [
+     "g:max(0, east\u2212-7.06) \u00b7 coherence",
+     "named, but can't rule out incidence (+-6.3 bits), g:max(0, east\u2212-7.06) (+-4.8 bits), g:max(0, east\u2212-7.06) \u00b7 incidence (+-1.0 bits)"
+    ],
+    [
+     "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist",
+     "named, but can't rule out sawtooth (+1.5 bits), g:ref_dist \u00b7 sawtooth\u00b2 (+2.3 bits)"
+    ]
+   ],
+   "ladder": [
+    {
+     "terms": [],
+     "structure_bits": 7.700439718141093,
+     "param_bits": 26.0,
+     "residual_bits": 24016.100591708746,
+     "total_bits": 24049.801031426887,
+     "bits_per_reading": 8.016600343808962,
+     "n": 3000,
+     "sd": 2.75,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.865690326372734
+     },
+     "alpha": {},
+     "added": "one correction"
+    },
+    {
+     "terms": [
+      "g:max(0, east\u2212-7.06) \u00b7 coherence"
+     ],
+     "structure_bits": 25.74072943916681,
+     "param_bits": 36.0,
+     "residual_bits": 23906.946067515317,
+     "total_bits": 23968.686796954484,
+     "bits_per_reading": 7.989562265651495,
+     "n": 3000,
+     "sd": 2.625,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.8656903263727339,
+      "g:max(0, east\u2212-7.06) \u00b7 coherence": 0.6725634920229185
+     },
+     "alpha": {},
+     "added": "g:max(0, east\u2212-7.06) \u00b7 coherence"
+    },
+    {
+     "terms": [
+      "g:max(0, east\u2212-7.06) \u00b7 coherence",
+      "coherence"
+     ],
+     "structure_bits": 34.141608875448995,
+     "param_bits": 40.0,
+     "residual_bits": 23830.242419004826,
+     "total_bits": 23904.384027880275,
+     "bits_per_reading": 7.968128009293425,
+     "n": 3000,
+     "sd": 2.625,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.865690326372734,
+      "g:max(0, east\u2212-7.06) \u00b7 coherence": 0.663052718191591,
+      "coherence": 8.327264565010548
+     },
+     "alpha": {},
+     "added": "coherence"
+    },
+    {
+     "terms": [
+      "g:max(0, east\u2212-7.06) \u00b7 coherence",
+      "coherence",
+      "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist"
+     ],
+     "structure_bits": 54.18189859647471,
+     "param_bits": 42.0,
+     "residual_bits": 23802.339605254463,
+     "total_bits": 23898.521503850938,
+     "bits_per_reading": 7.9661738346169795,
+     "n": 3000,
+     "sd": 2.625,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.865690326372734,
+      "g:max(0, east\u2212-7.06) \u00b7 coherence": 1.0175620747807752,
+      "coherence": 7.644843801928117,
+      "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist": 0.5091785238704726
+     },
+     "alpha": {},
+     "added": "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist"
+    },
+    {
+     "terms": [
+      "g:max(0, east\u2212-7.06) \u00b7 coherence",
+      "coherence",
+      "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist",
+      "annual_amp"
+     ],
+     "structure_bits": 62.58277803275689,
+     "param_bits": 60.0,
+     "residual_bits": 23768.04927389307,
+     "total_bits": 23890.632051925826,
+     "bits_per_reading": 7.9635440173086085,
+     "n": 3000,
+     "sd": 2.5,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.865690326372734,
+      "g:max(0, east\u2212-7.06) \u00b7 coherence": 1.0762920975899954,
+      "coherence": 7.130753399205505,
+      "g:max(0, sawtooth\u22120.754) \u00b7 ref_dist": 0.7392728671809753,
+      "annual_amp": -0.15871062947673367
+     },
+     "alpha": {},
+     "added": "annual_amp"
+    }
+   ],
+   "coefs": null,
+   "seconds": 185.49200415611267,
+   "n": 3000
+  },
+  "b": {
+   "winner": [
+    "sawtooth",
+    "g:max(0, incidence\u221241.8)",
+    "g:ln coherence \u00b7 \u221aannual_amp"
+   ],
+   "sd_before": 2.625,
+   "sd_after": 2.5,
+   "bits_saved_per_reading": 0.045450039288040145,
+   "transfers": false,
+   "holdout": [
+    {
+     "fold": "west -> east",
+     "formula_bpr": 8.96461825212642,
+     "one_correction_bpr": 8.059254066128078,
+     "transfers": false
+    },
+    {
+     "fold": "east -> west",
+     "formula_bpr": 7.900416990490955,
+     "one_correction_bpr": 7.970283163389652,
+     "transfers": true
+    },
+    {
+     "fold": "south -> north",
+     "formula_bpr": 7.891583662439881,
+     "one_correction_bpr": 7.9348347914944934,
+     "transfers": true
+    },
+    {
+     "fold": "north -> south",
+     "formula_bpr": 7.906804200969149,
+     "one_correction_bpr": 7.9610706740645645,
+     "transfers": true
+    }
+   ],
+   "inclusion": {
+    "g:ln coherence \u00b7 \u221aannual_amp": 0.9999997559837093,
+    "g:max(0, incidence\u221241.8)": 0.9995810734582453,
+    "fading": 0.9994438775564303,
+    "g:[jumps>13]": 0.6519551365844697,
+    "g:max(0, jumps\u221213) \u00b7 north": 0.20320633865563356,
+    "g:[jumps>13] \u00b7 amp_disp": 0.17085646534087093,
+    "g:[jumps>13] \u00b7 coherence": 0.11292559905586637,
+    "g:jumps\u00b2 \u00b7 north": 0.059107808530245824,
+    "g:[jumps>13] \u00b7 incidence": 0.05735568122551055,
+    "g:max(0, north\u2212-7.23) \u00b7 jumps": 0.04281338588544498,
+    "g:jumps \u00b7 north": 0.04015037407087576,
+    "g:[jumps>23] \u00b7 north": 0.030315077805587738,
+    "g:[ref_dist>15] \u00b7 north": 0.027524877354964353,
+    "g:max(0, jumps\u221223) \u00b7 closure_amb": 0.027075781743019237,
+    "g:[ref_dist>8.43] \u00b7 north": 0.026763805656955027,
+    "g:max(0, jumps\u221229)": 0.02066814596503887,
+    "g:[jumps>13] \u00b7 north": 0.019647621889394225,
+    "g:max(0, jumps\u221223) \u00b7 north": 0.014153339056884146
+   },
+   "bootstrap": {
+    "B": 10,
+    "selected": {
+     "g:[incidence>41.4] \u00b7 east": 0.4,
+     "fading": 0.4,
+     "g:ln coherence \u00b7 \u221aannual_amp": 0.3,
+     "g:[annual_amp>3.17] \u00b7 jumps": 0.2,
+     "quality": 0.2,
+     "g:[ref_dist>20.1] \u00b7 sawtooth": 0.2,
+     "g:ln coherence \u00b7 ln annual_amp": 0.2,
+     "g:\u221acoherence \u00b7 incidence\u00b2": 0.1,
+     "g:1/annual_amp \u00b7 sawtooth\u00b2": 0.1,
+     "g:[height>-11.2] \u00b7 sawtooth": 0.1,
+     "g:[jumps>29] \u00b7 closure_amb": 0.1,
+     "g:coherence \u00b7 incidence": 0.1,
+     "g:max(0, incidence\u221241.8) \u00b7 sawtooth": 0.1,
+     "g:[jumps>13] \u00b7 annual_amp": 0.1,
+     "g:sawtooth\u00b2": 0.1,
+     "g:max(0, incidence\u221241.8)": 0.1,
+     "g:[ref_dist>20.1]": 0.1,
+     "g:[ref_dist>8.43] \u00b7 incidence": 0.1,
+     "g:max(0, east\u2212-6.61) \u00b7 coherence": 0.1,
+     "g:[jumps>13] \u00b7 coherence": 0.1,
+     "g:max(0, east\u2212-6.61) \u00b7 sawtooth": 0.1,
+     "g:coherence\u00b2 \u00b7 incidence\u00b2": 0.1,
+     "g:[jumps>29] \u00b7 sawtooth": 0.1,
+     "g:jumps \u00b7 \u221aannual_amp": 0.1,
+     "g:[ref_dist>20.1] \u00b7 closure_amb": 0.1,
+     "g:[north>-0.774] \u00b7 east": 0.1,
+     "g:e^(\u2212jumps/29) \u00b7 sawtooth": 0.1,
+     "g:max(0, height\u221212.5) \u00b7 north": 0.1,
+     "g:max(0, sawtooth\u22121.41)": 0.1,
+     "g:[incidence>41.8] \u00b7 annual_amp": 0.1,
+     "g:e^(\u2212ref_dist/8.43) \u00b7 sawtooth": 0.1,
+     "g:max(0, incidence\u221242.2)": 0.1,
+     "g:max(0, jumps\u221223)": 0.1
+    },
+    "coef_90": {
+     "sawtooth": [
+      0.8685686256723517,
+      1.3995501005478919
+     ],
+     "g:max(0, incidence\u221241.8)": [
+      0.6893671551476503,
+      1.0137214020938103
+     ],
+     "g:ln coherence \u00b7 \u221aannual_amp": [
+      0.6330790466531133,
+      0.776194445262686
+     ]
+    }
+   },
+   "null": {
+    "max": 0.024135369556966907,
+    "mean": 0.02242400523651937,
+    "p": 0.1
+   },
+   "neighbour": {
+    "gain": 0.02646025117563633,
+    "where": "east \u00d7 north",
+    "null_95": -0.04833106549871059,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "verdict": [
+    [
+     "sawtooth",
+     "named; no look-alike within 10:1"
+    ],
+    [
+     "g:max(0, incidence\u221241.8)",
+     "named; no look-alike within 10:1"
+    ],
+    [
+     "g:ln coherence \u00b7 \u221aannual_amp",
+     "named; no look-alike within 10:1"
+    ]
+   ],
+   "ladder": [
+    {
+     "terms": [],
+     "structure_bits": 7.700439718141093,
+     "param_bits": 26.0,
+     "residual_bits": 23797.654455196956,
+     "total_bits": 23831.354894915097,
+     "bits_per_reading": 7.943784964971699,
+     "n": 3000,
+     "sd": 2.625,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.8562792507861934
+     },
+     "alpha": {},
+     "added": "one correction"
+    },
+    {
+     "terms": [
+      "g:ln coherence \u00b7 \u221aannual_amp"
+     ],
+     "structure_bits": 27.21466062749922,
+     "param_bits": 30.0,
+     "residual_bits": 23697.50692634694,
+     "total_bits": 23754.72158697444,
+     "bits_per_reading": 7.91824052899148,
+     "n": 3000,
+     "sd": 2.5,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.8562792507861934,
+      "g:ln coherence \u00b7 \u221aannual_amp": 0.6508646104141332
+     },
+     "alpha": {},
+     "added": "g:ln coherence \u00b7 \u221aannual_amp"
+    },
+    {
+     "terms": [
+      "g:ln coherence \u00b7 \u221aannual_amp",
+      "g:max(0, incidence\u221241.8)"
+     ],
+     "structure_bits": 41.08502534708262,
+     "param_bits": 38.0,
+     "residual_bits": 23629.233559937005,
+     "total_bits": 23708.318585284087,
+     "bits_per_reading": 7.902772861761362,
+     "n": 3000,
+     "sd": 2.5,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.8562792507861934,
+      "g:ln coherence \u00b7 \u221aannual_amp": 0.6030781117521601,
+      "g:max(0, incidence\u221241.8)": 0.4868458214390666
+     },
+     "alpha": {},
+     "added": "g:max(0, incidence\u221241.8)"
+    },
+    {
+     "terms": [
+      "g:ln coherence \u00b7 \u221aannual_amp",
+      "g:max(0, incidence\u221241.8)",
+      "sawtooth"
+     ],
+     "structure_bits": 52.48590478336481,
+     "param_bits": 44.0,
+     "residual_bits": 23598.518872267614,
+     "total_bits": 23695.004777050977,
+     "bits_per_reading": 7.898334925683659,
+     "n": 3000,
+     "sd": 2.5,
+     "rho": null,
+     "code": "mix0.05",
+     "coef": {
+      "level": -0.8562792507861934,
+      "g:ln coherence \u00b7 \u221aannual_amp": 0.7439378734230339,
+      "g:max(0, incidence\u221241.8)": 0.812742347725124,
+      "sawtooth": 1.1042105220200356
+     },
+     "alpha": {},
+     "added": "sawtooth"
+    }
+   ],
+   "coefs": null,
+   "seconds": 180.92572736740112,
+   "n": 3000
+  },
+  "named": []
+ }
+}
