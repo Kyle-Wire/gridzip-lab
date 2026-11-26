@@ -39,12 +39,12 @@ DIFF = [Term(f"d_{k}", "wind", f"b · Δ{k} (R0 − R1)", f"the wider section ch
              (lambda kk: (lambda c: c[f"d_{kk}"]))(k)) for k in DIFF_KEYS]
 
 
-def load(run):
-    d = np.load(PHYS / f"f3s6_{run}_fields.npz")
+def load(run, stem="f3s6"):
+    d = np.load(PHYS / f"{stem}_{run}_fields.npz")
     st = d["mean_sums"].astype(np.float64)
     st = 0.5 * (st + st[:, ::-1] * FOLD)                      # mirror fold, as WindSim scores it
     solid = d["solid"] | d["solid"][:, ::-1]
-    p = np.genfromtxt(PHYS / f"f3s6_{run}_points.csv", delimiter=",", names=True)
+    p = np.genfromtxt(PHYS / f"{stem}_{run}_points.csv", delimiter=",", names=True)
     p = p[np.argsort(p["id"])]
     return st, solid, float(d["dx_m"]), d["origin"].astype(float), p
 
@@ -62,8 +62,8 @@ def at(st, solid, o, dx, pts, cols):
     return LF.interp(st[..., cols], o, dx, pts), moved
 
 
-def ctx_build(run):
-    st, solid, dx, o, p = load(run)
+def ctx_build(run, stem="f3s6"):
+    st, solid, dx, o, p = load(run, stem)
     xc, yc, zc = LF.centres(o, dx, solid.shape)
     x, y = p["x"], p["y"]; n = len(x)
     col = lambda z: np.c_[x, y, np.full(n, z)]
