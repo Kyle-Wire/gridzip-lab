@@ -1,0 +1,21 @@
+# Method 1 control for V2 (Pawnee, Oklahoma; public stable-ground test site): OPERA DISP-S1 through the
+# insar_pipeline pin 3612eda, with the settings of CHI's Kenner and Katy wide runs
+# (Climate Inspection configs/ground/case-katy/disp_wide.yaml). V2's box, track and dates. 24 Nov 2026.
+backend: disp
+project_dir: /home/kylew/insar_projects/m1_pawnee_disp_asc34
+project_title: "Method 1 control, Pawnee, Oklahoma, ascending track 34 (DISP-S1)"
+bbox: [-96.994, 36.300, -96.734, 36.515]       # exp_v2_pawnee_asc34.yaml
+start_date: "2021-10-01"
+end_date: "2025-11-03"                          # V2's last product date
+orbit_direction: ascending
+track: 34
+disp_frame_id: ""                               # the pipeline picks the frame on track 34 covering most of the box
+disp_record_chain: false
+disp_use_recommended_mask: true
+disp_seasonal_model: true
+disp_tropo_correction: false                    # as Kenner and Katy (CHI plan A8)
+weather_model: HRRR
+raider_env: raider-env
+disp_min_valid_fraction: 0.5
+disp_use_static_layers: true
+gnss_tie_radius_km: 0                           # Kyle, 24 Nov 2026: "with the GNSS tie off"

@@ -1,0 +1,64 @@
+{
+ "points": 200000,
+ "within_2km": 61324,
+ "cells_in_box": 618286,
+ "valid_cells": 416936,
+ "dates": 128,
+ "first": "20211001",
+ "last": "20251127",
+ "grid": [
+  812,
+  795
+ ],
+ "stations": {
+  "OK02": 86,
+  "OK03": 139,
+  "OK04": 83,
+  "OK05": 137,
+  "OK06": 144,
+  "OK07": 134
+ },
+ "gnss_missing": {},
+ "jump_check": {
+  "rule": "GROUND-POC-PLAN.md A11",
+  "cells": 459746,
+  "threshold_mm": 23.705653131008148,
+  "level_threshold_mm": 13.78,
+  "steps": [
+   {
+    "decimal_year": 2024.4918032786886,
+    "jump_mm": -28.61,
+    "fitted_mm": 6.31,
+    "taken_off": "the box's size"
+   }
+  ],
+  "bad_dates": [
+   2023.7369863013698,
+   2024.8524590163934,
+   2024.8196721311476
+  ],
+  "result": "corrected",
+  "step_rule": "GROUND-POC-PLAN.md A17: each cell's own step size",
+  "action": "smaller steps taken off every cell at the box's size, the bad dates dropped, and each cell's rate re-fitted from the corrected series (the engine's stated uncertainty kept)"
+ },
+ "export": {
+  "route": "disp",
+  "component": "los",
+  "insar_commit": "3612eda674e02052fb1a4269017a2ba9ccdf7cea",
+  "box": [
+   36.3,
+   -96.994,
+   36.515,
+   -96.734
+  ],
+  "files_read": {
+   "velocity.h5": "cb98a7c61ef2b4dbd4ab1d212e6d984b3af47aa9ed2f54e74534139f59f8d651",
+   "timeseries.h5": "81a3883e2e83e248903cc9bcccabac6e4528755e5ea63404d1c5daba79cab285",
+   "maskTempCoh.h5": "3611a86f05ac2cd01825847e8c77dffc4f34d8b383522bcb6d2a142e57910559",
+   "temporalCoherence.h5": "468eba5d854b675718be0750f5fc14ccf63a7bb0c00ae4ba3a337629ae399c70",
+   "validEpochFraction.h5": "d5454594152a1b94d850484cb5678e2f5485f5de21aa0b733f6c94281cee9cd7",
+   "geometryGeo.h5": "c624df618c56e079bd802b76bf692d7904591a2aa4d9a75fcf79f2c3a9209d12"
+  }
+ },
+ "series_nan_code": -32768
+}

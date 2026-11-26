@@ -334,3 +334,8 @@ NWP = [
          ("q850", "spin850", "lat"), lambda c: c["q850"] * np.maximum(c["spin850"] * np.sign(c["lat"] + 1e-9), 0.0)),
 ]
 DOMAINS.update({"nwp": NWP})
+
+
+# ============================================================================================================ InSAR (PROTOCOL-13)
+from .insar import INSAR_RATE  # noqa: E402
+DOMAINS["insar_rate"] = INSAR_RATE
