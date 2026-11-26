@@ -317,4 +317,10 @@ FIRE += [
     Term("dry_crown", "fire", "b · [I_surface,max > (CBH (460 + 25.9 m) / 100)^1.5]", "canopy that would light if its foliage were as dry as m (dead needles); the model holds foliage at 100 %",
          ("dry", "dry_m"), lambda c: _knots(c, "dry", "dry_m"), family=(10.0, 100.0, True), group="crown", unit="%"),
 ]
+# PROTOCOL-FIRE amendment A24: heldx[:, j] is held[:, j] where the model reached the point in or after the hour the wind
+# event ended (A17's cut on the HRRR box wind, FireSim scripts/wind_event.py), and 0 before it. Table T2o.
+FIRE += [
+    Term("held_after_event", "fire", "b · [model flame length < L and arrival after the wind event]", "once the wind-driven run is over, an edge weak enough to be worked directly is held; the model lets it burn on",
+         ("heldx", "held_v"), lambda c: _knots(c, "heldx", "held_v"), family=(1.22, 2.44, True), group="heldx", unit="m"),
+]
 DOMAINS["fire"] = FIRE

@@ -22,7 +22,7 @@ A18 = "--a18" in sys.argv                                           # amendment 
 THIN = [1]                                                          # amendment A21: lattice thinning step (set in main)
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
-         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0)}
+         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0), "heldx": ("heldx", 1.22)}
 GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
@@ -80,6 +80,9 @@ def table(d, meta, which):
         r_ = ros(d, te)[rows]; c.update(slow=np.stack([(r_ < v).astype(float) for v in SLOW_V], 1), slow_v=np.array(SLOW_V))
     if which == "T2o" and "t12_flame_arr" in d:                  # A22
         f_ = d["t12_flame_arr"][rows]; c.update(held=np.stack([(f_ < v).astype(float) for v in (1.22, 2.44)], 1), held_v=np.array((1.22, 2.44)))
+    if which == "T2o" and "t12_flame_arr" in d and "wind_event_cut_hour" in meta:   # A24: the same, only where the model arrived after the wind event
+        f_ = d["t12_flame_arr"][rows]; aft = np.floor(d["t12_t_mod"][rows] / 60.0) >= meta["wind_event_cut_hour"]
+        c.update(heldx=np.stack([((f_ < v) & aft).astype(float) for v in (1.22, 2.44)], 1))
     if which in ("T2", "T2o") and "t12_fli_max" in d:           # A23
         cbh_, cbd_, fm_ = d["t12_cbh"][rows], d["t12_cbd"][rows], d["t12_fli_max"][rows]; ms_ = (10.0, 30.0, 60.0, 100.0)
         c.update(dry=np.stack([((cbd_ > 0) & (cbh_ > 0) & (fm_ > (cbh_ * (460.0 + 25.9 * m_) / 100.0) ** 1.5)).astype(float) for m_ in ms_], 1), dry_m=np.array(ms_))
@@ -118,7 +121,7 @@ def planted(ctx, y, blk, g, seed=0):
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
     names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
-             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown"}
+             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown", "heldx": "held_after_event"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}
