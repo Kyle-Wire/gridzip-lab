@@ -1,0 +1,507 @@
+{
+ "protocol": "physics/PROTOCOL-13.md",
+ "n": 120,
+ "level": {
+  "R0": 1.2539160465611343,
+  "N1": 1.2541510955616872,
+  "C1": 1.242763611415186,
+  "W1": 1.2833903223493077
+ },
+ "Q0": {
+  "s_pt": 0.05080565004109562,
+  "noise_level_ln": 0.0001874343770894298
+ },
+ "ledger": {
+  "C1": {
+   "Q_over_Q_upstream": {
+    "front": 0.7854025615732934,
+    "middle": 0.6649670759430464,
+    "back": 0.6690210914507997
+   },
+   "array_mean_roof_speed": 1.0886038368949977,
+   "array_mean_roof_stress": 0.009796761587207933,
+   "plan_mean_w_at_D_over_Uapp": 0.06535286361517137,
+   "u_ref_upstream_at_D": 3.4736029076169364,
+   "approach_minus_uw_over_uref2": {
+    "0.50D": 0.0014382225977517254,
+    "1.00D": 0.0009705124102178371,
+    "1.25D": 0.00026139349061118233,
+    "1.50D": 0.0003959029180564927,
+    "2.00D": -0.0021884816885492345
+   },
+   "moved_samples": {
+    "z0.02": 0,
+    "1.25D": 0,
+    "0.75D": 0,
+    "D": 0
+   }
+  },
+  "W1": {
+   "Q_over_Q_upstream": {
+    "front": 0.9047585700321441,
+    "middle": 0.8550232751157764,
+    "back": 0.8717012474315928
+   },
+   "array_mean_roof_speed": 1.089687119820024,
+   "array_mean_roof_stress": 0.009687071377647708,
+   "plan_mean_w_at_D_over_Uapp": 0.06938496875110045,
+   "u_ref_upstream_at_D": 3.613216817078182,
+   "approach_minus_uw_over_uref2": {
+    "0.50D": 0.0026687466022424066,
+    "1.00D": 0.0038400054365201365,
+    "1.25D": 0.0006227697474119718,
+    "1.50D": 0.00020677347682163862,
+    "2.00D": -8.932609079908183e-05
+   },
+   "moved_samples": {
+    "z0.02": 0,
+    "1.25D": 0,
+    "0.75D": 0,
+    "D": 0
+   }
+  }
+ },
+ "synthetic": {
+  "noise_sd": 0.10308784740701878,
+  "runs": [
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   },
+   {
+    "winner": [],
+    "roof": []
+   }
+  ],
+  "silent": 10,
+  "passed": true,
+  "power": {
+   "roof_stress": {
+    "found_by_sd": {
+     "0.02": 0,
+     "0.04": 3,
+     "0.06": 10,
+     "0.08": 10,
+     "0.1": 10
+    },
+    "mde_sd": 0.06
+   },
+   "roof_speed": {
+    "found_by_sd": {
+     "0.02": 0,
+     "0.04": 2,
+     "0.06": 10,
+     "0.08": 10,
+     "0.1": 10
+    },
+    "mde_sd": 0.06
+   }
+  }
+ },
+ "A": {
+  "winner": [
+   "g:[ti_local>0.454] \u00b7 lp"
+  ],
+  "coef": {
+   "level": 0.21733761859022788,
+   "g:[ti_local>0.454] \u00b7 lp": 0.14222274935216125
+  },
+  "sd_before": 0.171875,
+  "sd_after": 0.1015625,
+  "bits_saved_per_reading": 0.5145866728260096,
+  "holdout": [
+   {
+    "fold": "leave out x<0,y<0",
+    "formula_bpr": 5.351586636530608,
+    "one_correction_bpr": 5.924479772047597,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x<0,y>=0",
+    "formula_bpr": 5.423969804997622,
+    "one_correction_bpr": 6.240916529887034,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y<0",
+    "formula_bpr": 5.327073651751934,
+    "one_correction_bpr": 6.304404352501937,
+    "transfers": true
+   },
+   {
+    "fold": "leave out x>=0,y>=0",
+    "formula_bpr": 5.666019354294138,
+    "one_correction_bpr": 6.25857035820486,
+    "transfers": true
+   },
+   {
+    "fold": "upstream -> downstream",
+    "formula_bpr": 5.47094809042234,
+    "one_correction_bpr": 6.265664578702133,
+    "transfers": true
+   }
+  ],
+  "inclusion": {
+   "g:[ti_local>0.454] \u00b7 lp": 0.7066973056725095,
+   "canyon_cross": 0.25102762752516905,
+   "g:[lateral>1]": 0.21618827364834603,
+   "g:[lateral>1] \u00b7 downwash": 0.12234911036272543,
+   "g:max(0, lateral\u22121)": 0.11149995592076987,
+   "corner": 0.0930864973722898,
+   "g:[lateral>1] \u00b7 street_flux": 0.05977443552972227,
+   "g:[downwash>0.0107] \u00b7 street_flux": 0.047902145977487785,
+   "g:[downwash>0.0107] \u00b7 lateral": 0.0399208655273875,
+   "g:max(0, lateral\u22121) \u00b7 street_flux": 0.027146877296446967,
+   "g:lp \u00b7 cross": 0.026398075432672672,
+   "g:[ti_local>0.39] \u00b7 lp": 0.015568666656847755,
+   "g:corner \u00b7 along": 0.013936362092825531,
+   "g:lateral \u00b7 corner": 0.012256579818528736,
+   "g:x_pos\u00b2 \u00b7 lateral": 0.010709703837008724
+  },
+  "inclusion_by_input": {
+   "lp": 0.7508040621957406,
+   "ti_local": 0.7237297584161978,
+   "lateral": 0.6218124289482266,
+   "cross": 0.27742677390833215,
+   "downwash": 0.21252443124492054,
+   "corner": 0.15718342731547305,
+   "street_flux": 0.14691503015764568,
+   "x_pos": 0.030360394590028445,
+   "along": 0.01476638295351085
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "g:[ti_local>0.454] \u00b7 lp": 0.5333333333333333,
+    "canyon_cross": 0.2,
+    "g:[downwash>0.0107] \u00b7 street_flux": 0.2,
+    "corner": 0.13333333333333333,
+    "g:[ti_local>0.39] \u00b7 lp": 0.1,
+    "g:\u221ati_local": 0.03333333333333333,
+    "g:e^(\u2212ti_local/0.39) \u00b7 corner": 0.03333333333333333,
+    "g:x_pos\u00b2 \u00b7 lateral": 0.03333333333333333,
+    "g:\u221afetch \u00b7 1/ti_local": 0.03333333333333333,
+    "g:[street_flux>0.71] \u00b7 corner": 0.03333333333333333,
+    "g:e^(\u2212ti_local/1.2)": 0.03333333333333333,
+    "g:max(0, lateral\u22121)": 0.03333333333333333,
+    "contrast": 0.03333333333333333,
+    "g:\u221alateral \u00b7 street_flux\u00b2": 0.03333333333333333,
+    "g:\u221alateral \u00b7 corner": 0.03333333333333333,
+    "g:[lateral>1]": 0.03333333333333333,
+    "g:lp \u00b7 cross": 0.03333333333333333,
+    "g:lateral\u00b2": 0.03333333333333333,
+    "g:max(0, fetch\u22121.5) \u00b7 along": 0.03333333333333333,
+    "g:[downwash>0.0107] \u00b7 lateral": 0.03333333333333333,
+    "g:corner \u00b7 along": 0.03333333333333333
+   },
+   "coef_90": {
+    "g:[ti_local>0.454] \u00b7 lp": [
+     0.12322752453147379,
+     0.1560776398335068
+    ]
+   }
+  },
+  "null_p": 0.05,
+  "neighbour": {
+   "gain": 0.2795093068325669,
+   "where": "turn \u00d7 street_flux",
+   "null_95": 0.09024831107894832,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": [
+   [
+    "g:[ti_local>0.454] \u00b7 lp",
+    "named, but can't rule out canyon_cross (+0.3 bits)"
+   ]
+  ]
+ },
+ "Q1": {
+  "lateral_recurs": false,
+  "lateral_inclusion": 0.6218124289482266,
+  "quadrant_folds_A": 4,
+  "roof": {
+   "roof_speed": {
+    "inclusion": 0.017174521948964197,
+    "bootstrap": 0.16666666666666666,
+    "quadrant_folds": 0,
+    "pays": false
+   },
+   "roof_stress": {
+    "inclusion": 0,
+    "bootstrap": 0,
+    "quadrant_folds": 0,
+    "pays": false
+   },
+   "roof_k": {
+    "inclusion": 0,
+    "bootstrap": 0.06666666666666667,
+    "quadrant_folds": 0,
+    "pays": false
+   },
+   "roof_shear": {
+    "inclusion": 0.02421008226822226,
+    "bootstrap": 0.2,
+    "quadrant_folds": 0,
+    "pays": false
+   },
+   "coupling": {
+    "inclusion": 0,
+    "bootstrap": 0,
+    "quadrant_folds": 0,
+    "pays": false
+   },
+   "ti_full": {
+    "inclusion": 0,
+    "bootstrap": 0,
+    "quadrant_folds": 0,
+    "pays": false
+   }
+  },
+  "roof_pays": []
+ },
+ "B": {
+  "winner": [],
+  "coef": {
+   "level": -0.0014123814097722518
+  },
+  "sd_before": 0.1015625,
+  "sd_after": 0.1015625,
+  "bits_saved_per_reading": 0.0,
+  "holdout": [],
+  "inclusion": {
+   "g:roof_speed\u00b2 \u00b7 \u221aroof_shear": 0.01452603962559753
+  },
+  "inclusion_by_input": {
+   "roof_shear": 0.02421008226822226,
+   "roof_speed": 0.017174521948964197
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "g:roof_speed\u00b2 \u00b7 \u221aroof_shear": 0.16666666666666666,
+    "roof_k": 0.03333333333333333,
+    "g:[roof_k>0.0787]": 0.03333333333333333,
+    "g:[roof_k>0.0549] \u00b7 roof_shear": 0.03333333333333333
+   },
+   "coef_90": {}
+  },
+  "null_p": 1.0,
+  "neighbour": {
+   "gain": 0.31249289576907946,
+   "where": "all inputs",
+   "null_95": 0.02072901333168171,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": []
+ },
+ "Q2": {
+  "dC_mean": 0.008933872863507457,
+  "dC_sd": 0.048734581109508464,
+  "s_pt": 0.05080565004109562,
+  "null_p": 0.05,
+  "named": [
+   "d_coupling",
+   "side_flux"
+  ],
+  "search": {
+   "winner": [
+    "g:max(0, side_flux\u22120.0311) \u00b7 lp",
+    "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling"
+   ],
+   "coef": {
+    "level": 0.008933872863507459,
+    "g:max(0, side_flux\u22120.0311) \u00b7 lp": 0.024116781522070696,
+    "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling": -0.0332460195943944
+   },
+   "sd_before": 0.05078125,
+   "sd_after": 0.01171875,
+   "bits_saved_per_reading": 0.9350816409070117,
+   "holdout": [
+    {
+     "fold": "leave out x<0,y<0",
+     "formula_bpr": 3.1756648466792936,
+     "one_correction_bpr": 4.295047941656789,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x<0,y>=0",
+     "formula_bpr": 4.5508207608997076,
+     "one_correction_bpr": 4.602558248420887,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x>=0,y<0",
+     "formula_bpr": 2.9865855554643153,
+     "one_correction_bpr": 4.548693563671127,
+     "transfers": true
+    },
+    {
+     "fold": "leave out x>=0,y>=0",
+     "formula_bpr": 3.0444090757684914,
+     "one_correction_bpr": 4.452202163748256,
+     "transfers": true
+    },
+    {
+     "fold": "upstream -> downstream",
+     "formula_bpr": 4.097648607360869,
+     "one_correction_bpr": 5.3136212374933125,
+     "transfers": true
+    }
+   ],
+   "inclusion": {
+    "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling": 0.9724404349200557,
+    "g:max(0, side_flux\u22120.0311) \u00b7 lp": 0.9724162437473917,
+    "g:max(0, roof_k\u22120.0662) \u00b7 reverse": 0.43413162250666804,
+    "g:max(0, roof_stress\u22120.0121) \u00b7 downwash": 0.2564736692999459,
+    "g:max(0, roof_k\u22120.0787) \u00b7 reverse": 0.22469772981308828,
+    "g:reverse \u00b7 d_roof_shear": 0.04086535103148798,
+    "g:[coupling>0.11] \u00b7 d_coupling": 0.027559549448144628,
+    "g:max(0, roof_stress\u22120.00851) \u00b7 downwash": 0.026702480285933416,
+    "roof_speed": 0.019585926328236938,
+    "g:ln roof_speed \u00b7 d_roof_speed\u00b2": 0.019410130017065978,
+    "g:[d_roof_speed>-0.00139] \u00b7 corner": 0.011085853984993076
+   },
+   "inclusion_by_input": {
+    "d_coupling": 0.9999999999999989,
+    "roof_shear": 0.9734090492554159,
+    "side_flux": 0.9724993238997702,
+    "lp": 0.972429206432302,
+    "reverse": 0.6777770559827029,
+    "roof_k": 0.6657274453182241,
+    "roof_stress": 0.2933318267335531,
+    "downwash": 0.29056220885467193,
+    "d_roof_shear": 0.05497253930296609,
+    "roof_speed": 0.04769532524514079,
+    "d_roof_speed": 0.04448917185161871,
+    "coupling": 0.03053835064025412,
+    "d_roof_stress": 0.015547187469811822,
+    "corner": 0.014495361073763731
+   },
+   "bootstrap": {
+    "B": 30,
+    "selected": {
+     "g:[coupling>0.11] \u00b7 d_coupling": 0.36666666666666664,
+     "g:max(0, side_flux\u22120.0311) \u00b7 lp": 0.3333333333333333,
+     "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling": 0.3,
+     "roof_speed": 0.13333333333333333,
+     "g:max(0, roof_k\u22120.0662) \u00b7 reverse": 0.13333333333333333,
+     "g:\u221astreet_flux \u00b7 d_coupling": 0.1,
+     "g:e^(\u2212fetch/1.5) \u00b7 reverse": 0.1,
+     "g:max(0, side_flux\u2212-3.2e-05) \u00b7 lp": 0.1,
+     "g:roof_speed\u00b2 \u00b7 d_coupling": 0.1,
+     "g:max(0, roof_shear\u22121.6) \u00b7 d_roof_shear": 0.1,
+     "g:max(0, d_ti_full\u22120.0613) \u00b7 downwash": 0.06666666666666667,
+     "g:coupling \u00b7 d_roof_speed\u00b2": 0.06666666666666667,
+     "g:1/roof_speed": 0.06666666666666667,
+     "g:1/roof_speed \u00b7 \u221aroof_shear": 0.06666666666666667,
+     "g:[d_roof_k>0.00396] \u00b7 x_pos": 0.06666666666666667,
+     "g:max(0, lp\u2212-0.6) \u00b7 d_ti_full": 0.06666666666666667,
+     "g:\u221ati_local \u00b7 ln roof_speed": 0.03333333333333333,
+     "g:ln roof_speed \u00b7 d_roof_speed": 0.03333333333333333,
+     "g:e^(\u2212roof_stress/0.00851) \u00b7 cross": 0.03333333333333333,
+     "g:[d_roof_shear>-0.0122] \u00b7 corner": 0.03333333333333333,
+     "g:[d_roof_k>0.000644] \u00b7 d_roof_speed": 0.03333333333333333,
+     "g:max(0, roof_k\u22120.0662) \u00b7 d_ti_full": 0.03333333333333333,
+     "g:[d_coupling>-0.0284] \u00b7 roof_shear": 0.03333333333333333,
+     "g:max(0, d_roof_speed\u2212-0.00139) \u00b7 d_roof_stress": 0.03333333333333333,
+     "g:max(0, d_roof_speed\u2212-0.00139) \u00b7 d_roof_shear": 0.03333333333333333,
+     "d_coupling": 0.03333333333333333,
+     "g:max(0, side_flux\u22120.0311) \u00b7 turn": 0.03333333333333333,
+     "g:ti_local\u00b2 \u00b7 d_roof_stress\u00b2": 0.03333333333333333,
+     "g:[d_downwash>0.00822] \u00b7 d_roof_speed": 0.03333333333333333,
+     "g:e^(\u2212ti_local/1.2) \u00b7 d_coupling": 0.03333333333333333,
+     "g:roof_speed\u00b2 \u00b7 \u221afetch": 0.03333333333333333,
+     "g:[roof_stress>0.00393] \u00b7 d_coupling": 0.03333333333333333,
+     "reverse": 0.03333333333333333,
+     "g:max(0, d_roof_k\u22120.00296) \u00b7 side_flux": 0.03333333333333333,
+     "g:max(0, d_street_flux\u2212-0.00422) \u00b7 d_roof_shear": 0.03333333333333333,
+     "g:ln fetch \u00b7 d_roof_speed\u00b2": 0.03333333333333333,
+     "g:ln ti_local \u00b7 d_roof_stress\u00b2": 0.03333333333333333,
+     "g:[roof_shear>1.6] \u00b7 x_pos": 0.03333333333333333,
+     "g:[lp>-0.6] \u00b7 roof_stress": 0.03333333333333333,
+     "g:[d_side_flux>0.00219] \u00b7 x_pos": 0.03333333333333333,
+     "g:[d_roof_stress>0.00209] \u00b7 d_ti_full": 0.03333333333333333,
+     "g:max(0, d_downwash\u2212-0.00101) \u00b7 d_coupling": 0.03333333333333333,
+     "g:max(0, side_flux\u22120.0311) \u00b7 x_pos": 0.03333333333333333,
+     "g:max(0, d_roof_k\u22120.00296) \u00b7 cross": 0.03333333333333333,
+     "g:max(0, roof_shear\u22121.6) \u00b7 d_roof_k": 0.03333333333333333,
+     "g:d_coupling \u00b7 d_street_flux": 0.03333333333333333,
+     "g:coupling \u00b7 d_coupling": 0.03333333333333333,
+     "g:max(0, roof_k\u22120.0787) \u00b7 reverse": 0.03333333333333333,
+     "g:max(0, side_flux\u22120.0311) \u00b7 downwash": 0.03333333333333333,
+     "g:max(0, d_coupling\u2212-0.0198) \u00b7 reverse": 0.03333333333333333,
+     "ti_local": 0.03333333333333333,
+     "g:ln roof_speed": 0.03333333333333333,
+     "g:max(0, d_roof_stress\u22120.000588) \u00b7 reverse": 0.03333333333333333,
+     "g:d_roof_speed\u00b2 \u00b7 d_roof_shear": 0.03333333333333333,
+     "g:corner \u00b7 d_coupling": 0.03333333333333333,
+     "g:[d_ti_full>0.00651] \u00b7 side_flux": 0.03333333333333333,
+     "g:fetch \u00b7 d_roof_speed\u00b2": 0.03333333333333333
+    },
+    "coef_90": {
+     "g:max(0, side_flux\u22120.0311) \u00b7 lp": [
+      0.02256230269893941,
+      0.025065440400510234
+     ],
+     "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling": [
+      -0.03564606928767472,
+      -0.03204156646597738
+     ]
+    }
+   },
+   "null_p": 0.05,
+   "neighbour": {
+    "gain": 0.49668464851727423,
+    "where": "roof_speed \u00d7 roof_k",
+    "null_95": 0.15690289951139377,
+    "p": 0.01,
+    "structure_left": true
+   },
+   "verdict": [
+    [
+     "g:max(0, side_flux\u22120.0311) \u00b7 lp",
+     "named; no look-alike within 10:1"
+    ],
+    [
+     "g:e^(\u2212roof_shear/1.6) \u00b7 d_coupling",
+     "named, but can't rule out d_coupling (+0.4 bits), g:roof_speed \u00b7 d_coupling (+1.9 bits), g:ln roof_stress \u00b7 d_coupling (+3.0 bits)"
+    ]
+   ]
+  },
+  "reading": "level shift +0.009 in ln"
+ }
+}
