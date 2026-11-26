@@ -1,4 +1,4 @@
-"""Protocol 10 figure: method 2 (V2 Pawnee) on stable ground, for a reader with no InSAR background."""
+"""Protocol 13 figure: method 2 (V2 Pawnee) on stable ground, for a reader with no InSAR background."""
 import numpy as np, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -72,7 +72,7 @@ def main(out):
     ax.legend(frameon=False, loc="lower right", fontsize=9)
     ax.set_title("D. The noise slowly drifts instead of averaging out, so it builds up into fake trends", loc="left", fontsize=11, color=INK)
     fig.text(0.02, 0.012, "Source: insar_pipeline V2 run (MiaplPy, snaphu, MintPy), 24 Nov 2026; GPS: NGL IGS20 daily, along the satellite's view. "
-             "The map is shifted so its middle reads 0. Test site, not a customer property. gridzip-lab protocol 10.", fontsize=8, color=INK2)
+             "The map is shifted so its middle reads 0. Test site, not a customer property. gridzip-lab protocol 13.", fontsize=8, color=INK2)
     fig.savefig(out, dpi=150); print(out)
 
 if __name__ == "__main__":

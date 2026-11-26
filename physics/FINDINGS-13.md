@@ -1,4 +1,4 @@
-# Findings 10: method 2 (V2 Pawnee) on stable ground (protocol 10, A1, A2; 24 Nov 2026)
+# Findings 10: method 2 (V2 Pawnee) on stable ground (protocol 13, A1, A2; 24 Nov 2026)
 
 > **Correction (25 Nov 2026).** The "error bars about 3× too small" reading below is wrong. The table's
 > `sigma_mm_yr` was MintPy's formal white-noise `velocityStd` (median 0.72), not the pipeline's stated 1-sigma.
@@ -9,7 +9,7 @@
 > both methods. What fails V2 is the false-rate field (the OK02 patch): pair share and the noise benchmark.
 
 Data: `data/insar_m2/v2_pawnee_points.npz` (cd9ceab). Script: `python -m physics.insar_m2 [synth|A|B|C]`;
-results in `results/physics/insar_m2.json`; figure `physics/figures/p10_method2_pawnee.png` (`physics/figures10.py`).
+results in `results/physics/insar_m2.json`; figure `physics/figures/p13_method2_pawnee.png` (`physics/figures13.py`).
 V2 is spent data. Nothing here is evidence that method 2 passes.
 
 ## Synthetic check

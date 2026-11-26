@@ -1,4 +1,4 @@
-"""Protocol 10 A4, part E: which processing step makes the OK02 corner (V2 Pawnee)."""
+"""Protocol 13 A4, part E: which processing step makes the OK02 corner (V2 Pawnee)."""
 import json, time, numpy as np
 from pathlib import Path
 from physlib import guards as Q

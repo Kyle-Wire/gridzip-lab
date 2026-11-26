@@ -1,4 +1,4 @@
-"""Protocol 10: what method 2 (insar_pipeline's own MiaplPy -> snaphu -> MintPy route) is missing on stable ground, V2 Pawnee.
+"""Protocol 13: what method 2 (insar_pipeline's own MiaplPy -> snaphu -> MintPy route) is missing on stable ground, V2 Pawnee.
 
     python -m physics.insar_m2 [synth|A|B|C|all]
 

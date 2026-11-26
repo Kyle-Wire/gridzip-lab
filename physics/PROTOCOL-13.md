@@ -1,4 +1,7 @@
-# Protocol 10: what our own InSAR processing (method 2) is missing on stable ground, V2 Pawnee (written 24 Nov 2026, before the search ran)
+# Protocol 13: what our own InSAR processing (method 2) is missing on stable ground, V2 Pawnee (written 24 Nov 2026, before the search ran)
+
+> Written and run as "Protocol 10" on branch claude/project-thread-dtcz3g (24-26 Nov 2026). Renumbered 13 on 26 Nov
+> because main took protocols 10-12 in the meantime; nothing else changed.
 
 **Why.** Kyle (24 Nov, 11:57 AM ET) wants the insar_pipeline's own processing ("method 2": MiaplPy phase linking,
 snaphu, MintPy) to pass, since it is finer and more flexible than OPERA DISP-S1 ("method 1"), which passes. V2 at
@@ -118,7 +121,7 @@ CHI's reference-jump handling (A11, A17, A19).
 
 **Seen by then:** the export's README (8e77a82). Its first look said the HRRR correction's own rate runs −0.55 to
 +0.37 mm/yr (5th to 95th percentile), and the median count of interferograms apart from the reference is 3 of 375.
-Also corrected by then: the stated sigma reading (FINDINGS-10 correction).
+Also corrected by then: the stated sigma reading (FINDINGS-13 correction).
 
 **Readings, fixed now (valid points; NW and rest regions as in D1; target = the rate):**
 - E1, which step makes the corner. NW − rest, taken of the rate from (i) the series before both corrections,

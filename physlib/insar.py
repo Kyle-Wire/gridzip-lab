@@ -1,4 +1,4 @@
-"""InSAR rate-field terms for the physics compressor (PROTOCOL-10), reusable on any InSAR stack.
+"""InSAR rate-field terms for the physics compressor (PROTOCOL-13), reusable on any InSAR stack.
 
 Target: a per-point LOS rate on ground whose true rate is known (stable ground, or GNSS-tied), or a rate error.
 ctx keys (all (n,) arrays): coherence (temporal coherence 0-1), ps_share (share of PS pixels in the cell),

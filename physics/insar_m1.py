@@ -1,4 +1,4 @@
-"""Protocol 10 A3, part D: method 1 (OPERA DISP-S1, GNSS tie off) against method 2 (V2) at Pawnee.
+"""Protocol 13 A3, part D: method 1 (OPERA DISP-S1, GNSS tie off) against method 2 (V2) at Pawnee.
 
     python -m physics.insar_m1            # writes results/physics/insar_m1_vs_m2.json
 """

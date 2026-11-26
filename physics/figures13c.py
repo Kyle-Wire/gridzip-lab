@@ -2,7 +2,7 @@ import numpy as np, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from physics.insar_m2 import load
-from physics.figures10 import INK, INK2, BLUE, ORANGE
+from physics.figures13 import INK, INK2, BLUE, ORANGE
 
 def main(out):
     D = load(); C = np.load("data/insar_m2/v2_components.npz"); a = C["n_ifgrams_apart"]; v = D["valid"]; e, n = D["east_km"], D["north_km"]; r = D["rate_mm_yr"]
@@ -25,7 +25,7 @@ def main(out):
     ax2.set_ylabel("typical false movement, mm/yr (should be 0)")
     ax2.set_title("The stitched piece reads 3 mm/yr of\nsinking that the ground isn't doing", loc="left", fontsize=11, color=INK)
     fig.text(0.02, 0.01, "Grey = in the reference point's unwrapping piece in all 375 radar pairs; orange = apart from it in all 375, joined by MintPy's bridging step. "
-             "Weather and height corrections don't cause it (the corner is there before them). gridzip-lab protocol 10, part E.", fontsize=8, color=INK2)
+             "Weather and height corrections don't cause it (the corner is there before them). gridzip-lab protocol 13, part E.", fontsize=8, color=INK2)
     fig.savefig(out, dpi=150); print(out)
 
 if __name__ == "__main__":
