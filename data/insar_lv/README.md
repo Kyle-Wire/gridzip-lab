@@ -10,7 +10,7 @@ Each table is exported by `export_lv.py`, read-only on the project. The layout f
 | file | run | what changed |
 |---|---|---|
 | `br1_a_points.npz`, `br1_a_meta.json` | BR1-A | as now: snaphu CONNCOMPTHRESH 300, MintPy bridging+phase_closure |
-| `br1_b_points.npz` (when B is done) | BR1-B | CONNCOMPTHRESH 1000, re-unwrapped from A's phase linking |
+| `br1_b_points.npz`, `br1_b_meta.json` | BR1-B | CONNCOMPTHRESH 1000, re-unwrapped from A's phase linking |
 | `br1_c_points.npz` (when C is done) | BR1-C | no bridging (phase_closure only), re-unwrapped from A's phase linking |
 
 B and C are read at A's cells (`--points-from`), so all three tables line up row for row.
@@ -51,3 +51,7 @@ B and C are read at A's cells (`--points-from`), so all three tables line up row
 | uncertainty_calibration | 7 of 7 inside | pass |
 | noise_benchmark | worst 68th percentile 2.05 mm/yr | pass |
 | CHI A12 pair (NVNL, NVCA) | 1.54 mm/yr difference against 1.64 tolerance | pass |
+
+## What run B showed (recorded, not a finding of this folder)
+- CONNCOMPTHRESH 1000 reached snaphu: every pair re-unwrapped, because its config had changed. But the components were the same at every one of the 200,000 points (identical `bridged_fraction`, `n_ifgrams_outside_component`, `in_conncomp_mask`), and the bridged cells were still 302 in the whole grid. Rates differ from A by at most 0.003 mm/yr.
+- Every graded row passes, both with bridged cells left out and with every cell counted, and the figures match A's. CHI A12 pair: 1.54 against 1.64, pass.
