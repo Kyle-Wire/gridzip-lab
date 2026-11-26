@@ -607,3 +607,20 @@ edge late in the fire; Camp's and Marshall's early runs are not. A rule that hol
 minute is the wrong shape. The lead for a new amendment is a rule that is off while the fire is in its
 wind-driven run and comes on only afterwards (and never at the ignition), with "afterwards" defined from
 forecast-available weather, not from the fire record.
+
+## A25 part 1 (term): the Cruz crown fire rate (26 Nov 2026)
+
+Output `results/physics/fire_real_a25.json` (T2 and T2o, 1.5 km lattice, four fires, A23 tables).
+
+`cruz_crown` and `cruz_active` (Cruz, Alexander and Wakimoto 2005): found when planted on both tables, **not
+named** on the real errors (block-bootstrap share 0.03 on T2, 0 on T2o). T2's winner is unchanged (wind run,
+distance, timber -1.6, canopy cover +3.6; 0 of 4 folds transfer); T2o's is canopy cover alone (+1.4, share 0.93),
+with fuel 0.70, moisture 0.67 and late arrival 0.53 behind it. The noise twin is silent on both.
+
+The prediction was half right: not named on T2, as expected, because with window-mean wind and moisture East
+Troublesome has the lowest Cruz rate of the four (21 m/min) and so the term cannot carry its miss. It was not
+named on T2o through Camp either. What this says: a crown-rate formula fed the window-mean weather does not sort
+the errors, so the test of the formula is the model run, where it sees each hour's wind and moisture (East
+Troublesome's first 12 hours had 1-h moisture 3.9 to 6 %, where the Cruz rate in a timber cell at 5 m/s wind and
+CBD 0.08 is 43 m/min against the model's 4 m/min). That run, setting C1, was fixed in A25 part 2 before this
+result and is queued on THE-COW after InSAR and wind.

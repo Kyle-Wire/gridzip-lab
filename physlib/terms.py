@@ -317,4 +317,13 @@ FIRE += [
     Term("dry_crown", "fire", "b · [I_surface,max > (CBH (460 + 25.9 m) / 100)^1.5]", "canopy that would light if its foliage were as dry as m (dead needles); the model holds foliage at 100 %",
          ("dry", "dry_m"), lambda c: _knots(c, "dry", "dry_m"), family=(10.0, 100.0, True), group="crown", unit="%"),
 ]
+# PROTOCOL-FIRE amendment A25: Cruz, Alexander and Wakimoto 2005 (Can. J. For. Res. 35: 1626-1639) crown fire rate.
+# crown_ln = ln(CROS / 1 m/min) in canopy cells (0 elsewhere); cac[:, j] = [CAC >= cac_c[j]].
+FIRE += [
+    Term("cruz_crown", "fire", "b · [canopy] · ln CROS, CROS = 11.02 U10^0.90 CBD^0.19 e^(−0.17 EFFM) (× e^(−CAC) if passive)",
+         "where a conifer crown fire would run fast by the Cruz et al. 2005 rate, the model is too slow (b<0) or too fast (b>0)",
+         ("crown_ln",), lambda c: c["crown_ln"], group="crownrate"),
+    Term("cruz_active", "fire", "b · [CAC ≥ c], CAC = CROS_A · CBD / 3", "ground where Cruz et al. 2005 call the crown fire active",
+         ("cac", "cac_c"), lambda c: _knots(c, "cac", "cac_c"), family=(0.5, 2.0, True), group="crownrate"),
+]
 DOMAINS["fire"] = FIRE

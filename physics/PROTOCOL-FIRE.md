@@ -787,3 +787,6 @@ Tubbs 34, Marshall 87, East Troublesome 21 m/min). A24 (the device's run-phase h
   own test (A24 or later), under a new amendment.
 - Predicted: East Troublesome's ratio at 12.3 h rises from 0.29 to between 0.4 and 0.7; Camp overruns more
   (last ratio above 1.33), so C1 alone fails the rule.
+- A25 note (26 Nov, before part 1 ran): the tables' `moist` is already the window-mean 1-h moisture (checked
+  against the runs' weather: Camp 3.79, Tubbs 4.77, Marshall 5.06, East Troublesome 7.42 %, the last pulled up by
+  night recovery to 14 %), not an average of three classes as written above. Part 1 uses it as it is.
