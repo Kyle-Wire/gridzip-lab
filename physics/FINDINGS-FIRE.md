@@ -624,3 +624,37 @@ the errors, so the test of the formula is the model run, where it sees each hour
 Troublesome's first 12 hours had 1-h moisture 3.9 to 6 %, where the Cruz rate in a timber cell at 5 m/s wind and
 CBD 0.08 is 43 m/min against the model's 4 m/min). That run, setting C1, was fixed in A25 part 2 before this
 result and is queued on THE-COW after InSAR and wind.
+
+## A24 (term and model runs): the held edge after the wind event, H3 (26 Nov 2026)
+
+Term (tables `*_E0_a24.npz`, which also carry `u700` and `u10_marr`): `held_after_event(L)` found when planted,
+noise twin silent, **not named** on T2o (winner: timber, canopy cover, humidity, burn duration). The plain count
+is sharper: on Tubbs, ground the model reaches after the wind event ends is wrong ground 94 to 100 % of the time
+(22 points) against 34 % before the cut, whatever the flame length; on East Troublesome it is mostly right ground.
+
+Model runs (E0 priors, HRRR as analysed, 3 seeds, Tubbs 2; East Troublesome H3(2.44) still to run):
+
+| | E0 | H2(1.22) | H3(1.22) | H3(2.44) |
+|---|---|---|---|---|
+| Marshall overlap at 2.95 h | 0.461 | 0.385 | 0.461 | 0.461 |
+| Marshall area ratio, end | 2.35 | 1.35 | 1.62 | 0.96 |
+| Marshall overlap, end | 0.27 | 0.33 | 0.35 | 0.49 |
+| Marshall A8 | 2.45 | 1.94 | 1.94 | 1.88 |
+| Tubbs ratio at 42.98 h | 1.86 | 1.03 | 1.50 | 1.40 |
+| Tubbs overlap at 42.98 h | 0.44 | 0.47 | 0.52 | 0.55 |
+| Tubbs 5.5 h outside-share | 0.18 | 0.13 / 0.16 | 0.18 / 0.16 | 0.18 / 0.16 |
+| Tubbs A8 | 4.08 | 2.75 | 3.39 | 3.28 |
+| East Troublesome ratio at 36.8 h / A8 | 0.36 / 3.49 | 0.20 / 3.66 | 0.34 / 3.51 | to run |
+
+By A24's fixed rule H3 is **not kept**: Camp's HRRR wind never falls to half its peak inside its window, so H3 is
+E0 there and Camp's ratio cannot move toward 1, as A24 said before the runs. On the other two it passes every
+other clause (Marshall and Tubbs ratios move toward 1, first-time overlap unchanged, A8 better on both).
+Predictions: Tubbs right (1.4 to 1.7), Marshall right at 2.44 (0.96) and over at 1.22 (1.62 against 1.0 to 1.5).
+
+What it shows: H3(2.44) is the best Marshall run so far on every score (end ratio 0.96, overlap 0.49, houses
+1,750 against 1,196 observed with AUC 0.85), and it keeps the early grass run whole. Tubbs's overlap is the best
+yet at every outline, but the model has 176 km² burned by the cut at hour 17, above every mapped outline, so most
+of Tubbs's overrun is in the wind run itself and no stopping rule after it can remove it. Camp's overrun is the
+same kind. The open fault on the overrun fires is now during the run (Camp, Tubbs), and on East Troublesome it is
+the run that does not happen; A25's crown rate (C1, queued) is the next test of the second, and it will likely
+make the first worse, which A25 already says.
