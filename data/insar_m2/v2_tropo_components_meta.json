@@ -1,0 +1,44 @@
+{
+ "points": 200000,
+ "dates": 127,
+ "ifgrams": 375,
+ "ifgrams_used": 375,
+ "reference_yx": [
+  545,
+  535
+ ],
+ "reference_by_file": {
+  "timeseries.h5": [
+   545,
+   535,
+   "20211130"
+  ],
+  "timeseries_HRRR.h5": [
+   545,
+   535,
+   "20211130"
+  ],
+  "timeseries_HRRR_demErr.h5": [
+   545,
+   535,
+   "20211130"
+  ]
+ },
+ "reference_pin": {
+  "lalo": [
+   36.49511,
+   -96.80551
+  ],
+  "mintpy_yx": [
+   545,
+   535
+  ],
+  "in_mask": true,
+  "mask_fraction": 0.2948318496538081
+ },
+ "reference_date": "20211130",
+ "inverted_dataset": "unwrapPhase_bridging_phaseClosure",
+ "reference_outside_component_ifgrams": 0,
+ "points_apart_median_of_used": 3.0,
+ "hrrr_correction_rms_mm_median": 6.242212772369385
+}

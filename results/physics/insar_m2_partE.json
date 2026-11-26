@@ -1,0 +1,226 @@
+{
+ "E1": {
+  "nw_minus_rest": {
+   "before": -3.7008780887885195,
+   "hrrr": -0.4124529366624126,
+   "dem": -0.21562758093847728,
+   "final": -3.1661816881780878
+  },
+  "makes_corner": [],
+  "before_has_corner": true
+ },
+ "E2": {
+  "share_never_apart": 0.917231460971336,
+  "nw_apart_median": 1.0,
+  "rest_apart_median": 0.0,
+  "nw_minus_rest_never_apart": -0.987513324301601,
+  "n_nw_never": 1197,
+  "n_rest_never": 20976,
+  "corner_survives_never_apart": false
+ },
+ "E3": {
+  "winner": [
+   "incidence",
+   "g:max(0, east\u2212-6.98)",
+   "g:\u221acoherence \u00b7 apart_late\u00b2"
+  ],
+  "sd_before": 2.875,
+  "sd_after": 2.625,
+  "bits_saved_per_reading": 0.0972826406968812,
+  "transfers": true,
+  "holdout": [
+   {
+    "fold": "west -> east",
+    "formula_bpr": 8.064919684425899,
+    "one_correction_bpr": 8.147120945748426,
+    "transfers": true
+   },
+   {
+    "fold": "east -> west",
+    "formula_bpr": 7.978191881918917,
+    "one_correction_bpr": 8.244474055176875,
+    "transfers": true
+   },
+   {
+    "fold": "south -> north",
+    "formula_bpr": 8.005927128460366,
+    "one_correction_bpr": 8.197576765067737,
+    "transfers": true
+   },
+   {
+    "fold": "north -> south",
+    "formula_bpr": 7.924548975994765,
+    "one_correction_bpr": 8.03755519577741,
+    "transfers": true
+   }
+  ],
+  "inclusion": {
+   "g:\u221acoherence \u00b7 apart_late\u00b2": 0.9999999956242324,
+   "g:[incidence>41.4] \u00b7 east": 0.7010818889647564,
+   "g:max(0, east\u2212-6.98)": 0.27021876093197544,
+   "incidence": 0.1918189237722614,
+   "g:[dem_rate>0.238] \u00b7 closure_amb": 0.10759934708562002,
+   "g:max(0, east\u2212-6.98) \u00b7 incidence": 0.017170607580969013,
+   "g:[closure_amb>1.61] \u00b7 dem_rate": 0.01696177053512308
+  },
+  "bootstrap": {
+   "B": 10,
+   "selected": {
+    "g:\u221acoherence \u00b7 apart_late\u00b2": 0.8,
+    "g:max(0, east\u2212-6.98)": 0.5,
+    "g:[incidence>41.4] \u00b7 east": 0.3,
+    "g:closure_amb\u00b2 \u00b7 dem_rate\u00b2": 0.2,
+    "g:[closure_amb>1.61] \u00b7 dem_rate": 0.2,
+    "incidence": 0.2,
+    "g:[dem_rate>0.513] \u00b7 apart": 0.1,
+    "g:1/annual_amp \u00b7 dem_rate": 0.1,
+    "g:closure_amb\u00b2 \u00b7 east": 0.1,
+    "quality": 0.1,
+    "g:ln annual_amp": 0.1,
+    "g:e^(\u2212ref_dist/14.4) \u00b7 annual_amp": 0.1,
+    "g:hrrr_rate\u00b2 \u00b7 apart": 0.1,
+    "g:e^(\u2212annual_amp/3.05) \u00b7 dem_rate": 0.1,
+    "g:\u221ajumps \u00b7 ln annual_amp": 0.1,
+    "g:max(0, east\u2212-6.98) \u00b7 dem_rate": 0.1,
+    "g:[dem_rate>0.513] \u00b7 height": 0.1,
+    "g:coherence \u00b7 apart_late\u00b2": 0.1,
+    "g:[ref_dist>20]": 0.1,
+    "g:[closure_amb>1.61] \u00b7 amp_disp": 0.1,
+    "g:e^(\u2212annual_amp/3.05) \u00b7 hrrr_rate": 0.1,
+    "g:closure_amb\u00b2 \u00b7 dem_rate": 0.1,
+    "apart": 0.1,
+    "g:closure_amb \u00b7 dem_rate": 0.1,
+    "unwrap": 0.1,
+    "g:max(0, incidence\u221241.4)": 0.1,
+    "g:e^(\u2212annual_amp/6.23) \u00b7 dem_rate": 0.1
+   },
+   "coef_90": {
+    "incidence": [
+     -3.8658185098890487,
+     -2.0988845243390597
+    ],
+    "g:max(0, east\u2212-6.98)": [
+     1.5359389740913423,
+     2.349498415448673
+    ],
+    "g:\u221acoherence \u00b7 apart_late\u00b2": [
+     0.766213755758742,
+     0.9725179309175931
+    ]
+   }
+  },
+  "null": {
+   "max": 0.06722685390698219,
+   "mean": 0.06577867727811489,
+   "p": 0.1
+  },
+  "neighbour": {
+   "gain": 0.010712382259319475,
+   "where": "incidence \u00d7 north",
+   "null_95": -0.05736026027531654,
+   "p": 0.01,
+   "structure_left": true
+  },
+  "verdict": [
+   [
+    "incidence",
+    "group-level: can't be told from plain offsets over 102 groups"
+   ],
+   [
+    "g:max(0, east\u2212-6.98)",
+    "group-level: can't be told from plain offsets over 102 groups"
+   ],
+   [
+    "g:\u221acoherence \u00b7 apart_late\u00b2",
+    "named; no look-alike within 10:1"
+   ]
+  ],
+  "ladder": [
+   {
+    "terms": [],
+    "structure_bits": 7.906890595608519,
+    "param_bits": 20.0,
+    "residual_bits": 24209.720954109052,
+    "total_bits": 24237.62784470466,
+    "bits_per_reading": 8.07920928156822,
+    "n": 3000,
+    "sd": 2.875,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -1.108379119566642
+    },
+    "alpha": {},
+    "added": "one correction"
+   },
+   {
+    "terms": [
+     "g:\u221acoherence \u00b7 apart_late\u00b2"
+    ],
+    "structure_bits": 28.271418572208802,
+    "param_bits": 24.0,
+    "residual_bits": 23983.31941111853,
+    "total_bits": 24035.590829690736,
+    "bits_per_reading": 8.011863609896912,
+    "n": 3000,
+    "sd": 2.75,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -1.108379119566642,
+     "g:\u221acoherence \u00b7 apart_late\u00b2": 1.0816746764786058
+    },
+    "alpha": {},
+    "added": "g:\u221acoherence \u00b7 apart_late\u00b2"
+   },
+   {
+    "terms": [
+     "g:\u221acoherence \u00b7 apart_late\u00b2",
+     "g:max(0, east\u2212-6.98)"
+    ],
+    "structure_bits": 42.670162264146995,
+    "param_bits": 30.0,
+    "residual_bits": 23882.629274354942,
+    "total_bits": 23955.29943661909,
+    "bits_per_reading": 7.9850998122063634,
+    "n": 3000,
+    "sd": 2.625,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -1.108379119566642,
+     "g:\u221acoherence \u00b7 apart_late\u00b2": 0.9912608600880184,
+     "g:max(0, east\u2212-6.98)": 0.7101576010062997
+    },
+    "alpha": {},
+    "added": "g:max(0, east\u2212-6.98)"
+   },
+   {
+    "terms": [
+     "g:\u221acoherence \u00b7 apart_late\u00b2",
+     "g:max(0, east\u2212-6.98)",
+     "incidence"
+    ],
+    "structure_bits": 54.48394345536403,
+    "param_bits": 42.0,
+    "residual_bits": 23849.29597915865,
+    "total_bits": 23945.779922614016,
+    "bits_per_reading": 7.981926640871339,
+    "n": 3000,
+    "sd": 2.625,
+    "rho": null,
+    "code": "mix0.05",
+    "coef": {
+     "level": -1.108379119566642,
+     "g:\u221acoherence \u00b7 apart_late\u00b2": 0.8730794916502103,
+     "g:max(0, east\u2212-6.98)": 2.021655896680677,
+     "incidence": -3.040952413625387
+    },
+    "alpha": {},
+    "added": "incidence"
+   }
+  ],
+  "coefs": null,
+  "seconds": 226.01082158088684
+ }
+}

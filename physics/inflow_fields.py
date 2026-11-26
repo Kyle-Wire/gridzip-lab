@@ -1,4 +1,4 @@
-"""Protocol 13: the LBM's Case C errors with an inflow that carries shear stress (WindSim F3 step 7), roof terms guarded.
+"""Protocol 14: the LBM's Case C errors with an inflow that carries shear stress (WindSim F3 step 7), roof terms guarded.
 
 python physics/inflow_fields.py [--seeds 10]
 Reads results/physics/f3s7_{C1,W1}_fields.npz + points, f3s7_N1_points.csv and f3s6_R0_points.csv.
@@ -36,7 +36,7 @@ def main():
     assert (R0["id"] == idC).all() and (N1["id"] == idC).all() and (idW == idC).all()
     lr0, ln1 = np.log(R0["vs_pred"] / R0["vs_obs"]), np.log(N1["vs_pred"] / N1["vs_obs"])
     dN, dC = lr0 - ln1, lr0 - yC; s_pt = float(dN.std()); n = len(yC); fo = LF.folds(x, y)
-    out = {"protocol": "physics/PROTOCOL-13.md", "n": n,
+    out = {"protocol": "physics/PROTOCOL-14.md", "n": n,
            "level": {"R0": math.exp(lr0.mean()), "N1": math.exp(ln1.mean()), "C1": math.exp(yC.mean()), "W1": math.exp(yW.mean())},
            "Q0": {"s_pt": s_pt, "noise_level_ln": float(abs(dN.mean()))}, "ledger": {"C1": ledC, "W1": ledW}}
     print("levels", out["level"], "Q0", out["Q0"], flush=True)
@@ -71,7 +71,7 @@ def main():
         bB = LF.boot_inputs(B, res); out["B"] = LF._sum(B); out["Q1"]["roof"] = rule(B, bB, RF.ROOF_NAMES)
         out["Q1"]["roof_pays"] = [k for k, v in out["Q1"]["roof"].items() if v["pays"]]
     else:
-        out["Q1"]["roof_pays"] = None; out["Q1"]["note"] = "guarded synthetic check failed: roof terms dropped (protocol 13)"
+        out["Q1"]["roof_pays"] = None; out["Q1"]["note"] = "guarded synthetic check failed: roof terms dropped (protocol 14)"
     # Q2: the inflow change, point by point
     R0c = RF.ctx_build("R0", "f3s6")[0]
     cd = dict(cC); cd.update({f"d_{k}": cC[k] - R0c[k] for k in RF.DIFF_KEYS})
