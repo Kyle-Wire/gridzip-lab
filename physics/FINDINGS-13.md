@@ -107,3 +107,12 @@ ledger. Box from public facts only (7 NGL stations within 15 km of the city cent
   bridged ground is still needed for that.
 - No compressor search was run on Las Vegas: its rates are real ground motion, not errors, and with every row
   passing there is no error target. The tables are kept for a later error study.
+
+## Part G, Pawnee V2 rerun with the bridged fix (26 Nov; data/insar_m2/fix_rerun, figure p13_pawnee_fix.png)
+Run on THE-COW by insar_pipeline's PR #22 code, MintPy onward on V2's own stack (rates unchanged). 12.3 % of valid
+cells are bridged (2 regions); all 77 cells at OK02 are bridged, so OK02 is labelled and left out of grading.
+Rate RMSE 5.70 (marginal) -> 4.83 (pass); pair share 8/15 -> 6/10 (still fails); noise benchmark 7.75 (fails; it
+counts every cell by the protocol); bias and calibration pass. The fix does what it should at OK02, and V2 still fails
+on two rows that are not bridged ground. Remaining pairs involve OK04, OK05 (GPS on 57 of 127 dates) and OK07.
+A first look (not a test) at the station residual series shows per-ministack offsets that move together across
+stations (e.g. batch 9 about -6 mm, batch 12 about +5 to +7 mm), so the ministack joins are the next suspect.
