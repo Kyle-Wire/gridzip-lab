@@ -658,3 +658,57 @@ of Tubbs's overrun is in the wind run itself and no stopping rule after it can r
 same kind. The open fault on the overrun fires is now during the run (Camp, Tubbs), and on East Troublesome it is
 the run that does not happen; A25's crown rate (C1, queued) is the next test of the second, and it will likely
 make the first worse, which A25 already says.
+
+## A24: the held edge after the wind event, H3 (26-27 Nov 2026)
+
+Term output `results/physics/fire_real_a24.json` (T2o, 1.5 km lattice, tables `*_E0_a24.npz`). Runs in FireSim
+`results/*/..._E0_H3_122*` and `..._E0_H3_244*` (M3, E0 priors, HRRR as analysed, 3 seeds, Tubbs 2; WSL). Wind-event
+cut from the HRRR box wind (`scripts/wind_event.py`): Marshall hour 6, Tubbs 17, East Troublesome 27, Camp none.
+
+**Term:** `held_after_event(L)` is found when planted (the noise twin stays silent), and **not named** on the real
+errors. The winner is A21's (timber -2.4, canopy cover +4.9, humidity, burn duration), 0 of 4 folds transfer. Each
+fire alone: Camp canopy cover, Tubbs late arrival, East Troublesome ember (negative). The prediction (named, carried
+by Tubbs) was wrong. The plain counts say why: share of model-burned points the record does not show burned.
+
+| | before the cut | after, flame under 1.22 m | after, 1.22 to 2.44 m | after, over 2.44 m |
+|---|---|---|---|---|
+| Tubbs | 0.34 (74) | 0.94 (17) | 1.00 (4) | 1.00 (1) |
+| East Troublesome | 0.38 (53) | 0.17 (6) | 0.00 (2) | 0.00 (1) |
+| Camp | 0.42 (188) | none | none | none |
+| Marshall | 0.00 (5) | none | none | none |
+
+On Tubbs almost all ground the model takes after the wind event is wrong, whatever the flame: the cut, not the
+flame length, is what separates it. There are only 22 such points, too few to pay for a term over four fires.
+
+**Runs** (area ratio and overlap; A8 as building + area):
+
+| | E0 | H2(1.22) (A22) | H3(1.22) | H3(2.44) |
+|---|---|---|---|---|
+| Marshall 2.95 h overlap | 0.461 | 0.385 | 0.461 | 0.461 |
+| Marshall end ratio / overlap | 2.35 / 0.27 | 1.35 / 0.33 | 1.62 / 0.35 | 0.96 / 0.49 |
+| Marshall A8 | 2.45 (1.72 + 0.73) | 1.94 | 1.94 (1.21 + 0.73) | 1.88 (1.15 + 0.73) |
+| Marshall houses (1,196 obs.) | 2,570, AUC 0.84 | 827, 0.76 | 1,861, 0.85 | 1,750, 0.85 |
+| Tubbs ratio 35.3 / 40.9 / 43.0 h | 1.98 / 1.85 / 1.86 | 1.14 / 1.02 / 1.03 | 1.69 / 1.50 / 1.50 | 1.63 / 1.44 / 1.40 |
+| Tubbs overlap, same times | 0.40 / 0.47 / 0.44 | 0.42 / 0.51 / 0.47 | 0.46 / 0.56 / 0.52 | 0.47 / 0.58 / 0.55 |
+| Tubbs 5.5 h outside-share | 0.18 | 0.13 / 0.16 | 0.18 / 0.16 | 0.18 / 0.16 |
+| Tubbs A8 | 4.08 (2.58 + 1.50) | 2.75 | 3.39 (2.35 + 1.04) | 3.28 (2.33 + 0.95) |
+| Tubbs houses (5,185 obs.) | 11,619, 0.75 | 5,674, 0.72 | 10,664, 0.77 | 10,602, 0.77 |
+| East Troublesome ratio 12.3 / 23.7 / 36.8 h | 0.29 / 0.30 / 0.36 | 0.23 / 0.20 / 0.20 | 0.29 / 0.30 / 0.34 | 0.29 / 0.30 / 0.34 |
+| East Troublesome A8 | 3.49 | 3.66 | 3.51 | 3.51 |
+
+Before each fire's cut every H3 run is identical to E0 (Marshall and East Troublesome hour by hour; Tubbs's seed 0).
+
+By A24's rule (A22's, Camp counted with E0) **H3 is not kept**, failing only where the protocol said it would: Camp
+cannot move. Everything else in the rule passes for both L: the end ratio moves toward 1 on Marshall and Tubbs, no
+first-time overlap is worse, A8 improves on both with Camp unchanged. Predictions: Marshall's first 6 hours unchanged
+(right), its end ratio 1.0 to 1.5 (H3(1.22) 1.62, wrong; H3(2.44) 0.96, right); Tubbs 1.4 to 1.7 with the passes
+unchanged (right); East Troublesome changes little (right).
+
+What it shows:
+- Marshall H3(2.44) is the best Marshall run on every score so far. Waiting for the wind keeps the grass run whole.
+- Tubbs's overrun is mostly made during the wind run: the model has 176 km² at hour 17, above every mapped outline
+  (108 to 125). No stopping rule after the cut can fix that; it is a spread-rate fault in the run itself (with
+  canopy cover, A20's lead), for a later amendment. After the cut H3(2.44) all but stops it (175.5 to 176.1 km²).
+- The counts table suggests the next stopping rule: no new spread after the cut except where the flame is tall
+  (a crown run), rather than a flame threshold alone. That is for its own amendment, with Camp's opposite fault
+  (A25) in view.
