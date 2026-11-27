@@ -828,3 +828,10 @@ Tubbs 34, Marshall 87, East Troublesome 21 m/min). A24 (the device's run-phase h
 - A25 note (26 Nov, before part 1 ran): the tables' `moist` is already the window-mean 1-h moisture (checked
   against the runs' weather: Camp 3.79, Tubbs 4.77, Marshall 5.06, East Troublesome 7.42 %, the last pulled up by
   night recovery to 14 %), not an average of three classes as written above. Part 1 uses it as it is.
+- A25 note 2 (27 Nov 2026, 11:45 AM ET, before any C1 result was read): East Troublesome under C1 runs far slower
+  than E0 (seed 0 at hour 10 of 43 after 29 minutes, 34,000 spot fires), so under E0's 115-minute cap it stops
+  inside seed 0 at about hour 20 to 25. It is read as it stands: seed 0 only, scored at the mapped outlines inside
+  what it reached (12.3 h; 23.7 h only if reached), the rest marked "not reached", not guessed. The rule's
+  East Troublesome clause is judged only on the outlines reached, and that is said beside the verdict. A full
+  window (all three outlines, three seeds) is a longer run that needs Kyle's go, and would be read under this
+  same rule. Camp, Tubbs and Marshall run as written.
