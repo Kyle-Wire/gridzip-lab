@@ -1,0 +1,360 @@
+{
+ "synth": {
+  "storage_fill": {
+   "winner": [],
+   "bits": 0.0,
+   "null_p": 1.0,
+   "pass": false
+  },
+  "null": {
+   "winner": [],
+   "bits": 0.0,
+   "null_p": 1.0,
+   "pass": true
+  }
+ },
+ "all": {
+  "name": "A13 both towns (exploratory, n<20)",
+  "n": 16,
+  "exploratory": true,
+  "terms_offered": [
+   "floodplain_height",
+   "channel_distance",
+   "edge_loss",
+   "blockage",
+   "ground_slope",
+   "velocity_head_wall",
+   "datum_kind",
+   "on_building",
+   "storage_fill",
+   "town_offset"
+  ],
+  "winner": [
+   "g:e^(\u2212hand/12.4) \u00b7 V"
+  ],
+  "coef": {
+   "level": -0.012749999999999973,
+   "g:e^(\u2212hand/12.4) \u00b7 V": 1.0160711470078796
+  },
+  "bits_saved_per_reading": 0.0022783579956993094,
+  "sd_before": 0.5,
+  "sd_after": 0.34375,
+  "null_p": 0.05,
+  "inclusion": {
+   "g:max(0, bld_frac\u22120.0989) \u00b7 V": 0.9112187600797745,
+   "valley": 0.7977389127350192,
+   "g:e^(\u2212hand/12.4) \u00b7 V": 0.06699954966651431,
+   "offset": 0.03285439910615193
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {
+    "g:e^(\u2212hand/12.4) \u00b7 V": 0.4666666666666667,
+    "g:max(0, bld_frac\u22120.0989) \u00b7 hand": 0.2
+   },
+   "coef_90": {
+    "g:e^(\u2212hand/12.4) \u00b7 V": [
+     0.1958326915454228,
+     1.0160711470078796
+    ]
+   }
+  },
+  "verdict": [
+   [
+    "g:e^(\u2212hand/12.4) \u00b7 V",
+    "named, but can't rule out g:max(0, bld_frac\u22120.0989) \u00b7 V (+0.4 bits)"
+   ]
+  ],
+  "dry": {
+   "n": 1,
+   "hand_m": {
+    "median": 1.105,
+    "min": 1.105,
+    "max": 1.105
+   },
+   "d_channel_m": {
+    "median": 848.9,
+    "min": 848.9,
+    "max": 848.9
+   },
+   "d_edge_m": {
+    "median": 2828.6,
+    "min": 2828.6,
+    "max": 2828.6
+   },
+   "bld_frac_30": {
+    "median": 0.1389,
+    "min": 0.1389,
+    "max": 0.1389
+   },
+   "slope": {
+    "median": 0.006,
+    "min": 0.006,
+    "max": 0.006
+   }
+  },
+  "_y": [
+   -0.465,
+   -0.818,
+   -0.401,
+   -0.639,
+   -0.885,
+   -0.985,
+   -0.595,
+   -0.35,
+   -0.218,
+   -0.453,
+   0.298,
+   0.045,
+   2.591,
+   -0.181,
+   2.74,
+   0.112
+  ],
+  "_mu": [
+   -0.6062704418791978,
+   -0.6062704418791978,
+   0.39833410893513915,
+   -0.6062704418791978,
+   -0.6062704418791978,
+   -0.6062704418791978,
+   -0.38866161055291565,
+   -0.6062704418791978,
+   -0.6062704418791978,
+   -0.6062704418791978,
+   -0.3907318548318589,
+   0.19724362333057943,
+   2.499307400378585,
+   -0.1618791559351109,
+   2.499307400378585,
+   0.19724362333057943
+  ],
+  "_ids": [
+   "17479",
+   "17215",
+   "17485",
+   "17222",
+   "17218",
+   "17253",
+   "17486",
+   "17481",
+   "17220",
+   "17230",
+   "44716",
+   "44717",
+   "44724",
+   "44715",
+   "44719",
+   "44722"
+  ]
+ },
+ "no_step_pair": {
+  "name": "A13 without HF 44719/44724 (exploratory)",
+  "n": 14,
+  "exploratory": true,
+  "terms_offered": [
+   "floodplain_height",
+   "channel_distance",
+   "edge_loss",
+   "blockage",
+   "ground_slope",
+   "velocity_head_wall",
+   "datum_kind",
+   "on_building",
+   "storage_fill",
+   "town_offset"
+  ],
+  "winner": [],
+  "coef": {
+   "level": -0.3953571428571429
+  },
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.375,
+  "sd_after": 0.375,
+  "null_p": 1.0,
+  "inclusion": {
+   "valley": 0.6651724922012248,
+   "offset": 0.040783437420685596
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {},
+   "coef_90": {}
+  },
+  "verdict": [],
+  "dry": {
+   "n": 1,
+   "hand_m": {
+    "median": 1.105,
+    "min": 1.105,
+    "max": 1.105
+   },
+   "d_channel_m": {
+    "median": 848.9,
+    "min": 848.9,
+    "max": 848.9
+   },
+   "d_edge_m": {
+    "median": 2828.6,
+    "min": 2828.6,
+    "max": 2828.6
+   },
+   "bld_frac_30": {
+    "median": 0.1389,
+    "min": 0.1389,
+    "max": 0.1389
+   },
+   "slope": {
+    "median": 0.006,
+    "min": 0.006,
+    "max": 0.006
+   }
+  },
+  "_y": [
+   -0.465,
+   -0.818,
+   -0.401,
+   -0.639,
+   -0.885,
+   -0.985,
+   -0.595,
+   -0.35,
+   -0.218,
+   -0.453,
+   0.298,
+   0.045,
+   -0.181,
+   0.112
+  ],
+  "_mu": [
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5
+  ],
+  "_ids": [
+   "17479",
+   "17215",
+   "17485",
+   "17222",
+   "17218",
+   "17253",
+   "17486",
+   "17481",
+   "17220",
+   "17230",
+   "44716",
+   "44717",
+   "44715",
+   "44722"
+  ]
+ },
+ "lumber_only": {
+  "name": "A13 Lumber only (exploratory)",
+  "n": 10,
+  "exploratory": true,
+  "terms_offered": [
+   "floodplain_height",
+   "channel_distance",
+   "edge_loss",
+   "blockage",
+   "ground_slope",
+   "velocity_head_wall",
+   "datum_kind",
+   "on_building",
+   "storage_fill",
+   "spill_rise"
+  ],
+  "winner": [],
+  "coef": {
+   "level": -0.5809
+  },
+  "bits_saved_per_reading": 0.0,
+  "sd_before": 0.25,
+  "sd_after": 0.25,
+  "null_p": 1.0,
+  "inclusion": {
+   "edge_loss": 0.01188742108646999
+  },
+  "bootstrap": {
+   "B": 30,
+   "selected": {},
+   "coef_90": {}
+  },
+  "verdict": [],
+  "dry": {
+   "n": 1,
+   "hand_m": {
+    "median": 1.105,
+    "min": 1.105,
+    "max": 1.105
+   },
+   "d_channel_m": {
+    "median": 848.9,
+    "min": 848.9,
+    "max": 848.9
+   },
+   "d_edge_m": {
+    "median": 2828.6,
+    "min": 2828.6,
+    "max": 2828.6
+   },
+   "bld_frac_30": {
+    "median": 0.1389,
+    "min": 0.1389,
+    "max": 0.1389
+   },
+   "slope": {
+    "median": 0.006,
+    "min": 0.006,
+    "max": 0.006
+   }
+  },
+  "_y": [
+   -0.465,
+   -0.818,
+   -0.401,
+   -0.639,
+   -0.885,
+   -0.985,
+   -0.595,
+   -0.35,
+   -0.218,
+   -0.453
+  ],
+  "_mu": [
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5,
+   -0.5
+  ],
+  "_ids": [
+   "17479",
+   "17215",
+   "17485",
+   "17222",
+   "17218",
+   "17253",
+   "17486",
+   "17481",
+   "17220",
+   "17230"
+  ]
+ }
+}

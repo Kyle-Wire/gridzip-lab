@@ -161,6 +161,14 @@ FLOOD_WALL = [
          "NAVD88 level disagree: a datum or ground-reading error", ("kind_hag",), lambda c: c["kind_hag"]),
     Term("on_building", "flood", "b · [mark on a building]", "marks on walls differ from open-ground marks (wall "
          "treatment, local run-up or shelter)", ("at_building",), lambda c: c["at_building"]),
+    # protocol 15 (27 Nov 2026): after the thin-film fix, the Lumber marks still read ~0.6 m low
+    Term("storage_fill", "flood", "b · d_ch / (d_ch + L)", "the floodplain far from the river has not filled to the "
+         "river's level when the run stops (a steady run cut short, or too little volume reaching the swamp)",
+         ("d_channel",), lambda c: (lambda L: c["d_channel"] / (c["d_channel"] + L)), family=(30.0, 1000.0, True), unit="m",
+         group="valley"),
+    Term("spill_rise", "flood", "b · (spill − ground)", "water must climb over a ridge (road, railway, levee) to reach "
+         "the mark; the real flood got through culverts the model does not have", ("spill_rise",),
+         lambda c: c["spill_rise"]),
     Term("town_offset", "flood", "per-town offset", "a whole town is off by one amount (its rain product or inflow)",
          ("site_onehot",), lambda c: c["site_onehot"], group="offset", physics=False),
 ]
