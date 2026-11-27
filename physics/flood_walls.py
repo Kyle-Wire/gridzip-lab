@@ -51,7 +51,7 @@ def build(rows):
     col = lambda k: np.array([_f(r.get(k)) for r in wet])  # noqa: E731
     ctx = {}
     for key, src in (("h_model", "h_model_m"), ("hand", "hand_m"), ("d_channel", "d_channel_m"), ("d_edge", "d_edge_m"),
-                     ("bld_frac", "bld_frac_30"), ("slope", "slope"), ("V", "v_max_ms")):
+                     ("bld_frac", "bld_frac_30"), ("slope", "slope"), ("V", "v_max_ms"), ("spill_rise", "spill_rise_m")):
         v = col(src)
         if len(v) and np.isfinite(v).all():
             ctx[key] = v

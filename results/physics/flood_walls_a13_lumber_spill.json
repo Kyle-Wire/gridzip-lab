@@ -1,0 +1,90 @@
+[
+ {
+  "hwm_id": "17479",
+  "ground": 16.41,
+  "spill_from_channel": 16.41,
+  "obs": null,
+  "obs_from_hag": 16.98,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17215",
+  "ground": 16.13,
+  "spill_from_channel": 16.16,
+  "obs": 17.25168,
+  "obs_from_hag": 17.08,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17485",
+  "ground": 14.97,
+  "spill_from_channel": 14.97,
+  "obs": null,
+  "obs_from_hag": 16.86,
+  "wse_free": 15.19
+ },
+ {
+  "hwm_id": "17222",
+  "ground": 16.26,
+  "spill_from_channel": 16.3,
+  "obs": 17.16024,
+  "obs_from_hag": 17.15,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17218",
+  "ground": 16.29,
+  "spill_from_channel": 16.29,
+  "obs": 17.25168,
+  "obs_from_hag": 17.19,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17228",
+  "ground": 15.9,
+  "spill_from_channel": 16.11,
+  "obs": 16.9164,
+  "obs_from_hag": 16.46,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17253",
+  "ground": 15.82,
+  "spill_from_channel": 16.11,
+  "obs": 17.25168,
+  "obs_from_hag": 17.05,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17486",
+  "ground": 14.77,
+  "spill_from_channel": 14.95,
+  "obs": null,
+  "obs_from_hag": 16.89,
+  "wse_free": 15.31
+ },
+ {
+  "hwm_id": "17481",
+  "ground": 16.29,
+  "spill_from_channel": 16.32,
+  "obs": null,
+  "obs_from_hag": 16.81,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17220",
+  "ground": 15.68,
+  "spill_from_channel": 15.69,
+  "obs": 16.79448,
+  "obs_from_hag": 16.82,
+  "wse_free": null
+ },
+ {
+  "hwm_id": "17230",
+  "ground": 16.12,
+  "spill_from_channel": 16.12,
+  "obs": 16.9164,
+  "obs_from_hag": 17.08,
+  "wse_free": null
+ }
+]
