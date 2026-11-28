@@ -267,3 +267,40 @@ NWP = [
          ("q850", "spin850", "lat"), lambda c: c["q850"] * np.maximum(c["spin850"] * np.sign(c["lat"] + 1e-9), 0.0)),
 ]
 DOMAINS.update({"nwp": NWP})
+
+# ============================================================================================================ track
+# Errors of a hurricane track forecast at one lead, split along and across the storm's real path: r = error · axis (km,
+# along > 0 = forecast too fast, cross > 0 = forecast right of the real path), scaled by its spread. Inputs: lat (°),
+# r34 (mean 34 kt wind radius, nm, floored at 50), vmax (kt), nw (the north-west unit vector projected on the target
+# axis: the direction beta drift pushes a northern-hemisphere vortex), speed (start motion, km/h), u200 and shr (start
+# environment, m/s, from our own model), deficit (model's central pressure minus the real one at 6 h, hPa), land (share
+# of the real path over land), and two hindsight inputs flagged as such: turn (signed change of heading over the
+# forecast, degrees, right > 0) and accel (real speed late / early − 1). Added 28 Nov 2026 for WindSim hurricane Test 2.
+BETA0 = 2 * OMEGA / 6.371e6
+TRACK = [
+    Term("beta_drift", "track", "b · (β/β₀) · R₃₄ · (n̂w · ê),  β = 2Ω cos φ / a", "the model misses the vortex's own north-west drift from Earth's curvature (beta effect), more for big storms",
+         ("lat", "r34", "nw"), lambda c: np.cos(np.radians(c["lat"])) * c["r34"] / 100 * c["nw"], group="beta"),
+    Term("beta_drift_strength", "track", "b · (β/β₀) · V_max · (n̂w · ê)", "the missed beta drift scales with storm strength",
+         ("lat", "vmax", "nw"), lambda c: np.cos(np.radians(c["lat"])) * c["vmax"] / 100 * c["nw"], group="beta"),
+    Term("coriolis_f", "track", "b · f,  f = 2Ω sin φ", "errors change with latitude through Earth's spin", ("lat",),
+         lambda c: 2 * OMEGA * np.sin(np.radians(c["lat"])) * 1e4, group="latitude"),
+    Term("poleward", "track", "b · max(0, φ − 25°)", "north of the subtropical ridge (westerlies, transition) the model goes wrong", ("lat",),
+         lambda c: np.maximum(c["lat"] - 25.0, 0.0) / 10, group="latitude"),
+    Term("start_speed", "track", "b · |c₀|", "fast-moving storms are forecast too slow or too fast", ("speed",), lambda c: c["speed"] / 20),
+    Term("westerlies", "track", "b · u₂₀₀", "an upper-level trough / westerlies at the start (recurvature setup) is handled badly", ("u200",),
+         lambda c: c["u200"] / 10, group="steering"),
+    Term("shear", "track", "b · |V₂₀₀ − V₈₅₀|", "sheared storms: the steering layer the model uses is the wrong depth", ("shr",),
+         lambda c: c["shr"] / 10, group="steering"),
+    Term("unresolved_core", "track", "b · V_max", "intense storms have a core far smaller than the 165 km grid", ("vmax",),
+         lambda c: c["vmax"] / 100, group="vortex"),
+    Term("vortex_too_weak", "track", "b · (p_model − p_real)", "the model's vortex is too shallow, so it is steered at the wrong level", ("deficit",),
+         lambda c: c["deficit"] / 20, group="vortex"),
+    Term("small_storm", "track", "b · 50 / R₃₄", "small storms are barely resolved at all", ("r34",), lambda c: 50.0 / c["r34"], group="vortex"),
+    Term("land", "track", "b · land share", "storms over land: friction and terrain break the vortex in the model", ("land",), lambda c: c["land"]),
+    Term("recurvature", "track", "b · Δθ (hindsight)", "the real storm turned (right > 0) and the forecast did not follow", ("turn",),
+         lambda c: c["turn"] / 90, group="turn"),
+    Term("turn_size", "track", "b · |Δθ| (hindsight)", "errors grow wherever the real path bends", ("turn",), lambda c: np.abs(c["turn"]) / 90, group="turn"),
+    Term("acceleration", "track", "b · (c_late / c_early − 1) (hindsight)", "the real storm sped up (often in recurvature) and the forecast did not", ("accel",),
+         lambda c: np.clip(c["accel"], -1, 3)),
+]
+DOMAINS.update({"track": TRACK})
