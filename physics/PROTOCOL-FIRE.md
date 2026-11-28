@@ -835,3 +835,40 @@ Tubbs 34, Marshall 87, East Troublesome 21 m/min). A24 (the device's run-phase h
   East Troublesome clause is judged only on the outlines reached, and that is said beside the verdict. A full
   window (all three outlines, three seeds) is a longer run that needs Kyle's go, and would be read under this
   same rule. Camp, Tubbs and Marshall run as written.
+
+### A26 (28 Nov 2026, 9:55 AM ET): the crown rate in conifer timber only, held to its fitted range (C2), alone and with H3
+
+Seen: every A24 and A25 result (H3 not kept, Camp cannot move; C1 not kept: East Troublesome runs at the right pace
+for 12 hours, then everything overruns, with 99.5 to 100 % of C1's torching cell-hours outside Cruz's fitted range,
+mostly 1-h moisture under 7 % and CBD under 0.12). Also seen, as inputs only: the share of canopy cells in the
+conifer timber models below (East Troublesome 0.92, Tubbs 0.79, Marshall 0.65, Camp 0.59; broadleaf litter 0.00,
+0.10, 0.10, 0.22). No C2 run, no A26 table. Kyle, 28 Nov: "go for it :)" (to this step).
+- Where (the coordinator's brief, 28 Nov): the Cruz rate only in canopy cells whose LANDFIRE FBFM40 code (the run's
+  own fuel grid; no new data, EVT is not on disk) is a conifer timber model in Scott and Burgan 2005 (RMRS-GTR-153,
+  opened, pp. 50-64): TL1 "Low Load Compact Conifer Litter", TL3 "Moderate Load Conifer Litter", TL5 "High Load
+  Conifer Litter", TL8 "Long-Needle Litter" and TU4 "Dwarf Conifer With Understory" say conifer in their names;
+  TU1, TU2, TU3, TU5, TL4 "Small downed logs" and TL7 "Large Downed Logs" are timber types whose names say neither,
+  included as briefed. Left out: TL2, TL6 and TL9 ("... Broadleaf Litter") and every grass, shrub or grass-shrub
+  model under canopy, where the crown rate stays Rothermel 1991 as in E0. The TU group is wide: at Tubbs it covers
+  much of the oak woodland, so this mask removes little there; that is a limit stated now.
+- How (setting C2): Cruz et al. 2005 eq. 3 with its inputs held at the edges of the range it was fitted on: U10 5 to
+  32 km/h, EFFM (the model's 1-h moisture) 7 to 12 %, CBD 0.12 to 0.48 inside the rate. CAC (eqs. 1-2) uses the
+  held rate and the cell's own CBD; eq. 4 for passive fire as in C1. Initiation stays Van Wagner's. Code: FireSim
+  `--crown-rate cruz05c` (`firesim/landscape.py`, tests in `tests/test_crown_cruz.py`).
+- Compressor first: the error tables gain `fbfm` (`*_E0_a26.npz`, same E0 runs). Term `cruz_conifer_held`: [conifer
+  timber and canopy] · ln CROS with the held inputs (window-mean wind and moisture, as A25's term). T2 and T2o,
+  A21's thinning, four fires, leave one out, planted check first. Predicted: not named, for A25's reason (window
+  means), so the model runs decide.
+- Runs (each E0's command line plus the setting; 115-minute cap; a cap inside seed 0 is read on the partial result
+  and the outlines it reached): East Troublesome C2 and C2+H3(2.44); Tubbs C2+H3(2.44) and C2; Marshall C2+H3(2.44)
+  and C2; Camp C2 (Camp has no wind-event cut, so C2+H3 is C2 there and is not run twice).
+- Rule, fixed now, for the candidate C2+H3(2.44): kept only if, against E0, on every fire the area ratio at the last
+  mapped time moves toward 1 or does not move away by more than 0.1, East Troublesome's ratio moves toward 1 at
+  every mapped time, the first mapped time's overlap is not worse by more than 0.02 (Tubbs: the 5.5 h
+  outside-share not higher by more than 0.02), and A8 improves on at least two fires with none worse by more than
+  0.1. C2 alone is read under A25's rule. A kept candidate goes to the freeze with the rest.
+- Predicted: East Troublesome C2's ratio at 12.3 h is 0.5 to 0.9 (between E0's 0.29 and C1's 1.19: holding the
+  moisture at 7 % cuts the rate by about 40 %), with overlap above E0's 0.27; Camp C2 still overruns (last ratio
+  2 to 4); Tubbs C2+H3 3 to 6 at 43 h; Marshall C2+H3 within 0.1 of H3(2.44)'s 0.96. So the candidate is predicted
+  **not** kept, failing on Camp and Tubbs. Spot fires stay several times E0's wherever C2 crowns, which, if so,
+  points to the coordinator's other lead (the ember source tied to the crown fraction), under its own amendment.
