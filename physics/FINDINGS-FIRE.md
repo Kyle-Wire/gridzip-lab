@@ -671,3 +671,33 @@ km² until hour 28, then flat at 251 km². The reading above stands. The plain c
 
 Before each cut every H3 run is identical to E0 (Marshall and East Troublesome hour by hour, Tubbs seed 0), so the
 rule changes nothing it should not.
+
+## A25 part 2 (model runs): the Cruz crown rate, setting C1 (28 Nov 2026)
+
+Runs (FireSim fd54baa, 1dae85c, 219c0df, 4195173): E0 priors, HRRR as analysed, 3 seeds (Tubbs 2). East
+Troublesome finished seed 0 only inside the 115-minute cap (A25 note 2), so its row is one seed, at all three
+outlines.
+
+| | E0 | C1 |
+|---|---|---|
+| East Troublesome ratio / overlap at 12.3 h | 0.29 / 0.272 | 1.19 / 0.411 |
+| at 23.7 h | 0.30 / 0.256 | 1.47 / 0.395 |
+| at 36.8 h | 0.36 / 0.277 | 1.70 / 0.401 |
+| East Troublesome A8 / houses (618 observed) | 3.49 / 74 | 12.67 / 4,127 |
+| Camp ratio at 20.08 h / A8 | 1.33 / 3.02 | 5.09 / 9.06 |
+| Tubbs ratio at 42.98 h / A8 | 1.86 / 4.08 | 7.49 / 13.93 |
+| Marshall ratio at end / A8 | 2.35 / 2.45 | 2.43 / 2.58 |
+
+By A25's fixed rule C1 is **not kept**: East Troublesome's ratio moves toward 1 at 12.3 h and 23.7 h but away at
+36.8 h (0.64 off to 0.70 off) and its A8 is far worse; Camp and Tubbs are far worse on every clause. Predictions:
+East Troublesome's 12.3 h ratio was predicted 0.4 to 0.7 and came out 1.19 (too low a guess); Camp overrunning
+more was right.
+
+What it shows: the timber fire now runs. At 12.3 h C1 has the best East Troublesome shape yet (overlap 0.41
+against 0.27), so the miss there was the crown rate, as A23's class table pointed to. But the same rate in every
+canopy cell is far too strong elsewhere and later: 99.5 % of torching cell-hours were outside Cruz's fitted range
+(1-h moisture under 7 %, canopy bulk density under 0.12, wind over 32 km/h), Tubbs's oak woodland is not the
+conifer stands the formula was fitted on, and embers rose 40 to 60 times on East Troublesome and about 3 times on
+Tubbs, which drives the house counts. Leads for a new amendment, compressor first: the crown rate only where the
+stand is conifer (LANDFIRE existing vegetation type), held to the fitted range at its edges; and the ember source
+tied to the crown fraction rather than to intensity alone.
