@@ -332,4 +332,12 @@ FIRE += [
     Term("cruz_active", "fire", "b · [CAC ≥ c], CAC = CROS_A · CBD / 3", "ground where Cruz et al. 2005 call the crown fire active",
          ("cac", "cac_c"), lambda c: _knots(c, "cac", "cac_c"), family=(0.5, 2.0, True), group="crownrate"),
 ]
+# PROTOCOL-FIRE amendment A26: crown_c2 = ln CROS (Cruz et al. 2005) with U10 held to 5-32 km/h, EFFM to 7-12 %, CBD to
+# 0.12-0.48 inside the rate, CAC from the cell's own CBD, and only in canopy cells whose FBFM40 is a conifer timber model
+# (TU1-TU5, TL1, TL3, TL4, TL5, TL7, TL8; Scott and Burgan 2005, RMRS-GTR-153); 0 elsewhere.
+FIRE += [
+    Term("cruz_conifer_held", "fire", "b · [conifer timber canopy] · ln CROS(U10∈[5,32], EFFM∈[7,12], CBD∈[0.12,0.48])",
+         "in conifer timber, where the Cruz et al. 2005 rate held to its fitted range is fast, the model is too slow (b<0) or too fast (b>0)",
+         ("crown_c2",), lambda c: c["crown_c2"], group="crownc2"),
+]
 DOMAINS["fire"] = FIRE

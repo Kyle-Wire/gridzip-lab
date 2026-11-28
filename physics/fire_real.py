@@ -21,9 +21,11 @@ SLOW_V = (0.5, 1.0, 2.0, 5.0, 10.0)
 A18 = "--a18" in sys.argv                                           # amendment A18: slow_edge on T2o only
 THIN = [1]                                                          # amendment A21: lattice thinning step (set in main)
 A25 = "--a25" in sys.argv                                           # amendment A25: Cruz crown-rate terms
+A26 = "--a26" in sys.argv                                           # amendment A26: the same, conifer timber only, inputs held
+CONIFER_TIMBER = (161, 162, 163, 164, 165, 181, 183, 184, 185, 187, 188)   # TU1-TU5, TL1, TL3, TL4, TL5, TL7, TL8 (Scott and Burgan 2005)
 A16 = "--a16" in sys.argv                                           # amendment A16: tables T2 and T2o with the overrun inputs
 PLANT = {"wind": ("lnu", None), "lee": ("lee5", None), "calm": ("calm", None), "ember": ("ember", 1000.0), "houses": ("gap", 10.0), "flank": ("flank", None),
-         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0), "heldx": ("heldx", 1.22), "crownrate": ("crown_ln", None)}
+         "late": ("late", None), "slow": ("slow", 2.0), "held": ("held", 2.44), "crown": ("dry", 30.0), "heldx": ("heldx", 1.22), "crownrate": ("crown_ln", None), "crownc2": ("crown_c2", None)}
 GRIDS = {"T1": E.Grid(0.05, -8.0, 8.0), "T2": E.Grid(0.25, -3.0, 3.0), "T3": E.Grid(0.05, -2.0, 2.0), "T2o": E.Grid(0.25, -3.0, 3.0)}
 
 
@@ -93,6 +95,12 @@ def table(d, meta, which):
         cr = np.where(cac_ >= 1.0, ca, ca * np.exp(-cac_)); cc_ = (0.5, 1.0, 2.0)
         c.update(crown_ln=np.where(cbd_ > 0, np.log(np.maximum(cr, 1e-3)), 0.0),
                  cac=np.stack([((cbd_ > 0) & (cac_ >= v)).astype(float) for v in cc_], 1), cac_c=np.array(cc_))
+    if which in ("T2", "T2o") and A26 and "t12_fbfm" in d:     # A26: C2, conifer timber canopy only, inputs held to the fitted range
+        cbd_, fb_ = d["t12_cbd"][rows], d["t12_fbfm"][rows]
+        u_ = np.clip(g("u10" + suf) * 3.6, 5.0, 32.0); m_ = np.clip(g("moist" + suf) * 100.0, 7.0, 12.0)
+        ca = 11.02 * u_ ** 0.90 * np.clip(cbd_, 0.12, 0.48) ** 0.19 * np.exp(-0.17 * m_); cac_ = ca * cbd_ / 3.0
+        cr = np.where(cac_ >= 1.0, ca, ca * np.exp(-cac_)); w_ = (cbd_ > 0) & np.isin(fb_, CONIFER_TIMBER)
+        c.update(crown_c2=np.where(w_, np.log(np.maximum(cr, 1e-3)), 0.0))
     if which == "T3": c.update(gap=g("gap"), gap_d=np.array(meta["gap_d"]), mod=g("mod"))
     return c, y[rows], blk[rows]
 
@@ -128,7 +136,7 @@ def planted(ctx, y, blk, g, seed=0):
     rng = np.random.default_rng(seed); n = len(y); built = E.assemble(T.FIRE, ctx, n); L = E.library_info(built)
     by = {b.name: b for b in built}; out = {}
     names = {"wind": "wind_speed", "lee": "lee_descent_5km", "calm": "calm_share", "ember": "ember", "houses": "gap", "flank": "flank_spread",
-             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown", "heldx": "held_after_event", "crownrate": "cruz_crown"}
+             "late": "late_arrival", "slow": "slow_edge", "held": "held_edge", "crown": "dry_crown", "heldx": "held_after_event", "crownrate": "cruz_crown", "crownc2": "cruz_conifer_held"}
     noise = block_shuffle(y, blk, rng)
     w, _, _ = E.search(built, noise, g, library_size=L, robust=True)
     out["noise_only"] = {"named": w["terms"], "pass": not w["terms"]}
