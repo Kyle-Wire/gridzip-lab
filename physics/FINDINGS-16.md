@@ -44,3 +44,22 @@ Kyle), then the pooled search.
 - **Reading.** The wall model changes neither the pattern nor the level. What remains is a miss that grows with
   distance, worst in the far streets where the model is slow. That is consistent with an under-resolved low-rise canopy,
   which D9-16 tests.
+
+## S9 on D9-16 (16 cells per tower) and the three-run pool (28 Nov 2026)
+
+`python physics/district_fields.py --runs f3s8_D,f3s9_DW,f3s9_D16`. The D9-16 points are WindSim `f3_step9/D_b16/points.csv`, at ad43f9a.
+- **D9-16 alone: not named.** The synthetic check is silent in 10 of 10 seeds, and the winner is the intercept alone
+  (level −0.134 in ln, ×0.874). The distance slope has halved, by WindSim's direct reading, and the search no longer
+  finds it worth a term.
+- **Pooled (99 rows): the compressor writes the grid effect itself.** The winner is
+  ln(model/measured) = −0.28 + 0.042 · gap − 0.22 · d_tower² / cells_low.
+  - The miss grows with the square of the distance from the tower and **shrinks in proportion to the cells per
+    low-block height**.
+  - `cells_low` has inclusion 1.0 and bootstrap 67 %; `d_tower` has inclusion 1.0 and bootstrap 100 %. Null p is 0.05,
+    and `walls` stays at 0.
+  - It transfers upstream ↔ downstream and far → near, but **not near → far**, so under the fixed rule nothing
+    **pays**. The reading stays "not named".
+  - `gap`'s bootstrap is 53 %, and it does not pay.
+- **Reading.** Every guard short of the fold rule points the same way as WindSim's step 9 reading. The low read away
+  from the tower is a resolution error of the low-rise canopy, and it falls as the blocks get more cells. The fold that
+  fails is the extrapolation from near points to far ones, which is expected: the near points barely carry the effect.
