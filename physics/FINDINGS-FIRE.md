@@ -684,7 +684,7 @@ outlines.
 | at 23.7 h | 0.30 / 0.256 | 1.47 / 0.395 |
 | at 36.8 h | 0.36 / 0.277 | 1.70 / 0.401 |
 | East Troublesome A8 / houses (618 observed) | 3.49 / 74 | 12.67 / 4,127 |
-| Camp ratio at 20.08 h / A8 | 1.33 / 3.02 | 5.09 / 9.06 |
+| Camp ratio at 20.08 h / A8 | 1.33 / 3.02 | 5.19 / 9.06 |
 | Tubbs ratio at 42.98 h / A8 | 1.86 / 4.08 | 7.49 / 13.93 |
 | Marshall ratio at end / A8 | 2.35 / 2.45 | 2.43 / 2.58 |
 
