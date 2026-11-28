@@ -28,3 +28,19 @@ distance pattern.
 
 **Still to run under this protocol:** S9 on D9-W (queued on THE-COW after flood's Lumber run) and on D9-16 (waiting on
 Kyle), then the pooled search.
+
+## S9 on D9-W (walls on) and the pooled search (28 Nov 2026)
+
+`python physics/district_fields.py --runs f3s8_D,f3s9_DW`. The D9-W points are WindSim `f3_step9/D_walls/points.csv`, at 7389651.
+- **D9-W alone: not named.** The synthetic check passes (10 of 10 silent). The search keeps no term: the winner is the
+  intercept only, at null p 1.0, although the distance pattern is the same as step 8 by eye (WindSim's step 9 reading:
+  slope −0.77 against −0.78). On 33 points, distance falls just short of paying for its own description in this run.
+  So S9's question, whether the term keeps its sign and shrinks by half, cannot be answered from the search. The direct
+  reading in WindSim's step 9 result is that it does not shrink.
+- **Pooled (steps 8 and 9 stacked, 66 rows): not named.** The winner is a grammar shape, max(0, d_tower − 1.72) · lp:
+  the miss grows beyond 1.7 tower widths, where the model's own speeds are low. `d_tower` has inclusion 1.0 and bootstrap
+  100 %, but it fails the fold rule. `walls` has inclusion 0. `cells_low` cannot be read yet, because both runs have 4
+  cells per block height. That needs D9-16.
+- **Reading.** The wall model changes neither the pattern nor the level. What remains is a miss that grows with
+  distance, worst in the far streets where the model is slow. That is consistent with an under-resolved low-rise canopy,
+  which D9-16 tests.
